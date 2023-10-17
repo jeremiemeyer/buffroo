@@ -1,0 +1,104 @@
+//@ts-nocheck
+import {
+  Button,
+  Input,
+  Select,
+} from "@chakra-ui/react"
+import axios from "axios"
+import { useState } from "react"
+
+export default function AddExerciseModal({ onClose, getExerciseList }:any) {
+  const [nameInput, setNameInput] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("")
+  const [selectedBodyPart, setSelectedBodyPart] = useState("")
+
+  function handleChange(e) {
+    setNameInput(e.target.value)
+  }
+
+  function handleChangeCategory(e) {
+    setSelectedCategory(e.target.value)
+  }
+
+  function handleChangeBodyPart(e) {
+    setSelectedBodyPart(e.target.value)
+  }
+
+  async function handleSave() {
+    const exerciseData = {
+      name: nameInput,
+      bodypart: selectedBodyPart,
+      category: selectedCategory,
+    }
+
+    try {
+      await axios.post(`http://localhost:3000/exercises`, exerciseData)
+      alert("New exercise added!")
+      getExerciseList()
+    } catch (error) {
+      return console.log("error")
+    }
+    onClose()
+  }
+
+  return (
+    <div
+      onClick={onClose}
+      className="fixed z-10 inset-0 bg-slate-700/75 bg-blur flex justify-center items-center"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="z-20 relative bg-gray-100 text-slate-900 min-w-[400px] md:min-w-[700px] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4"
+      >
+        <div className="flex flex-row justify-between items-center">
+          <Button onClick={onClose} colorScheme="red">
+            X
+          </Button>
+          <h1 className="font-semibold text-xl">Create New Exercise</h1>
+          <Button onClick={handleSave} colorScheme="blue">
+            Save
+          </Button>
+        </div>
+
+        <div className="space-y-2 mt-4">
+          <Input
+            placeholder="Add name"
+            value={nameInput}
+            onChange={(e) => handleChange(e)}
+          ></Input>
+
+          <div className="grid grid-cols-2 justify-between items-center">
+            <p className="font-bold">Body part</p>
+            <Select
+              placeholder="Select option"
+              onChange={(e) => handleChangeBodyPart(e)}
+            >
+              <option value="core">Core</option>
+              <option value="arms">Arms</option>
+              <option value="back">Back</option>
+              <option value="chest">Chest</option>
+              <option value="legs">Legs</option>
+              <option value="shoulders">Shoulders</option>
+              <option value="cardio">Cardio</option>
+              <option value="other">Other</option>
+            </Select>
+          </div>
+
+          <div className="grid grid-cols-2 justify-between items-center">
+            <p className="font-bold">Category</p>
+            <Select
+              placeholder="Select option"
+              onChange={(e) => handleChangeCategory(e)}
+            >
+              <option value="barbell">Barbell</option>
+              <option value="dumbbell">Dumbbell</option>
+              <option value="machine">Machine</option>
+              <option value="weighted-bodyweight">Weighted Bodyweight</option>
+              <option value="assisted-bodyweight">Assisted Bodyweight</option>
+            </Select>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

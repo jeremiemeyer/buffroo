@@ -70,7 +70,7 @@ export default function Exercises() {
   return (
     <>
       <div>
-        <div className="px-6 fixed w-full pb-4 items-center  bg-white">
+        <div className="px-6 fixed z-[999] w-full pb-4 items-center  bg-white">
           <div className="flex justify-between flex-row w-full items-center">
             <Title>Exercises</Title>
             <Button
@@ -118,7 +118,7 @@ export default function Exercises() {
           </div>
         </div>
 
-        <div className="pt-[110px] pb-[100px]">
+        <div className="pt-[110px] pb-[100px] z-0">
           {isLoading ? (
             Array.from({ length: 12 }).map((_, index) => (
               <Box key={index} className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl">

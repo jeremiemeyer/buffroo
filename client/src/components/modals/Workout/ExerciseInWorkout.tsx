@@ -201,6 +201,7 @@ export default function ExerciseInWorkout({
             <div>-</div>
             <Input
               variant="flushed"
+              type="number"
               onChange={(event) =>
                 handleChange({ index, event, field: "weight" })
               }
@@ -209,6 +210,7 @@ export default function ExerciseInWorkout({
 
             <Input
               variant="flushed"
+              type="number"
               onChange={(event) =>
                 handleChange({ index, event, field: "reps" })
               }

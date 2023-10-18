@@ -29,7 +29,9 @@ export default function Exercises() {
   const getExerciseList = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.get("https://buffroo-87a1e6eff5dd.herokuapp.com/exercises")
+      const response = await axios.get(
+        "https://buffroo-87a1e6eff5dd.herokuapp.com/exercises"
+      )
       setExerciseData(response.data)
       setIsLoading(false)
     } catch (error) {
@@ -67,53 +69,56 @@ export default function Exercises() {
 
   return (
     <>
-      <div className="px-6 h-[90%]">
-        <div className="flex flex-row justify-between items-center h-[10%]">
-          <Title>Exercises</Title>
-          <Button
-            onClick={() => setShowNewExerciseModal(true)}
-            colorScheme="blue"
-          >
-            Add New
-          </Button>
+      <div>
+        <div className="px-6 fixed w-full pb-4 items-center  bg-white">
+          <div className="flex justify-between flex-row w-full items-center">
+            <Title>Exercises</Title>
+            <Button
+              onClick={() => setShowNewExerciseModal(true)}
+              colorScheme="blue"
+            >
+              Add New
+            </Button>
+          </div>
+
+          <div className="pt-2 flex flex-row gap-2">
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <SearchIcon color="gray.300" />
+              </InputLeftElement>
+              <Input
+                placeholder="Search"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+            </InputGroup>
+            <Select
+              placeholder="Any body part"
+              onChange={(e) => setSelectedBodyPart(e.target.value)}
+            >
+              <option value="core">Core</option>
+              <option value="arms">Arms</option>
+              <option value="back">Back</option>
+              <option value="chest">Chest</option>
+              <option value="legs">Legs</option>
+              <option value="shoulders">Shoulders</option>
+              <option value="cardio">Cardio</option>
+              <option value="other">Other</option>
+            </Select>
+            <Select
+              placeholder="Any category"
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="barbell">Barbell</option>
+              <option value="dumbbell">Dumbbell</option>
+              <option value="machine">Machine</option>
+              <option value="weighted-bodyweight">Weighted Bodyweight</option>
+              <option value="assisted-bodyweight">Assisted Bodyweight</option>
+            </Select>
+          </div>
         </div>
 
-        <div className="pt-2 flex flex-row gap-2 h-[10%]">
-          <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon color="gray.300" />
-            </InputLeftElement>
-            <Input
-              placeholder="Search"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-            />
-          </InputGroup>
-          <Select
-            placeholder="Any body part"
-            onChange={(e) => setSelectedBodyPart(e.target.value)}
-          >
-            <option value="core">Core</option>
-            <option value="arms">Arms</option>
-            <option value="back">Back</option>
-            <option value="chest">Chest</option>
-            <option value="legs">Legs</option>
-            <option value="shoulders">Shoulders</option>
-            <option value="cardio">Cardio</option>
-            <option value="other">Other</option>
-          </Select>
-          <Select
-            placeholder="Any category"
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="barbell">Barbell</option>
-            <option value="dumbbell">Dumbbell</option>
-            <option value="machine">Machine</option>
-            <option value="weighted-bodyweight">Weighted Bodyweight</option>
-            <option value="assisted-bodyweight">Assisted Bodyweight</option>
-          </Select>
-        </div>
-        <div className="h-[90%] overflow-auto">
+        <div className="pt-[110px] pb-[100px] px-6">
           {isLoading ? (
             Array.from({ length: 12 }).map((_, index) => (
               <Box key={index} className="bg-gray-200 mt-2 p-4 rounded-xl">

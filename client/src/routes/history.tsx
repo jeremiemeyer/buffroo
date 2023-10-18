@@ -21,7 +21,9 @@ export default function History() {
 
   const getWorkoutHistory = async () => {
     try {
-      const response = await axios.get("https://buffroo-87a1e6eff5dd.herokuapp.com/history")
+      const response = await axios.get(
+        "https://buffroo-87a1e6eff5dd.herokuapp.com/history"
+      )
       setHistoryData(response.data)
       setIsLoading(false)
     } catch (error) {
@@ -36,8 +38,10 @@ export default function History() {
   return (
     <>
       <div className="px-6 h-[100%]">
-        <Title className="h-[10%]">History</Title>
-        <div className="h-[90%] w-[100%] overflow-auto pt-4">
+        <div className="fixed bg-white w-full">
+          <Title className="h-[10%]">History</Title>
+        </div>
+        <div className="w-[100%] pt-[80px] pb-[100px]">
           {isLoading ? (
             Array.from({ length: 5 }).map((_, index) => (
               <>

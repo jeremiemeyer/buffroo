@@ -83,7 +83,7 @@ export default function WorkoutModal({ onClose }: any) {
               ></Input>
 
               {/* Liste des exos */}
-              <div className="h-1/2 overflow-auto ">
+              <div className="h-1/2 overflow-auto space-y-3">
                 {workoutData.exercises.length > 0 &&
                   workoutData.exercises.map((exercise, key) => (
                     <ExerciseInWorkout

@@ -135,15 +135,15 @@ export default function ExerciseInWorkout({
   }
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 bg-gray-200 rounded-xl p-4">
       <div className="flex flex-row justify-between">
         <p className="text-xl font-semibold">{name}</p>
-        <Menu>
+        <Menu variant="filled">
           <MenuButton
             as={IconButton}
             aria-label="Options"
             icon={<HamburgerIcon />}
-            variant="outline"
+            variant="filled"
           />
           <MenuList>
             <MenuItem
@@ -193,11 +193,14 @@ export default function ExerciseInWorkout({
           {/* <div>RPE</div> */}
         </div>
         {exerciseSets.map((set, index) => (
-          <div className="grid grid-cols-5" key={index}>
+          <div
+            className="grid grid-cols-5 bg-gray-200 px-2 items-center"
+            key={index}
+          >
             <div>{index + 1}</div>
             <div>-</div>
             <Input
-              variant="filled"
+              variant="flushed"
               onChange={(event) =>
                 handleChange({ index, event, field: "weight" })
               }
@@ -205,7 +208,7 @@ export default function ExerciseInWorkout({
             />
 
             <Input
-              variant="filled"
+              variant="flushed"
               onChange={(event) =>
                 handleChange({ index, event, field: "reps" })
               }
@@ -218,15 +221,21 @@ export default function ExerciseInWorkout({
             /> */}
             <Button
               onClick={() => handleRemoveSet(index)}
-              className="ml-auto h-2 w-2"
+              className="ml-auto h-2 w-2 hover:bg-gray-300"
+              variant="flushed"
             >
-              <i className="fa fa-trash"></i>
+              <i className="fa fa-trash "></i>
             </Button>
           </div>
         ))}
       </div>
 
-      <Button onClick={handleAddSet} colorScheme="blue" variant="outline">
+      <Button
+        onClick={handleAddSet}
+        className="mt-4"
+        colorScheme="blue"
+        variant="outline"
+      >
         Add set
       </Button>
     </div>

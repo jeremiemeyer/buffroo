@@ -1,27 +1,39 @@
 //@ts-nocheck
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { SearchIcon } from "@chakra-ui/icons"
+import ExerciseCard from "../../exercises/ExerciseCard"
 import {
   Button,
   Input,
   InputGroup,
   InputLeftElement,
+  Select,
+  Skeleton,
+  SkeletonText,
+  Box,
 } from "@chakra-ui/react"
-import axios from "axios"
-import { useState, useEffect } from "react"
-import { SearchIcon } from "@chakra-ui/icons"
-import ExerciseCard from "../../exercises/ExerciseCard"
 
-export default function AddExerciseToWorkoutModal({ onClose, addExercise }:any) {
+export default function AddExerciseToWorkoutModal({
+  onClose,
+  addExercise,
+}: any) {
+  const [isLoading, setIsLoading] = useState(true)
   const [exerciseData, setExerciseData] = useState([])
   const [searchInput, setSearchInput] = useState("")
   // const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
   const [selectedExercise, setSelectedExercise] = useState([])
 
   useEffect(() => {
+    setIsLoading(true)
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://buffroo-87a1e6eff5dd.herokuapp.com/exercises")
+        const response = await axios.get(
+          "https://buffroo-87a1e6eff5dd.herokuapp.com/exercises"
+        )
         // console.log(response.data)
         setExerciseData(response.data)
+        setIsLoading(false)
       } catch (error) {
         console.error("Error fetching data:", error)
       }
@@ -71,7 +83,7 @@ export default function AddExerciseToWorkoutModal({ onClose, addExercise }:any) 
           {/* <Button onClick={handleSave} colorScheme="blue">Save</Button> */}
         </div>
 
-        <div className="p-2 relative h-[90%]">
+        <div className="relative h-[90%]">
           <div className="h-[10%]">
             <InputGroup>
               <InputLeftElement pointerEvents="none">
@@ -86,16 +98,34 @@ export default function AddExerciseToWorkoutModal({ onClose, addExercise }:any) 
           </div>
 
           <div className="h-[90%] overflow-auto">
-            {filteredExercises.map((exercise, key) => (
-              <ExerciseCard
-                onClick={() => handleClick(exercise)}
-                key={exercise["_id"]}
-                name={exercise["name"]}
-                category={exercise["category"]}
-                bodypart={exercise["bodypart"]}
-                isSelected={exercise["_id"] === selectedExercise["_id"]}
-              />
-            ))}
+            {isLoading ? (
+              Array.from({ length: 12 }).map((_, index) => (
+                <Box
+                  key={index}
+                  className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
+                >
+                  <SkeletonText
+                    mt="4"
+                    noOfLines={3}
+                    spacing="4"
+                    skeletonHeight="2"
+                  />
+                </Box>
+              ))
+            ) : (
+              <>
+                {filteredExercises.map((exercise, key) => (
+                  <ExerciseCard
+                    onClick={() => handleClick(exercise)}
+                    key={exercise["_id"]}
+                    name={exercise["name"]}
+                    category={exercise["category"]}
+                    bodypart={exercise["bodypart"]}
+                    isSelected={exercise["_id"] === selectedExercise["_id"]}
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

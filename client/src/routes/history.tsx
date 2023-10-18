@@ -44,7 +44,7 @@ export default function History() {
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <>
-              <Box className="border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 p-4">
+              <Box className="border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 w-[calc(100%-40px)] p-[20px]">
                 <SkeletonText noOfLines={1} skeletonHeight="10" />
                 <SkeletonText noOfLines={2} skeletonHeight="6" />
                 <SkeletonText noOfLines={3} skeletonHeight="6" />

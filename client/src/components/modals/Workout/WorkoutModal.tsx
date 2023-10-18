@@ -44,7 +44,7 @@ export default function WorkoutModal({ onClose }: any) {
     };
 
     try {
-      await axios.post(`http://localhost:3000/sessions`, dataToSend)
+      await axios.post(`https://buffroo-87a1e6eff5dd.herokuapp.com/sessions`, dataToSend)
       alert("New session added!")
     } catch (error) {
       return console.log("error")

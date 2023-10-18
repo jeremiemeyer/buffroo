@@ -50,11 +50,11 @@ export default function AddExerciseModal({ onClose, getExerciseList }:any) {
         onClick={(e) => e.stopPropagation()}
         className="z-[900] relative bg-gray-100 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4"
       >
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-row justify-between items-center text-center">
           <Button onClick={onClose} colorScheme="red">
             X
           </Button>
-          <h1 className="font-semibold text-xl">Create New Exercise</h1>
+          <h1 className="font-semibold text-xl text-center">Create New Exercise</h1>
           <Button onClick={handleSave} colorScheme="blue">
             Save
           </Button>

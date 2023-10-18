@@ -21,7 +21,7 @@ export default function History() {
 
   const getWorkoutHistory = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/history")
+      const response = await axios.get("https://buffroo-87a1e6eff5dd.herokuapp.com/history")
       setHistoryData(response.data)
       setIsLoading(false)
     } catch (error) {

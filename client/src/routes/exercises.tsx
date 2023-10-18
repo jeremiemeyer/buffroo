@@ -62,7 +62,7 @@ export default function Exercises() {
 
   return (
     <>
-      <div className="p-6 h-[90%]">
+      <div className="px-6 h-[90%] pt-[100px]">
         <div className="flex flex-row justify-between items-center h-[10%]">
           <Title>Exercises</Title>
           <Button
@@ -108,7 +108,7 @@ export default function Exercises() {
             <option value="assisted-bodyweight">Assisted Bodyweight</option>
           </Select>
         </div>
-        <div className="h-[80%] overflow-auto">
+        <div className="h-[90%] overflow-auto">
           {filteredExercises.map((ex, key) => (
             <ExerciseCard
               key={key}

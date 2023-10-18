@@ -10,6 +10,8 @@ const exerciseSchema = new Schema({
 
 
 const workoutSessionSchema = new Schema({
+  startdate: { type: String, required: true},
+  enddate: { type: String, required: true},
   notes: { type: String, required: false },
   exercises: [
     {

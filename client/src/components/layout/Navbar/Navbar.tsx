@@ -5,7 +5,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="bg-gray-600 text-white flex flex-row justify-center">
+      <div className="fixed w-full bg-gray-600 text-white flex flex-row justify-center">
         <Link to={"profile"}>
           <div
             className={`${

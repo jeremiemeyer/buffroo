@@ -1,14 +1,21 @@
+// @ts-nocheck
 import { Button, Input } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
 import { useState } from "react"
 import AddExerciseToWorkoutModal from "./AddExerciseToWorkoutModal"
 import ExerciseInWorkout from "./ExerciseInWorkout"
 import axios from "axios"
+import ConfirmCancelWorkoutModal from "./ConfirmCancelWorkoutModal"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
-  const [workoutExercises, setWorkoutExercises] = useState<any[]>([])
+  const [showConfirmCancelWorkoutModal, setShowConfirmCancelWorkoutModal] =
+    useState(false)
+  // const [workoutExercises, setWorkoutExercises] = useState<any[]>([])
+
   const [workoutData, setWorkoutData] = useState({
+    startdate: new Date().toISOString(),
+    enddate: "",
     exercises: [],
     notes: "",
   })
@@ -24,9 +31,20 @@ export default function WorkoutModal({ onClose }: any) {
       }
     })
   }
+
+  //sending the workout session to db
   async function handleSave() {
+    if (workoutData.exercises.length === 0) {
+      return alert("You can't submit an empty workout!")
+    }
+
+    const dataToSend = {
+      ...workoutData,
+      enddate: new Date().toISOString()
+    };
+
     try {
-      await axios.post(`http://localhost:3000/sessions`, workoutData)
+      await axios.post(`http://localhost:3000/sessions`, dataToSend)
       alert("New session added!")
     } catch (error) {
       return console.log("error")
@@ -35,7 +53,8 @@ export default function WorkoutModal({ onClose }: any) {
   }
 
   function addExercise(exercise: any) {
-    setWorkoutExercises(workoutExercises.concat(exercise))
+    const updatedExercises = [...workoutData.exercises, exercise]
+    setWorkoutData({ ...workoutData, exercises: updatedExercises })
   }
 
   return (
@@ -65,28 +84,36 @@ export default function WorkoutModal({ onClose }: any) {
 
               {/* Liste des exos */}
               <div className="h-1/2 overflow-auto ">
-                {workoutExercises.map((exercise, key) => (
-                  <ExerciseInWorkout
-                    key={key}
-                    name={exercise.name}
-                    workoutData={workoutData}
-                    setWorkoutData={setWorkoutData}
-                  />
-                ))}
+                {workoutData.exercises.length > 0 &&
+                  workoutData.exercises.map((exercise, key) => (
+                    <ExerciseInWorkout
+                      key={key}
+                      name={exercise.name}
+                      workoutData={workoutData}
+                      setWorkoutData={setWorkoutData}
+                    />
+                  ))}
               </div>
             </div>
           </div>
 
-          <div className="h-[5%] py-12 space-x-4 max-w-xs mx-auto">
+          <div className="h-[5%] mt-4 space-x-4 max-w-xs mx-auto">
             <Button
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"
             >
               Add Exercises
             </Button>
-            <Button colorScheme="red">Cancel workout</Button>
+            <Button
+              onClick={() => setShowConfirmCancelWorkoutModal(true)}
+              colorScheme="red"
+            >
+              Cancel workout
+            </Button>
           </div>
-          <button onClick={() => console.log(workoutData)}>get workout</button>
+          <button onClick={() => console.log(workoutData)}>
+            consolelog workout data
+          </button>
         </div>
       </div>
       {showAddExerciseModal &&
@@ -94,6 +121,14 @@ export default function WorkoutModal({ onClose }: any) {
           <AddExerciseToWorkoutModal
             onClose={() => setShowAddExerciseModal(false)}
             addExercise={addExercise}
+          />,
+          document.body
+        )}
+      {showConfirmCancelWorkoutModal &&
+        createPortal(
+          <ConfirmCancelWorkoutModal
+            onClose={() => setShowConfirmCancelWorkoutModal(false)}
+            onCancelWorkout={onClose}
           />,
           document.body
         )}

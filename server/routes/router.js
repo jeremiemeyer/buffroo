@@ -17,6 +17,17 @@ router.get("/exercises", async (req, res) => {
   }
 })
 
+router.get("/history", async (req, res) => {
+  const sessions = schemas.WorkoutSession
+
+  const historyData = await sessions.find().exec()
+  if (historyData) {
+    res.send(historyData)
+  } else {
+    res.send("Failed to get data.")
+  }
+})
+
 router.post("/exercises", async (req, res) => {
   const { name, bodypart, category } = req.body
 
@@ -42,8 +53,10 @@ router.post("/sessions", async (req, res) => {
     console.log('Received request body:', req.body);
     
     const newWorkoutSession = new schemas.WorkoutSession({
+      startdate: req.body.startdate,
+      enddate: req.body.enddate,
+      notes: req.body.notes,
       exercises: req.body.exercises,
-      notes: req.body.notes
     })
 
     const saveWorkoutSession = await newWorkoutSession.save()

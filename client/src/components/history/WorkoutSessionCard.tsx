@@ -44,24 +44,24 @@ export default function WorkoutSessionCard({ sessionData }) {
       <div className="grid grid-cols-2">
         <p className="font-semibold">
           <i className="fa-regular fa-calendar mr-2" />
-          {formatISODate(sessionData.startdate)}
+          {formatISODate(sessionData?.startdate)}
         </p>
         <p>
           <i className="fa-solid fa-clock mr-2" />
-          {calculateWorkoutDuration(sessionData.startdate, sessionData.enddate)}
+          {calculateWorkoutDuration(sessionData?.startdate, sessionData?.enddate)}
         </p>
       </div>
 
-      {sessionData.notes !== "" && (
+      {sessionData?.notes !== "" && (
         <p>
-          <i className="fa fa-pen mr-2" /> {sessionData.notes}
+          <i className="fa fa-pen mr-2" /> {sessionData?.notes}
         </p>
       )}
       <div className="grid grid-cols-2 pt-4">
         <div className="font-semibold">Exercise</div>
         <div className="font-semibold">Sets</div>
       </div>
-      {sessionData.exercises.map((exercise) => (
+      {sessionData?.exercises.map((exercise) => (
         <div className="grid grid-cols-2">
           <div>
             {exercise.sets.length} x {exercise.name}

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import WorkoutSessionCard from "../components/history/WorkoutSessionCard"
 import Title from "../components/layout/Title"
 import { useState, useEffect } from "react"
@@ -24,7 +25,7 @@ export default function History() {
       <div className="px-6 pt-[100px] h-[100%]">
         <Title className="h-[10%]">History</Title>
         <div className="h-[90%] w-[100%] overflow-auto pt-4">
-          {historyData.map((index) => (
+          {historyData.map((session, index) => (
             <WorkoutSessionCard key={index} sessionData={historyData[index]} />
           ))}
         </div>

@@ -40,7 +40,7 @@ export default function History() {
       <div className="fixed bg-white w-screen">
         <Title className="h-[10%] z-[500]">History</Title>
       </div>
-      <div className="pt-[80px] pb-[100px] z-0">
+      <div className="pt-[80px] pb-[100px] z-[0]">
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <>

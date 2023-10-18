@@ -38,46 +38,48 @@ export default function WorkoutSessionCard({ sessionData }) {
 
   return (
     <div
-      className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 p-4 w-full flex-col`}
+      className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 flex-col w-[calc(100%-100px)] mx-auto`}
     >
-      <span className="font-bold pb-2">Workout Session</span>
-      <p className="font-semibold">
-        <i className="fa-regular fa-calendar mr-2" />
-        {formatISODate(sessionData?.startdate)}
-      </p>
-      {/* <span className="font-bold pb-2 text-xl">Workout Session</span>
+      <div className="p-[20px]">
+        <span className="font-bold pb-2">Workout Session</span>
+        <p className="font-semibold">
+          <i className="fa-regular fa-calendar mr-2" />
+          {formatISODate(sessionData?.startdate)}
+        </p>
+        {/* <span className="font-bold pb-2 text-xl">Workout Session</span>
       <p className="font-semibold">
         <i className="fa-regular fa-calendar mr-2" />
         {formatISODate(sessionData?.startdate)}
       </p> */}
 
-      <i className="fa-solid fa-clock mr-2" />
-      {calculateWorkoutDuration(sessionData?.startdate, sessionData?.enddate)}
-      {sessionData?.notes !== "" && (
-        <p>
-          <i className="fa fa-pen mr-2" /> {sessionData?.notes}
-        </p>
-      )}
+        <i className="fa-solid fa-clock mr-2" />
+        {calculateWorkoutDuration(sessionData?.startdate, sessionData?.enddate)}
+        {sessionData?.notes !== "" && (
+          <p>
+            <i className="fa fa-pen mr-2" /> {sessionData?.notes}
+          </p>
+        )}
 
-      <div className="grid grid-cols-2 pt-4">
-        <div className="font-semibold">Exercise</div>
-        <div className="font-semibold">Sets</div>
-      </div>
-      {sessionData?.exercises.map((exercise) => (
-        <div className="grid grid-cols-2">
-          <div>
-            {exercise.sets.length} x {exercise.name}
-          </div>
-          <div>
-            {exercise.sets.map((set, setIndex) => (
-              <span key={setIndex}>
-                {set.reps}x{set.weight}kg
-                {setIndex < exercise.sets.length - 1 && ", "}
-              </span>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 pt-4">
+          <div className="font-semibold">Exercise</div>
+          <div className="font-semibold">Sets</div>
         </div>
-      ))}
+        {sessionData?.exercises.map((exercise) => (
+          <div className="grid grid-cols-2">
+            <div>
+              {exercise.sets.length} x {exercise.name}
+            </div>
+            <div>
+              {exercise.sets.map((set, setIndex) => (
+                <span key={setIndex}>
+                  {set.reps}x{set.weight}kg
+                  {setIndex < exercise.sets.length - 1 && ", "}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

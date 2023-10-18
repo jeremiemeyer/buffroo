@@ -48,7 +48,7 @@ export default function AddExerciseModal({ onClose, getExerciseList }:any) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-100 text-slate-900 min-w-[400px] md:min-w-[700px] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4"
+        className="z-[900] relative bg-gray-100 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4"
       >
         <div className="flex flex-row justify-between items-center">
           <Button onClick={onClose} colorScheme="red">

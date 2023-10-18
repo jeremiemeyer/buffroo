@@ -70,7 +70,7 @@ export default function Exercises() {
   return (
     <>
       <div>
-        <div className="px-6 fixed z-[999] w-full pb-4 items-center  bg-white">
+        <div className="px-6 fixed z-[500] w-full pb-4 items-center  bg-white">
           <div className="flex justify-between flex-row w-full items-center">
             <Title>Exercises</Title>
             <Button

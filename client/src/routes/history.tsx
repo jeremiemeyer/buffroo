@@ -35,7 +35,7 @@ export default function History() {
 
   return (
     <>
-      <div className="px-6 pt-[100px] h-[100%]">
+      <div className="px-6 h-[100%]">
         <Title className="h-[10%]">History</Title>
         <div className="h-[90%] w-[100%] overflow-auto pt-4">
           {isLoading ? (

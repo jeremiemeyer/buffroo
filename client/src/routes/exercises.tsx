@@ -67,7 +67,7 @@ export default function Exercises() {
 
   return (
     <>
-      <div className="px-6 h-[90%] pt-[100px]">
+      <div className="px-6 h-[90%]">
         <div className="flex flex-row justify-between items-center h-[10%]">
           <Title>Exercises</Title>
           <Button

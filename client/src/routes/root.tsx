@@ -10,7 +10,7 @@ export default function Root() {
   const [showWorkoutModal, setShowWorkoutModal] = useState(false)
   return (
     <>
-      <div className="p-6 pt-[100px]">
+      <div className="p-6">
         <Title>Start Workout</Title>
         <div className="text-xl font-semibold mt-8">Quick start</div>
         <Button onClick={() => setShowWorkoutModal(true)} colorScheme="blue" className="mt-4">

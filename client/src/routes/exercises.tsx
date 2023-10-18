@@ -118,7 +118,7 @@ export default function Exercises() {
           </div>
         </div>
 
-        <div className="pt-[110px] pb-[100px] px-6">
+        <div className="pt-[110px] pb-[100px]">
           {isLoading ? (
             Array.from({ length: 12 }).map((_, index) => (
               <Box key={index} className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl">

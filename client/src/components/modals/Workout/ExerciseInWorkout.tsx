@@ -16,6 +16,8 @@ import {
   RepeatIcon,
   EditIcon,
   DeleteIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
 } from "@chakra-ui/icons"
 
 export default function ExerciseInWorkout({
@@ -47,6 +49,46 @@ export default function ExerciseInWorkout({
     if (exerciseIndex !== -1) {
       updatedData.exercises[exerciseIndex].sets.splice(index, 1)
       setWorkoutData(updatedData)
+    }
+  }
+
+  function moveExerciseAfter() {
+    const updatedData = { ...workoutData }
+    const exerciseIndex = updatedData.exercises.findIndex(
+      (exercise: any) => exercise.name === name
+    )
+
+    if (
+      exerciseIndex !== -1 &&
+      exerciseIndex < updatedData.exercises.length - 1
+    ) {
+      const [movedExercise] = updatedData.exercises.splice(exerciseIndex, 1)
+      updatedData.exercises.splice(exerciseIndex + 1, 0, movedExercise)
+      setWorkoutData(updatedData)
+    }
+  }
+
+  function moveExerciseBefore() {
+    const updatedData = { ...workoutData }
+
+    // Find the index of the current exercise
+    const exerciseIndex = updatedData.exercises.findIndex(
+      (exercise) => exercise.name === name
+    )
+
+    // Check if the current exercise is not the first exercise
+    if (exerciseIndex > 0) {
+      // Swap the current exercise with the previous exercise
+      const previousExercise = updatedData.exercises[exerciseIndex - 1]
+      updatedData.exercises[exerciseIndex - 1] =
+        updatedData.exercises[exerciseIndex]
+      updatedData.exercises[exerciseIndex] = previousExercise
+
+      // Update the workout data with the modified order of exercises
+      setWorkoutData({
+        ...workoutData,
+        exercises: updatedData.exercises,
+      })
     }
   }
 
@@ -115,6 +157,20 @@ export default function ExerciseInWorkout({
               // command="⌘N"
             >
               Replace Exercise
+            </MenuItem>
+            <MenuItem
+              onClick={moveExerciseBefore}
+              icon={<ArrowUpIcon />}
+              // command="⌘N"
+            >
+              Move Before
+            </MenuItem>
+            <MenuItem
+              onClick={moveExerciseAfter}
+              icon={<ArrowDownIcon />}
+              // command="⌘N"
+            >
+              Move After
             </MenuItem>
             <MenuItem
               onClick={() => removeExercise()} // Pass the index to removeExercise

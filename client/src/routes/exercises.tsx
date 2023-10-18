@@ -9,24 +9,29 @@ import {
   InputGroup,
   InputLeftElement,
   Select,
+  Skeleton,
+  SkeletonText,
+  Box,
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
 import { createPortal } from "react-dom"
 import AddExerciseModal from "../components/modals/AddExerciseModal"
 
 export default function Exercises() {
+  const [isLoading, setIsLoading] = useState(true)
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
   const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
   const [searchInput, setSearchInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedBodyPart, setSelectedBodyPart] = useState("")
-  
 
   const getExerciseList = async () => {
+    setIsLoading(true)
     try {
-      const response = await axios.get("http://localhost:3000/exercises")
+      const response = await axios.get("https://buffroo-87a1e6eff5dd.herokuapp.com/exercises")
       setExerciseData(response.data)
+      setIsLoading(false)
     } catch (error) {
       console.error("Error fetching data:", error)
     }
@@ -109,14 +114,29 @@ export default function Exercises() {
           </Select>
         </div>
         <div className="h-[90%] overflow-auto">
-          {filteredExercises.map((ex, key) => (
-            <ExerciseCard
-              key={key}
-              name={ex["name"]}
-              category={ex["category"]}
-              bodypart={ex["bodypart"]}
-            />
-          ))}
+          {isLoading ? (
+            Array.from({ length: 12 }).map((_, index) => (
+              <Box key={index} className="bg-gray-200 mt-2 p-4 rounded-xl">
+                <SkeletonText
+                  mt="4"
+                  noOfLines={3}
+                  spacing="4"
+                  skeletonHeight="2"
+                />
+              </Box>
+            ))
+          ) : (
+            <>
+              {filteredExercises.map((ex, key) => (
+                <ExerciseCard
+                  key={key}
+                  name={ex["name"]}
+                  category={ex["category"]}
+                  bodypart={ex["bodypart"]}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
       {showNewExerciseModal &&

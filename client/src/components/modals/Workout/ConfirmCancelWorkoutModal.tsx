@@ -25,7 +25,7 @@ export default function ConfirmCancelWorkoutModal({ onClose, onCancelWorkout }) 
             </p>
             <div className="grid grid-rows-2 gap-2">
               <Button onClick={handleCancel} colorScheme="red">Cancel workout</Button>
-              <Button onClick={onClose} colorScheme="gray">Resume</Button>
+              <Button onClick={onClose} colorScheme="blue">Resume</Button>
             </div>
           </div>
         </div>

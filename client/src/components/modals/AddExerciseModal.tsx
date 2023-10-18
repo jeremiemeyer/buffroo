@@ -32,7 +32,7 @@ export default function AddExerciseModal({ onClose, getExerciseList }:any) {
     }
 
     try {
-      await axios.post(`http://localhost:3000/exercises`, exerciseData)
+      await axios.post(`https://buffroo-87a1e6eff5dd.herokuapp.com/exercises`, exerciseData)
       alert("New exercise added!")
       getExerciseList()
     } catch (error) {

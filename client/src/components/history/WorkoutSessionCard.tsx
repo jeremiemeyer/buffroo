@@ -41,16 +41,14 @@ export default function WorkoutSessionCard({ sessionData }) {
       className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 p-4`}
     >
       <p className="font-bold pb-2 text-xl">Workout Session</p>
-      <div className="grid grid-cols-2">
-        <p className="font-semibold">
-          <i className="fa-regular fa-calendar mr-2" />
-          {formatISODate(sessionData?.startdate)}
-        </p>
-        <p>
-          <i className="fa-solid fa-clock mr-2" />
-          {calculateWorkoutDuration(sessionData?.startdate, sessionData?.enddate)}
-        </p>
-      </div>
+      <p className="font-semibold">
+        <i className="fa-regular fa-calendar mr-2" />
+        {formatISODate(sessionData?.startdate)}
+      </p>
+      <p>
+        <i className="fa-solid fa-clock mr-2" />
+        {calculateWorkoutDuration(sessionData?.startdate, sessionData?.enddate)}
+      </p>
 
       {sessionData?.notes !== "" && (
         <p>

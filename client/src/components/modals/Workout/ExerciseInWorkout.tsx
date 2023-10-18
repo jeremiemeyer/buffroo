@@ -185,15 +185,15 @@ export default function ExerciseInWorkout({
         </button> */}
       </div>
       <div className="space-y-2">
-        <div className="grid grid-cols-6 font-bold">
+        <div className="grid grid-cols-5 font-bold">
           <div>Set</div>
-          <div>Previous</div>
+          <div>Prev.</div>
           <div>kg</div>
           <div>reps</div>
-          <div>RPE</div>
+          {/* <div>RPE</div> */}
         </div>
         {exerciseSets.map((set, index) => (
-          <div className="grid grid-cols-6" key={index}>
+          <div className="grid grid-cols-5" key={index}>
             <div>{index + 1}</div>
             <div>-</div>
             <Input
@@ -211,11 +211,11 @@ export default function ExerciseInWorkout({
               }
               value={set.reps}
             />
-            <Input
+            {/* <Input
               variant="filled"
               onChange={(event) => handleChange({ index, event, field: "rpe" })}
               value={set.rpe}
-            />
+            /> */}
             <Button
               onClick={() => handleRemoveSet(index)}
               className="ml-auto h-2 w-2"

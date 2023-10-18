@@ -38,7 +38,7 @@ export default function WorkoutSessionCard({ sessionData }) {
 
   return (
     <div
-      className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 flex-col w-[calc(100%-100px)] mx-auto`}
+      className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 flex-col w-[calc(100%-40px)] mx-auto`}
     >
       <div className="p-[20px]">
         <span className="font-bold pb-2">Workout Session</span>

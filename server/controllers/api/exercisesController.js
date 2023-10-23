@@ -1,4 +1,4 @@
-const Exercise = require('./../../models/Exercise')
+const Exercise = require('../../models/Exercise')
 
 // get default app exercises
 const getExercises = async (req, res) => {

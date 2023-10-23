@@ -1,4 +1,4 @@
-const WorkoutSession = require("../../../models/workoutSession")
+const WorkoutSession = require("../../../models/WorkoutSession")
 
 // get user sessions (history)
 const getUserSessions = async (req, res) => {

@@ -1,5 +1,5 @@
 //@ts-nocheck
-import axios from "axios"
+import axios from "./../../../api/axios"
 import { useState, useEffect } from "react"
 import { SearchIcon } from "@chakra-ui/icons"
 import ExerciseCard from "../../exercises/ExerciseCard"
@@ -13,6 +13,8 @@ import {
   SkeletonText,
   Box,
 } from "@chakra-ui/react"
+
+const EXERCISES_URL = "/api/exercises"
 
 export default function AddExerciseToWorkoutModal({
   onClose,
@@ -29,7 +31,7 @@ export default function AddExerciseToWorkoutModal({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://buffroo-87a1e6eff5dd.herokuapp.com/exercises"
+          EXERCISES_URL
         )
         // console.log(response.data)
         setExerciseData(response.data)

@@ -4,8 +4,10 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react"
-import axios from "axios"
+import axios from "./../../api/axios"
 import { useState } from "react"
+
+const EXERCISES_URL = "/api/exercises"
 
 export default function AddExerciseModal({ onClose, getExerciseList }:any) {
   const [nameInput, setNameInput] = useState("")
@@ -32,7 +34,7 @@ export default function AddExerciseModal({ onClose, getExerciseList }:any) {
     }
 
     try {
-      await axios.post(`https://buffroo-87a1e6eff5dd.herokuapp.com/exercises`, exerciseData)
+      await axios.post(EXERCISES_URL, exerciseData)
       alert("New exercise added!")
       getExerciseList()
     } catch (error) {

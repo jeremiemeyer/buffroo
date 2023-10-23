@@ -1,11 +1,12 @@
-import Title from "../components/layout/Title"
+import Title from "./layout/Title"
 import { Button } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
+import WorkoutModal from "./modals/Workout/WorkoutModal"
 import { useState } from "react"
-import WorkoutModal from "../components/modals/Workout/WorkoutModal"
 
-export default function Root() {
+export default function Home() {
   const [showWorkoutModal, setShowWorkoutModal] = useState(false)
+
   return (
     <>
       <div className="fixed bg-white w-screen">

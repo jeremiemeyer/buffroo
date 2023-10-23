@@ -1,6 +1,6 @@
 //@ts-nocheck
-import WorkoutSessionCard from "../components/history/WorkoutSessionCard"
-import Title from "../components/layout/Title"
+import WorkoutSessionCard from "./history/WorkoutSessionCard"
+import Title from "./layout/Title"
 import { useState, useEffect } from "react"
 import {
   Button,
@@ -13,18 +13,22 @@ import {
   Box,
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
-import axios from "axios"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
+
+const HISTORY_URL = "/api/sessions"
 
 export default function History() {
   const [historyData, setHistoryData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const axiosPrivate = useAxiosPrivate()
 
   const getWorkoutHistory = async () => {
+    setIsLoading(true)
     try {
-      const response = await axios.get(
-        "https://buffroo-87a1e6eff5dd.herokuapp.com/history"
-      )
-      setHistoryData(response.data)
+      const response = await axiosPrivate.get(HISTORY_URL, {
+        withCredentials: true,
+      })
+      isMounted && setHistoryData(response.data)
       setIsLoading(false)
     } catch (error) {
       console.error("Error fetching data:", error)
@@ -32,7 +36,9 @@ export default function History() {
   }
 
   useEffect(() => {
+
     getWorkoutHistory()
+
   }, [])
 
   return (

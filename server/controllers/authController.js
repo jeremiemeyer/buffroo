@@ -30,8 +30,10 @@ const handleLogin = async (req, res) => {
     const refreshToken = jwt.sign(
       { username: foundUser.username },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" } // 1 day
+      { expiresIn: "1d" } // prod: 1d
     )
+
+    const username = foundUser.username
 
     // Saving refreshToken with current user
     foundUser.refreshToken = refreshToken
@@ -44,7 +46,7 @@ const handleLogin = async (req, res) => {
       secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     })
-    res.json({ accessToken }) // not secure to store it in local storage. to be stored in app state memory
+    res.json({ accessToken, roles, username }) // not secure to store it in local storage. to be stored in app state memory
   } else {
     res.sendStatus(401) // 401 Unauthorized
   }

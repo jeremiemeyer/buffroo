@@ -4,8 +4,10 @@ import { createPortal } from "react-dom"
 import { useState } from "react"
 import AddExerciseToWorkoutModal from "./AddExerciseToWorkoutModal"
 import ExerciseInWorkout from "./ExerciseInWorkout"
-import axios from "axios"
+import axios from "./../../../api/axios"
 import ConfirmCancelWorkoutModal from "./ConfirmCancelWorkoutModal"
+
+const SESSIONS_URL = "/api/sessions"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -44,7 +46,7 @@ export default function WorkoutModal({ onClose }: any) {
     };
 
     try {
-      await axios.post(`https://buffroo-87a1e6eff5dd.herokuapp.com/sessions`, dataToSend)
+      await axios.post(SESSIONS_URL, dataToSend)
       alert("New session added!")
     } catch (error) {
       return console.log("error")

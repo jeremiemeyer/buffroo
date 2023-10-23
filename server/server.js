@@ -41,14 +41,9 @@ app.use("/logout", require("./routes/logout"))
 
 app.use(verifyJWT)
 app.use("/api/exercises", require("./routes/api/exercisesRoutes"))
-app.use(
-  "/api/users/:id/exercises",
-  require("./routes/api/users/userExercisesRoutes")
-)
-app.use(
-  "/api/users/:id/sessions",
-  require("./routes/api/users/userSessionsRoutes")
-)
+app.use("/api/users", require('./routes/api/users/userExercisesRoutes'))
+app.use("/api/users", require('./routes/api/users/userSessionsRoutes'))
+
 
 // app.use(errorHandler) // to implement
 

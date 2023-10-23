@@ -1,8 +1,8 @@
 //@ts-nocheck
-import ExerciseCard from "../components/exercises/ExerciseCard"
-import Title from "../components/layout/Title"
-import { useState, useEffect } from "react"
-import axios from "axios"
+import ExerciseCard from "./exercises/ExerciseCard"
+import Title from "./layout/Title"
+import { useState, useEffect, useRef } from "react"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import {
   Button,
   Input,
@@ -15,7 +15,10 @@ import {
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
 import { createPortal } from "react-dom"
-import AddExerciseModal from "../components/modals/AddExerciseModal"
+import AddExerciseModal from "./modals/AddExerciseModal"
+import { useNavigate, useLocation } from "react-router-dom"
+
+const EXERCISES_URL = "/api/exercises"
 
 export default function Exercises() {
   const [isLoading, setIsLoading] = useState(true)
@@ -25,22 +28,33 @@ export default function Exercises() {
   const [searchInput, setSearchInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedBodyPart, setSelectedBodyPart] = useState("")
+  const axiosPrivate = useAxiosPrivate()
+  const navigate = useNavigate()
+  const location = useLocation()
+  // const controller = new AbortController()
+  // let isMounted = true
 
   const getExerciseList = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.get(
-        "https://buffroo-87a1e6eff5dd.herokuapp.com/exercises"
-      )
+      const response = await axiosPrivate.get(EXERCISES_URL, {
+        // signal: controller.signal,
+      })
       setExerciseData(response.data)
       setIsLoading(false)
     } catch (error) {
       console.error("Error fetching data:", error)
+      navigate("/login", { state: { from: location }, replace: true })
     }
   }
 
   useEffect(() => {
     getExerciseList()
+
+    // return () => {
+    //   isMounted = false
+    //   controller.abort()
+    // }
   }, [])
 
   useEffect(() => {
@@ -65,6 +79,10 @@ export default function Exercises() {
     }
 
     setFilteredExercises(filteredData)
+
+    // return () => {
+    //   isMounted = false // Unmounting, set isMounted to false
+    // }
   }, [exerciseData, searchInput, selectedCategory, selectedBodyPart])
 
   return (
@@ -121,7 +139,10 @@ export default function Exercises() {
         <div className="pt-[110px] pb-[100px] z-[0]">
           {isLoading ? (
             Array.from({ length: 12 }).map((_, index) => (
-              <Box key={index} className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl">
+              <Box
+                key={index}
+                className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
+              >
                 <SkeletonText
                   mt="4"
                   noOfLines={3}

@@ -70,8 +70,11 @@ const Login = () => {
         LOGIN_URL,
         JSON.stringify({ user, pwd }),
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+          "Content-Type": "application/json",
+        },
           withCredentials: true,
+          
         }
       )
       console.log(JSON.stringify(response?.data))

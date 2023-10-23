@@ -1,4 +1,4 @@
-import { Outlet, Link, useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 export default function Navbar() {
   const location = useLocation()

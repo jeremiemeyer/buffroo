@@ -1,11 +1,11 @@
-//@ts-ignore
+//@ts-nocheck
 export default function ExerciseCard({
   name,
   bodypart,
   category,
   onClick,
   isSelected,
-}:any) {
+}) {
   return (
     <div
       onClick={onClick}

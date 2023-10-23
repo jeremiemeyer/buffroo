@@ -81,7 +81,9 @@ const Login = () => {
       //console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken
       const roles = response?.data?.roles
-      setAuth({ user, pwd, roles, accessToken })
+      const userId = response?.data?.userId
+      const username = response?.data?.username
+      setAuth({ username, userId, roles, accessToken })
       // setUser("")
       resetUser("")
       setPwd("")

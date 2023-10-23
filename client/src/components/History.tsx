@@ -14,13 +14,15 @@ import {
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
-
-const HISTORY_URL = "/api/sessions"
+import useAuth from "../hooks/useAuth"
+import { Link } from "react-router-dom"
 
 export default function History() {
   const [historyData, setHistoryData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const axiosPrivate = useAxiosPrivate()
+  const { auth } = useAuth()
+  const HISTORY_URL = `/api/users/${auth.userId}/sessions`
 
   const getWorkoutHistory = async () => {
     setIsLoading(true)
@@ -28,7 +30,8 @@ export default function History() {
       const response = await axiosPrivate.get(HISTORY_URL, {
         withCredentials: true,
       })
-      isMounted && setHistoryData(response.data)
+      // isMounted &&
+      setHistoryData(response.data)
       setIsLoading(false)
     } catch (error) {
       console.error("Error fetching data:", error)
@@ -36,14 +39,12 @@ export default function History() {
   }
 
   useEffect(() => {
-
     getWorkoutHistory()
-
   }, [])
 
   return (
     <>
-      <div className="fixed bg-white w-screen">
+      <div className="px-6 fixed top-0 left-0 bg-white w-full">
         <Title className="h-[10%] z-[500]">History</Title>
       </div>
       <div className="pt-[80px] pb-[100px] z-[0]">
@@ -59,12 +60,24 @@ export default function History() {
           ))
         ) : (
           <>
-            {historyData.map((session, index) => (
-              <WorkoutSessionCard
-                key={index}
-                sessionData={historyData[index]}
-              />
-            ))}
+            {/* <p>bonjour</p>
+          <button onClick={() => console.log(historyData)}>Get history data</button> */}
+            {historyData && historyData.length > 0 ? (
+              historyData.map((session, index) => (
+                <WorkoutSessionCard
+                  key={index}
+                  sessionData={historyData[index]}
+                />
+              ))
+            ) : (
+              <p className="text-xl text-">
+                Your workout history is empty. 😥 <br /> Go ahead and{" "}
+                <Link to="/">
+                  <span className="text-gray-500 font-semibold underline decoration-gray-300">start a workout session</span>
+                </Link>
+                ! 💪
+              </p>
+            )}
           </>
         )}
       </div>

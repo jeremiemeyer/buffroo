@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="fixed bg-white w-screen">
+      <div className="fixed px-6 fixed top-0 left-0 bg-white w-screen">
         <Title className="z-[500]">Start Workout</Title>
       </div>
       <div className="pt-[80px] pb-[100px] z-[0]">

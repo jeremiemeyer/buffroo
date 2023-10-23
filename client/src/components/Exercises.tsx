@@ -17,8 +17,7 @@ import { SearchIcon } from "@chakra-ui/icons"
 import { createPortal } from "react-dom"
 import AddExerciseModal from "./modals/AddExerciseModal"
 import { useNavigate, useLocation } from "react-router-dom"
-
-const EXERCISES_URL = "/api/exercises"
+import useAuth from "../hooks/useAuth"
 
 export default function Exercises() {
   const [isLoading, setIsLoading] = useState(true)
@@ -31,30 +30,31 @@ export default function Exercises() {
   const axiosPrivate = useAxiosPrivate()
   const navigate = useNavigate()
   const location = useLocation()
+  const { auth } = useAuth()
   // const controller = new AbortController()
   // let isMounted = true
+  const DEFAULT_EXERCISES_URL = "/api/exercises"
+  const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
 
-  const getExerciseList = async () => {
+  const getExercises = async () => {
     setIsLoading(true)
     try {
-      const response = await axiosPrivate.get(EXERCISES_URL, {
-        // signal: controller.signal,
-      })
-      setExerciseData(response.data)
+      const response = await axiosPrivate.get(DEFAULT_EXERCISES_URL)
+      const defaultExercises = response.data
+
+      const userResponse = await axiosPrivate.get(USER_EXERCISES_URL)
+      const userExercises = userResponse.data
+
+      setExerciseData([...defaultExercises, ...userExercises])
       setIsLoading(false)
-    } catch (error) {
+    } catch {
       console.error("Error fetching data:", error)
       navigate("/login", { state: { from: location }, replace: true })
     }
   }
 
   useEffect(() => {
-    getExerciseList()
-
-    // return () => {
-    //   isMounted = false
-    //   controller.abort()
-    // }
+    getExercises()
   }, [])
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function Exercises() {
   return (
     <>
       <div>
-        <div className="px-6 fixed z-[500] w-full pb-4 items-center  bg-white">
+        <div className="px-6 fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-white">
           <div className="flex justify-between flex-row w-full items-center">
             <Title>Exercises</Title>
             <Button
@@ -169,7 +169,7 @@ export default function Exercises() {
         createPortal(
           <AddExerciseModal
             onClose={() => setShowNewExerciseModal(false)}
-            getExerciseList={getExerciseList}
+            getExercises={getExercises}
           />,
           document.body
         )}

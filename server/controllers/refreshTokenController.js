@@ -18,6 +18,8 @@ const handleRefreshToken = async (req, res) => {
     if (err || foundUser.username !== decoded.username)
       return res.sendStatus(403)
     const roles = Object.values(foundUser.roles)
+    const username = foundUser.username
+    const userId = foundUser._id // id in mongodb db
     const accessToken = jwt.sign(
       {
         UserInfo: {
@@ -28,7 +30,7 @@ const handleRefreshToken = async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "10min" } // in production: 10 min
     )
-    res.json({ roles, accessToken })
+    res.json({ roles, accessToken, username, userId })
   })
 }
 

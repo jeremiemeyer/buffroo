@@ -1,18 +1,17 @@
 //@ts-nocheck
-import {
-  Button,
-  Input,
-  Select,
-} from "@chakra-ui/react"
+import { Button, Input, Select } from "@chakra-ui/react"
 import axios from "./../../api/axios"
 import { useState } from "react"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import useAuth from "../../hooks/useAuth"
 
-const EXERCISES_URL = "/api/exercises"
-
-export default function AddExerciseModal({ onClose, getExerciseList }:any) {
+export default function AddExerciseModal({ onClose, getExercises }: any) {
   const [nameInput, setNameInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedBodyPart, setSelectedBodyPart] = useState("")
+  const axiosPrivate = useAxiosPrivate()
+  const { auth } = useAuth()
+  const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
 
   function handleChange(e) {
     setNameInput(e.target.value)
@@ -34,13 +33,13 @@ export default function AddExerciseModal({ onClose, getExerciseList }:any) {
     }
 
     try {
-      await axios.post(EXERCISES_URL, exerciseData)
+      await axiosPrivate.post(USER_EXERCISES_URL, exerciseData)
       alert("New exercise added!")
-      getExerciseList()
+      onClose()
+      getExercises()
     } catch (error) {
       return console.log("error")
     }
-    onClose()
   }
 
   return (
@@ -56,7 +55,9 @@ export default function AddExerciseModal({ onClose, getExerciseList }:any) {
           <Button onClick={onClose} colorScheme="red">
             X
           </Button>
-          <h1 className="font-semibold text-xl text-center">Create New Exercise</h1>
+          <h1 className="font-semibold text-xl text-center">
+            Create New Exercise
+          </h1>
           <Button onClick={handleSave} colorScheme="blue">
             Save
           </Button>

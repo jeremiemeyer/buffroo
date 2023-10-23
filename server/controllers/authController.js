@@ -33,7 +33,8 @@ const handleLogin = async (req, res) => {
       { expiresIn: "1d" } // prod: 1d
     )
 
-    const user = foundUser.username
+    const username = foundUser.username
+    const userId = foundUser._id // id in mongodb db
 
     // Saving refreshToken with current user
     foundUser.refreshToken = refreshToken
@@ -46,7 +47,7 @@ const handleLogin = async (req, res) => {
       secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     })
-    res.json({ accessToken, roles, user }) // not secure to store it in local storage. to be stored in app state memory
+    res.json({ accessToken, roles, username, userId }) // not secure to store it in local storage. to be stored in app state memory
   } else {
     res.sendStatus(401) // 401 Unauthorized
   }

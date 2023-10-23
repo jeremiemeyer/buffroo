@@ -33,8 +33,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/history" element={<History />} />
             <Route path="/profile" element={<Profile />} />
-          </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
             <Route path="/exercises" element={<Exercises />} />
           </Route>
         </Route>

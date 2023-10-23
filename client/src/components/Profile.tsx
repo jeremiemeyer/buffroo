@@ -16,11 +16,14 @@ export default function Profile() {
 
   return (
     <>
-      <div className="fixed bg-white w-screen">
+      <div className="px-6 fixed top-0 left-0 bg-white w-full">
         <Title className="z-[500]">Profile</Title>
       </div>
+
       <div className="pt-[80px] pb-[100px] z-[0]">
-        <p className="pb-8 text-xl">Hello, {auth.user}!</p>
+      {/* <button onClick={() => console.log(auth)}>Click</button> */}
+
+        <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
         <Button onClick={signOut} colorScheme="blue">
           Sign out
         </Button>

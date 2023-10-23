@@ -166,7 +166,7 @@ const Login = () => {
               isChecked={check}
               className="border-gray-400 py-4"
             >
-              Trust this device
+              Stay logged in
             </Checkbox>
           </form>
           <p>

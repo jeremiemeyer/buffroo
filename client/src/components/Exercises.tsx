@@ -88,8 +88,8 @@ export default function Exercises() {
   return (
     <>
       <div>
-        <div className="px-6 fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-white">
-          <div className="flex justify-between flex-row w-full items-center">
+        <div className="fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-white">
+          <div className="flex px-6 bg-gray-200  justify-between flex-row w-full items-center">
             <Title>Exercises</Title>
             <Button
               onClick={() => setShowNewExerciseModal(true)}
@@ -99,7 +99,7 @@ export default function Exercises() {
             </Button>
           </div>
 
-          <div className="pt-2 flex flex-row gap-2">
+          <div className="px-6 pt-2 flex flex-row gap-2">
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />

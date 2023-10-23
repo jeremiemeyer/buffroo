@@ -13,8 +13,9 @@ import {
   SkeletonText,
   Box,
 } from "@chakra-ui/react"
-
-const EXERCISES_URL = "/api/exercises"
+import useAuth from "../../../hooks/useAuth"
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export default function AddExerciseToWorkoutModal({
   onClose,
@@ -25,23 +26,32 @@ export default function AddExerciseToWorkoutModal({
   const [searchInput, setSearchInput] = useState("")
   // const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
   const [selectedExercise, setSelectedExercise] = useState([])
+  const { auth } = useAuth()
+  const axiosPrivate = useAxiosPrivate()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const DEFAULT_EXERCISES_URL = "/api/exercises"
+  const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
+
+  const getExercises = async () => {
+    setIsLoading(true)
+    try {
+      const response = await axiosPrivate.get(DEFAULT_EXERCISES_URL)
+      const defaultExercises = response.data
+
+      const userResponse = await axiosPrivate.get(USER_EXERCISES_URL)
+      const userExercises = userResponse.data
+
+      setExerciseData([...defaultExercises, ...userExercises])
+      setIsLoading(false)
+    } catch (error) {
+      console.error("Error fetching data:", error)
+      navigate("/login", { state: { from: location }, replace: true })
+    }
+  }
 
   useEffect(() => {
-    setIsLoading(true)
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          EXERCISES_URL
-        )
-        // console.log(response.data)
-        setExerciseData(response.data)
-        setIsLoading(false)
-      } catch (error) {
-        console.error("Error fetching data:", error)
-      }
-    }
-
-    fetchData()
+    getExercises()
   }, [])
 
   const filteredExercises = exerciseData.filter((ex) =>
@@ -54,15 +64,15 @@ export default function AddExerciseToWorkoutModal({
 
   function handleClick(exercise) {
     setSelectedExercise(exercise)
-    // console.log(exercise)
+    console.log(exercise)
   }
 
   function handleAddExercise() {
     if (selectedExercise.length === 0) {
       return
     }
-    // Ici on passe l'exercice selectionné au parent component, càd WorkoutModal
-    addExercise(selectedExercise)
+    // Ici on passe l'Id de l'exercice selectionné au parent component, càd WorkoutModal
+    addExercise(selectedExercise.name)
     onClose()
   }
 

@@ -25,30 +25,34 @@ export default function ExerciseInWorkout({
   workoutData,
   setWorkoutData,
 }: any) {
-  const [exerciseSets, setExerciseSets] = useState([
-    { reps: "", weight: "", rpe: "" },
-  ])
+  // This exercise's index in workoutData
+  const exerciseIndex = workoutData.exercises.findIndex(
+    (exercise: any) => exercise.name === name
+  )
+
+  const exerciseSets = workoutData.exercises[exerciseIndex].sets
 
   // ajouter série
   function handleAddSet() {
-    setExerciseSets(exerciseSets.concat({ reps: "", weight: "", rpe: "" }))
-    console.log(exerciseSets)
+    const newSet = { reps: "", weight: "", rpe: "" }
+    const updatedExerciseSets = [...exerciseSets, newSet]
+    workoutData.exercises[exerciseIndex].sets = updatedExerciseSets
+    setWorkoutData({ ...workoutData })
   }
 
   // supprimer série
   function handleRemoveSet(index: number) {
-    const updatedExerciseSets = [...exerciseSets]
-    updatedExerciseSets.splice(index, 1)
-    setExerciseSets(updatedExerciseSets)
-
     const updatedData = { ...workoutData }
+
     const exerciseIndex = updatedData.exercises.findIndex(
       (exercise: any) => exercise.name === name
     )
 
     if (exerciseIndex !== -1) {
-      updatedData.exercises[exerciseIndex].sets.splice(index, 1)
-      setWorkoutData(updatedData)
+      const updatedExerciseSets = [...updatedData.exercises[exerciseIndex].sets]
+      updatedExerciseSets.splice(index, 1)
+      updatedData.exercises[exerciseIndex].sets = updatedExerciseSets
+      setWorkoutData({ ...updatedData })
     }
   }
 
@@ -103,35 +107,39 @@ export default function ExerciseInWorkout({
   }
 
   function handleChange({ index, event, field }: any) {
-    const updatedExerciseSets = [...exerciseSets]
-    if (field === "weight") {
-      updatedExerciseSets[index].weight = event.target.value
-    } else if (field === "reps") {
-      updatedExerciseSets[index].reps = event.target.value
-    } else if (field === "rpe") {
-      updatedExerciseSets[index].rpe = event.target.value
-    }
-    setExerciseSets(updatedExerciseSets)
-    console.log({ name: name, sets: updatedExerciseSets })
-
-    // Update workout data in parent component thanks to callback
-
-    const updatedData = workoutData
+    const updatedData = { ...workoutData }
 
     const exerciseIndex = updatedData.exercises.findIndex(
       (exercise: any) => exercise.name === name
     )
 
     if (exerciseIndex !== -1) {
-      updatedData.exercises[exerciseIndex].sets = updatedExerciseSets
-    } else {
-      updatedData.exercises.push({ name: name, sets: updatedExerciseSets })
-    }
+      const updatedExerciseSets = [...updatedData.exercises[exerciseIndex].sets]
 
-    setWorkoutData({
-      ...workoutData,
-      exercises: updatedData.exercises,
-    })
+      if (field === "weight") {
+        updatedExerciseSets[index].weight = event.target.value
+      } else if (field === "reps") {
+        updatedExerciseSets[index].reps = event.target.value
+      } else if (field === "rpe") {
+        updatedExerciseSets[index].rpe = event.target.value
+      }
+
+      updatedData.exercises[exerciseIndex].sets = updatedExerciseSets
+      setWorkoutData({ ...updatedData })
+    } else {
+      // If the exercise doesn't exist in the workoutData, create a new exercise
+      const newExercise = { name, sets: [] }
+      if (field === "weight") {
+        newExercise.sets[index].weight = event.target.value
+      } else if (field === "reps") {
+        newExercise.sets[index].reps = event.target.value
+      } else if (field === "rpe") {
+        newExercise.sets[index].rpe = event.target.value
+      }
+
+      updatedData.exercises.push(newExercise)
+      setWorkoutData({ ...updatedData })
+    }
   }
 
   return (
@@ -192,44 +200,42 @@ export default function ExerciseInWorkout({
           <div>reps</div>
           {/* <div>RPE</div> */}
         </div>
-        {exerciseSets.map((set, index) => (
-          <div
-            className="grid grid-cols-5 bg-gray-200 px-2 items-center"
-            key={index}
-          >
-            <div>{index + 1}</div>
-            <div>-</div>
-            <Input
-              variant="flushed"
-              type="number"
-              onChange={(event) =>
-                handleChange({ index, event, field: "weight" })
-              }
-              value={set.weight}
-            />
-
-            <Input
-              variant="flushed"
-              type="number"
-              onChange={(event) =>
-                handleChange({ index, event, field: "reps" })
-              }
-              value={set.reps}
-            />
-            {/* <Input
-              variant="filled"
-              onChange={(event) => handleChange({ index, event, field: "rpe" })}
-              value={set.rpe}
-            /> */}
-            <Button
-              onClick={() => handleRemoveSet(index)}
-              className="ml-auto h-2 w-2 hover:bg-gray-300"
-              variant="flushed"
+        {exerciseSets &&
+          exerciseSets.length > 0 &&
+          exerciseSets.map((set, index) => (
+            <div
+              className="grid grid-cols-5 bg-gray-200 px-2 items-center"
+              key={index}
             >
-              <i className="fa fa-trash "></i>
-            </Button>
-          </div>
-        ))}
+              <div>{index + 1}</div>
+              <div>-</div>
+              <Input
+                variant="flushed"
+                type="number"
+                onChange={(event) =>
+                  handleChange({ index, event, field: "weight" })
+                }
+                value={set.weight}
+              />
+
+              <Input
+                variant="flushed"
+                type="number"
+                onChange={(event) =>
+                  handleChange({ index, event, field: "reps" })
+                }
+                value={set.reps}
+              />
+
+              <Button
+                onClick={() => handleRemoveSet(index)}
+                className="ml-auto h-2 w-2 hover:bg-gray-300"
+                variant="flushed"
+              >
+                <i className="fa fa-trash "></i>
+              </Button>
+            </div>
+          ))}
       </div>
 
       <Button
@@ -240,6 +246,7 @@ export default function ExerciseInWorkout({
       >
         Add set
       </Button>
+      {/* <button onClick={() => console.log(exerciseSets)}>index</button> */}
     </div>
   )
 }

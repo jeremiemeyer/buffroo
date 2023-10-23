@@ -1,63 +1,72 @@
 // @ts-nocheck
 import { Button, Input } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
-import { useState } from "react"
 import AddExerciseToWorkoutModal from "./AddExerciseToWorkoutModal"
 import ExerciseInWorkout from "./ExerciseInWorkout"
-import axios from "./../../../api/axios"
 import ConfirmCancelWorkoutModal from "./ConfirmCancelWorkoutModal"
-
-const SESSIONS_URL = "/api/sessions"
+import useAuth from "../../../hooks/useAuth"
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  IconButton,
+  MenuItem,
+} from "@chakra-ui/react"
+import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
+import { useState, useContext } from "react"
+import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
+import WorkoutDataContext from "../../../context/WorkoutDataProvider"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
   const [showConfirmCancelWorkoutModal, setShowConfirmCancelWorkoutModal] =
     useState(false)
-  // const [workoutExercises, setWorkoutExercises] = useState<any[]>([])
+  const [workoutModalIsMinimized, setWorkoutModalIsMinimized] = useState(false)
+  const axiosPrivate = useAxiosPrivate()
+  const { auth } = useAuth()
+  const SESSIONS_URL = `/api/users/${auth.userId}/sessions`
+  const {
+    workoutIsInProgress,
+    setWorkoutIsInProgress,
+    sessionWindowIsMinimized,
+    setSessionWindowIsMinimized,
+  } = useContext(WorkoutStatusContext)
 
-  const [workoutData, setWorkoutData] = useState({
-    startdate: new Date().toISOString(),
-    enddate: "",
-    exercises: [],
-    notes: "",
-  })
-  const [workoutNotes, setWorkoutNotes] = useState("")
+  const {
+    workoutData,
+    setWorkoutData,
+    workoutNotes,
+    setWorkoutNotes,
+    handleEditWorkoutNotes,
+    addExercise,
+    resetWorkout
+  } = useContext(WorkoutDataContext)
+  
 
-  function handleEditWorkoutNotes(e: any) {
-    const newNotes = e.target.value
-    setWorkoutNotes(newNotes)
-    setWorkoutData((prevWorkoutData) => {
-      return {
-        ...prevWorkoutData,
-        notes: newNotes,
-      }
-    })
-  }
 
-  //sending the workout session to db
-  async function handleSave() {
+  async function saveSession() {
     if (workoutData.exercises.length === 0) {
       return alert("You can't submit an empty workout!")
     }
 
     const dataToSend = {
       ...workoutData,
-      enddate: new Date().toISOString()
-    };
+      enddate: new Date().toISOString(),
+      userId: auth.userId,
+    }
 
     try {
-      await axios.post(SESSIONS_URL, dataToSend)
+      await axiosPrivate.post(SESSIONS_URL, dataToSend)
       alert("New session added!")
+      setWorkoutNotes("")
+      resetWorkout()
     } catch (error) {
       return console.log("error")
     }
     onClose()
   }
 
-  function addExercise(exercise: any) {
-    const updatedExercises = [...workoutData.exercises, exercise]
-    setWorkoutData({ ...workoutData, exercises: updatedExercises })
-  }
 
   return (
     <>
@@ -69,9 +78,24 @@ export default function WorkoutModal({ onClose }: any) {
           // onClick={(e) => e.stopPropagation()}
           className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
         >
+          <div className="text-center">
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                onClick={() =>
+                  setSessionWindowIsMinimized(!sessionWindowIsMinimized)
+                }
+                icon={
+                  sessionWindowIsMinimized ? <ArrowUpIcon /> : <ArrowDownIcon />
+                }
+                variant="filled"
+              />
+            </Menu>
+          </div>
           <div className="h-[5%] flex flex-row justify-between items-center">
             <h1 className="font-semibold text-xl">Workout</h1>
-            <Button onClick={handleSave} colorScheme="green">
+            <Button onClick={saveSession} colorScheme="green">
               Finish
             </Button>
           </div>

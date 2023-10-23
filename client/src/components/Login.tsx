@@ -105,8 +105,8 @@ const Login = () => {
 
   return (
     <>
-      <div className="bg-slate-800 w-full h-full flex justify-center items-center">
-        <div className="bg-slate-200  rounded-2xl p-12 w-[600px] mx-auto my-auto">
+      <div className="bg-slate-800 w-full h-full flex flex-col justify-center items-center">
+        <div className="bg-slate-200 rounded-2xl p-12 w-[600px] mx-auto my-auto">
           <p
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"}

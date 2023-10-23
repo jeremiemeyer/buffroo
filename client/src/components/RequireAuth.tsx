@@ -1,19 +1,71 @@
 //@ts-nocheck
 import { useLocation, Navigate, Outlet } from "react-router-dom"
+import { createPortal } from "react-dom"
+import WorkoutModal from "./modals/Workout/WorkoutModal"
 import useAuth from "../hooks/useAuth"
 import Navbar from "./layout/Navbar/Navbar"
-import WorkoutModal from "./modals/Workout/WorkoutModal"
+import { useState, useContext } from "react"
+import WorkoutStatusContext from "../context/WorkoutStatusProvider"
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  IconButton,
+  MenuItem,
+} from "@chakra-ui/react"
+import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
+import { WorkoutDataProvider } from "./context/WorkoutDataProvider.tsx"
+
 
 const AppLayout = () => {
+  // const [showWorkoutModal, setShowWorkoutModal] = useState(false)
+  const {
+    workoutIsInProgress,
+    setWorkoutIsInProgress,
+    sessionWindowIsMinimized,
+    setSessionWindowIsMinimized,
+  } = useContext(WorkoutStatusContext)
+
   return (
     <>
       <div className="max-w-[1200px] mx-auto">
         <Outlet />
       </div>
       <Navbar />
+      {workoutIsInProgress ? (
+        !sessionWindowIsMinimized ? (
+          createPortal(
+            <WorkoutModal onClose={() => setWorkoutIsInProgress(false)} />,
+            document.body
+          )
+        ) : (
+          <div
+            // onClick={(e) => e.stopPropagation()}
+            className="z-[900] fixed bottom-[80px]  bg-gray-100 text-slate-900 w-full px-6 my-1 py-6 rounded-2xl border border-slate-600 "
+          >
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                onClick={() =>
+                  setSessionWindowIsMinimized(!sessionWindowIsMinimized)
+                }
+                icon={
+                  sessionWindowIsMinimized ? <ArrowUpIcon /> : <ArrowDownIcon />
+                }
+                variant="filled"
+              />
+            </Menu>
+            <p className="text-xl font-semibold">Workout</p>
+          </div>
+        ) // version réduite
+      ) : (
+        <p></p>
+      )}
     </>
   )
 }
+
 const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useAuth()
   const location = useLocation()

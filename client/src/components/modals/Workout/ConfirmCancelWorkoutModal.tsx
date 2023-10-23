@@ -1,9 +1,17 @@
 // @ts-nocheck
 import { Button, Input } from "@chakra-ui/react"
+import { useState, useContext } from "react"
+import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
+import WorkoutDataContext from "../../../context/WorkoutDataProvider"
+
 
 export default function ConfirmCancelWorkoutModal({ onClose, onCancelWorkout }) {
+  const { workoutIsInProgress, setWorkoutIsInProgress } = useContext(WorkoutStatusContext)
+  const { resetWorkout } = useContext(WorkoutDataContext)
+
   function handleCancel(){
     onCancelWorkout()
+    resetWorkout()
     onClose()
   }
 

@@ -6,6 +6,7 @@ import useAuth from "../hooks/useAuth"
 import Navbar from "./layout/Navbar/Navbar"
 import { useState, useContext } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
+import WorkoutDataContext from "../context/WorkoutDataProvider.tsx"
 import {
   Menu,
   MenuButton,
@@ -14,8 +15,7 @@ import {
   MenuItem,
 } from "@chakra-ui/react"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
-import { WorkoutDataProvider } from "./context/WorkoutDataProvider.tsx"
-
+import Stopwatch from "./Stopwatch.tsx"
 
 const AppLayout = () => {
   // const [showWorkoutModal, setShowWorkoutModal] = useState(false)
@@ -26,6 +26,8 @@ const AppLayout = () => {
     setSessionWindowIsMinimized,
   } = useContext(WorkoutStatusContext)
 
+  const { workoutData } = useContext(WorkoutDataContext)
+
   return (
     <>
       <div className="max-w-[1200px] mx-auto">
@@ -35,7 +37,8 @@ const AppLayout = () => {
       {workoutIsInProgress ? (
         !sessionWindowIsMinimized ? (
           createPortal(
-            <WorkoutModal onClose={() => setWorkoutIsInProgress(false)} />,
+            <WorkoutModal onClose={() => setWorkoutIsInProgress(false)}>
+            </WorkoutModal>,
             document.body
           )
         ) : (
@@ -56,7 +59,8 @@ const AppLayout = () => {
                 variant="filled"
               />
             </Menu>
-            <p className="text-xl font-semibold">Workout</p>
+            <Stopwatch />
+            <p className="text-xl font-semibold">{workoutData.name}</p>
           </div>
         ) // version réduite
       ) : (

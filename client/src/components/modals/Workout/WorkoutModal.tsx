@@ -17,6 +17,10 @@ import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import { useState, useContext, useEffect } from "react"
 import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../../context/WorkoutDataProvider"
+import WorkoutTimerContext from "../../../context/WorkoutTimerProvider"
+import Stopwatch from "../../Stopwatch"
+import { useStopwatch } from "react-timer-hook"
+
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -42,6 +46,7 @@ export default function WorkoutModal({ onClose }: any) {
     resetWorkout,
   } = useContext(WorkoutDataContext)
 
+  const { reset, start, pause } = useContext(WorkoutTimerContext)
 
   async function saveSession() {
     if (workoutData.exercises.length === 0) {
@@ -60,6 +65,7 @@ export default function WorkoutModal({ onClose }: any) {
       await axiosPrivate.post(SESSIONS_URL, dataToSend)
       alert("New session added!")
       resetWorkout()
+      reset() // reset timer
     } catch (error) {
       return console.log("error")
     }
@@ -68,12 +74,8 @@ export default function WorkoutModal({ onClose }: any) {
 
   return (
     <>
-      <div
-        className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center"
-      >
-        <div
-          className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
-        >
+      <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
+        <div className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 ">
           <div className="text-center">
             <Menu>
               <MenuButton
@@ -89,6 +91,8 @@ export default function WorkoutModal({ onClose }: any) {
               />
             </Menu>
           </div>
+          <div><Stopwatch /></div>
+
           <div className="h-[5%] flex flex-row justify-between items-center gap-2">
             <Input value={workoutData.name} onChange={handleEditWorkoutName} />
             <Button onClick={saveSession} colorScheme="green">

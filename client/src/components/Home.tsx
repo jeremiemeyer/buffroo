@@ -6,6 +6,7 @@ import WorkoutModal from "./modals/Workout/WorkoutModal"
 import { useState, useContext } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../context/WorkoutDataProvider"
+import WorkoutTimerContext from "../context/WorkoutTimerProvider"
 
 function formatDate(inputDate) {
   const date = new Date(inputDate)
@@ -45,12 +46,14 @@ export default function Home() {
     addExercise,
     resetWorkout,
   } = useContext(WorkoutDataContext)
+  const { reset, start, pause } = useContext(WorkoutTimerContext)
 
   function handleClick() {
     if (workoutIsInProgress) {
       alert("A workout is already in progress!")
     } else {
       setWorkoutIsInProgress(true)
+      start() // stopwatch start
       const startDate = new Date().toISOString()
       setWorkoutData({
         name: `${formatDate(startDate)} Workout`,

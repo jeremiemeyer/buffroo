@@ -41,7 +41,9 @@ const createUserSession = async (req, res) => {
       exercises: exercises,
       userId: userId,
     })
+    console.log(newUserSession)
     res.status(201).json(newUserSession) // 201 Created
+
   } catch (err) {
     console.error(err)
   }

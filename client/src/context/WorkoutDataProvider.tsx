@@ -7,6 +7,7 @@ const WorkoutDataContext = createContext({})
 
 export const WorkoutDataProvider = ({ children }) => {
   const { auth } = useAuth()
+  const [timer, setTimer] = useState({})
   const [workoutData, setWorkoutData] = useState({
     name: "", // function that gets date and put "sunday morning workout" here
     startdate: "",

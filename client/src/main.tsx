@@ -8,6 +8,7 @@ import "./index.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { WorkoutStatusProvider } from "./context/WorkoutStatusProvider.tsx"
 import { WorkoutDataProvider } from "./context/WorkoutDataProvider.tsx"
+import { WorkoutTimerProvider } from "./context/WorkoutTimerProvider.tsx"
 
 const colors = {
   brand: {
@@ -25,9 +26,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <AuthProvider>
         <WorkoutStatusProvider>
           <WorkoutDataProvider>
-            <ChakraProvider theme={theme}>
-              <App />
-            </ChakraProvider>
+            <WorkoutTimerProvider>
+              <ChakraProvider theme={theme}>
+                <App />
+              </ChakraProvider>
+            </WorkoutTimerProvider>
           </WorkoutDataProvider>
         </WorkoutStatusProvider>
       </AuthProvider>

@@ -3,15 +3,18 @@ import { Button, Input } from "@chakra-ui/react"
 import { useState, useContext } from "react"
 import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../../context/WorkoutDataProvider"
+import WorkoutTimerContext from "../../../context/WorkoutTimerProvider"
 
 
 export default function ConfirmCancelWorkoutModal({ onClose, onCancelWorkout }) {
   const { workoutIsInProgress, setWorkoutIsInProgress } = useContext(WorkoutStatusContext)
   const { resetWorkout } = useContext(WorkoutDataContext)
+  const { reset, start, pause } = useContext(WorkoutTimerContext)
 
   function handleCancel(){
     onCancelWorkout()
     resetWorkout()
+    reset() // reset stopwatch
     onClose()
   }
 

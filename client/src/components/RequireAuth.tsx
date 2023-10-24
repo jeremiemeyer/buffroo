@@ -4,7 +4,7 @@ import { createPortal } from "react-dom"
 import WorkoutModal from "./workout/WorkoutModal.tsx"
 import useAuth from "../hooks/useAuth"
 import Navbar from "./layout/Navbar/Navbar"
-import { useState, useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../context/WorkoutDataProvider.tsx"
 import {
@@ -17,6 +17,7 @@ import {
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import Stopwatch from "./workout/Stopwatch.tsx"
 
+
 const AppLayout = () => {
   // const [showWorkoutModal, setShowWorkoutModal] = useState(false)
   const {
@@ -27,6 +28,14 @@ const AppLayout = () => {
   } = useContext(WorkoutStatusContext)
 
   const { workoutData } = useContext(WorkoutDataContext)
+
+  useEffect(() => {
+    if(workoutIsInProgress & !sessionWindowIsMinimized){
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [workoutIsInProgress, sessionWindowIsMinimized])
 
   return (
     <>

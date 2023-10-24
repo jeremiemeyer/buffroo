@@ -47,6 +47,22 @@ export default function History() {
     getWorkoutHistory()
   }, [historyData.length])
 
+
+  useEffect(() => {
+    if (showEditWorkoutModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [showEditWorkoutModal]);
+
+  
+  function onClickExerciseCard(exerciseId){
+    setSelectedExerciseId(exerciseId)
+    setShowExerciseDetailsModal(true)
+  }
+
+
   const deleteWorkoutSession = async (sessionId) => {
     try {
       const response = await axiosPrivate.delete(

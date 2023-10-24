@@ -88,10 +88,21 @@ export default function Exercises() {
     // }
   }, [exerciseData, searchInput, selectedCategory, selectedBodyPart])
 
+
+
+  // No overflow when modal is open
+  useEffect(() => {
+    if (showNewExerciseModal || showExerciseDetailsModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [showNewExerciseModal, showExerciseDetailsModal]);
   function onClickExerciseCard(exerciseId){
     setSelectedExerciseId(exerciseId)
     setShowExerciseDetailsModal(true)
   }
+
 
   return (
     <>
@@ -183,7 +194,8 @@ export default function Exercises() {
           />,
           document.body
         )}
-      {showExerciseDetailsModal &&
+
+      {showExerciseDetailsModal && 
         createPortal(
           <ExerciseDetailsModal
             onClose={() => setShowExerciseDetailsModal(false)}

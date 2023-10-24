@@ -1,9 +1,9 @@
 // @ts-nocheck
 import { Button, Input } from "@chakra-ui/react"
 import { useState, useContext } from "react"
-import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
-import WorkoutDataContext from "../../../context/WorkoutDataProvider"
-import WorkoutTimerContext from "../../../context/WorkoutTimerProvider"
+import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
+import WorkoutDataContext from "../../context/WorkoutDataProvider"
+import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
 
 
 export default function ConfirmCancelWorkoutModal({ onClose, onCancelWorkout }) {

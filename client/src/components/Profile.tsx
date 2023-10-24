@@ -21,7 +21,7 @@ export default function Profile() {
 
   return (
     <>
-      <div className="fixed px-6 bg-gray-200  top-0 left-0 w-full">
+      <div className="fixed px-6 bg-glassmorphism2 top-0 left-0 w-full">
         <Title className="z-[500]">Profile</Title>
       </div>
 

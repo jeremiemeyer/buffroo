@@ -1,12 +1,13 @@
 // @ts-nocheck
-import { Button, Input } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
 import AddExerciseToWorkoutModal from "./AddExerciseToWorkoutModal"
 import ExerciseInWorkout from "./ExerciseInWorkout"
 import ConfirmCancelWorkoutModal from "./ConfirmCancelWorkoutModal"
-import useAuth from "../../../hooks/useAuth"
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
+import useAuth from "../../hooks/useAuth"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import {
+  Button,
+  Input,
   Menu,
   MenuButton,
   MenuList,
@@ -15,12 +16,11 @@ import {
 } from "@chakra-ui/react"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import { useState, useContext, useEffect } from "react"
-import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
-import WorkoutDataContext from "../../../context/WorkoutDataProvider"
-import WorkoutTimerContext from "../../../context/WorkoutTimerProvider"
-import Stopwatch from "../../Stopwatch"
+import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
+import WorkoutDataContext from "../../context/WorkoutDataProvider"
+import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
+import Stopwatch from "./Stopwatch"
 import { useStopwatch } from "react-timer-hook"
-
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -75,10 +75,11 @@ export default function WorkoutModal({ onClose }: any) {
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 ">
+        <div className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 ">
           <div className="text-center">
             <Menu>
               <MenuButton
+                className="hover:bg-slate-300"
                 as={IconButton}
                 aria-label="Options"
                 onClick={() =>
@@ -91,7 +92,9 @@ export default function WorkoutModal({ onClose }: any) {
               />
             </Menu>
           </div>
-          <div><Stopwatch /></div>
+          <div>
+            <Stopwatch />
+          </div>
 
           <div className="h-[5%] flex flex-row justify-between items-center gap-2">
             <Input value={workoutData.name} onChange={handleEditWorkoutName} />
@@ -137,9 +140,9 @@ export default function WorkoutModal({ onClose }: any) {
               Cancel workout
             </Button>
           </div>
-          <button onClick={() => console.log(workoutData)}>
+          {/* <button onClick={() => console.log(workoutData)}>
             consolelog workout data
-          </button>
+          </button> */}
         </div>
       </div>
       {showAddExerciseModal &&

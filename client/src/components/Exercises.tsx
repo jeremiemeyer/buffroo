@@ -15,18 +15,21 @@ import {
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
 import { createPortal } from "react-dom"
-import AddExerciseModal from "./modals/AddExerciseModal"
+import AddExerciseModal from "./exercises/AddExerciseModal"
 import { useNavigate, useLocation } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
+import ExerciseDetailsModal from "./exercises/ExerciseDetailsModal"
 
 export default function Exercises() {
   const [isLoading, setIsLoading] = useState(true)
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
+  const [showExerciseDetailsModal, setShowExerciseDetailsModal] = useState(false)
   const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
   const [searchInput, setSearchInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedBodyPart, setSelectedBodyPart] = useState("")
+  const [selectedExerciseId, setSelectedExerciseId] = useState("")
   const axiosPrivate = useAxiosPrivate()
   const navigate = useNavigate()
   const location = useLocation()
@@ -47,7 +50,7 @@ export default function Exercises() {
 
       setExerciseData([...defaultExercises, ...userExercises])
       setIsLoading(false)
-    } catch {
+    } catch (error) {
       console.error("Error fetching data:", error)
       navigate("/login", { state: { from: location }, replace: true })
     }
@@ -85,11 +88,16 @@ export default function Exercises() {
     // }
   }, [exerciseData, searchInput, selectedCategory, selectedBodyPart])
 
+  function onClickExerciseCard(exerciseId){
+    setSelectedExerciseId(exerciseId)
+    setShowExerciseDetailsModal(true)
+  }
+
   return (
     <>
       <div>
-        <div className="fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-white">
-          <div className="flex px-6 bg-gray-200  justify-between flex-row w-full items-center">
+        <div className="fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-glassmorphism2">
+          <div className="flex px-6  justify-between flex-row w-full items-center">
             <Title>Exercises</Title>
             <Button
               onClick={() => setShowNewExerciseModal(true)}
@@ -136,7 +144,7 @@ export default function Exercises() {
           </div>
         </div>
 
-        <div className="pt-[110px] pb-[100px] z-[0]">
+        <div className="pt-[130px] pb-[80px] z-[0]">
           {isLoading ? (
             Array.from({ length: 12 }).map((_, index) => (
               <Box
@@ -156,9 +164,11 @@ export default function Exercises() {
               {filteredExercises.map((ex, key) => (
                 <ExerciseCard
                   key={key}
+                  exerciseId={ex["_id"]}
                   name={ex["name"]}
                   category={ex["category"]}
                   bodypart={ex["bodypart"]}
+                  onClickExerciseCard={onClickExerciseCard}
                 />
               ))}
             </>
@@ -170,6 +180,14 @@ export default function Exercises() {
           <AddExerciseModal
             onClose={() => setShowNewExerciseModal(false)}
             getExercises={getExercises}
+          />,
+          document.body
+        )}
+      {showExerciseDetailsModal &&
+        createPortal(
+          <ExerciseDetailsModal
+            onClose={() => setShowExerciseDetailsModal(false)}
+            selectedExerciseId={selectedExerciseId}
           />,
           document.body
         )}

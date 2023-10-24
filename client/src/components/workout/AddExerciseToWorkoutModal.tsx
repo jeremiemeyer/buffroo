@@ -1,8 +1,8 @@
 //@ts-nocheck
-import axios from "./../../../api/axios"
+import axios from "../../api/axios"
 import { useState, useEffect } from "react"
 import { SearchIcon } from "@chakra-ui/icons"
-import ExerciseCard from "../../exercises/ExerciseCard"
+import ExerciseCard from "../exercises/ExerciseCard"
 import {
   Button,
   Input,
@@ -13,9 +13,10 @@ import {
   SkeletonText,
   Box,
 } from "@chakra-ui/react"
-import useAuth from "../../../hooks/useAuth"
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
+import useAuth from "../../hooks/useAuth"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { useLocation, useNavigate } from "react-router-dom"
+import WorkoutExercisesListExerciseCard from "./WorkoutExercisesListExerciseCard"
 
 export default function AddExerciseToWorkoutModal({
   onClose,
@@ -71,7 +72,7 @@ export default function AddExerciseToWorkoutModal({
     if (selectedExercise.length === 0) {
       return
     }
-    // Ici on passe l'Id de l'exercice selectionné au parent component, càd WorkoutModal
+    // Ici on passe l'Id de l'exercice selectionné au parent component, càd WorkoutModal (ou EditWorkoutModal)
     addExercise(selectedExercise.name)
     onClose()
   }
@@ -127,7 +128,7 @@ export default function AddExerciseToWorkoutModal({
             ) : (
               <>
                 {filteredExercises.map((exercise, key) => (
-                  <ExerciseCard
+                  <WorkoutExercisesListExerciseCard
                     onClick={() => handleClick(exercise)}
                     key={exercise["_id"]}
                     name={exercise["name"]}

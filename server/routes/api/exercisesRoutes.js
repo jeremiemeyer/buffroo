@@ -8,4 +8,9 @@ router
   .route("/")
   .get(verifyRoles(ROLES_LIST.User), exercisesController.getExercises)
 
+  // get details for a specific exercise
+router
+  .route("/:exerciseId")
+  .get(verifyRoles(ROLES_LIST.User), exercisesController.getExerciseData)
+
 module.exports = router

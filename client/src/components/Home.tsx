@@ -2,7 +2,7 @@
 import Title from "./layout/Title"
 import { Button } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
-import WorkoutModal from "./modals/Workout/WorkoutModal"
+import WorkoutModal from "./workout/WorkoutModal"
 import { useState, useContext } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../context/WorkoutDataProvider"
@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="fixed bg-gray-200 top-0 left-0 w-screen">
+      <div className="fixed bg-glassmorphism2 top-0 left-0 w-screen">
         <Title className="z-[500]">Start Workout</Title>
       </div>
       <div className="pt-[80px] pb-[100px] z-[0]">

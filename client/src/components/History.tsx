@@ -16,12 +16,16 @@ import { SearchIcon } from "@chakra-ui/icons"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import useAuth from "../hooks/useAuth"
 import { Link } from "react-router-dom"
+import { createPortal } from "react-dom"
+import EditWorkoutModal from "./history/EditWorkoutModal"
 
 export default function History() {
   const [historyData, setHistoryData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
+  const [selectedWorkoutId, setSelectedWorkoutId] = useState("")
+  const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false)
 
   const HISTORY_URL = `/api/users/${auth.userId}/sessions`
 
@@ -60,22 +64,24 @@ export default function History() {
     }
   }
 
+  const handleClickSessionCard = (index) => {
+    setSelectedWorkoutId(historyData[index]._id)
+    setShowEditWorkoutModal(true)
+  }
+
   const updateWorkoutHistory = () => {
     getWorkoutHistory()
   }
 
   return (
     <>
-      <div className="px-6 bg-gray-200  fixed top-0 left-0 w-full">
+      <div className="px-6 bg-gray-200 bg-glassmorphism2 fixed top-0 left-0 w-full">
         <Title className="h-[10%] z-[500]">History</Title>
       </div>
-      <div className="pt-[80px] pb-[100px] z-[0]">
+      <div className="pt-[80px] pb-[80px] z-[0]">
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
-            <Box
-              key={index}
-              className="border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left cursor-pointer mt-2 w-[calc(100%-40px)] p-[20px] mx-auto"
-            >
+            <Box key={index}>
               <SkeletonText noOfLines={1} skeletonHeight="10" />
               <SkeletonText noOfLines={2} skeletonHeight="6" />
               <SkeletonText noOfLines={3} skeletonHeight="6" />
@@ -90,6 +96,7 @@ export default function History() {
             {historyData && historyData.length > 0 ? (
               historyData.map((session, index) => (
                 <WorkoutSessionCard
+                  onClick={() => handleClickSessionCard(index)}
                   key={index}
                   sessionData={historyData[index]}
                   deleteWorkoutSession={deleteWorkoutSession}
@@ -111,6 +118,14 @@ export default function History() {
       </div>
 
       {/* <button onClick={() => console.log(historyData[0])}>ok</button> */}
+      {showEditWorkoutModal &&
+        createPortal(
+          <EditWorkoutModal
+            selectedWorkoutId={selectedWorkoutId}
+            onClose={() => setShowEditWorkoutModal(false)}
+          />,
+          document.body
+        )}
     </>
   )
 }

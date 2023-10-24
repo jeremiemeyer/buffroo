@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { useLocation, Navigate, Outlet } from "react-router-dom"
 import { createPortal } from "react-dom"
-import WorkoutModal from "./modals/Workout/WorkoutModal"
+import WorkoutModal from "./workout/WorkoutModal.tsx"
 import useAuth from "../hooks/useAuth"
 import Navbar from "./layout/Navbar/Navbar"
 import { useState, useContext } from "react"
@@ -15,7 +15,7 @@ import {
   MenuItem,
 } from "@chakra-ui/react"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
-import Stopwatch from "./Stopwatch.tsx"
+import Stopwatch from "./workout/Stopwatch.tsx"
 
 const AppLayout = () => {
   // const [showWorkoutModal, setShowWorkoutModal] = useState(false)
@@ -37,18 +37,18 @@ const AppLayout = () => {
       {workoutIsInProgress ? (
         !sessionWindowIsMinimized ? (
           createPortal(
-            <WorkoutModal onClose={() => setWorkoutIsInProgress(false)}>
-            </WorkoutModal>,
+            <WorkoutModal onClose={() => setWorkoutIsInProgress(false)} />,
             document.body
           )
         ) : (
           <div
             // onClick={(e) => e.stopPropagation()}
-            className="z-[500] fixed bottom-[55px] bg-gray-100 text-slate-900 w-full px-6 my-1 py-6 rounded-2xl border border-slate-600 "
+            className="z-[500] fixed bottom-[55px] bg-glassmorphism text-slate-900 w-full px-6 my-1 rounded-2xl"
           >
             <Menu>
               <MenuButton
                 as={IconButton}
+                className="hover:bg-slate-300"
                 aria-label="Options"
                 onClick={() =>
                   setSessionWindowIsMinimized(!sessionWindowIsMinimized)
@@ -60,7 +60,7 @@ const AppLayout = () => {
               />
             </Menu>
             <Stopwatch />
-            <p className="text-xl font-semibold">{workoutData.name}</p>
+            <p className="text-xl font-semibold pb-4">{workoutData.name}</p>
           </div>
         ) // version réduite
       ) : (

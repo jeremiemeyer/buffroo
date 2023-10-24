@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { Button, Input, Select } from "@chakra-ui/react"
-import axios from "./../../api/axios"
+import axios from "../../api/axios"
 import { useState } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import useAuth from "../../hooks/useAuth"

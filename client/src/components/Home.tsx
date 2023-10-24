@@ -5,15 +5,61 @@ import { createPortal } from "react-dom"
 import WorkoutModal from "./modals/Workout/WorkoutModal"
 import { useState, useContext } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
+import WorkoutDataContext from "../context/WorkoutDataProvider"
+
+function formatDate(inputDate) {
+  const date = new Date(inputDate)
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ]
+  const dayOfWeek = days[date.getDay()]
+  const hour = date.getHours()
+  let timeOfDay
+  if (hour >= 5 && hour < 12) {
+    timeOfDay = "Morning"
+  } else if (hour >= 12 && hour < 17) {
+    timeOfDay = "Afternoon"
+  } else if (hour >= 17 && hour < 20) {
+    timeOfDay = "Evening"
+  } else {
+    timeOfDay = "Night"
+  }
+  const formattedDate = `${dayOfWeek} ${timeOfDay}`
+  return formattedDate
+}
 
 export default function Home() {
   const { workoutIsInProgress, setWorkoutIsInProgress } =
     useContext(WorkoutStatusContext)
+  const {
+    workoutData,
+    setWorkoutData,
+    handleEditWorkoutNotes,
+    handleEditWorkoutName,
+    addExercise,
+    resetWorkout,
+  } = useContext(WorkoutDataContext)
 
   function handleClick() {
-    workoutIsInProgress
-      ? alert("A workout is already in progress!")
-      : setWorkoutIsInProgress(true)
+    if (workoutIsInProgress) {
+      alert("A workout is already in progress!")
+    } else {
+      setWorkoutIsInProgress(true)
+      const startDate = new Date().toISOString()
+      setWorkoutData({
+        name: `${formatDate(startDate)} Workout`,
+        startdate: startDate,
+        enddate: "",
+        exercises: [],
+        notes: "",
+      })
+    }
   }
 
   return (

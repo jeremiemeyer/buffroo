@@ -20,6 +20,8 @@ import {
   ArrowUpIcon,
 } from "@chakra-ui/icons"
 
+
+
 export default function ExerciseInWorkout({
   name,
   workoutData,

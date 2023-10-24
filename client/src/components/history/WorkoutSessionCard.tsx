@@ -66,7 +66,7 @@ export default function WorkoutSessionCard({ sessionData, deleteWorkoutSession }
     >
       <div className="p-[20px]">
         <div className="flex flex-row justify-between">
-          <span className="font-bold pb-2 text-xl">Workout Session</span>
+          <span className="font-bold pb-2 text-xl">{sessionData?.name}</span>
           <Menu variant="filled">
             <MenuButton
               as={IconButton}

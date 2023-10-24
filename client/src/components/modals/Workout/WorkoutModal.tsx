@@ -14,7 +14,7 @@ import {
   MenuItem,
 } from "@chakra-ui/react"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../../context/WorkoutDataProvider"
 
@@ -36,13 +36,11 @@ export default function WorkoutModal({ onClose }: any) {
   const {
     workoutData,
     setWorkoutData,
-    workoutNotes,
-    setWorkoutNotes,
     handleEditWorkoutNotes,
+    handleEditWorkoutName,
     addExercise,
-    resetWorkout
+    resetWorkout,
   } = useContext(WorkoutDataContext)
-  
 
 
   async function saveSession() {
@@ -53,13 +51,14 @@ export default function WorkoutModal({ onClose }: any) {
     const dataToSend = {
       ...workoutData,
       enddate: new Date().toISOString(),
-      userId: auth.userId,
     }
+
+    console.log("data sent: ", dataToSend)
+    console.log("user id", auth.userId)
 
     try {
       await axiosPrivate.post(SESSIONS_URL, dataToSend)
       alert("New session added!")
-      setWorkoutNotes("")
       resetWorkout()
     } catch (error) {
       return console.log("error")
@@ -67,15 +66,12 @@ export default function WorkoutModal({ onClose }: any) {
     onClose()
   }
 
-
   return (
     <>
       <div
-        // onClick={onClose}
         className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center"
       >
         <div
-          // onClick={(e) => e.stopPropagation()}
           className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
         >
           <div className="text-center">
@@ -93,8 +89,8 @@ export default function WorkoutModal({ onClose }: any) {
               />
             </Menu>
           </div>
-          <div className="h-[5%] flex flex-row justify-between items-center">
-            <h1 className="font-semibold text-xl">Workout</h1>
+          <div className="h-[5%] flex flex-row justify-between items-center gap-2">
+            <Input value={workoutData.name} onChange={handleEditWorkoutName} />
             <Button onClick={saveSession} colorScheme="green">
               Finish
             </Button>
@@ -104,7 +100,7 @@ export default function WorkoutModal({ onClose }: any) {
             <div className="space-y-2 mt-4">
               <Input
                 placeholder="Notes"
-                value={workoutNotes}
+                value={workoutData.notes}
                 onChange={(e) => handleEditWorkoutNotes(e)}
               ></Input>
 
@@ -137,9 +133,9 @@ export default function WorkoutModal({ onClose }: any) {
               Cancel workout
             </Button>
           </div>
-          {/* <button onClick={() => console.log(workoutData)}>
+          <button onClick={() => console.log(workoutData)}>
             consolelog workout data
-          </button> */}
+          </button>
         </div>
       </div>
       {showAddExerciseModal &&

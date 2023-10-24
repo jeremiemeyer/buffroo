@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const workoutSessionSchema = new Schema({
   userId: { type: String, required: true},
+  name: { type: String, required: true},
   startdate: { type: String, required: true },
   enddate: { type: String, required: true },
   notes: { type: String, required: false },

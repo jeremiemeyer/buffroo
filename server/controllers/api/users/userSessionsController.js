@@ -16,11 +16,9 @@ const getUserSessions = async (req, res) => {
 
 // add session to history (when workout session is submitted)
 const createUserSession = async (req, res) => {
-  if (!req?.params?.userId)
-    return res.status(400).json({ message: "User ID required." })
 
   if (
-    !req?.body?.userId ||
+    !req?.params?.userId ||
     !req?.body?.startdate ||
     !req?.body?.enddate ||
     !req?.body?.exercises
@@ -32,10 +30,11 @@ const createUserSession = async (req, res) => {
   }
 
   try {
-    const { startdate, enddate, notes, exercises } = req.body
+    const { name, startdate, enddate, notes, exercises } = req.body
     const userId = req.params.userId
 
     const newUserSession = await WorkoutSession.create({
+      name: name,
       startdate: startdate,
       enddate: enddate,
       notes: notes,

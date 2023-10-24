@@ -9,6 +9,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+html {
+  font-size: 85%;
+}
+
 
 body {
   margin: 0;

@@ -41,7 +41,7 @@ const AppLayout = () => {
         ) : (
           <div
             // onClick={(e) => e.stopPropagation()}
-            className="z-[900] fixed bottom-[80px]  bg-gray-100 text-slate-900 w-full px-6 my-1 py-6 rounded-2xl border border-slate-600 "
+            className="z-[500] fixed bottom-[55px] bg-gray-100 text-slate-900 w-full px-6 my-1 py-6 rounded-2xl border border-slate-600 "
           >
             <Menu>
               <MenuButton

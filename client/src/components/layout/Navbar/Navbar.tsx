@@ -12,7 +12,7 @@ export default function Navbar() {
               location.pathname.startsWith("/profile")
                 ? "bg-gray-800"
                 : "hover:bg-gray-500"
-            } cursor-pointer py-4 px-4 `}
+            } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-user" />
             <p>Profile</p>
@@ -25,7 +25,7 @@ export default function Navbar() {
               location.pathname.startsWith("/history")
                 ? "bg-gray-800"
                 : "hover:bg-gray-500"
-            } cursor-pointer py-4 px-4 `}
+            } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-clock" />
             <p>History</p>
@@ -38,7 +38,7 @@ export default function Navbar() {
               location.pathname === "/"
                 ? "bg-gray-800"
                 : "hover:bg-gray-500"
-            } cursor-pointer py-4 px-4 `}
+            } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-plus" />
             <p>Start</p>
@@ -51,7 +51,7 @@ export default function Navbar() {
               location.pathname.startsWith("/exercises")
                 ? "bg-gray-800"
                 : "hover:bg-gray-500"
-            } cursor-pointer py-4 px-4 `}
+            } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-dumbbell" />
             <p>Exercises</p>

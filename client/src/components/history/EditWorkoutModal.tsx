@@ -80,7 +80,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 ">
+        <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 ">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
             <Input value={workoutData.name} onChange={handleEditWorkoutName} />
             <Button onClick={saveSessionChanges} colorScheme="blue">
@@ -88,7 +88,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
             </Button>
           </div>
 
-          <div className="h-[80%] mt-6 overflow-auto">
+          <div className="grow mt-6 overflow-auto">
             <div className="space-y-2 mt-4">
               <Input
                 placeholder="Notes"
@@ -112,7 +112,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
             </div>
           </div>
 
-          <div className="h-[5%] mt-4 space-x-1 text-center">
+          <div className="mt-4 space-x-1 text-center">
             <Button
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"

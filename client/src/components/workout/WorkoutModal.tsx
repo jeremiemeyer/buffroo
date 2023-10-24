@@ -75,7 +75,7 @@ export default function WorkoutModal({ onClose }: any) {
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 ">
+        <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 ">
           <div className="text-center">
             <Menu>
               <MenuButton
@@ -103,7 +103,7 @@ export default function WorkoutModal({ onClose }: any) {
             </Button>
           </div>
 
-          <div className="h-[80%] mt-6 overflow-auto">
+          <div className="grow mt-6 overflow-auto">
             <div className="space-y-2 mt-4">
               <Input
                 placeholder="Notes"

@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="fixed bg-glassmorphism2 top-0 left-0 w-screen">
+      <div className="fixed bg-glassmorphism2 top-0 left-0 w-screen z-[10]">
         <Title className="z-[500]">Start Workout</Title>
       </div>
       <div className="pt-[80px] pb-[100px] z-[0]">

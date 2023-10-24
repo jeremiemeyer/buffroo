@@ -21,7 +21,7 @@ export default function Profile() {
 
   return (
     <>
-      <div className="fixed px-6 bg-glassmorphism2 top-0 left-0 w-full">
+      <div className="fixed px-6 bg-glassmorphism2 top-0 left-0 w-full z-[10]">
         <Title className="z-[500]">Profile</Title>
       </div>
 
@@ -29,7 +29,7 @@ export default function Profile() {
         {/* <button onClick={() => console.log(auth)}>Click</button> */}
 
         <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
-        <Button onClick={signOut} colorScheme="blue" zIndex={10}>
+        <Button onClick={signOut} colorScheme="blue">
           Sign out
         </Button>
       </div>

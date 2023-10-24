@@ -75,7 +75,7 @@ export default function History() {
 
   return (
     <>
-      <div className="px-6 bg-gray-200 bg-glassmorphism2 fixed top-0 left-0 w-full">
+      <div className="px-6 bg-gray-200 bg-glassmorphism2 fixed top-0 left-0 w-full z-[10]">
         <Title className="h-[10%] z-[500]">History</Title>
       </div>
       <div className="pt-[80px] pb-[80px] z-[0]">

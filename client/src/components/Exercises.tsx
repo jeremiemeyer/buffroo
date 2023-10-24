@@ -96,7 +96,7 @@ export default function Exercises() {
   return (
     <>
       <div>
-        <div className="fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-glassmorphism2">
+        <div className="fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-glassmorphism2 z-[10]">
           <div className="flex px-6  justify-between flex-row w-full items-center">
             <Title>Exercises</Title>
             <Button

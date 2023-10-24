@@ -126,7 +126,7 @@ export default function WorkoutModal({ onClose }: any) {
             </div>
           </div>
 
-          <div className="h-[5%] mt-4 space-x-4 max-w-xs mx-auto">
+          <div className="mt-4 space-x-1 text-center">
             <Button
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"

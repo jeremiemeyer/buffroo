@@ -112,7 +112,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
             </div>
           </div>
 
-          <div className="h-[5%] mt-4 space-x-2 max-w-xs mx-auto">
+          <div className="h-[5%] mt-4 space-x-1 text-center">
             <Button
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"

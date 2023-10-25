@@ -233,7 +233,6 @@ export default function ExerciseInWorkout({
                 onClick={() => handleRemoveSet(index)}
                 className="ml-auto h-2 w-2 hover:bg-gray-300"
                 variant="flushed"
-                borderRadius="16px"
               >
                 <i className="fa fa-trash "></i>
               </Button>

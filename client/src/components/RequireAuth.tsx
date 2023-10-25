@@ -17,7 +17,6 @@ import {
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import Stopwatch from "./workout/Stopwatch.tsx"
 
-
 const AppLayout = () => {
   // const [showWorkoutModal, setShowWorkoutModal] = useState(false)
   const {
@@ -30,19 +29,18 @@ const AppLayout = () => {
   const { workoutData } = useContext(WorkoutDataContext)
 
   useEffect(() => {
-    if(workoutIsInProgress & !sessionWindowIsMinimized){
-      document.body.style.overflow = 'hidden';
+    if (workoutIsInProgress & !sessionWindowIsMinimized) {
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto"
     }
   }, [workoutIsInProgress, sessionWindowIsMinimized])
 
   return (
     <>
-      <div className="max-w-[1200px] mx-auto">
-        <Outlet />
-      </div>
+      <Outlet />
       <Navbar />
+
       {workoutIsInProgress ? (
         !sessionWindowIsMinimized ? (
           createPortal(
@@ -51,17 +49,15 @@ const AppLayout = () => {
           )
         ) : (
           <div
-            // onClick={(e) => e.stopPropagation()}
-            className="z-[500] fixed bottom-[55px] bg-glassmorphism text-slate-900 w-full px-6 my-1 rounded-2xl"
+            onClick={() => setSessionWindowIsMinimized(false)}
+            className="z-[500] fixed bottom-[55px] bg-glassmorphism cursor-pointer text-slate-900 w-full px-6 my-1 rounded-2xl"
           >
             <Menu>
               <MenuButton
                 as={IconButton}
                 className="hover:bg-slate-300"
                 aria-label="Options"
-                onClick={() =>
-                  setSessionWindowIsMinimized(!sessionWindowIsMinimized)
-                }
+                onClick={() => setSessionWindowIsMinimized(false)}
                 icon={
                   sessionWindowIsMinimized ? <ArrowUpIcon /> : <ArrowDownIcon />
                 }

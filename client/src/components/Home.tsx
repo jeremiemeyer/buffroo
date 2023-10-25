@@ -67,10 +67,13 @@ export default function Home() {
 
   return (
     <>
+      {/* Title */}
       <div className="fixed bg-glassmorphism2 top-0 left-0 w-screen z-[10]">
         <Title className="z-[500]">Start Workout</Title>
       </div>
-      <div className="pt-[80px] pb-[100px] z-[0]">
+
+      {/* Content */}
+      <div className="pt-[80px] pb-[100px] z-[0] mx-auto max-w-[1200px]">
         <div className="text-xl font-semibold mt-8">Quick start</div>
         {/* <button onClick={() => console.log(workoutIsInProgress)}>
           console log workoutIsInProgress

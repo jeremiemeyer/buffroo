@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom"
 export default function Layout() {
   return (
     <>
-      <main className="h-screen w-screen">
+      <div className="w-screen relative">
         <Outlet />
-      </main>
+      </div>
     </>
   )
 }

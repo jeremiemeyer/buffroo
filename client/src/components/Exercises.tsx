@@ -23,7 +23,8 @@ import ExerciseDetailsModal from "./exercises/ExerciseDetailsModal"
 export default function Exercises() {
   const [isLoading, setIsLoading] = useState(true)
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
-  const [showExerciseDetailsModal, setShowExerciseDetailsModal] = useState(false)
+  const [showExerciseDetailsModal, setShowExerciseDetailsModal] =
+    useState(false)
   const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
   const [searchInput, setSearchInput] = useState("")
@@ -88,37 +89,35 @@ export default function Exercises() {
     // }
   }, [exerciseData, searchInput, selectedCategory, selectedBodyPart])
 
-
-
   // No overflow when modal is open
   useEffect(() => {
     if (showNewExerciseModal || showExerciseDetailsModal) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto"
     }
-  }, [showNewExerciseModal, showExerciseDetailsModal]);
-  function onClickExerciseCard(exerciseId){
+  }, [showNewExerciseModal, showExerciseDetailsModal])
+  function onClickExerciseCard(exerciseId) {
     setSelectedExerciseId(exerciseId)
     setShowExerciseDetailsModal(true)
   }
 
-
   return (
     <>
-      <div>
-        <div className="fixed top-0 left-0 z-[500] w-full pb-4 items-center  bg-glassmorphism2 z-[10]">
-          <div className="flex px-6  justify-between flex-row w-full items-center">
-            <Title>Exercises</Title>
-            <Button
-              onClick={() => setShowNewExerciseModal(true)}
-              colorScheme="blue"
-            >
-              Add New
-            </Button>
-          </div>
+      {/* Title + search bar */}
+      <div className="fixed top-0 left-0 w-full pb-4 items-center bg-glassmorphism2 z-[10]">
+        <div className="flex px-6 justify-between flex-row items-center">
+          <Title>Exercises</Title>
+          <Button
+            onClick={() => setShowNewExerciseModal(true)}
+            colorScheme="blue"
+          >
+            Add New
+          </Button>
+        </div>
 
-          <div className="px-6 pt-2 flex flex-row gap-2">
+        <div className="flex flex-col">
+          <div className="px-6 pt-2">
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />
@@ -129,6 +128,9 @@ export default function Exercises() {
                 onChange={(e) => setSearchInput(e.target.value)}
               />
             </InputGroup>
+          </div>
+
+          <div className="px-6 pt-2 flex flex-row gap-2">
             <Select
               placeholder="Any body part"
               onChange={(e) => setSelectedBodyPart(e.target.value)}
@@ -154,37 +156,38 @@ export default function Exercises() {
             </Select>
           </div>
         </div>
+      </div>
 
-        <div className="pt-[130px] pb-[80px] z-[0]">
-          {isLoading ? (
-            Array.from({ length: 12 }).map((_, index) => (
-              <Box
-                key={index}
-                className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
-              >
-                <SkeletonText
-                  mt="4"
-                  noOfLines={3}
-                  spacing="4"
-                  skeletonHeight="2"
-                />
-              </Box>
-            ))
-          ) : (
-            <>
-              {filteredExercises.map((ex, key) => (
-                <ExerciseCard
-                  key={key}
-                  exerciseId={ex["_id"]}
-                  name={ex["name"]}
-                  category={ex["category"]}
-                  bodypart={ex["bodypart"]}
-                  onClickExerciseCard={onClickExerciseCard}
-                />
-              ))}
-            </>
-          )}
-        </div>
+      {/* Content */}
+      <div className="pt-[160px] pb-[80px] z-[0] mx-auto max-w-[1200px]">
+        {isLoading ? (
+          Array.from({ length: 12 }).map((_, index) => (
+            <Box
+              key={index}
+              className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
+            >
+              <SkeletonText
+                mt="4"
+                noOfLines={3}
+                spacing="4"
+                skeletonHeight="2"
+              />
+            </Box>
+          ))
+        ) : (
+          <>
+            {filteredExercises.map((ex, key) => (
+              <ExerciseCard
+                key={key}
+                exerciseId={ex["_id"]}
+                name={ex["name"]}
+                category={ex["category"]}
+                bodypart={ex["bodypart"]}
+                onClickExerciseCard={onClickExerciseCard}
+              />
+            ))}
+          </>
+        )}
       </div>
       {showNewExerciseModal &&
         createPortal(
@@ -195,7 +198,7 @@ export default function Exercises() {
           document.body
         )}
 
-      {showExerciseDetailsModal && 
+      {showExerciseDetailsModal &&
         createPortal(
           <ExerciseDetailsModal
             onClose={() => setShowExerciseDetailsModal(false)}

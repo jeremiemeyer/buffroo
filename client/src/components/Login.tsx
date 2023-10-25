@@ -105,7 +105,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="bg-slate-800 w-full h-full flex justify-center items-center">
+      <div className="bg-slate-800 w-screen h-screen flex justify-center items-center">
         <div className="bg-slate-200 rounded-2xl p-12 w-[600px] mx-auto my-auto">
           <p
             ref={errRef}

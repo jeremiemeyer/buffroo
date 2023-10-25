@@ -11,27 +11,27 @@
 
 html {
   font-size: 85%;
+  /* overflow: hidden; enlever */
 }
 
-
+/* 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
+} */
 
 /* From form tutorial */
 
-.App {
+/* .App {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh; 
   padding: 1rem 0.5rem;
-}
+} */
 
 section {
     width: 100%;
@@ -125,6 +125,12 @@ button {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.bg-glassmorphism:hover {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 40px 10px rgba(72,171,224, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 

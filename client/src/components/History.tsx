@@ -91,10 +91,13 @@ export default function History() {
 
   return (
     <>
+      {/* Title  */}
       <div className="px-6 bg-gray-200 bg-glassmorphism2 fixed top-0 left-0 w-full z-[10]">
         <Title className="h-[10%] z-[500]">History</Title>
       </div>
-      <div className="pt-[80px] pb-[80px] z-[0]">
+
+      {/* Content */}
+      <div className="pt-[80px] pb-[80px] z-[0] mx-auto max-w-[1200px]">
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <Box key={index}>
@@ -119,7 +122,7 @@ export default function History() {
                 />
               ))
             ) : (
-              <p className="text-xl text-">
+              <p className="text-xl">
                 Your workout history is empty. 😥 <br /> Go ahead and{" "}
                 <Link to="/">
                   <span className="text-gray-500 font-semibold underline decoration-gray-300">

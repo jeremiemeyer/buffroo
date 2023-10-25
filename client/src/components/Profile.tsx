@@ -21,10 +21,12 @@ export default function Profile() {
 
   return (
     <>
+      {/* Title  */}
       <div className="fixed px-6 bg-glassmorphism2 top-0 left-0 w-full z-[10]">
         <Title className="z-[500]">Profile</Title>
       </div>
 
+      {/* Content  */}
       <div className="pt-[80px] pb-[100px] z-[0]">
         {/* <button onClick={() => console.log(auth)}>Click</button> */}
 

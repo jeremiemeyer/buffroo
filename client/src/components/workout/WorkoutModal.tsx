@@ -83,7 +83,7 @@ export default function WorkoutModal({ onClose }: any) {
                 as={IconButton}
                 aria-label="Options"
                 onClick={() =>
-                  setSessionWindowIsMinimized(!sessionWindowIsMinimized)
+                  setSessionWindowIsMinimized(true)
                 }
                 icon={
                   sessionWindowIsMinimized ? <ArrowUpIcon /> : <ArrowDownIcon />

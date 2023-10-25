@@ -19,7 +19,11 @@ import {
   ArrowUpIcon,
 } from "@chakra-ui/icons"
 
-export default function WorkoutSessionCard({ sessionData, deleteWorkoutSession, onClick }) {
+export default function WorkoutSessionCard({
+  sessionData,
+  deleteWorkoutSession,
+  onClick,
+}) {
   function formatISODate(isoDate) {
     const options = {
       weekday: "long",
@@ -63,10 +67,10 @@ export default function WorkoutSessionCard({ sessionData, deleteWorkoutSession, 
   return (
     <div
       onClick={onClick}
-      className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left mt-2 flex-col w-[calc(100%-40px)] mx-auto cursor-pointer`}
+      className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left mt-2 cursor-pointer`}
     >
-      <div className="p-[20px]">
-        <div className="flex flex-row justify-between">
+      <div className="p-6">
+        <div className="flex flex-row justify-between items-center">
           <span className="font-bold pb-2 text-xl">{sessionData?.name}</span>
           <Menu variant="filled">
             <MenuButton
@@ -83,10 +87,7 @@ export default function WorkoutSessionCard({ sessionData, deleteWorkoutSession, 
                 Edit session
               </MenuItem>
 
-              <MenuItem
-                onClick={deleteSession}
-                icon={<DeleteIcon />}
-              >
+              <MenuItem onClick={deleteSession} icon={<DeleteIcon />}>
                 Delete from history
               </MenuItem>
             </MenuList>

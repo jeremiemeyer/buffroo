@@ -73,7 +73,7 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[100px] z-[0] mx-auto max-w-[1200px]">
+      <div className="pt-[80px] pb-[100px] z-[0] mx-auto max-w-[1200px] px-6">
         <div className="text-xl font-semibold mt-8">Quick start</div>
         {/* <button onClick={() => console.log(workoutIsInProgress)}>
           console log workoutIsInProgress

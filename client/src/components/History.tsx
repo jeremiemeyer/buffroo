@@ -97,7 +97,7 @@ export default function History() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[80px] z-[0] mx-auto max-w-[1200px]">
+      <div className="pt-[80px] pb-[80px] z-[0] mx-auto max-w-[1200px] px-6">
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <Box key={index}>

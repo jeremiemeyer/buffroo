@@ -41,6 +41,7 @@ export default function EditExerciseModal({ onClose, selectedExerciseId }) {
           <Button
             onClick={onClose}
             colorScheme="red"
+            borderRadius="16px"
           >
             X
           </Button>
@@ -50,6 +51,7 @@ export default function EditExerciseModal({ onClose, selectedExerciseId }) {
           <Button
             // onClick={handleSave}
             colorScheme="blue"
+            borderRadius="16px"
           >
             Edit
           </Button>

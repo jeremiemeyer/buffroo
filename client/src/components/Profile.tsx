@@ -31,7 +31,7 @@ export default function Profile() {
         {/* <button onClick={() => console.log(auth)}>Click</button> */}
 
         <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
-        <Button onClick={signOut} colorScheme="blue">
+        <Button onClick={signOut} colorScheme="blue" borderRadius="16px">
           Sign out
         </Button>
       </div>

@@ -79,7 +79,12 @@ export default function Home() {
           console log workoutIsInProgress
         </button> */}
 
-        <Button onClick={handleClick} colorScheme="blue" className="mt-4">
+        <Button
+          onClick={handleClick}
+          colorScheme="blue"
+          className="mt-4"
+          borderRadius="16px"
+        >
           Start an empty workout
         </Button>
 

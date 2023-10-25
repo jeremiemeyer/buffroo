@@ -111,6 +111,7 @@ export default function Exercises() {
           <Button
             onClick={() => setShowNewExerciseModal(true)}
             colorScheme="blue"
+            borderRadius="16px"
           >
             Add New
           </Button>

@@ -64,7 +64,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
       const response = await axiosPrivate.put(SESSION_URL, workoutData)
       const updatedSessionData = response.data
       // console.log(updatedSessionData)
-      alert('Changes saved!')
+      alert("Changes saved!")
       onClose()
     } catch (error) {
       console.error("Error updating session:", error)
@@ -83,7 +83,11 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
         <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 ">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
             <Input value={workoutData.name} onChange={handleEditWorkoutName} />
-            <Button onClick={saveSessionChanges} colorScheme="blue">
+            <Button
+              onClick={saveSessionChanges}
+              colorScheme="blue"
+              borderRadius="16px"
+            >
               Save
             </Button>
           </div>
@@ -116,12 +120,14 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
             <Button
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"
+              borderRadius="16px"
             >
               Add Exercises
             </Button>
             <Button
               onClick={() => setShowConfirmDiscardChangesModal(true)}
               colorScheme="red"
+              borderRadius="16px"
             >
               Discard changes
             </Button>

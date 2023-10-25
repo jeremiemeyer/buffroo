@@ -5,9 +5,12 @@ import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
 
-
-export default function ConfirmDiscardChangesModal({ onClose, onCancelEditWorkout }) {
-  const { workoutIsInProgress, setWorkoutIsInProgress } = useContext(WorkoutStatusContext)
+export default function ConfirmDiscardChangesModal({
+  onClose,
+  onCancelEditWorkout,
+}) {
+  const { workoutIsInProgress, setWorkoutIsInProgress } =
+    useContext(WorkoutStatusContext)
   const { resetWorkout } = useContext(WorkoutDataContext)
   const { reset, start, pause } = useContext(WorkoutTimerContext)
 
@@ -28,11 +31,15 @@ export default function ConfirmDiscardChangesModal({ onClose, onCancelEditWorkou
             </p>
             <div className="grid grid-rows-2 gap-2">
               <Button
-              onClick={onCancelEditWorkout}
-              colorScheme="red">Discard changes</Button>
-              <Button 
-              onClick={onClose}
-              colorScheme="blue">Back to edit</Button>
+                onClick={onCancelEditWorkout}
+                colorScheme="red"
+                borderRadius="16px"
+              >
+                Discard changes
+              </Button>
+              <Button onClick={onClose} colorScheme="blue" borderRadius="16px">
+                Back to edit
+              </Button>
             </div>
           </div>
         </div>

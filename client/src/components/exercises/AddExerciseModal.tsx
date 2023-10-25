@@ -52,13 +52,13 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
         className="z-[900] relative bg-gray-100 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4"
       >
         <div className="flex flex-row justify-between items-center text-center">
-          <Button onClick={onClose} colorScheme="red">
+          <Button onClick={onClose} colorScheme="red" borderRadius="16px">
             X
           </Button>
           <h1 className="font-semibold text-xl text-center">
             Create New Exercise
           </h1>
-          <Button onClick={handleSave} colorScheme="blue">
+          <Button onClick={handleSave} colorScheme="blue" borderRadius="16px">
             Save
           </Button>
         </div>

@@ -11,6 +11,7 @@ import NotFound from "./components/NotFound.tsx"
 import RequireAuth from "./components/RequireAuth.tsx"
 import PersistLogin from "./components/PersistLogin.tsx"
 import { Routes, Route } from "react-router-dom"
+import LoginRegister from "./components/LoginRegister.tsx"
 
 const ROLES = {
   User: 2001,
@@ -23,8 +24,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* public routes */}
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="login" element={<LoginRegister children={<Login />} />} />
+        <Route
+          path="register"
+          element={<LoginRegister children={<Register />} />}
+        />
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* protected routes */}

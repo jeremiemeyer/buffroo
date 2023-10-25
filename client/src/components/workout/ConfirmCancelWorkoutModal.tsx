@@ -5,13 +5,16 @@ import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
 
-
-export default function ConfirmCancelWorkoutModal({ onClose, onCancelWorkout }) {
-  const { workoutIsInProgress, setWorkoutIsInProgress } = useContext(WorkoutStatusContext)
+export default function ConfirmCancelWorkoutModal({
+  onClose,
+  onCancelWorkout,
+}) {
+  const { workoutIsInProgress, setWorkoutIsInProgress } =
+    useContext(WorkoutStatusContext)
   const { resetWorkout } = useContext(WorkoutDataContext)
   const { reset, start, pause } = useContext(WorkoutTimerContext)
 
-  function handleCancel(){
+  function handleCancel() {
     onCancelWorkout()
     resetWorkout()
     reset() // reset stopwatch
@@ -35,8 +38,16 @@ export default function ConfirmCancelWorkoutModal({ onClose, onCancelWorkout }) 
               lost.
             </p>
             <div className="grid grid-rows-2 gap-2">
-              <Button onClick={handleCancel} colorScheme="red">Cancel workout</Button>
-              <Button onClick={onClose} colorScheme="blue">Resume</Button>
+              <Button
+                onClick={handleCancel}
+                colorScheme="red"
+                borderRadius="16px"
+              >
+                Cancel workout
+              </Button>
+              <Button onClick={onClose} colorScheme="blue" borderRadius="16px">
+                Resume
+              </Button>
             </div>
           </div>
         </div>

@@ -71,10 +71,9 @@ const Login = () => {
         JSON.stringify({ user, pwd }),
         {
           headers: {
-          "Content-Type": "application/json",
-        },
+            "Content-Type": "application/json",
+          },
           withCredentials: true,
-          
         }
       )
       console.log(JSON.stringify(response?.data))
@@ -102,88 +101,89 @@ const Login = () => {
     }
   }
 
-
   return (
     <>
-      <div className="bg-slate-800 w-screen h-screen flex justify-center items-center">
-        <div className="bg-slate-200 rounded-2xl p-12 w-[600px] mx-auto my-auto">
-          <p
-            ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
-            aria-live="assertive"
+      <h1 className="text-4xl font-semibold pb-8 text-white z-[600]">Sign In</h1>
+      <div className="bg-glassmorphism2 rounded-3xl p-12 w-[600px] z-[600]">
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={4}>
+            {/* Username */}
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                color="gray.300"
+                fontSize="1.2em"
+              >
+                <EmailIcon color="gray.500" />
+              </InputLeftElement>
+              <Input
+                id="username"
+                ref={userRef}
+                placeholder="Username"
+                autoComplete="off"
+                {...userAttribs}
+                //   onFocus={() => setUserFocus(true)}
+                //   onBlur={() => setUserFocus(false)}
+                borderRadius="16px"
+                borderColor="gray.400"
+                required
+              />
+            </InputGroup>
+
+            {/* Password */}
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                color="gray.300"
+                fontSize="1.2em"
+              >
+                <LockIcon color="gray.500" />
+              </InputLeftElement>
+              <Input
+                id="password"
+                placeholder="Password"
+                value={pwd}
+                onChange={(e) => setPwd(e.target.value)}
+                //   onFocus={() => setPwdFocus(true)}
+                //   onBlur={() => setPwdFocus(false)}
+                type="password"
+                borderRadius="16px"
+                borderColor="gray.400"
+                required
+              />
+            </InputGroup>
+          </Stack>
+
+          <Button mt={4} colorScheme="blue" type="submit" borderRadius={"16px"}>
+            Sign In
+          </Button>
+          <Checkbox
+            onChange={toggleCheck}
+            isChecked={check}
+            className="border-gray-400 py-4"
           >
-            {errMsg}
-          </p>
-          <h1 className="text-3xl font-semibold pb-8">Sign In</h1>
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={4}>
-              {/* Username */}
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  color="gray.300"
-                  fontSize="1.2em"
-                >
-                  <EmailIcon color="gray.500" />
-                </InputLeftElement>
-                <Input
-                  id="username"
-                  ref={userRef}
-                  placeholder="Username"
-                  autoComplete="off"
-                  {...userAttribs}
-                  //   onFocus={() => setUserFocus(true)}
-                  //   onBlur={() => setUserFocus(false)}
-                  required
-                />
-              </InputGroup>
-
-              {/* Password */}
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  color="gray.300"
-                  fontSize="1.2em"
-                >
-                  <LockIcon color="gray.500" />
-                </InputLeftElement>
-                <Input
-                  id="password"
-                  placeholder="Password"
-                  value={pwd}
-                  onChange={(e) => setPwd(e.target.value)}
-                  //   onFocus={() => setPwdFocus(true)}
-                  //   onBlur={() => setPwdFocus(false)}
-                  type="password"
-                  required
-                />
-              </InputGroup>
-            </Stack>
-
-            <Button mt={4} colorScheme="blue" type="submit">
-              Sign In
-            </Button>
-            <Checkbox
-              onChange={toggleCheck}
-              isChecked={check}
-              className="border-gray-400 py-4"
-            >
-              Stay logged in
-            </Checkbox>
-          </form>
-          <p>
-            Need an account?
-            <br />
-            <span className="line">
-              {/*put router link here*/}
-              <Link to="/register">
-                <span className="text-black underline font-semibold">
-                  Sign Up
-                </span>
-              </Link>
-            </span>
-          </p>
-        </div>
+            Stay logged in
+          </Checkbox>
+        </form>
+        <p>
+          Need an account?
+          <br />
+          <span className="line">
+            {/*put router link here*/}
+            <Link to="/register">
+              <span className="text-black underline font-semibold">
+                Sign Up
+              </span>
+            </Link>
+          </span>
+        </p>
       </div>
     </>
   )

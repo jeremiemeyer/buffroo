@@ -90,7 +90,11 @@ export default function AddExerciseToWorkoutModal({
           <Button onClick={onClose} colorScheme="red">
             X
           </Button>
-          <Button onClick={handleAddExercise} colorScheme="blue">
+          <Button
+            onClick={handleAddExercise}
+            colorScheme="blue"
+            borderRadius="16px"
+          >
             Add
           </Button>
           {/* <Button onClick={handleSave} colorScheme="blue">Save</Button> */}

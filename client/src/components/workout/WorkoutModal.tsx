@@ -82,9 +82,7 @@ export default function WorkoutModal({ onClose }: any) {
                 className="hover:bg-slate-300"
                 as={IconButton}
                 aria-label="Options"
-                onClick={() =>
-                  setSessionWindowIsMinimized(true)
-                }
+                onClick={() => setSessionWindowIsMinimized(true)}
                 icon={
                   sessionWindowIsMinimized ? <ArrowUpIcon /> : <ArrowDownIcon />
                 }
@@ -92,13 +90,17 @@ export default function WorkoutModal({ onClose }: any) {
               />
             </Menu>
           </div>
-          <div>
+          <div className="pb-2">
             <Stopwatch />
           </div>
 
           <div className="h-[5%] flex flex-row justify-between items-center gap-2">
             <Input value={workoutData.name} onChange={handleEditWorkoutName} />
-            <Button onClick={saveSession} colorScheme="green">
+            <Button
+              onClick={saveSession}
+              colorScheme="green"
+              borderRadius="16px"
+            >
               Finish
             </Button>
           </div>
@@ -130,12 +132,14 @@ export default function WorkoutModal({ onClose }: any) {
             <Button
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"
+              borderRadius="16px"
             >
               Add Exercises
             </Button>
             <Button
               onClick={() => setShowConfirmCancelWorkoutModal(true)}
               colorScheme="red"
+              borderRadius="16px"
             >
               Cancel workout
             </Button>

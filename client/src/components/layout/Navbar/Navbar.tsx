@@ -5,13 +5,13 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="fixed w-full bottom-0 z-[500] bg-glassmorphism3 text-white flex flex-row justify-center">
+      <div className="fixed w-full bottom-0 z-[500] rounded-3xl bg-glassmorphism3 text-white flex flex-row justify-center">
         <Link to={"profile"}>
           <div
             className={`${
               location.pathname.startsWith("/profile")
                 ? "bg-gray-800"
-                : "hover:bg-gray-500"
+                : "hover:bg-gray-600"
             } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-user" />
@@ -24,7 +24,7 @@ export default function Navbar() {
             className={`${
               location.pathname.startsWith("/history")
                 ? "bg-gray-800"
-                : "hover:bg-gray-500"
+                : "hover:bg-gray-600"
             } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-clock" />
@@ -37,7 +37,7 @@ export default function Navbar() {
             className={`${
               location.pathname === "/"
                 ? "bg-gray-800"
-                : "hover:bg-gray-500"
+                : "hover:bg-gray-600"
             } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-plus" />
@@ -50,7 +50,7 @@ export default function Navbar() {
             className={`${
               location.pathname.startsWith("/exercises")
                 ? "bg-gray-800"
-                : "hover:bg-gray-500"
+                : "hover:bg-gray-600"
             } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-dumbbell" />

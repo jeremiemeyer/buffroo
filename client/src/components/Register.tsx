@@ -124,202 +124,208 @@ const Register = () => {
 
   return (
     <>
-      <h1 className="text-4xl text-white font-semibold pb-8 z-[600]">
-        Register
-      </h1>
+      <div className="w-full">
+        <h1 className="text-4xl text-white font-semibold pb-8 z-[600]">
+          Register
+        </h1>
 
-      <div className="bg-glassmorphism2 rounded-3xl p-12 w-[600px] z-[600]">
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMsg}
-        </p>
-        <form onSubmit={handleSubmit}>
-          <Stack spacing={4} >
-            {/* Username */}
-            <InputGroup borderRadius="16px">
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-              >
-                <EmailIcon color="gray.500" />
-              </InputLeftElement>
-              <Input
-                id="username"
-                ref={userRef}
-                placeholder="Username"
-                autoComplete="off"
-                value={user}
-                onChange={(e) => setUser(e.target.value)}
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)}
-                borderRadius="16px"
-                borderColor="gray.400"
-                required
-              />
-
-              <InputRightElement>
-                {validName && <CheckIcon color="green.500" />}
-                {!validName && user && <CloseIcon color="red.500" />}
-              </InputRightElement>
-            </InputGroup>
-            <p
-              id="uidnote"
-              className={
-                userFocus && user && !validName ? "instructions" : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
-              <br />
-              Must begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
-            </p>
-
-            {/* Email */}
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-              >
-                <EmailIcon color="gray.500" />
-              </InputLeftElement>
-              <Input
-                id="email"
-                ref={emailRef}
-                placeholder="E-mail"
-                autoComplete="off"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onFocus={() => setEmailFocus(true)}
-                onBlur={() => setEmailFocus(false)}
-                borderRadius="16px"
-                borderColor="gray.400"
-                required
-              />
-
-              <InputRightElement>
-                {validEmail && <CheckIcon color="green.500" />}
-                {!validEmail && email && <CloseIcon color="red.500" />}
-              </InputRightElement>
-            </InputGroup>
-            <p
-              id="uidnote"
-              className={
-                emailFocus && email && !validEmail
-                  ? "instructions"
-                  : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Must be a valid email address.
-            </p>
-
-            {/* Password */}
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-              >
-                <LockIcon color="gray.500" />
-              </InputLeftElement>
-              <Input
-                id="password"
-                placeholder="Password"
-                value={pwd}
-                onChange={(e) => setPwd(e.target.value)}
-                onFocus={() => setPwdFocus(true)}
-                onBlur={() => setPwdFocus(false)}
-                type="password"
-                borderRadius="16px"
-                borderColor="gray.400"
-                required
-              />
-
-              <InputRightElement>
-                {validPwd && <CheckIcon color="green.500" />}
-                {!validPwd && pwd && <CloseIcon color="red.500" />}
-              </InputRightElement>
-            </InputGroup>
-            <p
-              id="pwdnote"
-              className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              8 to 24 characters.
-              <br />
-              Must include uppercase and lowercase letters, a number and a
-              special character.
-              <br />
-              Allowed special characters:{" "}
-              <span aria-label="exclamation mark">!</span>{" "}
-              <span aria-label="at symbol">@</span>{" "}
-              <span aria-label="hashtag">#</span>{" "}
-              <span aria-label="dollar sign">$</span>{" "}
-              <span aria-label="percent">%</span>
-            </p>
-
-            {/* Password confirmation */}
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-              >
-                <LockIcon color="gray.500" />
-              </InputLeftElement>
-              <Input
-                id="confirm_pwd"
-                placeholder="Confirm Password"
-                value={matchPwd}
-                onChange={(e) => setMatchPwd(e.target.value)}
-                onFocus={() => setMatchFocus(true)}
-                onBlur={() => setMatchFocus(false)}
-                type="password"
-                borderRadius="16px"
-                borderColor="gray.400"
-                required
-              />
-
-              <InputRightElement>
-                {validMatch && matchPwd && <CheckIcon color="green.500" />}
-                {!validMatch && matchPwd && <CloseIcon color="red.500" />}
-              </InputRightElement>
-            </InputGroup>
-          </Stack>
-
+        <div className="bg-glassmorphism2 rounded-3xl p-12 w-[600px] z-[600]">
           <p
-            id="confirmnote"
-            className={matchFocus && !validMatch ? "instructions" : "offscreen"}
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
           >
-            <FontAwesomeIcon icon={faInfoCircle} />
-            Must match the first password input field.
+            {errMsg}
           </p>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+              {/* Username */}
+              <InputGroup borderRadius="16px">
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  fontSize="1.2em"
+                >
+                  <EmailIcon color="gray.500" />
+                </InputLeftElement>
+                <Input
+                  id="username"
+                  ref={userRef}
+                  placeholder="Username"
+                  autoComplete="off"
+                  value={user}
+                  onChange={(e) => setUser(e.target.value)}
+                  onFocus={() => setUserFocus(true)}
+                  onBlur={() => setUserFocus(false)}
+                  borderRadius="16px"
+                  borderColor="gray.400"
+                  required
+                />
 
-          <Button
-            mt={4}
-            isDisabled={!validName || !validPwd || !validMatch ? true : false}
-            colorScheme="blue"
-            borderRadius={"16px"}
-            // isLoading={props.isSubmitting}
-            type="submit"
-          >
-            Sign Up
-          </Button>
-        </form>
-        <p>
-          Already registered?
-          <br />
-          <Link to="/login">
-            <span className="text-black underline font-semibold">Sign In</span>
-          </Link>
-        </p>
+                <InputRightElement>
+                  {validName && <CheckIcon color="green.500" />}
+                  {!validName && user && <CloseIcon color="red.500" />}
+                </InputRightElement>
+              </InputGroup>
+              <p
+                id="uidnote"
+                className={
+                  userFocus && user && !validName ? "instructions" : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                4 to 24 characters.
+                <br />
+                Must begin with a letter.
+                <br />
+                Letters, numbers, underscores, hyphens allowed.
+              </p>
+
+              {/* Email */}
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  fontSize="1.2em"
+                >
+                  <EmailIcon color="gray.500" />
+                </InputLeftElement>
+                <Input
+                  id="email"
+                  ref={emailRef}
+                  placeholder="E-mail"
+                  autoComplete="off"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onFocus={() => setEmailFocus(true)}
+                  onBlur={() => setEmailFocus(false)}
+                  borderRadius="16px"
+                  borderColor="gray.400"
+                  required
+                />
+
+                <InputRightElement>
+                  {validEmail && <CheckIcon color="green.500" />}
+                  {!validEmail && email && <CloseIcon color="red.500" />}
+                </InputRightElement>
+              </InputGroup>
+              <p
+                id="uidnote"
+                className={
+                  emailFocus && email && !validEmail
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Must be a valid email address.
+              </p>
+
+              {/* Password */}
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  fontSize="1.2em"
+                >
+                  <LockIcon color="gray.500" />
+                </InputLeftElement>
+                <Input
+                  id="password"
+                  placeholder="Password"
+                  value={pwd}
+                  onChange={(e) => setPwd(e.target.value)}
+                  onFocus={() => setPwdFocus(true)}
+                  onBlur={() => setPwdFocus(false)}
+                  type="password"
+                  borderRadius="16px"
+                  borderColor="gray.400"
+                  required
+                />
+
+                <InputRightElement>
+                  {validPwd && <CheckIcon color="green.500" />}
+                  {!validPwd && pwd && <CloseIcon color="red.500" />}
+                </InputRightElement>
+              </InputGroup>
+              <p
+                id="pwdnote"
+                className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                8 to 24 characters.
+                <br />
+                Must include uppercase and lowercase letters, a number and a
+                special character.
+                <br />
+                Allowed special characters:{" "}
+                <span aria-label="exclamation mark">!</span>{" "}
+                <span aria-label="at symbol">@</span>{" "}
+                <span aria-label="hashtag">#</span>{" "}
+                <span aria-label="dollar sign">$</span>{" "}
+                <span aria-label="percent">%</span>
+              </p>
+
+              {/* Password confirmation */}
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  fontSize="1.2em"
+                >
+                  <LockIcon color="gray.500" />
+                </InputLeftElement>
+                <Input
+                  id="confirm_pwd"
+                  placeholder="Confirm Password"
+                  value={matchPwd}
+                  onChange={(e) => setMatchPwd(e.target.value)}
+                  onFocus={() => setMatchFocus(true)}
+                  onBlur={() => setMatchFocus(false)}
+                  type="password"
+                  borderRadius="16px"
+                  borderColor="gray.400"
+                  required
+                />
+
+                <InputRightElement>
+                  {validMatch && matchPwd && <CheckIcon color="green.500" />}
+                  {!validMatch && matchPwd && <CloseIcon color="red.500" />}
+                </InputRightElement>
+              </InputGroup>
+            </Stack>
+
+            <p
+              id="confirmnote"
+              className={
+                matchFocus && !validMatch ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              Must match the first password input field.
+            </p>
+
+            <Button
+              mt={4}
+              isDisabled={!validName || !validPwd || !validMatch ? true : false}
+              colorScheme="blue"
+              borderRadius={"16px"}
+              // isLoading={props.isSubmitting}
+              type="submit"
+            >
+              Sign Up
+            </Button>
+          </form>
+          <p>
+            Already registered?
+            <br />
+            <Link to="/login">
+              <span className="text-black underline font-semibold">
+                Sign In
+              </span>
+            </Link>
+          </p>
+        </div>
       </div>
     </>
   )

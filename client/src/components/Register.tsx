@@ -124,7 +124,6 @@ const Register = () => {
 
   return (
     <>
-      <div className="w-full">
         <h1 className="text-4xl text-white font-semibold pb-8 z-[600]">
           Register
         </h1>
@@ -326,7 +325,6 @@ const Register = () => {
             </Link>
           </p>
         </div>
-      </div>
     </>
   )
 }

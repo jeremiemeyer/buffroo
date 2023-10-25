@@ -42,7 +42,7 @@ export default function LoginRegister({ children }) {
         options={particlesOptions as ISourceOptions}
         init={particlesInit}
       />
-      <div className="bg-black w-full h-screen flex flex-col justify-center items-center mx-auto my-auto z-[600]">
+      <div className="bg-black w-screen h-screen flex flex-col justify-center items-center mx-auto my-auto z-[600]">
         {children}
       </div>
     </>

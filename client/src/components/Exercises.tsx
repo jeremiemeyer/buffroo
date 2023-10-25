@@ -164,7 +164,8 @@ export default function Exercises() {
           Array.from({ length: 12 }).map((_, index) => (
             <Box
               key={index}
-              className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
+              className="border border-gray-200 bg-gray-200 mt-2  p-[20px] mx-auto rounded-xl"
+              
             >
               <SkeletonText
                 mt="4"

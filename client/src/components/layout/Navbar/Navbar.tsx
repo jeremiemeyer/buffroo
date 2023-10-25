@@ -5,7 +5,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="fixed w-full bottom-0 z-[500] rounded-3xl bg-glassmorphism3 text-white flex flex-row justify-center">
+      <div className="fixed w-full bottom-0 z-[500] rounded-2xl bg-glassmorphism3 text-white flex flex-row justify-center">
         <Link to={"profile"}>
           <div
             className={`${

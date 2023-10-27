@@ -29,6 +29,7 @@ import { loadFull } from "tsparticles"
 import { ISourceOptions } from "tsparticles-engine"
 import particlesOptions from "./../particles.json"
 import { useCallback } from "react"
+import logo from "./../assets/logo.png"
 
 export default function LoginRegister({ children }) {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -43,6 +44,8 @@ export default function LoginRegister({ children }) {
         init={particlesInit}
       />
       <div className="bg-black w-screen h-screen flex flex-col justify-center items-center mx-auto my-auto z-[600]">
+      <img src={logo} className="h-[300px] z-[800]" />
+        
         {children}
       </div>
     </>

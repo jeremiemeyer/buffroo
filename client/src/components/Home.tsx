@@ -3,10 +3,15 @@ import Title from "./layout/Title"
 import { Button } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
 import WorkoutModal from "./workout/WorkoutModal"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../context/WorkoutTimerProvider"
+import TemplateCard from "./profile/templates/TemplateCard"
+import CreateEditTemplateModal from "./profile/templates/CreateEditTemplateModal"
+import useAuth from "../hooks/useAuth"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
+import ConfirmDeleteTemplateModal from "./profile/templates/ConfirmDeleteTemplateModal"
 
 function formatDate(inputDate) {
   const date = new Date(inputDate)
@@ -47,6 +52,27 @@ export default function Home() {
     resetWorkout,
   } = useContext(WorkoutDataContext)
   const { reset, start, pause } = useContext(WorkoutTimerContext)
+  const [showCreateTemplateModal, setShowCreateTemplateModal] = useState(false)
+  const axiosPrivate = useAxiosPrivate()
+  const { auth } = useAuth()
+  const [userTemplates, setUserTemplates] = useState([])
+  const TEMPLATES_URL = `/api/users/${auth.userId}/templates`
+  const [isLoading, setIsLoading] = useState(false)
+
+
+  const getUserTemplates = async () => {
+    setIsLoading(true)
+    try {
+      const response = await axiosPrivate.get(TEMPLATES_URL, {
+        withCredentials: true,
+      })
+      // isMounted &&
+      setUserTemplates(response.data)
+      setIsLoading(false)
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    }
+  }
 
   function handleClick() {
     if (workoutIsInProgress) {
@@ -65,6 +91,27 @@ export default function Home() {
     }
   }
 
+  const deleteTemplate = async (templateId) => {
+    try {
+      const response = await axiosPrivate.delete(
+        `/api/users/${auth.userId}/templates/${templateId}`,
+        {
+          withCredentials: true,
+        }
+      )
+      if (response.status === 200) {
+        // Call the callback function to update the workout history
+        getUserTemplates()
+      }
+    } catch (error) {
+      console.error("Error deleting session:", error)
+    }
+  }
+
+  useEffect(() => {
+    getUserTemplates()
+  }, [])
+
   return (
     <>
       {/* Title */}
@@ -74,7 +121,7 @@ export default function Home() {
 
       {/* Content */}
       <div className="pt-[80px] pb-[100px] z-[0] mx-auto max-w-[1200px] px-6">
-        <div className="text-2xl font-light mt-8">Quick start</div>
+        <div className="text-3xl font-light mt-8">Quick start</div>
         {/* <button onClick={() => console.log(workoutIsInProgress)}>
           console log workoutIsInProgress
         </button> */}
@@ -89,8 +136,47 @@ export default function Home() {
           Start an empty workout
         </Button>
 
-        <div className="text-2xl font-light mt-12">Templates</div>
+        <div className="text-3xl font-light mt-12 mb-4">
+          Start from template
+        </div>
+        <div className="space-y-5">
+          <Button
+            borderRadius={"16px"}
+            variant="outline"
+            colorScheme="blue"
+            onClick={() => setShowCreateTemplateModal(true)}
+          >
+            Create new...
+          </Button>
+
+          {/* <button onClick={() => console.log(userTemplates)}>
+            Console log user templates
+          </button> */}
+          <div className="space-y-2">
+            {userTemplates.map((template, index) => (
+              <TemplateCard
+                key={index}
+                templateData={userTemplates[index]}
+                setShowConfirmDeleteTemplate={() =>
+                  setShowConfirmDeleteTemplate(true)
+                }
+                deleteTemplate={deleteTemplate}
+                getUserTemplates={getUserTemplates}
+              />
+            ))}
+          </div>
+        </div>
       </div>
+      {showCreateTemplateModal &&
+        createPortal(
+          <CreateEditTemplateModal
+            actionType="create"
+            onClose={() => setShowCreateTemplateModal(false)}
+            getUserTemplates={getUserTemplates}
+          />,
+          document.body
+        )}
+
     </>
   )
 }

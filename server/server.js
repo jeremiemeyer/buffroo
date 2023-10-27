@@ -44,6 +44,7 @@ app.use("/api/exercises", require("./routes/api/exercisesRoutes"))
 app.use("/api/users", require('./routes/api/users/userRoutes'))
 app.use("/api/users", require('./routes/api/users/userExercisesRoutes'))
 app.use("/api/users", require('./routes/api/users/userSessionsRoutes'))
+app.use("/api/users", require('./routes/api/users/userWorkoutTemplatesRoutes'))
 
 
 // app.use(errorHandler) // to implement

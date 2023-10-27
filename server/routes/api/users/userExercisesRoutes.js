@@ -6,4 +6,7 @@ router.route('/:id/exercises')
     .get(userExercisesController.getUserExercises)
     .post(userExercisesController.createUserExercise)
 
+router.route('/:userId/exercises/:exerciseId')
+    .patch(userExercisesController.updateUserExercise)
+
 module.exports = router;

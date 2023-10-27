@@ -84,6 +84,7 @@ export default function Home() {
           colorScheme="blue"
           className="mt-4"
           borderRadius="16px"
+          fontWeight={"400"}
         >
           Start an empty workout
         </Button>

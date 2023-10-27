@@ -319,6 +319,7 @@ const Register = () => {
               isDisabled={!validName || !validPwd || !validMatch ? true : false}
               colorScheme="blue"
               borderRadius={"16px"}
+              fontWeight={"400"}
               // isLoading={props.isSubmitting}
               type="submit"
             >

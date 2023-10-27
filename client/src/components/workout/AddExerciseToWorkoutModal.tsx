@@ -84,7 +84,7 @@ export default function AddExerciseToWorkoutModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-100 text-slate-900 w-[90%] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
+        className="z-[900] relative bg-gray-100 text-slate-900 xl:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
       >
         <div className="flex flex-row justify-between items-center h-[10%]">
           <Button onClick={onClose} colorScheme="red">
@@ -94,6 +94,8 @@ export default function AddExerciseToWorkoutModal({
             onClick={handleAddExercise}
             colorScheme="blue"
             borderRadius="16px"
+            fontWeight={"400"}
+            fontWeight={"400"}
           >
             Add
           </Button>

@@ -24,7 +24,21 @@ export default function ExerciseCard({
   exerciseId,
   selectedExerciseId,
   setSelectedExerciseId,
+  isCustomUserExercise,
 }) {
+  function handleClickEditExercise() {
+    isCustomUserExercise
+      ? onClickExerciseEdit(selectedExerciseId)
+      : alert("You can't edit default exercises.")
+  }
+
+
+  // formats category and bodypart fields correctly for the frontend
+  function formatString(category) {
+    const words = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1));
+    return words.join(' ');
+  }
+
   return (
     <div
       // onClick={() => onClickExerciseCard(exerciseId)}
@@ -35,12 +49,12 @@ export default function ExerciseCard({
       <div className="text-4xl mr-8">{name.charAt(0)}</div>
 
       <div className="flex-col grow">
-        <p className="font-bold">{name}</p>
+        <p className="font-semibold">{name}</p>
         <p>
-          <span className="text-gray-500">Body part:</span> {bodypart}
+          <span className="text-gray-500">Body part:</span> {formatString(bodypart)}
         </p>
         <p>
-          <span className="text-gray-500">Category:</span> {category}
+          <span className="text-gray-500">Category:</span> {formatString(category)}
         </p>
       </div>
       <div>
@@ -53,7 +67,7 @@ export default function ExerciseCard({
             variant="filled"
             onClick={() => setSelectedExerciseId(exerciseId)}
           />
-          <MenuList>
+          <MenuList zIndex={"600"}>
             <MenuItem
               icon={<RepeatClockIcon />}
               onClick={() => onClickExerciseStats(selectedExerciseId)}
@@ -64,7 +78,7 @@ export default function ExerciseCard({
 
             <MenuItem
               // onClick={() => setShowConfirmDeleteSessionModal(true)}
-              onClick={() => onClickExerciseEdit(selectedExerciseId)}
+              onClick={handleClickEditExercise}
               icon={<EditIcon />}
             >
               Edit exercise

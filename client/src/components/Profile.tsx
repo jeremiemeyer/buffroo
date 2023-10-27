@@ -69,7 +69,7 @@ export default function Profile() {
 
           { !isLoading && <Settings userPreferences={userPreferences} setUserPreferences={setUserPreferences} saveUserPreferences={saveUserPreferences}/> }
 
-          <Button onClick={signOut} colorScheme="red" borderRadius="16px">
+          <Button onClick={signOut} colorScheme="red" fontWeight={"400"} borderRadius="16px">
             Sign out
           </Button>
           {/* <button onClick={() => console.log(userPreferences)}>Console log userPreferences</button> */}

@@ -30,13 +30,19 @@ export default function ConfirmDiscardChangesModal({
               Are you sure you want to discard changes made to this workout?
             </p>
             <div className="grid grid-rows-2 gap-2">
-              <Button onClick={onClose} colorScheme="blue" borderRadius="16px">
+              <Button
+                onClick={onClose}
+                colorScheme="blue"
+                borderRadius="16px"
+                fontWeight={"400"}
+              >
                 Back to edit
               </Button>
               <Button
                 onClick={onCancelEditWorkout}
                 colorScheme="red"
                 borderRadius="16px"
+                fontWeight={"400"}
               >
                 Discard changes
               </Button>

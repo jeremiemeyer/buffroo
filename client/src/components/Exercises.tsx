@@ -117,6 +117,7 @@ export default function Exercises() {
             onClick={() => setShowNewExerciseModal(true)}
             colorScheme="blue"
             borderRadius="16px"
+            fontWeight={"400"}
           >
             Add New
           </Button>
@@ -193,6 +194,7 @@ export default function Exercises() {
                 setSelectedExerciseId={setSelectedExerciseId}
                 onClickExerciseEdit={onClickExerciseEdit}
                 onClickExerciseStats={onClickExerciseStats}
+                isCustomUserExercise={ex.hasOwnProperty("userId")}
               />
             ))}
           </>
@@ -221,6 +223,7 @@ export default function Exercises() {
           <ExerciseEditModal
             onClose={() => setShowExerciseEditModal(false)}
             selectedExerciseId={selectedExerciseId}
+            getExercises={getExercises}
           />,
           document.body
         )}

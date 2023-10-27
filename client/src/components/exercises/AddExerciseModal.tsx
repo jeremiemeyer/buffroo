@@ -49,16 +49,16 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-100 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4"
+        className="z-[900] relative bg-gray-100 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4 xl:max-w-[1200px]"
       >
         <div className="flex flex-row justify-between items-center text-center">
-          <Button onClick={onClose} colorScheme="red">
+          <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
             X
           </Button>
           <h1 className="font-semibold text-xl text-center">
             Create New Exercise
           </h1>
-          <Button onClick={handleSave} colorScheme="blue" borderRadius="16px">
+          <Button onClick={handleSave} colorScheme="blue" borderRadius="16px" fontWeight={"400"}>
             Save
           </Button>
         </div>
@@ -71,7 +71,7 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
           ></Input>
 
           <div className="grid grid-cols-2 justify-between items-center">
-            <p className="font-bold">Body part</p>
+            <p className="font-semibold">Body part</p>
             <Select
               placeholder="Select option"
               onChange={(e) => handleChangeBodyPart(e)}
@@ -88,7 +88,7 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
           </div>
 
           <div className="grid grid-cols-2 justify-between items-center">
-            <p className="font-bold">Category</p>
+            <p className="font-semibold">Category</p>
             <Select
               placeholder="Select option"
               onChange={(e) => handleChangeCategory(e)}

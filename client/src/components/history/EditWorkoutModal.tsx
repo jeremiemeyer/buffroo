@@ -87,6 +87,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
               onClick={saveSessionChanges}
               colorScheme="blue"
               borderRadius="16px"
+              fontWeight={"400"}
             >
               Save
             </Button>
@@ -121,6 +122,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"
               borderRadius="16px"
+              fontWeight={"400"}
             >
               Add Exercises
             </Button>
@@ -128,6 +130,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
               onClick={() => setShowConfirmDiscardChangesModal(true)}
               colorScheme="red"
               borderRadius="16px"
+              fontWeight={"400"}
             >
               Discard changes
             </Button>

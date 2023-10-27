@@ -69,6 +69,27 @@ export default function WorkoutSessionCard({
     deleteWorkoutSession(sessionData._id)
   }
 
+  function getBestSet(exerciseSets) {
+    if (!Array.isArray(exerciseSets) || exerciseSets.length === 0) {
+      return "No data available"; // Return this message if exerciseSets is not an array or is empty
+    }
+  
+    let bestSet = exerciseSets[0]; // Initialize bestSet with the first set
+    let maxProduct = bestSet.reps * bestSet.weight;
+  
+    for (let i = 1; i < exerciseSets.length; i++) {
+      const currentSet = exerciseSets[i];
+      const product = currentSet.reps * currentSet.weight;
+  
+      if (product > maxProduct) {
+        bestSet = currentSet;
+        maxProduct = product;
+      }
+    }
+  
+    return `${bestSet.reps} x ${bestSet.weight} kg`;
+  }
+
   return (
     <>
       <div
@@ -76,7 +97,7 @@ export default function WorkoutSessionCard({
       >
         <div className="p-6">
           <div className="flex flex-row justify-between items-center">
-            <span className="font-bold pb-2 text-xl">{sessionData?.name}</span>
+            <span className="font-semibold pb-2 text-xl">{sessionData?.name}</span>
             <Menu variant="filled">
               <MenuButton
                 as={IconButton}
@@ -99,7 +120,7 @@ export default function WorkoutSessionCard({
               </MenuList>
             </Menu>
           </div>
-          <p className="font-semibold">
+          <p>
             <i className="fa-regular fa-calendar mr-4" />
             {formatISODate(sessionData?.startdate)}
           </p>
@@ -117,7 +138,7 @@ export default function WorkoutSessionCard({
 
           <div className="grid grid-cols-2 pt-4">
             <div className="font-semibold">Exercise</div>
-            <div className="font-semibold">Sets</div>
+            <div className="font-semibold">Best set</div>
           </div>
           {sessionData?.exercises.map((exercise, key) => (
             <div className="grid grid-cols-2" key={key}>
@@ -125,12 +146,7 @@ export default function WorkoutSessionCard({
                 {exercise.sets.length} x {exercise.name}
               </div>
               <div>
-                {exercise.sets.map((set, setIndex) => (
-                  <span key={setIndex}>
-                    {set.reps}x{set.weight}kg
-                    {setIndex < exercise.sets.length - 1 && ", "}
-                  </span>
-                ))}
+                {getBestSet(exercise.sets)}
               </div>
             </div>
           ))}

@@ -42,10 +42,16 @@ export default function ConfirmCancelWorkoutModal({
                 onClick={handleCancel}
                 colorScheme="red"
                 borderRadius="16px"
+                fontWeight={"400"}
               >
                 Cancel workout
               </Button>
-              <Button onClick={onClose} colorScheme="blue" borderRadius="16px">
+              <Button
+                onClick={onClose}
+                colorScheme="blue"
+                borderRadius="16px"
+                fontWeight={"400"}
+              >
                 Resume
               </Button>
             </div>

@@ -125,7 +125,7 @@ export default function History() {
               <p className="text-xl">
                 Your workout history is empty. 😥 <br /> Go ahead and{" "}
                 <Link to="/">
-                  <span className="text-gray-500 font-semibold underline decoration-gray-300">
+                  <span className="text-gray-500  underline decoration-gray-300">
                     start a workout session
                   </span>
                 </Link>

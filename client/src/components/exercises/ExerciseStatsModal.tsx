@@ -44,7 +44,7 @@ export default function ExerciseStatsModal({ onClose, selectedExerciseId }) {
     <>
       <div
         onClick={onClose}
-        className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center"
+        className="fixed z-[700] inset-0 bg-slate-700/75 flex justify-center items-center"
       >
         <div
           onClick={(e) => e.stopPropagation()}
@@ -54,7 +54,7 @@ export default function ExerciseStatsModal({ onClose, selectedExerciseId }) {
             <h1 className="font-semibold text-2xl text-center px-5">
               {exerciseData["name"]}
             </h1>
-            <Button onClick={onClose} colorScheme="red">
+            <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
               X
             </Button>
           </div>

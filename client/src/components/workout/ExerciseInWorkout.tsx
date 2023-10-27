@@ -190,7 +190,7 @@ export default function ExerciseInWorkout({
         </button> */}
       </div>
       <div className="space-y-2">
-        <div className="grid grid-cols-5 font-bold gap-8">
+        <div className="grid grid-cols-5 font-semibold gap-8">
           <div className="font-semibold">Set</div>
           <div className="font-semibold">Prev.</div>
           <div className="font-semibold">kg</div>
@@ -228,6 +228,7 @@ export default function ExerciseInWorkout({
                 onClick={() => handleRemoveSet(index)}
                 className="ml-auto h-2 w-2 hover:bg-gray-300"
                 variant="flushed"
+                fontWeight={"400"}
               >
                 <i className="fa fa-trash "></i>
               </Button>
@@ -241,6 +242,7 @@ export default function ExerciseInWorkout({
         colorScheme="blue"
         variant="outline"
         borderRadius="16px"
+        fontWeight={"400"}
       >
         Add set
       </Button>

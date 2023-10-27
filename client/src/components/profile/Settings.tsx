@@ -26,7 +26,7 @@ export default function Settings({
         <div className="rounded-3xl border bg-gray-200 pt-8 pb-6 px-6 max-w-[800px] mx-auto">
           <div className="text-left space-y-4 pb-6">
             <div className="grid grid-cols-2">
-              <span>Preferred unit system</span>
+              <span className="font-semibold">Preferred unit system</span>
               <Select
                 placeholder="Select option"
                 value={userPreferences.unitsystem}
@@ -39,7 +39,7 @@ export default function Settings({
               </Select>
             </div>
             <div className="grid grid-cols-2 pb-2">
-              <span>Theme</span>
+              <span className="font-semibold">Theme</span>
 
               <Select
                 placeholder="Select option"
@@ -58,6 +58,7 @@ export default function Settings({
             colorScheme="blue"
             borderRadius="16px"
             onClick={saveUserPreferences}
+            fontWeight={"400"}
           >
             Save preferences
           </Button>

@@ -100,6 +100,7 @@ export default function WorkoutModal({ onClose }: any) {
               onClick={saveSession}
               colorScheme="green"
               borderRadius="16px"
+              fontWeight={"400"}
             >
               Finish
             </Button>
@@ -134,6 +135,7 @@ export default function WorkoutModal({ onClose }: any) {
               onClick={() => setShowAddExerciseModal(true)}
               colorScheme="blue"
               borderRadius="16px"
+              fontWeight={"400"}
             >
               Add Exercises
             </Button>
@@ -141,6 +143,7 @@ export default function WorkoutModal({ onClose }: any) {
               onClick={() => setShowConfirmCancelWorkoutModal(true)}
               colorScheme="red"
               borderRadius="16px"
+              fontWeight={"400"}
             >
               Cancel workout
             </Button>

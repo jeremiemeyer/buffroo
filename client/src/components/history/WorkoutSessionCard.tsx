@@ -97,7 +97,7 @@ export default function WorkoutSessionCard({
       >
         <div className="p-6">
           <div className="flex flex-row justify-between items-center">
-            <span className="font-semibold pb-2 text-xl">{sessionData?.name}</span>
+            <span className="font-light text-2xl pb-2">{sessionData?.name}</span>
             <Menu variant="filled">
               <MenuButton
                 as={IconButton}
@@ -137,8 +137,8 @@ export default function WorkoutSessionCard({
           )}
 
           <div className="grid grid-cols-2 pt-4">
-            <div className="text-gray-500">Exercise</div>
-            <div className="text-gray-500">Best set</div>
+            <div className="text-gray-500" >Exercise</div>
+            <div className="text-gray-500" >Best set</div>
           </div>
           {sessionData?.exercises.map((exercise, key) => (
             <div className="grid grid-cols-2" key={key}>

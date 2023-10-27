@@ -49,7 +49,7 @@ export default function ExerciseCard({
       <div className="text-4xl mr-8 w-8">{name.charAt(0)}</div>
 
       <div className="flex-col grow">
-        <p className="font-semibold">{name}</p>
+        <p className="text-xl font-light">{name}</p>
         <p>
           <span className="text-gray-500">Body part:</span> {formatString(bodypart)}
         </p>

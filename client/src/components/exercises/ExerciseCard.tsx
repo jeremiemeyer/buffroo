@@ -46,7 +46,7 @@ export default function ExerciseCard({
         isSelected ? "bg-gray-400" : "hover:bg-gray-300 "
       } border border-gray-200 bg-gray-200 rounded-2xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
     >
-      <div className="text-4xl mr-8">{name.charAt(0)}</div>
+      <div className="text-4xl mr-8 w-8">{name.charAt(0)}</div>
 
       <div className="flex-col grow">
         <p className="font-semibold">{name}</p>

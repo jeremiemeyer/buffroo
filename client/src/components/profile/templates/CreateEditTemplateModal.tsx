@@ -190,7 +190,7 @@ export default function CreateEditTemplateModal({
               borderRadius="16px"
               fontWeight={"400"}
             >
-              Discard template
+              {actionType === "create" ? "Discard template" : "Cancel edit"}
             </Button>
           </div>
           {/* <button onClick={() => console.log(templateData)}>

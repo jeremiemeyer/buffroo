@@ -20,8 +20,6 @@ import {
   ArrowUpIcon,
 } from "@chakra-ui/icons"
 
-
-
 export default function ExerciseInWorkout({
   name,
   workoutData,
@@ -99,13 +97,10 @@ export default function ExerciseInWorkout({
   }
 
   function removeExercise() {
-    const updatedData = { ...workoutData }
-    const filteredExercises = updatedData.exercises.filter(
-      (exercise) => exercise.name !== name
-    )
+    const updatedExercises = [...workoutData.exercises]
+    updatedExercises.splice(exerciseIndex, 1)
 
-    updatedData.exercises = filteredExercises
-    setWorkoutData(updatedData)
+    setWorkoutData({ ...workoutData, exercises: updatedExercises })
   }
 
   function handleChange({ index, event, field }: any) {
@@ -195,38 +190,38 @@ export default function ExerciseInWorkout({
         </button> */}
       </div>
       <div className="space-y-2">
-        <div className="grid grid-cols-5 font-bold">
-          <div>Set</div>
-          <div>Prev.</div>
-          <div>kg</div>
-          <div>reps</div>
+        <div className="grid grid-cols-5 font-bold gap-8">
+          <div className="font-semibold">Set</div>
+          <div className="font-semibold">Prev.</div>
+          <div className="font-semibold">kg</div>
+          <div className="font-semibold">reps</div>
           {/* <div>RPE</div> */}
         </div>
         {exerciseSets &&
           exerciseSets.length > 0 &&
           exerciseSets.map((set, index) => (
             <div
-              className="grid grid-cols-5 bg-gray-200 px-2 items-center"
+              className="grid grid-cols-5 bg-gray-200 px-2 items-center gap-8"
               key={index}
             >
               <div>{index + 1}</div>
               <div>-</div>
               <Input
-                variant="flushed"
                 type="number"
                 onChange={(event) =>
                   handleChange({ index, event, field: "weight" })
                 }
                 value={set.weight}
+                bgColor={"gray.300"}
               />
 
               <Input
-                variant="flushed"
                 type="number"
                 onChange={(event) =>
                   handleChange({ index, event, field: "reps" })
                 }
                 value={set.reps}
+                bgColor={"gray.300"}
               />
 
               <Button
@@ -249,7 +244,10 @@ export default function ExerciseInWorkout({
       >
         Add set
       </Button>
-      {/* <button onClick={() => console.log(exerciseSets)}>index</button> */}
+      {/* <button onClick={() => console.log(exerciseSets)}>sets</button>
+      <button onClick={() => console.log(workoutData.exercises)}>
+        workoutData
+      </button> */}
     </div>
   )
 }

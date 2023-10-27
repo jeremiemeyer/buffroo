@@ -35,9 +35,7 @@ const PersistLogin = () => {
     console.log(`accessToken: ${JSON.stringify(auth?.accessToken)}`)
   }, [isLoading])
 
-  return (
-    <>{!persist ? <Outlet /> : isLoading ? <LoadingPage/> : <Outlet />}</>
-  )
+  return <>{!persist ? <Outlet /> : isLoading ? <LoadingPage /> : <Outlet />}</>
 }
 
 export default PersistLogin

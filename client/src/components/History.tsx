@@ -47,21 +47,18 @@ export default function History() {
     getWorkoutHistory()
   }, [historyData.length])
 
-
   useEffect(() => {
     if (showEditWorkoutModal) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto"
     }
-  }, [showEditWorkoutModal]);
+  }, [showEditWorkoutModal])
 
-  
-  function onClickExerciseCard(exerciseId){
+  function onClickExerciseCard(exerciseId) {
     setSelectedExerciseId(exerciseId)
     setShowExerciseDetailsModal(true)
   }
-
 
   const deleteWorkoutSession = async (sessionId) => {
     try {
@@ -142,6 +139,7 @@ export default function History() {
           <EditWorkoutModal
             selectedWorkoutId={selectedWorkoutId}
             onClose={() => setShowEditWorkoutModal(false)}
+            getWorkoutHistory={getWorkoutHistory}
           />,
           document.body
         )}

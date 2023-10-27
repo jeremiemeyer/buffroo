@@ -17,11 +17,19 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import ExerciseInWorkout from "../workout/ExerciseInWorkout"
 import AddExerciseToWorkoutModal from "../workout/AddExerciseToWorkoutModal"
 
-export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
+export default function EditWorkoutModal({
+  onClose,
+  selectedWorkoutId,
+  getWorkoutHistory,
+}) {
   const [showConfirmDiscardChangesModal, setShowConfirmDiscardChangesModal] =
     useState(false)
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
-  const [workoutData, setWorkoutData] = useState([])
+  const [workoutData, setWorkoutData] = useState({
+    name: "",
+    notes: "",
+    exercises: [],
+  })
   const axiosPrivate = useAxiosPrivate()
   const [isLoading, setIsLoading] = useState(true)
   const { auth } = useAuth()
@@ -64,6 +72,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
       const response = await axiosPrivate.put(SESSION_URL, workoutData)
       const updatedSessionData = response.data
       // console.log(updatedSessionData)
+      getWorkoutHistory()
       alert("Changes saved!")
       onClose()
     } catch (error) {
@@ -140,6 +149,7 @@ export default function EditWorkoutModal({ onClose, selectedWorkoutId }) {
           </button> */}
         </div>
       </div>
+
       {showAddExerciseModal &&
         createPortal(
           <AddExerciseToWorkoutModal

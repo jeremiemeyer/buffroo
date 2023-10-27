@@ -74,7 +74,7 @@ export default function Home() {
 
       {/* Content */}
       <div className="pt-[80px] pb-[100px] z-[0] mx-auto max-w-[1200px] px-6">
-        <div className="text-xl font-semibold mt-8">Quick start</div>
+        <div className="text-xl mt-8">Quick start</div>
         {/* <button onClick={() => console.log(workoutIsInProgress)}>
           console log workoutIsInProgress
         </button> */}
@@ -89,7 +89,7 @@ export default function Home() {
           Start an empty workout
         </Button>
 
-        <div className="text-xl font-semibold mt-12">Templates</div>
+        <div className="text-xl mt-12">Templates</div>
       </div>
     </>
   )

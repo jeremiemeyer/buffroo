@@ -100,7 +100,7 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
             ></Input>
 
             <div className="grid grid-cols-2 justify-between items-center">
-              <p className="font-semibold">Body part</p>
+              <p>Body part</p>
               <Select
                 placeholder="Select option"
                 onChange={(e) => handleChange(e)}
@@ -119,7 +119,7 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
             </div>
 
             <div className="grid grid-cols-2 justify-between items-center">
-              <p className="font-semibold">Category</p>
+              <p>Category</p>
               <Select
                 placeholder="Select option"
                 onChange={(e) => handleChange(e)}

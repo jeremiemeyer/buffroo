@@ -22,11 +22,11 @@ export default function Settings({
   return (
     <>
       <div>
-        <h1 className="text-2xl font-semibold">Settings</h1>
+        <h1 className="text-2xl">Settings</h1>
         <div className="rounded-3xl border bg-gray-200 pt-8 pb-6 px-6 max-w-[800px] mx-auto">
           <div className="text-left space-y-4 pb-6">
             <div className="grid grid-cols-2">
-              <span className="font-semibold">Preferred unit system</span>
+              <span>Preferred unit system</span>
               <Select
                 placeholder="Select option"
                 value={userPreferences.unitsystem}
@@ -39,7 +39,7 @@ export default function Settings({
               </Select>
             </div>
             <div className="grid grid-cols-2 pb-2">
-              <span className="font-semibold">Theme</span>
+              <span>Theme</span>
 
               <Select
                 placeholder="Select option"

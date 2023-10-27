@@ -71,7 +71,7 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
           ></Input>
 
           <div className="grid grid-cols-2 justify-between items-center">
-            <p className="font-semibold">Body part</p>
+            <p>Body part</p>
             <Select
               placeholder="Select option"
               onChange={(e) => handleChangeBodyPart(e)}
@@ -88,7 +88,7 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
           </div>
 
           <div className="grid grid-cols-2 justify-between items-center">
-            <p className="font-semibold">Category</p>
+            <p>Category</p>
             <Select
               placeholder="Select option"
               onChange={(e) => handleChangeCategory(e)}

@@ -137,8 +137,8 @@ export default function WorkoutSessionCard({
           )}
 
           <div className="grid grid-cols-2 pt-4">
-            <div className="font-semibold">Exercise</div>
-            <div className="font-semibold">Best set</div>
+            <div className="text-gray-500">Exercise</div>
+            <div className="text-gray-500">Best set</div>
           </div>
           {sessionData?.exercises.map((exercise, key) => (
             <div className="grid grid-cols-2" key={key}>

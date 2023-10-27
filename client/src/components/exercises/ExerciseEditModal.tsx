@@ -78,7 +78,7 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
           <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
             X
           </Button>
-          <h1 className="font-semibold text-2xl text-center px-5">
+          <h1 className="text-3xl text-center px-5">
             {exerciseData["name"]}
           </h1>
           <Button

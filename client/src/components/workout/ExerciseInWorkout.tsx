@@ -142,7 +142,7 @@ export default function ExerciseInWorkout({
   return (
     <div className="pb-8 bg-gray-200 rounded-xl p-4">
       <div className="flex flex-row justify-between">
-        <p className="text-xl font-semibold">{name}</p>
+        <p className="text-2xl">{name}</p>
         <Menu variant="filled">
           <MenuButton
             as={IconButton}
@@ -190,11 +190,11 @@ export default function ExerciseInWorkout({
         </button> */}
       </div>
       <div className="space-y-2">
-        <div className="grid grid-cols-5 font-semibold gap-8">
-          <div className="font-semibold">Set</div>
-          <div className="font-semibold">Prev.</div>
-          <div className="font-semibold">kg</div>
-          <div className="font-semibold">reps</div>
+        <div className="grid grid-cols-5 gap-8">
+          <div>Set</div>
+          <div>Prev.</div>
+          <div>kg</div>
+          <div>reps</div>
           {/* <div>RPE</div> */}
         </div>
         {exerciseSets &&

@@ -127,7 +127,7 @@ const Register = () => {
 
   return (
     <>
-        <h1 className="text-4xl text-white font-semibold pb-8 z-[600]">
+        <h1 className="text-4xl text-white pb-8 z-[600]">
           Register
         </h1>
 
@@ -330,7 +330,7 @@ const Register = () => {
             Already registered?
             <br />
             <Link to="/login">
-              <span className="text-black underline font-semibold">
+              <span className="text-black underline">
                 Sign In
               </span>
             </Link>

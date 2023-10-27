@@ -55,7 +55,7 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
           <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
             X
           </Button>
-          <h1 className="font-semibold text-xl text-center">
+          <h1 className="text-2xl text-center">
             Create New Exercise
           </h1>
           <Button onClick={handleSave} colorScheme="blue" borderRadius="16px" fontWeight={"400"}>

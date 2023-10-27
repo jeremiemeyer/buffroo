@@ -65,7 +65,7 @@ const AppLayout = () => {
               />
             </Menu>
             <Stopwatch />
-            <p className="text-xl font-semibold pb-4">{workoutData.name}</p>
+            <p className="text-2xl font-light pb-4">{workoutData.name}</p>
           </div>
         ) // version réduite
       ) : (

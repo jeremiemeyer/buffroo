@@ -103,7 +103,7 @@ const Login = () => {
 
   return (
     <>
-      <h1 className="text-4xl font-semibold pb-8 text-white z-[600]">
+      <h1 className="text-4xl pb-8 text-white z-[600]">
         Sign In
       </h1>
       <div className="bg-glassmorphism2 rounded-3xl p-12 z-[600] xl:min-w-[500px]">
@@ -186,7 +186,7 @@ const Login = () => {
           <span className="line">
             {/*put router link here*/}
             <Link to="/register">
-              <span className="text-black underline font-semibold">
+              <span className="text-black underline">
                 Sign Up
               </span>
             </Link>

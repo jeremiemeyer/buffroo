@@ -24,7 +24,7 @@ export default function WorkoutExercisesListExerciseCard({
       <div className="flex flex-row items-center">
         <div className="mr-8 text-4xl">{name.charAt(0)}</div>
         <div>
-          <p className="font-semibold">{name}</p>
+          <p className="font-light text-xl">{name}</p>
           <p>
             <span className="text-gray-500">Body part:</span> {formatString(bodypart)}
           </p>

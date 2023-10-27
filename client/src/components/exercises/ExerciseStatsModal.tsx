@@ -51,7 +51,7 @@ export default function ExerciseStatsModal({ onClose, selectedExerciseId }) {
           className="z-[900] relative bg-gray-100 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
         >
           <div className="flex flex-row justify-between items-center text-center">
-            <h1 className="font-semibold text-2xl text-center px-5">
+            <h1 className="text-3xl text-center px-5">
               {exerciseData["name"]}
             </h1>
             <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>

@@ -132,7 +132,7 @@ export default function WorkoutSessionCard({
           )}
           {sessionData?.notes !== "" && (
             <p>
-              <i className="fa fa-pen mr-4" /> {sessionData?.notes}
+              <i className="fa fa-pen mr-4" /> <span className="font-light">“{sessionData?.notes}”</span>
             </p>
           )}
 

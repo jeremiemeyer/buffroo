@@ -131,7 +131,7 @@ const Register = () => {
           Register
         </h1>
 
-        <div className="bg-glassmorphism2 rounded-3xl p-12 z-[600] min-w-[500px]">
+        <div className="bg-glassmorphism2 rounded-3xl p-12 z-[600] xl:min-w-[500px]">
           <p
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"}

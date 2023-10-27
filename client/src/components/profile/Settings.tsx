@@ -1,17 +1,20 @@
 //@ts-nocheck
 import { Button, Select } from "@chakra-ui/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function Settings() {
-  const [settings, setSettings] = useState({
-    unitSystem: "metric",
-    theme: "light",
-  })
+export default function Settings({
+  userPreferences,
+  setUserPreferences,
+  saveUserPreferences,
+}) {
+  useEffect(() => {
+    console.log(userPreferences)
+  }, [])
 
-  function handleChangeSettings(e) {
+  function handleChangePreferences(e) {
     const { name, value } = e.target
-    setSettings({
-      ...settings,
+    setUserPreferences({
+      ...userPreferences,
       [name]: value,
     })
   }
@@ -26,9 +29,9 @@ export default function Settings() {
               <span>Preferred unit system</span>
               <Select
                 placeholder="Select option"
-                value={settings.unitSystem}
-                onChange={handleChangeSettings}
-                name="unitSystem"
+                value={userPreferences.unitsystem}
+                onChange={handleChangePreferences}
+                name="unitsystem"
                 borderColor="gray.400"
               >
                 <option value="imperial">Imperial</option>
@@ -40,8 +43,8 @@ export default function Settings() {
 
               <Select
                 placeholder="Select option"
-                value={settings.theme}
-                onChange={handleChangeSettings}
+                value={userPreferences.theme}
+                onChange={handleChangePreferences}
                 name="theme"
                 borderColor="gray.400"
               >
@@ -51,9 +54,14 @@ export default function Settings() {
             </div>
           </div>
 
-          <Button colorScheme="blue" borderRadius="16px">
+          <Button
+            colorScheme="blue"
+            borderRadius="16px"
+            onClick={saveUserPreferences}
+          >
             Save preferences
           </Button>
+          {/* <button onClick={() => console.log(userPreferences)}>Console log userPreferences</button> */}
         </div>
       </div>
     </>

@@ -12,6 +12,16 @@ const userSchema = new Schema({
     },
     Admin: { type: Number },
   },
+  preferences: {
+    unitsystem: {
+      type: String,
+      default: "metric",
+    },
+    theme: {
+      type: String,
+      default: "light"
+    },
+  },
   refreshToken: { type: String },
 })
 

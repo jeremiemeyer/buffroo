@@ -5,14 +5,47 @@ import { useNavigate, Link } from "react-router-dom"
 import useLogout from "../hooks/useLogout"
 import useAuth from "../hooks/useAuth"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import Settings from "./profile/Settings"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
 
 export default function Profile() {
   const navigate = useNavigate()
   const logout = useLogout()
   const { auth } = useAuth()
   const { workoutIsInProgress } = useContext(WorkoutStatusContext)
+  const axiosPrivate = useAxiosPrivate()
+  const USER_DATA_URL = `/api/users/${auth.userId}`
+  const [userPreferences, setUserPreferences] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  const getUserPreferences = async () => {
+    try {
+      const response = await axiosPrivate.get(USER_DATA_URL)
+      const userData = response.data
+      setUserPreferences(userData.preferences)
+      setIsLoading(false)
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    }
+  }
+
+  const saveUserPreferences = async () => {
+    try {
+      const response = await axiosPrivate.patch(USER_DATA_URL, {userPreferences: userPreferences})
+      const updatedUser = response.data
+      alert('Preferences saved!')
+    } catch (error) {
+      console.error("Error updating user:", error)
+    }
+  }
+
+  useEffect(() => {
+    // console.log(USER_DATA_URL)
+    getUserPreferences()
+  }, [])
+
+
 
   const signOut = async () => {
     workoutIsInProgress
@@ -34,11 +67,13 @@ export default function Profile() {
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
 
-          <Settings />
+          { !isLoading && <Settings userPreferences={userPreferences} setUserPreferences={setUserPreferences} saveUserPreferences={saveUserPreferences}/> }
 
           <Button onClick={signOut} colorScheme="red" borderRadius="16px">
             Sign out
           </Button>
+          {/* <button onClick={() => console.log(userPreferences)}>Console log userPreferences</button> */}
+
         </div>
       </div>
     </>

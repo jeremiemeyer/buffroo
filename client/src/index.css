@@ -115,6 +115,14 @@ button {
     margin-bottom: 0.5rem;
 }
 
+.infomsg {
+  background-color: lightgreen;
+  color: green;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .line {
     display: inline-block;
 }

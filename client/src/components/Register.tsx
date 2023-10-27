@@ -38,6 +38,7 @@ const REGISTER_URL = "/register"
 const Register = () => {
   const userRef = useRef()
   const errRef = useRef()
+  const infoRef = useRef()
   const emailRef = useRef()
 
   const [user, setUser] = useState("")
@@ -57,6 +58,7 @@ const Register = () => {
   const [matchFocus, setMatchFocus] = useState(false)
 
   const [errMsg, setErrMsg] = useState("")
+  const [infoMsg, setInfoMsg] = useState("")
 
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine)
@@ -106,6 +108,7 @@ const Register = () => {
       console.log(JSON.stringify(response))
       //clear state and controlled inputs
       //need value attrib on inputs for this
+      setInfoMsg("Registration successful!")
       setUser("")
       setEmail("")
       setPwd("")
@@ -135,6 +138,13 @@ const Register = () => {
             aria-live="assertive"
           >
             {errMsg}
+          </p>
+          <p
+            ref={infoRef}
+            className={infoMsg ? "infomsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {infoMsg}
           </p>
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>

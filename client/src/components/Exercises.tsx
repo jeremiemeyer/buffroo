@@ -18,13 +18,14 @@ import { createPortal } from "react-dom"
 import AddExerciseModal from "./exercises/AddExerciseModal"
 import { useNavigate, useLocation } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
-import ExerciseDetailsModal from "./exercises/ExerciseDetailsModal"
+import ExerciseStatsModal from "./exercises/ExerciseStatsModal"
+import ExerciseEditModal from "./exercises/ExerciseEditModal"
 
 export default function Exercises() {
   const [isLoading, setIsLoading] = useState(true)
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
-  const [showExerciseDetailsModal, setShowExerciseDetailsModal] =
-    useState(false)
+  const [showExerciseStatsModal, setShowExerciseStatsModal] = useState(false)
+  const [showExerciseEditModal, setShowExerciseEditModal] = useState(false)
   const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
   const [searchInput, setSearchInput] = useState("")
@@ -91,15 +92,19 @@ export default function Exercises() {
 
   // No overflow when modal is open
   useEffect(() => {
-    if (showNewExerciseModal || showExerciseDetailsModal) {
+    if (showNewExerciseModal || showExerciseEditModal || showExerciseStatsModal) {
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = "auto"
     }
-  }, [showNewExerciseModal, showExerciseDetailsModal])
-  function onClickExerciseCard(exerciseId) {
-    setSelectedExerciseId(exerciseId)
-    setShowExerciseDetailsModal(true)
+  }, [showNewExerciseModal, showExerciseEditModal, showExerciseStatsModal])
+
+  function onClickExerciseEdit(exerciseId) {
+    setShowExerciseEditModal(true)
+  }
+
+  function onClickExerciseStats(exerciseId) {
+    setShowExerciseStatsModal(true)
   }
 
   return (
@@ -166,7 +171,6 @@ export default function Exercises() {
             <Box
               key={index}
               className="border border-gray-200 bg-gray-200 mt-2  p-[20px] mx-auto rounded-xl"
-              
             >
               <SkeletonText
                 mt="4"
@@ -185,7 +189,10 @@ export default function Exercises() {
                 name={ex["name"]}
                 category={ex["category"]}
                 bodypart={ex["bodypart"]}
-                onClickExerciseCard={onClickExerciseCard}
+                selectedExeciseId={selectedExerciseId}
+                setSelectedExerciseId={setSelectedExerciseId}
+                onClickExerciseEdit={onClickExerciseEdit}
+                onClickExerciseStats={onClickExerciseStats}
               />
             ))}
           </>
@@ -200,10 +207,19 @@ export default function Exercises() {
           document.body
         )}
 
-      {showExerciseDetailsModal &&
+      {showExerciseStatsModal &&
         createPortal(
-          <ExerciseDetailsModal
-            onClose={() => setShowExerciseDetailsModal(false)}
+          <ExerciseStatsModal
+            onClose={() => setShowExerciseStatsModal(false)}
+            selectedExerciseId={selectedExerciseId}
+          />,
+          document.body
+        )}
+
+      {showExerciseEditModal &&
+        createPortal(
+          <ExerciseEditModal
+            onClose={() => setShowExerciseEditModal(false)}
             selectedExerciseId={selectedExerciseId}
           />,
           document.body

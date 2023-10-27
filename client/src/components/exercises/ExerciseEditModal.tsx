@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { Button, Input, Select, Tab, Tabs, TabList, TabIndicator, TabPanels, TabPanel  } from "@chakra-ui/react"
 
-export default function EditExerciseModal({ onClose, selectedExerciseId }) {
+export default function ExerciseEditModal({ onClose, selectedExerciseId }) {
   const EXERCISE_DATA_URL = `/api/exercises/${selectedExerciseId}`
   const [exerciseData, setExerciseData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -52,7 +52,7 @@ export default function EditExerciseModal({ onClose, selectedExerciseId }) {
             colorScheme="blue"
             borderRadius="16px"
           >
-            Edit
+            Save
           </Button>
         </div>
         {!isLoading && (

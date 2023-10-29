@@ -95,7 +95,14 @@ export default function WorkoutModal({ onClose }: any) {
           </div>
 
           <div className="h-[5%] flex flex-row justify-between items-center gap-2">
-            <Input placeholder="Workout title" value={workoutData.name} onChange={handleEditWorkoutName} borderColor={"gray.300"}/>
+            <i className="fa fa-heading mr-4" />
+            <Input
+              placeholder="Workout title"
+              variant="flushed"
+              value={workoutData.name}
+              onChange={handleEditWorkoutName}
+              borderColor={"gray.300"}
+            />
             <Button
               onClick={saveSession}
               colorScheme="green"
@@ -108,12 +115,16 @@ export default function WorkoutModal({ onClose }: any) {
 
           <div className="grow mt-6 overflow-auto">
             <div className="space-y-2 mt-4">
-              <Input
-                placeholder="Notes"
-                value={workoutData.notes}
-                onChange={(e) => handleEditWorkoutNotes(e)}
-                borderColor={"gray.300"}
-              ></Input>
+              <div className="flex flex-row items-center">
+                <i className="fa fa-pen mr-4" />
+                <Input
+                  placeholder="Notes"
+                  variant="flushed"
+                  value={workoutData.notes}
+                  onChange={(e) => handleEditWorkoutNotes(e)}
+                  borderColor={"gray.300"}
+                ></Input>
+              </div>
 
               {/* Liste des exos */}
               <div className="h-1/2 overflow-auto space-y-3">

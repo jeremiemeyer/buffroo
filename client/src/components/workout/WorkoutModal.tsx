@@ -95,7 +95,7 @@ export default function WorkoutModal({ onClose }: any) {
           </div>
 
           <div className="h-[5%] flex flex-row justify-between items-center gap-2">
-            <Input value={workoutData.name} onChange={handleEditWorkoutName} borderColor={"gray.300"}/>
+            <Input placeholder="Workout title" value={workoutData.name} onChange={handleEditWorkoutName} borderColor={"gray.300"}/>
             <Button
               onClick={saveSession}
               colorScheme="green"

@@ -7,11 +7,11 @@ import { useState, useContext, useEffect } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../context/WorkoutTimerProvider"
-import TemplateCard from "./profile/templates/TemplateCard"
-import CreateEditTemplateModal from "./profile/templates/CreateEditTemplateModal"
+import TemplateCard from "./home/templates/TemplateCard"
+import CreateEditTemplateModal from "./home/templates/CreateEditTemplateModal"
 import useAuth from "../hooks/useAuth"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
-import ConfirmDeleteTemplateModal from "./profile/templates/ConfirmDeleteTemplateModal"
+import ConfirmDeleteTemplateModal from "./home/templates/ConfirmDeleteTemplateModal"
 
 function formatDate(inputDate) {
   const date = new Date(inputDate)
@@ -59,7 +59,6 @@ export default function Home() {
   const TEMPLATES_URL = `/api/users/${auth.userId}/templates`
   const [isLoading, setIsLoading] = useState(false)
 
-
   const getUserTemplates = async () => {
     setIsLoading(true)
     try {
@@ -74,6 +73,7 @@ export default function Home() {
     }
   }
 
+  // start empty workout
   function handleClick() {
     if (workoutIsInProgress) {
       alert("A workout is already in progress!")
@@ -88,6 +88,17 @@ export default function Home() {
         exercises: [],
         notes: "",
       })
+    }
+  }
+
+  function startWorkoutFromTemplate(templateData) {
+    if (workoutIsInProgress) {
+      alert("A workout is already in progress!")
+    } else {
+      setWorkoutIsInProgress(true)
+      start() // stopwatch start
+      const startDate = new Date().toISOString()
+      setWorkoutData({ ...templateData, startdate: startDate, enddate: "" })
     }
   }
 
@@ -162,6 +173,7 @@ export default function Home() {
                 }
                 deleteTemplate={deleteTemplate}
                 getUserTemplates={getUserTemplates}
+                startWorkoutFromTemplate={startWorkoutFromTemplate}
               />
             ))}
           </div>
@@ -176,7 +188,6 @@ export default function Home() {
           />,
           document.body
         )}
-
     </>
   )
 }

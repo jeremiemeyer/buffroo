@@ -22,41 +22,50 @@ export default function TemplateCard({
   templateData,
   deleteTemplate,
   getUserTemplates,
+  startWorkoutFromTemplate
 }) {
   const [showConfirmDeleteTemplate, setShowConfirmDeleteTemplate] =
     useState(false)
   const [showEditTemplate, setShowEditTemplate] = useState(false)
 
+  // start workout from template
+
   return (
     <>
-      <div className="border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-3xl max-w-xs mx-auto">
-        <div className="p-4 ">
-          <div className="flex justify-between items-center">
-            <h1 className="text-xl pb-4">{templateData.name}</h1>
+      <div
+        className="border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-3xl  mx-auto cursor-pointer"
+        onClick={() => startWorkoutFromTemplate(templateData)}
+      >
+        <div className="p-4">
+          <div className="flex justify-between items-center pb-4">
+            <h1 className="text-xl">{templateData.name}</h1>
             {/* <button onClick={() => console.log(templateData)}>Consolelog data</button> */}
-            <Menu variant="filled">
-              <MenuButton
-                as={IconButton}
-                aria-label="Options"
-                icon={<HamburgerIcon />}
-                variant="filled"
-              />
-              <MenuList zIndex={"600"}>
-                <MenuItem
-                  icon={<EditIcon />}
-                  onClick={() => setShowEditTemplate(true)}
-                >
-                  Edit template
-                </MenuItem>
+            <div onClick={(e) => e.stopPropagation()}>
+              <Menu variant="filled">
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Options"
+                  icon={<HamburgerIcon />}
+                  variant="filled"
+                  className="hover:bg-gray-200"
+                />
+                <MenuList zIndex={"600"}>
+                  <MenuItem
+                    icon={<EditIcon />}
+                    onClick={() => setShowEditTemplate(true)}
+                  >
+                    Edit template
+                  </MenuItem>
 
-                <MenuItem
-                  icon={<DeleteIcon />}
-                  onClick={setShowConfirmDeleteTemplate}
-                >
-                  Delete template
-                </MenuItem>
-              </MenuList>
-            </Menu>
+                  <MenuItem
+                    icon={<DeleteIcon />}
+                    onClick={() => setShowConfirmDeleteTemplate(true)}
+                  >
+                    Delete template
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </div>
           </div>
           <div>
             <ul>

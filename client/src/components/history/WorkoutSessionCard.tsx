@@ -104,6 +104,7 @@ export default function WorkoutSessionCard({
                 aria-label="Options"
                 icon={<HamburgerIcon />}
                 variant="filled"
+                className="hover:bg-gray-200"
               />
               <MenuList>
                 <MenuItem

@@ -31,7 +31,7 @@ export default function CreateEditTemplateModal({
   const [showConfirmCancelEdit, setShowConfirmCancelEdit] = useState(false)
   const { auth } = useAuth()
   const [templateData, setTemplateData] = useState({
-    name: "Template name",
+    name: "New template",
     notes: "",
     exercises: [],
   })
@@ -136,6 +136,7 @@ export default function CreateEditTemplateModal({
         <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
             <Input
+              placeholder="Template title"
               value={templateData.name}
               onChange={handleEditTemplateName}
             />

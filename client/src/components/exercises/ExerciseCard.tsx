@@ -66,6 +66,7 @@ export default function ExerciseCard({
             icon={<HamburgerIcon />}
             variant="filled"
             onClick={() => setSelectedExerciseId(exerciseId)}
+            className="hover:bg-gray-200"
           />
           <MenuList zIndex={"600"}>
             <MenuItem

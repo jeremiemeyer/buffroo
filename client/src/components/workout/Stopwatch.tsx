@@ -24,7 +24,7 @@ export default function Stopwatch() {
     <div style={{ textAlign: "center" }}>
       <div className="text-2xl">
         <span>{hours > 0 && `${hours}:`}</span>
-        <span>{minutes}</span>:
+        <span>{hours > 0 && minutes < 10 ? `0${minutes}`: minutes}</span>:
         <span>{makeMeTwoDigits(seconds)}</span>
       </div>
     </div>

@@ -91,7 +91,12 @@ export default function EditWorkoutModal({
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
         <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
-            <Input value={workoutData.name} onChange={handleEditWorkoutName} />
+            <i className="fa fa-heading mr-4" />
+            <Input
+              variant="flushed"
+              value={workoutData.name}
+              onChange={handleEditWorkoutName}
+            />
             <Button
               onClick={saveSessionChanges}
               colorScheme="blue"
@@ -104,11 +109,15 @@ export default function EditWorkoutModal({
 
           <div className="grow mt-6 overflow-auto">
             <div className="space-y-2 mt-4">
-              <Input
-                placeholder="Notes"
-                value={workoutData.notes}
-                onChange={(e) => handleEditWorkoutNotes(e)}
-              ></Input>
+              <div className="flex flex-row items-center">
+                <i className="fa fa-pen mr-4" />
+                <Input
+                  placeholder="Notes"
+                  variant="flushed"
+                  value={workoutData.notes}
+                  onChange={(e) => handleEditWorkoutNotes(e)}
+                ></Input>
+              </div>
 
               {/* Liste des exos */}
               <div className="h-1/2 overflow-auto space-y-3">

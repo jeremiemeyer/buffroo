@@ -94,6 +94,7 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
           <div className="space-y-2 mt-4">
             <Input
               placeholder="Add name"
+              variant="flushed"
               value={exerciseData.name}
               name="name"
               onChange={(e) => handleChange(e)}

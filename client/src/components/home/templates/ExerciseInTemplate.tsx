@@ -8,6 +8,7 @@ import {
   MenuList,
   IconButton,
   MenuItem,
+  Icon,
 } from "@chakra-ui/react"
 import {
   HamburgerIcon,
@@ -19,6 +20,8 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
 } from "@chakra-ui/icons"
+import { FaEllipsisH } from "react-icons/fa"
+
 
 export default function ExerciseInTemplate({
   name,
@@ -147,7 +150,7 @@ export default function ExerciseInTemplate({
           <MenuButton
             as={IconButton}
             aria-label="Options"
-            icon={<HamburgerIcon />}
+            icon={<Icon as={FaEllipsisH} />}
             variant="filled"
           />
           <MenuList>

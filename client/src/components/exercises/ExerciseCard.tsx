@@ -5,6 +5,7 @@ import {
   MenuList,
   IconButton,
   MenuItem,
+  Icon,
 } from "@chakra-ui/react"
 import {
   HamburgerIcon,
@@ -13,7 +14,8 @@ import {
   EditIcon,
   RepeatClockIcon,
 } from "@chakra-ui/icons"
-//@ts-nocheck
+import { FaEllipsisH } from "react-icons/fa"
+
 export default function ExerciseCard({
   name,
   bodypart,
@@ -32,11 +34,12 @@ export default function ExerciseCard({
       : alert("You can't edit default exercises.")
   }
 
-
   // formats category and bodypart fields correctly for the frontend
   function formatString(category) {
-    const words = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1));
-    return words.join(' ');
+    const words = category
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    return words.join(" ")
   }
 
   return (
@@ -51,10 +54,12 @@ export default function ExerciseCard({
       <div className="flex-col grow">
         <p className="text-xl font-light">{name}</p>
         <p>
-          <span className="text-gray-500">Body part:</span> {formatString(bodypart)}
+          <span className="text-gray-500">Body part:</span>{" "}
+          {formatString(bodypart)}
         </p>
         <p>
-          <span className="text-gray-500">Category:</span> {formatString(category)}
+          <span className="text-gray-500">Category:</span>{" "}
+          {formatString(category)}
         </p>
       </div>
       <div>
@@ -63,7 +68,7 @@ export default function ExerciseCard({
           <MenuButton
             as={IconButton}
             aria-label="Options"
-            icon={<HamburgerIcon />}
+            icon={<Icon as={FaEllipsisH} />}
             variant="filled"
             onClick={() => setSelectedExerciseId(exerciseId)}
             className="hover:bg-gray-200"

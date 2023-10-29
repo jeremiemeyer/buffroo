@@ -7,6 +7,7 @@ import {
   MenuList,
   IconButton,
   MenuItem,
+  Icon,
 } from "@chakra-ui/react"
 import {
   HamburgerIcon,
@@ -18,6 +19,7 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
 } from "@chakra-ui/icons"
+import { FaEllipsisH } from "react-icons/fa"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import ConfirmDeleteSessionModal from "./ConfirmDeleteSessionModal"
@@ -102,7 +104,7 @@ export default function WorkoutSessionCard({
               <MenuButton
                 as={IconButton}
                 aria-label="Options"
-                icon={<HamburgerIcon />}
+                icon={<Icon as={FaEllipsisH} />}
                 variant="filled"
                 className="hover:bg-gray-200"
               />

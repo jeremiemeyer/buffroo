@@ -5,6 +5,7 @@ import {
   MenuList,
   IconButton,
   MenuItem,
+  Icon,
 } from "@chakra-ui/react"
 import {
   HamburgerIcon,
@@ -13,6 +14,7 @@ import {
   EditIcon,
   RepeatClockIcon,
 } from "@chakra-ui/icons"
+import { FaEllipsisH } from "react-icons/fa"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import ConfirmDeleteTemplateModal from "./ConfirmDeleteTemplateModal"
@@ -22,7 +24,7 @@ export default function TemplateCard({
   templateData,
   deleteTemplate,
   getUserTemplates,
-  startWorkoutFromTemplate
+  startWorkoutFromTemplate,
 }) {
   const [showConfirmDeleteTemplate, setShowConfirmDeleteTemplate] =
     useState(false)
@@ -45,7 +47,7 @@ export default function TemplateCard({
                 <MenuButton
                   as={IconButton}
                   aria-label="Options"
-                  icon={<HamburgerIcon />}
+                  icon={<Icon as={FaEllipsisH} />}
                   variant="filled"
                   className="hover:bg-gray-200"
                 />
@@ -70,7 +72,10 @@ export default function TemplateCard({
           <div>
             <ul>
               {templateData.exercises.map((exercise, index) => (
-                <li key={index}> {exercise.sets.length} x {exercise.name} </li>
+                <li key={index}>
+                  {" "}
+                  {exercise.sets.length} x {exercise.name}{" "}
+                </li>
               ))}
             </ul>
           </div>

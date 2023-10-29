@@ -66,6 +66,7 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
         <div className="space-y-2 mt-4">
           <Input
             placeholder="Add name"
+            variant="flushed"
             value={nameInput}
             onChange={(e) => handleChange(e)}
           ></Input>

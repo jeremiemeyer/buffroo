@@ -22,7 +22,6 @@ import {
 } from "@chakra-ui/icons"
 import { FaEllipsisH } from "react-icons/fa"
 
-
 export default function ExerciseInWorkout({
   name,
   workoutData,
@@ -211,20 +210,24 @@ export default function ExerciseInWorkout({
               <div>-</div>
               <Input
                 type="number"
+                variant="flushed"
                 onChange={(event) =>
                   handleChange({ index, event, field: "weight" })
                 }
                 value={set.weight}
-                bgColor={"gray.300"}
+                padding={"12px"}
+                bgColor={"rgb(243 244 246)"}
               />
 
               <Input
                 type="number"
+                variant="flushed"
                 onChange={(event) =>
                   handleChange({ index, event, field: "reps" })
                 }
                 value={set.reps}
-                bgColor={"gray.300"}
+                padding={"12px"}
+                bgColor={"rgb(243 244 246)"}
               />
 
               <Button

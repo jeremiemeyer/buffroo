@@ -211,20 +211,24 @@ export default function ExerciseInTemplate({
               <div>-</div>
               <Input
                 type="number"
+                variant="flushed"
                 onChange={(event) =>
                   handleChange({ index, event, field: "weight" })
                 }
                 value={set.weight}
-                bgColor={"gray.300"}
+                padding={"12px"}
+                bgColor={"rgb(243 244 246)"}
               />
 
               <Input
                 type="number"
+                variant="flushed"
                 onChange={(event) =>
                   handleChange({ index, event, field: "reps" })
                 }
                 value={set.reps}
-                bgColor={"gray.300"}
+                padding={"12px"}
+                bgColor={"rgb(243 244 246)"}
               />
 
               <Button

@@ -217,7 +217,7 @@ export default function ExerciseInTemplate({
                 }
                 value={set.weight}
                 textAlign={"center"}
-                bgColor={"rgb(243 244 246)"}
+                borderColor={"rgba(0,0,0,0.2)"}
               />
 
               <Input
@@ -228,7 +228,7 @@ export default function ExerciseInTemplate({
                 }
                 value={set.reps}
                 textAlign={"center"}
-                bgColor={"rgb(243 244 246)"}
+                borderColor={"rgba(0,0,0,0.2)"}
               />
 
               <Button

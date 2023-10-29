@@ -38,7 +38,7 @@ export default function TemplateCard({
       >
         <div className="p-4">
           <div className="flex justify-between items-center pb-4">
-            <h1 className="text-xl">{templateData.name}</h1>
+            <h1 className="text-2xl font-light">{templateData.name}</h1>
             {/* <button onClick={() => console.log(templateData)}>Consolelog data</button> */}
             <div onClick={(e) => e.stopPropagation()}>
               <Menu variant="filled">
@@ -70,7 +70,7 @@ export default function TemplateCard({
           <div>
             <ul>
               {templateData.exercises.map((exercise, index) => (
-                <li key={index}> {exercise.name} </li>
+                <li key={index}> {exercise.sets.length} x {exercise.name} </li>
               ))}
             </ul>
           </div>

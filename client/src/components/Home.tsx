@@ -164,7 +164,7 @@ export default function Home() {
             Console log user templates
           </button> */}
           <div className="space-y-2">
-            {userTemplates.map((template, index) => (
+            {userTemplates && userTemplates.length > 0 && userTemplates.map((template, index) => (
               <TemplateCard
                 key={index}
                 templateData={userTemplates[index]}

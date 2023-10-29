@@ -215,7 +215,7 @@ export default function ExerciseInWorkout({
                   handleChange({ index, event, field: "weight" })
                 }
                 value={set.weight}
-                padding={"6px"}
+                textAlign={"center"}
                 bgColor={"rgb(243 244 246)"}
               />
 
@@ -226,7 +226,7 @@ export default function ExerciseInWorkout({
                   handleChange({ index, event, field: "reps" })
                 }
                 value={set.reps}
-                padding={"6px"}
+                textAlign={"center"}
                 bgColor={"rgb(243 244 246)"}
               />
 

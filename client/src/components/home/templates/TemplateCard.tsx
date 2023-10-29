@@ -19,6 +19,7 @@ import { useState } from "react"
 import { createPortal } from "react-dom"
 import ConfirmDeleteTemplateModal from "./ConfirmDeleteTemplateModal"
 import CreateEditTemplateModal from "./CreateEditTemplateModal"
+import ConfirmStartWorkoutFromTemplateModal from "./ConfirmStartWorkoutFromTemplateModal"
 
 export default function TemplateCard({
   templateData,
@@ -29,14 +30,17 @@ export default function TemplateCard({
   const [showConfirmDeleteTemplate, setShowConfirmDeleteTemplate] =
     useState(false)
   const [showEditTemplate, setShowEditTemplate] = useState(false)
-
+  const [
+    showConfirmStartWorkoutFromTemplateModal,
+    setShowConfirmStartWorkoutFromTemplateModal,
+  ] = useState(false)
   // start workout from template
 
   return (
     <>
       <div
         className="border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-3xl  mx-auto cursor-pointer"
-        onClick={() => startWorkoutFromTemplate(templateData)}
+        onClick={() => setShowConfirmStartWorkoutFromTemplateModal(true)}
       >
         <div className="p-4">
           <div className="flex justify-between items-center pb-4">
@@ -100,6 +104,8 @@ export default function TemplateCard({
           />,
           document.body
         )}
+      {showConfirmStartWorkoutFromTemplateModal &&
+        createPortal(<ConfirmStartWorkoutFromTemplateModal onClose={() => setShowConfirmStartWorkoutFromTemplateModal(false)} onConfirmStartWorkoutFromTemplate={() => startWorkoutFromTemplate(templateData)} templateData={templateData}/>, document.body)}
     </>
   )
 }

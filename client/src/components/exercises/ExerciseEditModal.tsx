@@ -14,7 +14,11 @@ import {
 } from "@chakra-ui/react"
 import useAuth from "../../hooks/useAuth"
 
-export default function ExerciseEditModal({ onClose, selectedExerciseId, getExercises }) {
+export default function ExerciseEditModal({
+  onClose,
+  selectedExerciseId,
+  getExercises,
+}) {
   const [exerciseData, setExerciseData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const axiosPrivate = useAxiosPrivate()
@@ -22,7 +26,6 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
 
   const EXERCISE_DATA_URL = `/api/exercises/${selectedExerciseId}`
   const EXERCISE_UPDATE_URL = `/api/users/${auth.userId}/exercises/${selectedExerciseId}`
-
 
   const getExerciseData = async () => {
     setIsLoading(true)
@@ -41,12 +44,14 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
   const editUserExercise = async () => {
     try {
       console.log(EXERCISE_UPDATE_URL)
-      const response = await axiosPrivate.patch(EXERCISE_UPDATE_URL, {exerciseData: exerciseData})
+      const response = await axiosPrivate.patch(EXERCISE_UPDATE_URL, {
+        exerciseData: exerciseData,
+      })
       const updatedExercise = response.data
       console.log(updatedExercise)
       getExercises()
       onClose()
-      alert('Exercise updated!')
+      alert("Exercise updated!")
     } catch (error) {
       console.error("Error updating user exercise:", error)
       // navigate("/login", { state: { from: location }, replace: true })
@@ -78,9 +83,7 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
           <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
             X
           </Button>
-          <h1 className="text-3xl text-center px-5">
-            {exerciseData["name"]}
-          </h1>
+          <h1 className="text-3xl text-center px-5">{exerciseData["name"]}</h1>
           <Button
             onClick={editUserExercise}
             colorScheme="blue"
@@ -92,13 +95,17 @@ export default function ExerciseEditModal({ onClose, selectedExerciseId, getExer
         </div>
         {!isLoading && (
           <div className="space-y-2 mt-4">
-            <Input
-              placeholder="Add name"
-              variant="flushed"
-              value={exerciseData.name}
-              name="name"
-              onChange={(e) => handleChange(e)}
-            ></Input>
+            <div className="flex flex-row items-center">
+              <i className="fa fa-heading mr-4" />
+
+              <Input
+                placeholder="Exercise name"
+                variant="flushed"
+                value={exerciseData.name}
+                name="name"
+                onChange={(e) => handleChange(e)}
+              ></Input>
+            </div>
 
             <div className="grid grid-cols-2 justify-between items-center">
               <p>Body part</p>

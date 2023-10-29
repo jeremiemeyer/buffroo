@@ -55,21 +55,27 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
           <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
             X
           </Button>
-          <h1 className="text-2xl text-center">
-            Create New Exercise
-          </h1>
-          <Button onClick={handleSave} colorScheme="blue" borderRadius="16px" fontWeight={"400"}>
+          <h1 className="text-2xl text-center">Create New Exercise</h1>
+          <Button
+            onClick={handleSave}
+            colorScheme="blue"
+            borderRadius="16px"
+            fontWeight={"400"}
+          >
             Save
           </Button>
         </div>
 
         <div className="space-y-2 mt-4">
-          <Input
-            placeholder="Add name"
-            variant="flushed"
-            value={nameInput}
-            onChange={(e) => handleChange(e)}
-          ></Input>
+          <div className="flex flex-row items-center">
+            <i className="fa fa-heading mr-4" />
+            <Input
+              placeholder="Exercise name"
+              variant="flushed"
+              value={nameInput}
+              onChange={(e) => handleChange(e)}
+            ></Input>
+          </div>
 
           <div className="grid grid-cols-2 justify-between items-center">
             <p>Body part</p>

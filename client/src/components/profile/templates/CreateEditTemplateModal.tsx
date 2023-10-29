@@ -16,6 +16,7 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
 import ExerciseInTemplate from "./ExerciseInTemplate"
 import AddExerciseToWorkoutModal from "../../workout/AddExerciseToWorkoutModal"
 import ConfirmDiscardTemplateModal from "./ConfirmDiscardTemplateModal"
+import ConfirmCancelEditTemplateModal from "./ConfirmCancelEditTemplateModal"
 
 export default function CreateEditTemplateModal({
   actionType,
@@ -27,6 +28,7 @@ export default function CreateEditTemplateModal({
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
   const [showConfirmDiscardTemplate, setShowConfirmDiscardTemplate] =
     useState(false)
+  const [showConfirmCancelEdit, setShowConfirmCancelEdit] = useState(false)
   const { auth } = useAuth()
   const [templateData, setTemplateData] = useState({
     name: "Template name",
@@ -185,7 +187,11 @@ export default function CreateEditTemplateModal({
               Add Exercises
             </Button>
             <Button
-              onClick={() => setShowConfirmDiscardTemplate(true)}
+              onClick={
+                actionType === "create"
+                  ? () => setShowConfirmDiscardTemplate(true)
+                  : () => setShowConfirmCancelEdit(true)
+              }
               colorScheme="red"
               borderRadius="16px"
               fontWeight={"400"}
@@ -216,6 +222,15 @@ export default function CreateEditTemplateModal({
           <ConfirmDiscardTemplateModal
             onClose={() => setShowConfirmDiscardTemplate(false)}
             onConfirmDiscardTemplate={onClose}
+          />,
+          document.body
+        )}
+
+      {showConfirmCancelEdit &&
+        createPortal(
+          <ConfirmCancelEditTemplateModal
+            onConfirmCancelEdit={onClose}
+            onClose={() => setShowConfirmCancelEdit(false)}
           />,
           document.body
         )}

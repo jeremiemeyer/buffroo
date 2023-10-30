@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { Button, Input } from "@chakra-ui/react"
-import { useState, useContext } from "react"
+import { useState } from "react"
 
 export default function ConfirmStartWorkoutFromTemplateModal({
   onClose,

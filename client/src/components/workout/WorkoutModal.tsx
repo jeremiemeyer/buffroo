@@ -15,12 +15,13 @@ import {
   MenuItem,
 } from "@chakra-ui/react"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
-import { useState, useContext, useEffect } from "react"
-import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
-import WorkoutDataContext from "../../context/WorkoutDataProvider"
-import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
+import { useState, useEffect } from "react"
 import Stopwatch from "./Stopwatch"
 import { useStopwatch } from "react-timer-hook"
+import useWorkoutStatus from "../../hooks/useWorkoutStatus"
+import useWorkoutTimer from "../../hooks/useWorkoutTimer"
+import useWorkoutData from "../../hooks/useWorkoutData"
+import useToast from "../../hooks/useToast"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -35,7 +36,7 @@ export default function WorkoutModal({ onClose }: any) {
     setWorkoutIsInProgress,
     sessionWindowIsMinimized,
     setSessionWindowIsMinimized,
-  } = useContext(WorkoutStatusContext)
+  } = useWorkoutStatus()
 
   const {
     workoutData,
@@ -44,9 +45,11 @@ export default function WorkoutModal({ onClose }: any) {
     handleEditWorkoutName,
     addExercise,
     resetWorkout,
-  } = useContext(WorkoutDataContext)
+  } = useWorkoutData()
 
-  const { reset, start, pause } = useContext(WorkoutTimerContext)
+  const { reset, start, pause } = useWorkoutTimer()
+  const notify = () => toast("Here is your toast.")
+  const { workoutAdded } = useToast()
 
   async function saveSession() {
     if (workoutData.exercises.length === 0) {
@@ -63,13 +66,13 @@ export default function WorkoutModal({ onClose }: any) {
 
     try {
       await axiosPrivate.post(SESSIONS_URL, dataToSend)
-      alert("New session added!")
       resetWorkout()
       reset() // reset timer
+      workoutAdded()
+      onClose()
     } catch (error) {
       return console.log("error")
     }
-    onClose()
   }
 
   return (

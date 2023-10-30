@@ -1,18 +1,21 @@
 // @ts-nocheck
 import { Button, Input } from "@chakra-ui/react"
-import { useState, useContext } from "react"
+import { useState } from "react"
 import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
+import useWorkoutStatus from "../../hooks/useWorkoutStatus"
+import useWorkoutData from "../../hooks/useWorkoutData"
+import useWorkoutTimer from "../../hooks/useWorkoutTimer"
 
 export default function ConfirmCancelWorkoutModal({
   onClose,
   onCancelWorkout,
 }) {
   const { workoutIsInProgress, setWorkoutIsInProgress } =
-    useContext(WorkoutStatusContext)
-  const { resetWorkout } = useContext(WorkoutDataContext)
-  const { reset, start, pause } = useContext(WorkoutTimerContext)
+    useWorkoutStatus()
+  const { resetWorkout } = useWorkoutData()
+  const { reset, start, pause } = useWorkoutTimer()
 
   function handleCancel() {
     onCancelWorkout()

@@ -326,7 +326,7 @@ const Register = () => {
               Sign Up
             </Button>
           </form>
-          <p>
+          <p className="pt-4">
             Already registered?
             <br />
             <Link to="/login">

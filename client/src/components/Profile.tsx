@@ -5,15 +5,16 @@ import { useNavigate, Link } from "react-router-dom"
 import useLogout from "../hooks/useLogout"
 import useAuth from "../hooks/useAuth"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Settings from "./profile/Settings"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
+import useWorkoutStatus from "../hooks/useWorkoutStatus"
 
 export default function Profile() {
   const navigate = useNavigate()
   const logout = useLogout()
   const { auth } = useAuth()
-  const { workoutIsInProgress } = useContext(WorkoutStatusContext)
+  const { workoutIsInProgress } = useWorkoutStatus()
   const axiosPrivate = useAxiosPrivate()
   const USER_DATA_URL = `/api/users/${auth.userId}`
   const [userPreferences, setUserPreferences] = useState([])
@@ -62,7 +63,7 @@ export default function Profile() {
         </div>
 
         {/* Content  */}
-        <div className="pt-[80px] pb-[100px] z-[0] px-6 space-y-12">
+        <div className="pt-[80px] pb-[100px] z-[0] px-6 space-y-12 w-full">
           {/* <button onClick={() => console.log(auth)}>Click</button> */}
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>

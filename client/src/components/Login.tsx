@@ -103,9 +103,7 @@ const Login = () => {
 
   return (
     <>
-      <h1 className="text-4xl pb-8 text-white z-[600]">
-        Sign In
-      </h1>
+      <h1 className="text-4xl pb-8 text-white z-[600]">Sign In</h1>
       <div className="bg-glassmorphism2 rounded-3xl p-12 z-[600] xl:min-w-[500px]">
         <p
           ref={errRef}
@@ -162,23 +160,25 @@ const Login = () => {
               />
             </InputGroup>
           </Stack>
+          <div className="flex flex-col">
+            <Button
+              mt={4}
+              colorScheme="blue"
+              type="submit"
+              borderRadius={"16px"}
+              fontWeight={"400"}
+            >
+              Sign In
+            </Button>
 
-          <Button
-            mt={4}
-            colorScheme="blue"
-            type="submit"
-            borderRadius={"16px"}
-            fontWeight={"400"}
-          >
-            Sign In
-          </Button>
-          <Checkbox
-            onChange={toggleCheck}
-            isChecked={check}
-            className="border-gray-400 py-4"
-          >
-            Stay logged in
-          </Checkbox>
+            <Checkbox
+              onChange={toggleCheck}
+              isChecked={check}
+              className="border-gray-400 py-4"
+            >
+              Stay logged in
+            </Checkbox>
+          </div>
         </form>
         <p>
           Need an account?
@@ -186,9 +186,7 @@ const Login = () => {
           <span className="line">
             {/*put router link here*/}
             <Link to="/register">
-              <span className="text-black underline">
-                Sign Up
-              </span>
+              <span className="text-black underline">Sign Up</span>
             </Link>
           </span>
         </p>

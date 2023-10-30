@@ -166,7 +166,7 @@ export default function Exercises() {
       </div>
 
       {/* Content */}
-      <div className="pt-[160px] pb-[80px] z-[0] mx-auto max-w-[1200px] px-6">
+      <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-6">
         {isLoading ? (
           Array.from({ length: 12 }).map((_, index) => (
             <Box

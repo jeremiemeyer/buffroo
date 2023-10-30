@@ -4,6 +4,7 @@ import axios from "../../api/axios"
 import { useState } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import useAuth from "../../hooks/useAuth"
+import useToast from "../../hooks/useToast"
 
 export default function AddExerciseModal({ onClose, getExercises }: any) {
   const [nameInput, setNameInput] = useState("")
@@ -12,6 +13,7 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
+  const { exerciseAdded } = useToast()
 
   function handleChange(e) {
     setNameInput(e.target.value)
@@ -34,9 +36,9 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
 
     try {
       await axiosPrivate.post(USER_EXERCISES_URL, exerciseData)
-      alert("New exercise added!")
       onClose()
       getExercises()
+      exerciseAdded()
     } catch (error) {
       return console.log("error")
     }

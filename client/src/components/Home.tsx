@@ -3,7 +3,7 @@ import Title from "./layout/Title"
 import { Button } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
 import WorkoutModal from "./workout/WorkoutModal"
-import { useState, useContext, useEffect } from "react"
+import { useState, useEffect } from "react"
 import WorkoutStatusContext from "../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../context/WorkoutTimerProvider"
@@ -12,6 +12,10 @@ import CreateEditTemplateModal from "./home/templates/CreateEditTemplateModal"
 import useAuth from "../hooks/useAuth"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import ConfirmDeleteTemplateModal from "./home/templates/ConfirmDeleteTemplateModal"
+import useWorkoutStatus from "../hooks/useWorkoutStatus"
+import useWorkoutData from "../hooks/useWorkoutData"
+import useWorkoutTimer from "../hooks/useWorkoutTimer"
+import useToast from "../hooks/useToast"
 
 function formatDate(inputDate) {
   const date = new Date(inputDate)
@@ -42,7 +46,7 @@ function formatDate(inputDate) {
 
 export default function Home() {
   const { workoutIsInProgress, setWorkoutIsInProgress } =
-    useContext(WorkoutStatusContext)
+    useWorkoutStatus()
   const {
     workoutData,
     setWorkoutData,
@@ -50,14 +54,15 @@ export default function Home() {
     handleEditWorkoutName,
     addExercise,
     resetWorkout,
-  } = useContext(WorkoutDataContext)
-  const { reset, start, pause } = useContext(WorkoutTimerContext)
+  } = useWorkoutData()
+  const { reset, start, pause } = useWorkoutTimer()
   const [showCreateTemplateModal, setShowCreateTemplateModal] = useState(false)
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
   const [userTemplates, setUserTemplates] = useState([])
   const TEMPLATES_URL = `/api/users/${auth.userId}/templates`
   const [isLoading, setIsLoading] = useState(false)
+  const { workoutAdded } = useToast()
 
   const getUserTemplates = async () => {
     setIsLoading(true)
@@ -131,7 +136,7 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[100px] z-[0] mx-auto max-w-[1200px] px-6">
+      <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-6">
         <div className="text-3xl font-light mt-8">Quick start</div>
         {/* <button onClick={() => console.log(workoutIsInProgress)}>
           console log workoutIsInProgress

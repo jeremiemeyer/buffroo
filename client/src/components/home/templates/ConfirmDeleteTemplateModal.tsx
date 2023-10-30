@@ -1,16 +1,19 @@
 //@ts-nocheck
 import { Button, Input } from "@chakra-ui/react"
-import { useState, useContext } from "react"
+import { useState } from "react"
+import useToast from "../../../hooks/useToast"
 
 export default function ConfirmDeleteTemplateModal({
   onClose,
   onConfirmDeleteTemplate,
   getUserTemplates
 }) {
+  const { templateDeleted } = useToast()
   function onConfirmDelete() {
     onConfirmDeleteTemplate()
     onClose()
     getUserTemplates()
+    templateDeleted()
     // alert("Template deleted!")
   }
   return (

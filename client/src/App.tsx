@@ -1,5 +1,4 @@
 import "./App.css"
-import Layout from "./components/Layout.tsx"
 import Home from "./components/Home.tsx"
 import Register from "./components/Register.tsx"
 import Login from "./components/Login.tsx"
@@ -12,6 +11,7 @@ import RequireAuth from "./components/RequireAuth.tsx"
 import PersistLogin from "./components/PersistLogin.tsx"
 import { Routes, Route } from "react-router-dom"
 import LoginRegister from "./components/LoginRegister.tsx"
+import { AppLayout } from "./components/AppLayout.tsx"
 
 const ROLES = {
   User: 2001,
@@ -22,16 +22,16 @@ const ROLES = {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        {/* public routes */}
-        <Route path="login" element={<LoginRegister children={<Login />} />} />
-        <Route
-          path="register"
-          element={<LoginRegister children={<Register />} />}
-        />
-        <Route path="unauthorized" element={<Unauthorized />} />
+      {/* public routes */}
+      <Route path="login" element={<LoginRegister children={<Login />} />} />
+      <Route
+        path="register"
+        element={<LoginRegister children={<Register />} />}
+      />
+      <Route path="unauthorized" element={<Unauthorized />} />
 
-        {/* protected routes */}
+      {/* protected routes */}
+      <Route element={<AppLayout />}>
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/" element={<Home />} />
@@ -40,10 +40,10 @@ function App() {
             <Route path="/exercises" element={<Exercises />} />
           </Route>
         </Route>
-
-        {/* not found */}
-        <Route path="*" element={<NotFound />} />
       </Route>
+
+      {/* not found */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

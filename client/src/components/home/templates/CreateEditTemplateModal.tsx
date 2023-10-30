@@ -17,6 +17,7 @@ import ExerciseInTemplate from "./ExerciseInTemplate"
 import AddExerciseToWorkoutModal from "../../workout/AddExerciseToWorkoutModal"
 import ConfirmDiscardTemplateModal from "./ConfirmDiscardTemplateModal"
 import ConfirmCancelEditTemplateModal from "./ConfirmCancelEditTemplateModal"
+import useToast from "../../../hooks/useToast"
 
 export default function CreateEditTemplateModal({
   actionType,
@@ -36,6 +37,7 @@ export default function CreateEditTemplateModal({
     exercises: [],
   })
   const axiosPrivate = useAxiosPrivate()
+  const { templateAdded } = useToast()
 
   const TEMPLATES_URL = `/api/users/${auth.userId}/templates`
   const TEMPLATE_URL = `/api/users/${auth.userId}/templates/${templateId}`
@@ -74,9 +76,10 @@ export default function CreateEditTemplateModal({
 
       try {
         await axiosPrivate.post(TEMPLATES_URL, dataToSend)
-        alert("New template added!")
+        // alert("New template added!")
         getUserTemplates()
         onClose()
+        templateAdded()
       } catch (error) {
         return console.log("error")
       }

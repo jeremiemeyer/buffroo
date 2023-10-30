@@ -18,6 +18,7 @@ import useAuth from "../hooks/useAuth"
 import { Link } from "react-router-dom"
 import { createPortal } from "react-dom"
 import EditWorkoutModal from "./history/EditWorkoutModal"
+import useToast from "../hooks/useToast"
 
 export default function History() {
   const [historyData, setHistoryData] = useState([])
@@ -26,6 +27,7 @@ export default function History() {
   const { auth } = useAuth()
   const [selectedWorkoutId, setSelectedWorkoutId] = useState("")
   const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false)
+  const { workoutDeleted } = useToast()
 
   const HISTORY_URL = `/api/users/${auth.userId}/sessions`
 
@@ -71,6 +73,7 @@ export default function History() {
       if (response.status === 200) {
         // Call the callback function to update the workout history
         updateWorkoutHistory()
+        workoutDeleted()
       }
     } catch (error) {
       console.error("Error deleting session:", error)
@@ -94,7 +97,7 @@ export default function History() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[80px] z-[0] mx-auto max-w-[1200px] px-6">
+      <div className="pt-[80px] pb-[80px] z-[0] mx-auto w-full px-6">
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <Box key={index}>

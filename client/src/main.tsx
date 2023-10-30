@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { WorkoutStatusProvider } from "./context/WorkoutStatusProvider.tsx"
 import { WorkoutDataProvider } from "./context/WorkoutDataProvider.tsx"
 import { WorkoutTimerProvider } from "./context/WorkoutTimerProvider.tsx"
+import { ToastProvider } from "./context/ToastProvider.tsx"
 
 const colors = {
   brand: {
@@ -20,7 +21,7 @@ const colors = {
 
 const zIndices = {
   hide: -1,
-  auto: 'auto',
+  auto: "auto",
   base: 0,
   docked: 10,
   dropdown: 1000,
@@ -43,9 +44,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <WorkoutStatusProvider>
           <WorkoutDataProvider>
             <WorkoutTimerProvider>
-              <ChakraProvider theme={theme}>
-                <App />
-              </ChakraProvider>
+              <ToastProvider>
+                <ChakraProvider theme={theme}>
+                  <App />
+                </ChakraProvider>
+              </ToastProvider>
             </WorkoutTimerProvider>
           </WorkoutDataProvider>
         </WorkoutStatusProvider>

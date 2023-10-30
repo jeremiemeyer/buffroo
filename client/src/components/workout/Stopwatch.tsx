@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { useStopwatch } from "react-timer-hook"
-import { useContext } from "react"
 import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
+import useWorkoutTimer from "../../hooks/useWorkoutTimer"
 
 function makeMeTwoDigits(n) {
   return (n < 10 ? "0" : "") + n
@@ -18,7 +18,7 @@ export default function Stopwatch() {
     start,
     pause,
     reset,
-  } = useContext(WorkoutTimerContext)
+  } = useWorkoutTimer()
 
   return (
     <div style={{ textAlign: "center" }}>

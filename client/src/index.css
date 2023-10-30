@@ -55,10 +55,10 @@ button {
     font-size: 0.75rem;
     border-radius: 0.5rem;
     background: #000;
+    opacity:0.8;
     color: #fff;
-    padding: 0.25rem;
+    padding: 0.75rem;
     position: relative;
-    bottom: -10px;
 }
 
 .instructions > svg {

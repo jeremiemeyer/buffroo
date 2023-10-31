@@ -1,8 +1,8 @@
 //@ts-nocheck
-import axios from "../../api/axios"
+import axios from "@/api/axios"
 import { useState, useEffect } from "react"
 import { SearchIcon } from "@chakra-ui/icons"
-import ExerciseCard from "../exercises/ExerciseCard"
+import ExerciseCard from "@/components/exercises/ExerciseCard"
 import { Button } from "@/components/ui/button"
 import {
   Input,
@@ -13,15 +13,13 @@ import {
   SkeletonText,
   Box,
 } from "@chakra-ui/react"
-import useAuth from "../../hooks/useAuth"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import useAuth from "@/hooks/useAuth"
+import useAxiosPrivate from "@/hooks/useAxiosPrivate"
 import { useLocation, useNavigate } from "react-router-dom"
-import WorkoutExercisesListExerciseCard from "./WorkoutExercisesListExerciseCard"
+import TemplateExercisesListExerciseCard from "./TemplateExercisesListExerciseCard"
+import useTemplateData from "@/hooks/useTemplateData"
 
-export default function AddExerciseToWorkoutModal({
-  onClose,
-  addExercise,
-}: any) {
+export default function AddExerciseToTemplateModal({onClose}) {
   const [isLoading, setIsLoading] = useState(true)
   const [exerciseData, setExerciseData] = useState([])
   const [searchInput, setSearchInput] = useState("")
@@ -33,6 +31,14 @@ export default function AddExerciseToWorkoutModal({
   const location = useLocation()
   const DEFAULT_EXERCISES_URL = "/api/exercises"
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
+  const {
+    templateData,
+    setTemplateData,
+    handleEditTemplateNotes,
+    handleEditTemplateName,
+    addExercise,
+    resetTemplate,
+  } = useTemplateData()
 
   const getExercises = async () => {
     setIsLoading(true)
@@ -72,7 +78,6 @@ export default function AddExerciseToWorkoutModal({
     if (selectedExercise.length === 0) {
       return
     }
-    // Ici on passe l'Id de l'exercice selectionné au parent component, càd WorkoutModal (ou EditWorkoutModal)
     addExercise(selectedExercise)
     onClose()
   }
@@ -126,7 +131,7 @@ export default function AddExerciseToWorkoutModal({
             ) : (
               <>
                 {filteredExercises.map((exercise, index) => (
-                  <WorkoutExercisesListExerciseCard
+                  <TemplateExercisesListExerciseCard
                     onClick={() => handleSelectExercise(exercise)}
                     key={index}
                     exercise={exercise}

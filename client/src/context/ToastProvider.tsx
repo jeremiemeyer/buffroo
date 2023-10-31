@@ -8,6 +8,22 @@ export const ToastProvider = ({ children }) => {
   const workoutAdded = () => toast.success("Workout added!")
   const exerciseAdded = () => toast.success("Exercise added!")
   const templateAdded = () => toast.success("Template added!")
+  const preferencesSaved = () => toast.success("Preferences saved!")
+  const exerciseUpdated = () => toast.success("Exercise updated!")
+  const workoutUpdated = () => toast.success("Workout updated!")
+  const templateUpdated = () => toast.success("Template updated!")
+
+  const noEditDefaultExercises = () =>
+    toast.error("You can't edit default exercises.")
+  const workoutAlreadyInProgress = () =>
+    toast.error("A workout is already in progress!")
+  const cannotLogOutWorkoutInProgress = () =>
+    toast.error("A workout is in progress. You cannot logout now!")
+  const cannotSubmitEmptyTemplate = () =>
+    toast.error("You cannot submit an empty template!")
+  const cannotSubmitEmptyWorkout = () =>
+    toast.error("You cannot submit an empty workout!")
+
   const workoutDeleted = () => toast("Workout deleted!")
   const templateDeleted = () => toast("Template deleted!")
 
@@ -17,7 +33,22 @@ export const ToastProvider = ({ children }) => {
 
   return (
     <ToastContext.Provider
-      value={{ workoutAdded, exerciseAdded, templateAdded, templateDeleted, workoutDeleted }}
+      value={{
+        workoutAdded,
+        exerciseAdded,
+        templateAdded,
+        preferencesSaved,
+        exerciseUpdated,
+        workoutUpdated,
+        templateUpdated,
+        noEditDefaultExercises,
+        workoutAlreadyInProgress,
+        cannotLogOutWorkoutInProgress,
+        cannotSubmitEmptyTemplate,
+        cannotSubmitEmptyWorkout,
+        workoutDeleted,
+        templateDeleted,
+      }}
     >
       {children}
     </ToastContext.Provider>

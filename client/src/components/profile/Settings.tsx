@@ -1,5 +1,6 @@
 //@ts-nocheck
-import { Button, Select } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
+import { Select } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 
 export default function Settings({
@@ -54,14 +55,7 @@ export default function Settings({
             </div>
           </div>
 
-          <Button
-            colorScheme="blue"
-            borderRadius="16px"
-            onClick={saveUserPreferences}
-            fontWeight={"400"}
-          >
-            Save preferences
-          </Button>
+          <Button onClick={saveUserPreferences}>Save preferences</Button>
           {/* <button onClick={() => console.log(userPreferences)}>Console log userPreferences</button> */}
         </div>
       </div>

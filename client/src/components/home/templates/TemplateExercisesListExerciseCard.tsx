@@ -1,12 +1,12 @@
 //@ts-nocheck
-import useWorkoutData from "@/hooks/useWorkoutData"
+import useTemplateData from "@/hooks/useTemplateData"
 
-export default function WorkoutExercisesListExerciseCard({
+export default function TemplateExercisesListExerciseCard({
   onClick,
   isSelected,
   exercise,
 }) {
-  const { addExercise } = useWorkoutData()
+  const { addExercise } = useTemplateData()
 
   // formats category and bodypart fields correctly for the frontend
   function formatString(category) {

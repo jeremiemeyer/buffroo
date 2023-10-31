@@ -1,12 +1,13 @@
 //@ts-nocheck
-import { Button, Input } from "@chakra-ui/react"
+import { Input } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import useToast from "../../../hooks/useToast"
 
 export default function ConfirmDeleteTemplateModal({
   onClose,
   onConfirmDeleteTemplate,
-  getUserTemplates
+  getUserTemplates,
 }) {
   const { templateDeleted } = useToast()
   function onConfirmDelete() {
@@ -14,7 +15,6 @@ export default function ConfirmDeleteTemplateModal({
     onClose()
     getUserTemplates()
     templateDeleted()
-    // alert("Template deleted!")
   }
   return (
     <div
@@ -32,22 +32,10 @@ export default function ConfirmDeleteTemplateModal({
             undone.
           </p>
           <div className="grid grid-rows-2 gap-2">
-            <Button
-              onClick={onConfirmDelete}
-              colorScheme="red"
-              borderRadius="16px"
-              fontWeight={"400"}
-            >
+            <Button onClick={onConfirmDelete} variant="destructive">
               Delete template
             </Button>
-            <Button
-              onClick={onClose}
-              colorScheme="blue"
-              borderRadius="16px"
-              fontWeight={"400"}
-            >
-              Cancel
-            </Button>
+            <Button onClick={onClose}>Cancel</Button>
           </div>
         </div>
       </div>

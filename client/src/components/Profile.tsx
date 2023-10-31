@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { Button } from "@chakra-ui/react"
+import { Button } from "./ui/button"
 import Title from "./layout/Title"
 import { useNavigate, Link } from "react-router-dom"
 import useLogout from "../hooks/useLogout"
@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import Settings from "./profile/Settings"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import useWorkoutStatus from "../hooks/useWorkoutStatus"
+import useToast from "@/hooks/useToast"
 
 export default function Profile() {
   const navigate = useNavigate()
@@ -19,6 +20,7 @@ export default function Profile() {
   const USER_DATA_URL = `/api/users/${auth.userId}`
   const [userPreferences, setUserPreferences] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const { cannotLogOutWorkoutInProgress, preferencesSaved } = useToast()
 
   const getUserPreferences = async () => {
     try {
@@ -33,9 +35,11 @@ export default function Profile() {
 
   const saveUserPreferences = async () => {
     try {
-      const response = await axiosPrivate.patch(USER_DATA_URL, {userPreferences: userPreferences})
+      const response = await axiosPrivate.patch(USER_DATA_URL, {
+        userPreferences: userPreferences,
+      })
       const updatedUser = response.data
-      alert('Preferences saved!')
+      preferencesSaved()
     } catch (error) {
       console.error("Error updating user:", error)
     }
@@ -46,11 +50,9 @@ export default function Profile() {
     getUserPreferences()
   }, [])
 
-
-
   const signOut = async () => {
     workoutIsInProgress
-      ? alert("A workout is in progress. You cannot logout now!")
+      ? cannotLogOutWorkoutInProgress()
       : await logout()
   }
 
@@ -68,13 +70,18 @@ export default function Profile() {
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
 
-          { !isLoading && <Settings userPreferences={userPreferences} setUserPreferences={setUserPreferences} saveUserPreferences={saveUserPreferences}/> }
+          {!isLoading && (
+            <Settings
+              userPreferences={userPreferences}
+              setUserPreferences={setUserPreferences}
+              saveUserPreferences={saveUserPreferences}
+            />
+          )}
 
-          <Button onClick={signOut} colorScheme="red" fontWeight={"400"} borderRadius="16px">
+          <Button variant="destructive" onClick={signOut}>
             Sign out
           </Button>
           {/* <button onClick={() => console.log(userPreferences)}>Console log userPreferences</button> */}
-
         </div>
       </div>
     </>

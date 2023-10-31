@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { Button, Input } from "@chakra-ui/react"
+import { Input } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../context/WorkoutDataProvider"
@@ -23,20 +24,8 @@ export default function ConfirmDeleteSessionModal({ deleteSession, onClose }) {
               This action cannot be undone.
             </p>
             <div className="grid grid-rows-2 gap-2">
-              <Button
-                onClick={onClose}
-                colorScheme="blue"
-                borderRadius="16px"
-                fontWeight={"400"}
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={deleteSession}
-                colorScheme="red"
-                borderRadius="16px"
-                fontWeight={"400"}
-              >
+              <Button onClick={onClose}>Cancel</Button>
+              <Button onClick={deleteSession} variant="destructive">
                 Delete
               </Button>
             </div>

@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { useState } from "react"
 import {
-  Button,
   Input,
   Menu,
   MenuButton,
@@ -10,6 +9,7 @@ import {
   MenuItem,
   Icon,
 } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import {
   HamburgerIcon,
   AddIcon,
@@ -24,13 +24,13 @@ import { FaEllipsisH } from "react-icons/fa"
 
 
 export default function ExerciseInTemplate({
-  name,
+  exercise,
   templateData,
   setTemplateData,
 }: any) {
   // This exercise's index in templateData
   const exerciseIndex = templateData.exercises.findIndex(
-    (exercise: any) => exercise.name === name
+    (ex: any) => ex.name === exercise.name
   )
 
   const exerciseSets = templateData.exercises[exerciseIndex].sets
@@ -47,10 +47,6 @@ export default function ExerciseInTemplate({
   function handleRemoveSet(index: number) {
     const updatedData = { ...templateData }
 
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise: any) => exercise.name === name
-    )
-
     if (exerciseIndex !== -1) {
       const updatedExerciseSets = [...updatedData.exercises[exerciseIndex].sets]
       updatedExerciseSets.splice(index, 1)
@@ -61,9 +57,6 @@ export default function ExerciseInTemplate({
 
   function moveExerciseAfter() {
     const updatedData = { ...templateData }
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise: any) => exercise.name === name
-    )
 
     if (
       exerciseIndex !== -1 &&
@@ -77,11 +70,6 @@ export default function ExerciseInTemplate({
 
   function moveExerciseBefore() {
     const updatedData = { ...templateData }
-
-    // Find the index of the current exercise
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise) => exercise.name === name
-    )
 
     // Check if the current exercise is not the first exercise
     if (exerciseIndex > 0) {
@@ -145,7 +133,7 @@ export default function ExerciseInTemplate({
   return (
     <div className="pb-8 bg-gray-200 rounded-xl p-4">
       <div className="flex flex-row justify-between">
-        <p className="text-2xl">{name}</p>
+        <p className="text-2xl">{exercise.name}</p>
         <Menu variant="filled">
           <MenuButton
             as={IconButton}
@@ -233,9 +221,8 @@ export default function ExerciseInTemplate({
 
               <Button
                 onClick={() => handleRemoveSet(index)}
-                className="ml-auto h-2 w-2 hover:bg-gray-300"
-                variant="flushed"
-                fontWeight={"400"}
+                className="ml-auto h-2 w-2"
+                  fontWeight={"400"}
               >
                 <i className="fa fa-trash "></i>
               </Button>
@@ -245,11 +232,6 @@ export default function ExerciseInTemplate({
 
       <Button
         onClick={handleAddSet}
-        className="mt-4"
-        colorScheme="blue"
-        variant="outline"
-        borderRadius="16px"
-        fontWeight={"400"}
       >
         Add set
       </Button>

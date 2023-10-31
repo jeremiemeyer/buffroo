@@ -1,8 +1,8 @@
 //@ts-nocheck
 import { useState, useEffect } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import { Button } from "@/components/ui/button"
 import {
-  Button,
   Input,
   Select,
   Tab,
@@ -13,6 +13,7 @@ import {
   TabPanel,
 } from "@chakra-ui/react"
 import useAuth from "../../hooks/useAuth"
+import useToast from "@/hooks/useToast"
 
 export default function ExerciseEditModal({
   onClose,
@@ -23,6 +24,7 @@ export default function ExerciseEditModal({
   const [isLoading, setIsLoading] = useState(true)
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
+  const { exerciseUpdated } = useToast()
 
   const EXERCISE_DATA_URL = `/api/exercises/${selectedExerciseId}`
   const EXERCISE_UPDATE_URL = `/api/users/${auth.userId}/exercises/${selectedExerciseId}`
@@ -51,7 +53,7 @@ export default function ExerciseEditModal({
       console.log(updatedExercise)
       getExercises()
       onClose()
-      alert("Exercise updated!")
+      exerciseUpdated()
     } catch (error) {
       console.error("Error updating user exercise:", error)
       // navigate("/login", { state: { from: location }, replace: true })
@@ -80,15 +82,12 @@ export default function ExerciseEditModal({
         className="z-[900] relative bg-gray-100 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
       >
         <div className="flex flex-row justify-between items-center text-center">
-          <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
+          <Button onClick={onClose} variant="destructive">
             X
           </Button>
           <h1 className="text-3xl text-center px-5">{exerciseData["name"]}</h1>
           <Button
             onClick={editUserExercise}
-            colorScheme="blue"
-            borderRadius="16px"
-            fontWeight={"400"}
           >
             Save
           </Button>

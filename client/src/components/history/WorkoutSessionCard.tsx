@@ -1,6 +1,5 @@
 // @ts-nocheck
 import {
-  Button,
   Input,
   Menu,
   MenuButton,
@@ -23,6 +22,9 @@ import { FaEllipsisH } from "react-icons/fa"
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import ConfirmDeleteSessionModal from "./ConfirmDeleteSessionModal"
+import formatISODate from "@/utils/formatISODate"
+import calculateWorkoutDuration from "@/utils/calculateWorkoutDuration"
+import calculateBestSet from "@/utils/calculateBestSet"
 
 export default function WorkoutSessionCard({
   sessionData,
@@ -31,65 +33,9 @@ export default function WorkoutSessionCard({
 }) {
   const [showConfirmDeleteSessionModal, setShowConfirmDeleteSessionModal] =
     useState(false)
-  function formatISODate(isoDate) {
-    const options = {
-      weekday: "long",
-      day: "numeric",
-      month: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-    }
-
-    const formattedDate = new Date(isoDate).toLocaleString("en-US", options)
-    return formattedDate
-  }
-
-  function calculateWorkoutDuration(startISODate, endISODate) {
-    const startDate = new Date(startISODate)
-    const endDate = new Date(endISODate)
-    const durationInMilliseconds = endDate - startDate
-
-    const hours = Math.floor(durationInMilliseconds / 3600000)
-    const minutes = Math.floor((durationInMilliseconds % 3600000) / 60000)
-
-    let formattedDuration = ""
-
-    if (hours > 0) {
-      formattedDuration += `${hours}h`
-    }
-
-    if (minutes > 0 || formattedDuration === "") {
-      formattedDuration += ` ${minutes}m`
-    } else if (formattedDuration === "") {
-      formattedDuration = "0m"
-    }
-
-    return formattedDuration.trim()
-  }
 
   function deleteSession() {
     deleteWorkoutSession(sessionData._id)
-  }
-
-  function getBestSet(exerciseSets) {
-    if (!Array.isArray(exerciseSets) || exerciseSets.length === 0) {
-      return "No data available"; // Return this message if exerciseSets is not an array or is empty
-    }
-  
-    let bestSet = exerciseSets[0]; // Initialize bestSet with the first set
-    let maxProduct = bestSet.reps * bestSet.weight;
-  
-    for (let i = 1; i < exerciseSets.length; i++) {
-      const currentSet = exerciseSets[i];
-      const product = currentSet.reps * currentSet.weight;
-  
-      if (product > maxProduct) {
-        bestSet = currentSet;
-        maxProduct = product;
-      }
-    }
-  
-    return `${bestSet.reps} x ${bestSet.weight} kg`;
   }
 
   return (
@@ -99,7 +45,9 @@ export default function WorkoutSessionCard({
       >
         <div className="p-6">
           <div className="flex flex-row justify-between items-center">
-            <span className="font-light text-2xl pb-2">{sessionData?.name}</span>
+            <span className="font-light text-2xl pb-2">
+              {sessionData?.name}
+            </span>
             <Menu variant="filled">
               <MenuButton
                 as={IconButton}
@@ -117,7 +65,10 @@ export default function WorkoutSessionCard({
                   Edit session
                 </MenuItem>
 
-                <MenuItem onClick={() => setShowConfirmDeleteSessionModal(true)} icon={<DeleteIcon />}>
+                <MenuItem
+                  onClick={() => setShowConfirmDeleteSessionModal(true)}
+                  icon={<DeleteIcon />}
+                >
                   Delete from history
                 </MenuItem>
               </MenuList>
@@ -135,27 +86,33 @@ export default function WorkoutSessionCard({
           )}
           {sessionData?.notes !== "" && (
             <p>
-              <i className="fa fa-pen mr-4" /> <span className="font-light italic">“{sessionData?.notes}”</span>
+              <i className="fa fa-pen mr-4" />{" "}
+              <span className="font-light italic">“{sessionData?.notes}”</span>
             </p>
           )}
 
           <div className="grid grid-cols-2 pt-4">
-            <div className="text-gray-500" >Exercise</div>
-            <div className="text-gray-500" >Best set</div>
+            <div className="text-gray-500">Exercise</div>
+            <div className="text-gray-500">Best set</div>
           </div>
           {sessionData?.exercises.map((exercise, key) => (
             <div className="grid grid-cols-2" key={key}>
               <div>
                 {exercise.sets.length} x {exercise.name}
               </div>
-              <div>
-                {getBestSet(exercise.sets)}
-              </div>
+              <div>{calculateBestSet(exercise.sets)}</div>
             </div>
           ))}
         </div>
       </div>
-      { showConfirmDeleteSessionModal && createPortal(<ConfirmDeleteSessionModal deleteSession={deleteSession} onClose={() => setShowConfirmDeleteSessionModal(false)}/>, document.body)}
+      {showConfirmDeleteSessionModal &&
+        createPortal(
+          <ConfirmDeleteSessionModal
+            deleteSession={deleteSession}
+            onClose={() => setShowConfirmDeleteSessionModal(false)}
+          />,
+          document.body
+        )}
     </>
   )
 }

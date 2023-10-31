@@ -2,7 +2,6 @@
 import { useRef, useState, useEffect } from "react"
 import useAuth from "../hooks/useAuth"
 import {
-  Button,
   Input,
   Stack,
   InputGroup,
@@ -10,6 +9,7 @@ import {
   InputRightElement,
   Checkbox,
 } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import {
   PhoneIcon,
   CheckIcon,
@@ -160,16 +160,8 @@ const Login = () => {
               />
             </InputGroup>
           </Stack>
-          <div className="flex flex-col">
-            <Button
-              mt={4}
-              colorScheme="blue"
-              type="submit"
-              borderRadius={"16px"}
-              fontWeight={"400"}
-            >
-              Sign In
-            </Button>
+          <div className="flex flex-col mt-4">
+            <Button>Sign In</Button>
 
             <Checkbox
               onChange={toggleCheck}

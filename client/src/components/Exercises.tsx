@@ -4,7 +4,6 @@ import Title from "./layout/Title"
 import { useState, useEffect, useRef } from "react"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import {
-  Button,
   Input,
   InputGroup,
   InputLeftElement,
@@ -20,6 +19,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import ExerciseStatsModal from "./exercises/ExerciseStatsModal"
 import ExerciseEditModal from "./exercises/ExerciseEditModal"
+import { Button } from "@/components/ui/button"
 
 export default function Exercises() {
   const [isLoading, setIsLoading] = useState(true)
@@ -113,14 +113,12 @@ export default function Exercises() {
       <div className="fixed top-0 left-0 w-full pb-4 items-center bg-glassmorphism2 z-[10]">
         <div className="flex px-6 justify-between flex-row items-center">
           <Title>Exercises</Title>
-          <Button
+          <Button 
             onClick={() => setShowNewExerciseModal(true)}
-            colorScheme="blue"
-            borderRadius="16px"
-            fontWeight={"400"}
           >
             Add New
           </Button>
+
         </div>
 
         <div className="flex flex-col">

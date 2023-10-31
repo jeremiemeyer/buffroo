@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import {
-  Button,
   Input,
   Select,
   Tab,
@@ -12,6 +11,7 @@ import {
   TabPanels,
   TabPanel,
 } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
 import EditExerciseModal from "./ExerciseEditModal"
 
@@ -54,7 +54,7 @@ export default function ExerciseStatsModal({ onClose, selectedExerciseId }) {
             <h1 className="text-3xl text-center px-5">
               {exerciseData["name"]}
             </h1>
-            <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
+            <Button onClick={onClose} variant="destructive">
               X
             </Button>
           </div>

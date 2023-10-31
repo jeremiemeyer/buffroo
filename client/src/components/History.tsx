@@ -3,7 +3,6 @@ import WorkoutSessionCard from "./history/WorkoutSessionCard"
 import Title from "./layout/Title"
 import { useState, useEffect } from "react"
 import {
-  Button,
   Input,
   InputGroup,
   InputLeftElement,
@@ -19,15 +18,16 @@ import { Link } from "react-router-dom"
 import { createPortal } from "react-dom"
 import EditWorkoutModal from "./history/EditWorkoutModal"
 import useToast from "../hooks/useToast"
+import { Button } from "@/components/ui/button"
 
 export default function History() {
   const [historyData, setHistoryData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const axiosPrivate = useAxiosPrivate()
-  const { auth } = useAuth()
   const [selectedWorkoutId, setSelectedWorkoutId] = useState("")
   const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false)
   const { workoutDeleted } = useToast()
+  const { auth } = useAuth()
 
   const HISTORY_URL = `/api/users/${auth.userId}/sessions`
 

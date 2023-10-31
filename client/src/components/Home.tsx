@@ -1,6 +1,6 @@
 //@ts-nocheck
 import Title from "./layout/Title"
-import { Button } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
 import WorkoutModal from "./workout/WorkoutModal"
 import { useState, useEffect } from "react"
@@ -16,37 +16,11 @@ import useWorkoutStatus from "../hooks/useWorkoutStatus"
 import useWorkoutData from "../hooks/useWorkoutData"
 import useWorkoutTimer from "../hooks/useWorkoutTimer"
 import useToast from "../hooks/useToast"
+import formatDate from "@/utils/formatDate"
 
-function formatDate(inputDate) {
-  const date = new Date(inputDate)
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ]
-  const dayOfWeek = days[date.getDay()]
-  const hour = date.getHours()
-  let timeOfDay
-  if (hour >= 5 && hour < 12) {
-    timeOfDay = "Morning"
-  } else if (hour >= 12 && hour < 17) {
-    timeOfDay = "Afternoon"
-  } else if (hour >= 17 && hour < 20) {
-    timeOfDay = "Evening"
-  } else {
-    timeOfDay = "Night"
-  }
-  const formattedDate = `${dayOfWeek} ${timeOfDay}`
-  return formattedDate
-}
 
 export default function Home() {
-  const { workoutIsInProgress, setWorkoutIsInProgress } =
-    useWorkoutStatus()
+  const { workoutIsInProgress, setWorkoutIsInProgress } = useWorkoutStatus()
   const {
     workoutData,
     setWorkoutData,
@@ -62,7 +36,7 @@ export default function Home() {
   const [userTemplates, setUserTemplates] = useState([])
   const TEMPLATES_URL = `/api/users/${auth.userId}/templates`
   const [isLoading, setIsLoading] = useState(false)
-  const { workoutAdded } = useToast()
+  const { workoutAdded, workoutAlreadyInProgress } = useToast()
 
   const getUserTemplates = async () => {
     setIsLoading(true)
@@ -81,7 +55,7 @@ export default function Home() {
   // start empty workout
   function handleClick() {
     if (workoutIsInProgress) {
-      alert("A workout is already in progress!")
+      workoutAlreadyInProgress()
     } else {
       setWorkoutIsInProgress(true)
       start() // stopwatch start
@@ -98,7 +72,7 @@ export default function Home() {
 
   function startWorkoutFromTemplate(templateData) {
     if (workoutIsInProgress) {
-      alert("A workout is already in progress!")
+      workoutAlreadyInProgress()
     } else {
       setWorkoutIsInProgress(true)
       start() // stopwatch start
@@ -136,32 +110,19 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-6">
+      <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-6  space-y-4">
         <div className="text-3xl font-light mt-8">Quick start</div>
         {/* <button onClick={() => console.log(workoutIsInProgress)}>
           console log workoutIsInProgress
         </button> */}
 
-        <Button
-          onClick={handleClick}
-          colorScheme="blue"
-          className="mt-4"
-          borderRadius="16px"
-          fontWeight={"400"}
-        >
-          Start an empty workout
-        </Button>
+        <Button onClick={handleClick}>Start an empty workout</Button>
 
-        <div className="text-3xl font-light mt-12 mb-4">
+        <div className="pt-12 text-3xl font-light mt-12 mb-4">
           Start from template
         </div>
         <div className="space-y-5">
-          <Button
-            borderRadius={"16px"}
-            variant="outline"
-            colorScheme="blue"
-            onClick={() => setShowCreateTemplateModal(true)}
-          >
+          <Button onClick={() => setShowCreateTemplateModal(true)}>
             Create new...
           </Button>
 
@@ -169,18 +130,20 @@ export default function Home() {
             Console log user templates
           </button> */}
           <div className="space-y-2">
-            {userTemplates && userTemplates.length > 0 && userTemplates.map((template, index) => (
-              <TemplateCard
-                key={index}
-                templateData={userTemplates[index]}
-                setShowConfirmDeleteTemplate={() =>
-                  setShowConfirmDeleteTemplate(true)
-                }
-                deleteTemplate={deleteTemplate}
-                getUserTemplates={getUserTemplates}
-                startWorkoutFromTemplate={startWorkoutFromTemplate}
-              />
-            ))}
+            {userTemplates &&
+              userTemplates.length > 0 &&
+              userTemplates.map((template, index) => (
+                <TemplateCard
+                  key={index}
+                  templateData={userTemplates[index]}
+                  setShowConfirmDeleteTemplate={() =>
+                    setShowConfirmDeleteTemplate(true)
+                  }
+                  deleteTemplate={deleteTemplate}
+                  getUserTemplates={getUserTemplates}
+                  startWorkoutFromTemplate={startWorkoutFromTemplate}
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -193,7 +156,6 @@ export default function Home() {
           />,
           document.body
         )}
-        
     </>
   )
 }

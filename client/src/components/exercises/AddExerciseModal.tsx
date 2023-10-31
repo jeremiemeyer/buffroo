@@ -1,5 +1,6 @@
 //@ts-nocheck
-import { Button, Input, Select } from "@chakra-ui/react"
+import { Input, Select } from "@chakra-ui/react"
+import { Button } from "@/components//ui/button"
 import axios from "../../api/axios"
 import { useState } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
@@ -54,18 +55,11 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
         className="z-[900] relative bg-gray-100 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4 xl:max-w-[1200px]"
       >
         <div className="flex flex-row justify-between items-center text-center">
-          <Button onClick={onClose} colorScheme="red" fontWeight={"400"}>
+          <Button onClick={onClose} variant="destructive">
             X
           </Button>
           <h1 className="text-2xl text-center">Create New Exercise</h1>
-          <Button
-            onClick={handleSave}
-            colorScheme="blue"
-            borderRadius="16px"
-            fontWeight={"400"}
-          >
-            Save
-          </Button>
+          <Button onClick={handleSave}>Save</Button>
         </div>
 
         <div className="space-y-2 mt-4">

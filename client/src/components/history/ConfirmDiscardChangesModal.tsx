@@ -1,11 +1,13 @@
 // @ts-nocheck
-import { Button, Input } from "@chakra-ui/react"
+import { Input } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
 import useWorkoutStatus from "../../hooks/useWorkoutStatus"
 import useWorkoutTimer from "../../hooks/useWorkoutTimer"
+import useWorkoutData from "@/hooks/useWorkoutData"
 
 export default function ConfirmDiscardChangesModal({
   onClose,
@@ -34,17 +36,12 @@ export default function ConfirmDiscardChangesModal({
             <div className="grid grid-rows-2 gap-2">
               <Button
                 onClick={onClose}
-                colorScheme="blue"
-                borderRadius="16px"
-                fontWeight={"400"}
               >
                 Back to edit
               </Button>
               <Button
                 onClick={onCancelEditWorkout}
-                colorScheme="red"
-                borderRadius="16px"
-                fontWeight={"400"}
+                variant="destructive"
               >
                 Discard changes
               </Button>

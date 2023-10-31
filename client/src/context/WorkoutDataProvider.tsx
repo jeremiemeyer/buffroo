@@ -9,7 +9,7 @@ export const WorkoutDataProvider = ({ children }) => {
   const { auth } = useAuth()
   const [timer, setTimer] = useState({})
   const [workoutData, setWorkoutData] = useState({
-    name: "", // function that gets date and put "sunday morning workout" here
+    name: "",
     startdate: "",
     enddate: "",
     exercises: [],
@@ -28,16 +28,19 @@ export const WorkoutDataProvider = ({ children }) => {
 
   function handleEditWorkoutNotes(e) {
     const newNotes = e.target.value
-    setWorkoutData({...workoutData, notes: newNotes})
+    setWorkoutData({ ...workoutData, notes: newNotes })
   }
 
   function handleEditWorkoutName(e) {
     const newName = e.target.value
-    setWorkoutData({...workoutData, name: newName})
+    setWorkoutData({ ...workoutData, name: newName })
   }
 
-  function addExercise(exercisename) {
-    const exerciseToBeAdded = { name: exercisename, sets: [{ reps: "", weight: "", rpe: "" }] }
+  function addExercise(exercise) {
+    const exerciseToBeAdded = {
+      name: exercise.name,
+      sets: [{ reps: "", weight: "", rpe: "" }],
+    }
     const updatedExercises = [...workoutData.exercises, exerciseToBeAdded]
     setWorkoutData({ ...workoutData, exercises: updatedExercises })
   }

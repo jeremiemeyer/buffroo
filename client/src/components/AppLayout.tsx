@@ -5,7 +5,7 @@ import useWorkoutStatus from "../hooks/useWorkoutStatus"
 import useWorkoutData from "../hooks/useWorkoutData"
 import useWorkoutTimer from "../hooks/useWorkoutTimer"
 import { useEffect, useState } from "react"
-import Navbar from "./layout/Navbar/Navbar"
+import Navbar from "@/components/layout/Navbar/Navbar"
 import { createPortal } from "react-dom"
 import {
   Menu,

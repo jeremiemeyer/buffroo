@@ -15,6 +15,7 @@ import {
   RepeatClockIcon,
 } from "@chakra-ui/icons"
 import { FaEllipsisH } from "react-icons/fa"
+import useToast from "@/hooks/useToast"
 
 export default function ExerciseCard({
   name,
@@ -28,10 +29,12 @@ export default function ExerciseCard({
   setSelectedExerciseId,
   isCustomUserExercise,
 }) {
+  const { noEditDefaultExercises } = useToast()
+
   function handleClickEditExercise() {
     isCustomUserExercise
       ? onClickExerciseEdit(selectedExerciseId)
-      : alert("You can't edit default exercises.")
+      : noEditDefaultExercises()
   }
 
   // formats category and bodypart fields correctly for the frontend
@@ -54,8 +57,7 @@ export default function ExerciseCard({
       <div className="flex-col grow">
         <p className="text-xl font-light">{name}</p>
         <p>
-          <span className="text-gray-500">Body part:</span>{" "}
-          {formatString(bodypart)}
+          <span className="text-gray-500">Body part:</span> {String(bodypart)}
         </p>
         <p>
           <span className="text-gray-500">Category:</span>{" "}

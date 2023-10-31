@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { useRef, useState, useEffect } from "react"
+import { Button } from "./ui/button"
 import {
-  Button,
   Input,
   Stack,
   InputGroup,
@@ -310,18 +310,13 @@ const Register = () => {
               Must match the first password input field.
             </p>
           </Stack>
-
-          <Button
-            mt={4}
-            isDisabled={!validName || !validPwd || !validMatch ? true : false}
-            colorScheme="blue"
-            borderRadius={"16px"}
-            fontWeight={"400"}
-            // isLoading={props.isSubmitting}
-            type="submit"
-          >
-            Sign Up
-          </Button>
+          <div className="mt-4 flex flex-col">
+            {!validName || !validPwd || !validMatch ? (
+              <Button disabled>Sign Up</Button>
+            ) : (
+              <Button>Sign Up</Button>
+            )}
+          </div>
         </form>
         <p className="pt-4">
           Already registered?

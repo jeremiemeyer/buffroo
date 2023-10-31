@@ -1,7 +1,6 @@
 //@ts-nocheck
 import { useState, useEffect } from "react"
 import {
-  Button,
   Input,
   Menu,
   MenuButton,
@@ -9,6 +8,7 @@ import {
   IconButton,
   MenuItem,
 } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import { createPortal } from "react-dom"
 import ConfirmDiscardChangesModal from "./ConfirmDiscardChangesModal"
@@ -16,6 +16,7 @@ import useAuth from "../../hooks/useAuth"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import ExerciseInWorkout from "../workout/ExerciseInWorkout"
 import AddExerciseToWorkoutModal from "../workout/AddExerciseToWorkoutModal"
+import useToast from "@/hooks/useToast"
 
 export default function EditWorkoutModal({
   onClose,
@@ -34,6 +35,7 @@ export default function EditWorkoutModal({
   const [isLoading, setIsLoading] = useState(true)
   const { auth } = useAuth()
   const SESSION_URL = `/api/users/${auth.userId}/sessions/${selectedWorkoutId}`
+  const { workoutUpdated } = useToast()
 
   function addExercise(exercisename) {
     const exerciseToBeAdded = {
@@ -73,7 +75,7 @@ export default function EditWorkoutModal({
       const updatedSessionData = response.data
       // console.log(updatedSessionData)
       getWorkoutHistory()
-      alert("Changes saved!")
+      workoutUpdated()
       onClose()
     } catch (error) {
       console.error("Error updating session:", error)
@@ -97,14 +99,7 @@ export default function EditWorkoutModal({
               value={workoutData.name}
               onChange={handleEditWorkoutName}
             />
-            <Button
-              onClick={saveSessionChanges}
-              colorScheme="blue"
-              borderRadius="16px"
-              fontWeight={"400"}
-            >
-              Save
-            </Button>
+            <Button onClick={saveSessionChanges}>Save</Button>
           </div>
 
           <div className="grow mt-6 overflow-auto">
@@ -123,10 +118,10 @@ export default function EditWorkoutModal({
               <div className="h-1/2 overflow-auto space-y-3">
                 {!isLoading &&
                   workoutData.exercises.length > 0 &&
-                  workoutData.exercises.map((exercise, key) => (
+                  workoutData.exercises.map((exercise, index) => (
                     <ExerciseInWorkout
-                      key={key}
-                      name={exercise.name}
+                      key={index}
+                      exercise={exercise}
                       workoutData={workoutData}
                       setWorkoutData={setWorkoutData}
                     />
@@ -136,19 +131,12 @@ export default function EditWorkoutModal({
           </div>
 
           <div className="mt-4 space-x-1 text-center">
-            <Button
-              onClick={() => setShowAddExerciseModal(true)}
-              colorScheme="blue"
-              borderRadius="16px"
-              fontWeight={"400"}
-            >
+            <Button onClick={() => setShowAddExerciseModal(true)}>
               Add Exercises
             </Button>
             <Button
               onClick={() => setShowConfirmDiscardChangesModal(true)}
-              colorScheme="red"
-              borderRadius="16px"
-              fontWeight={"400"}
+              variant="destructive"
             >
               Discard changes
             </Button>

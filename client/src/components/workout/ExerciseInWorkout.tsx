@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useState } from "react"
+import { Button } from "@/components/ui/button"
 import {
-  Button,
   Input,
   Menu,
   MenuButton,
@@ -23,13 +23,14 @@ import {
 import { FaEllipsisH } from "react-icons/fa"
 
 export default function ExerciseInWorkout({
-  name,
   workoutData,
   setWorkoutData,
+  exercise,
 }: any) {
+
   // This exercise's index in workoutData
   const exerciseIndex = workoutData.exercises.findIndex(
-    (exercise: any) => exercise.name === name
+    (ex: any) => ex.name === exercise.name
   )
 
   const exerciseSets = workoutData.exercises[exerciseIndex].sets
@@ -46,10 +47,6 @@ export default function ExerciseInWorkout({
   function handleRemoveSet(index: number) {
     const updatedData = { ...workoutData }
 
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise: any) => exercise.name === name
-    )
-
     if (exerciseIndex !== -1) {
       const updatedExerciseSets = [...updatedData.exercises[exerciseIndex].sets]
       updatedExerciseSets.splice(index, 1)
@@ -60,9 +57,6 @@ export default function ExerciseInWorkout({
 
   function moveExerciseAfter() {
     const updatedData = { ...workoutData }
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise: any) => exercise.name === name
-    )
 
     if (
       exerciseIndex !== -1 &&
@@ -76,11 +70,6 @@ export default function ExerciseInWorkout({
 
   function moveExerciseBefore() {
     const updatedData = { ...workoutData }
-
-    // Find the index of the current exercise
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise) => exercise.name === name
-    )
 
     // Check if the current exercise is not the first exercise
     if (exerciseIndex > 0) {
@@ -107,10 +96,6 @@ export default function ExerciseInWorkout({
 
   function handleChange({ index, event, field }: any) {
     const updatedData = { ...workoutData }
-
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise: any) => exercise.name === name
-    )
 
     if (exerciseIndex !== -1) {
       const updatedExerciseSets = [...updatedData.exercises[exerciseIndex].sets]
@@ -144,7 +129,7 @@ export default function ExerciseInWorkout({
   return (
     <div className="pb-8 bg-gray-200 rounded-xl p-4">
       <div className="flex flex-row justify-between">
-        <p className="text-2xl">{name}</p>
+        <p className="text-2xl">{exercise.name}</p>
         <Menu variant="filled">
           <MenuButton
             as={IconButton}
@@ -187,9 +172,7 @@ export default function ExerciseInWorkout({
             </MenuItem>
           </MenuList>
         </Menu>
-        {/* <button>
-          <i className="fa fa-ellipsis"></i>
-        </button> */}
+
       </div>
       <div className="space-y-2">
         <div className="grid grid-cols-5 gap-8">
@@ -232,26 +215,16 @@ export default function ExerciseInWorkout({
 
               <Button
                 onClick={() => handleRemoveSet(index)}
-                className="ml-auto h-2 w-2 hover:bg-gray-300"
-                variant="flushed"
-                fontWeight={"400"}
+                className="ml-auto h-2 w-2"
               >
                 <i className="fa fa-trash "></i>
               </Button>
             </div>
           ))}
       </div>
-
-      <Button
-        onClick={handleAddSet}
-        className="mt-4"
-        colorScheme="blue"
-        variant="outline"
-        borderRadius="16px"
-        fontWeight={"400"}
-      >
-        Add set
-      </Button>
+      
+      <Button onClick={handleAddSet}>Add set</Button>
+      {/* <button onClick={() => console.log(exercise)}>exercise</button> */}
       {/* <button onClick={() => console.log(exerciseSets)}>sets</button>
       <button onClick={() => console.log(workoutData.exercises)}>
         workoutData

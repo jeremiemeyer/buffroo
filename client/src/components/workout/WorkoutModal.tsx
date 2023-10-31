@@ -6,7 +6,6 @@ import ConfirmCancelWorkoutModal from "./ConfirmCancelWorkoutModal"
 import useAuth from "../../hooks/useAuth"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import {
-  Button,
   Input,
   Menu,
   MenuButton,
@@ -14,6 +13,7 @@ import {
   IconButton,
   MenuItem,
 } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import { useState, useEffect } from "react"
 import Stopwatch from "./Stopwatch"
@@ -49,11 +49,11 @@ export default function WorkoutModal({ onClose }: any) {
 
   const { reset, start, pause } = useWorkoutTimer()
   const notify = () => toast("Here is your toast.")
-  const { workoutAdded } = useToast()
+  const { workoutAdded, cannotSubmitEmptyWorkout } = useToast()
 
   async function saveSession() {
     if (workoutData.exercises.length === 0) {
-      return alert("You can't submit an empty workout!")
+      return cannotSubmitEmptyWorkout()
     }
 
     const dataToSend = {
@@ -106,14 +106,7 @@ export default function WorkoutModal({ onClose }: any) {
               onChange={handleEditWorkoutName}
               borderColor={"gray.300"}
             />
-            <Button
-              onClick={saveSession}
-              colorScheme="green"
-              borderRadius="16px"
-              fontWeight={"400"}
-            >
-              Finish
-            </Button>
+            <Button onClick={saveSession} variant="secondary">Finish</Button>
           </div>
 
           <div className="grow mt-6 overflow-auto">
@@ -132,10 +125,10 @@ export default function WorkoutModal({ onClose }: any) {
               {/* Liste des exos */}
               <div className="h-1/2 overflow-auto space-y-3">
                 {workoutData.exercises.length > 0 &&
-                  workoutData.exercises.map((exercise, key) => (
+                  workoutData.exercises.map((exercise, index) => (
                     <ExerciseInWorkout
-                      key={key}
-                      name={exercise.name}
+                      key={index}
+                      exercise={exercise}
                       workoutData={workoutData}
                       setWorkoutData={setWorkoutData}
                     />
@@ -145,19 +138,12 @@ export default function WorkoutModal({ onClose }: any) {
           </div>
 
           <div className="mt-4 space-x-1 text-center">
-            <Button
-              onClick={() => setShowAddExerciseModal(true)}
-              colorScheme="blue"
-              borderRadius="16px"
-              fontWeight={"400"}
-            >
+            <Button onClick={() => setShowAddExerciseModal(true)}>
               Add Exercises
             </Button>
             <Button
               onClick={() => setShowConfirmCancelWorkoutModal(true)}
-              colorScheme="red"
-              borderRadius="16px"
-              fontWeight={"400"}
+              variant={"destructive"}
             >
               Cancel workout
             </Button>

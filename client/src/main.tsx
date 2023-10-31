@@ -10,6 +10,7 @@ import { WorkoutStatusProvider } from "./context/WorkoutStatusProvider.tsx"
 import { WorkoutDataProvider } from "./context/WorkoutDataProvider.tsx"
 import { WorkoutTimerProvider } from "./context/WorkoutTimerProvider.tsx"
 import { ToastProvider } from "./context/ToastProvider.tsx"
+import { TemplateDataProvider } from "./context/TemplateDataProvider.tsx"
 
 const colors = {
   brand: {
@@ -43,13 +44,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <AuthProvider>
         <WorkoutStatusProvider>
           <WorkoutDataProvider>
-            <WorkoutTimerProvider>
-              <ToastProvider>
-                <ChakraProvider theme={theme}>
-                  <App />
-                </ChakraProvider>
-              </ToastProvider>
-            </WorkoutTimerProvider>
+            <TemplateDataProvider>
+              <WorkoutTimerProvider>
+                <ToastProvider>
+                  <ChakraProvider theme={theme}>
+                    <App />
+                  </ChakraProvider>
+                </ToastProvider>
+              </WorkoutTimerProvider>
+            </TemplateDataProvider>
           </WorkoutDataProvider>
         </WorkoutStatusProvider>
       </AuthProvider>

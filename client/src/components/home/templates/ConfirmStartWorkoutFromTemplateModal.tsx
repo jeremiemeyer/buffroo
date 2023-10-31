@@ -1,5 +1,6 @@
 //@ts-nocheck
-import { Button, Input } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@chakra-ui/react"
 import { useState } from "react"
 
 export default function ConfirmStartWorkoutFromTemplateModal({
@@ -29,17 +30,12 @@ export default function ConfirmStartWorkoutFromTemplateModal({
           <div className="grid grid-rows-2 gap-2">
             <Button
               onClick={handleClick}
-              colorScheme="blue"
-              borderRadius="16px"
-              fontWeight={"400"}
             >
               Start from template
             </Button>
             <Button
               onClick={onClose}
-              colorScheme="red"
-              borderRadius="16px"
-              fontWeight={"400"}
+              variant="destructive"
             >
               Cancel
             </Button>

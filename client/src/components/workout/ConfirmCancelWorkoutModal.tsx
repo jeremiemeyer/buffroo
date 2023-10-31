@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { Button, Input } from "@chakra-ui/react"
+import { Input } from "@chakra-ui/react"
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../context/WorkoutDataProvider"
@@ -43,17 +44,12 @@ export default function ConfirmCancelWorkoutModal({
             <div className="grid grid-rows-2 gap-2">
               <Button
                 onClick={handleCancel}
-                colorScheme="red"
-                borderRadius="16px"
-                fontWeight={"400"}
+                variant="destructive"
               >
                 Cancel workout
               </Button>
               <Button
                 onClick={onClose}
-                colorScheme="blue"
-                borderRadius="16px"
-                fontWeight={"400"}
               >
                 Resume
               </Button>

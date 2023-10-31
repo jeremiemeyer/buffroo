@@ -44,8 +44,7 @@ export default function LoginRegister({ children }) {
         init={particlesInit}
       />
       <div className="bg-black w-screen h-screen flex flex-col justify-center items-center mx-auto my-auto z-[600]">
-      <img src={logo} className="h-[200px] z-[800]" />
-        
+        <img src={logo} className="h-[200px] z-[800]" />
         {children}
       </div>
     </>

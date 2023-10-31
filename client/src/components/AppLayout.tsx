@@ -40,8 +40,10 @@ export const AppLayout = () => {
   return (
     <>
       <div className="max-w-[1200px] mx-auto">
-        <Toaster position="bottom-center" />
         <Outlet />
+      </div>
+      <div className="fixed w-full bottom-0 transform translate-y-[-80px]">
+        <Toaster position="bottom-center" />
       </div>
       <Navbar />
 

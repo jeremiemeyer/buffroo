@@ -40,7 +40,7 @@ export const AppLayout = () => {
   return (
     <>
       <div className="max-w-[1200px] mx-auto">
-        <Toaster />
+        <Toaster position="bottom-center" />
         <Outlet />
       </div>
       <Navbar />

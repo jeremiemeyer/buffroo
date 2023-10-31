@@ -17,6 +17,7 @@ import useAuth from "../../hooks/useAuth"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { useLocation, useNavigate } from "react-router-dom"
 import WorkoutExercisesListExerciseCard from "./WorkoutExercisesListExerciseCard"
+import useToast from "@/hooks/useToast"
 
 export default function AddExerciseToWorkoutModal({
   onClose,

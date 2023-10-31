@@ -7,6 +7,8 @@ const ToastContext = createContext({})
 export const ToastProvider = ({ children }) => {
   const workoutAdded = () => toast.success("Workout added!")
   const exerciseAdded = () => toast.success("Exercise added!")
+  const exerciseAddedToWorkout = () => toast.success("Exercise added!")
+  const exerciseAddedToTemplate = () => toast.success("Exercise added!")
   const templateAdded = () => toast.success("Template added!")
   const preferencesSaved = () => toast.success("Preferences saved!")
   const exerciseUpdated = () => toast.success("Exercise updated!")
@@ -36,6 +38,8 @@ export const ToastProvider = ({ children }) => {
       value={{
         workoutAdded,
         exerciseAdded,
+        exerciseAddedToWorkout,
+        exerciseAddedToTemplate,
         templateAdded,
         preferencesSaved,
         exerciseUpdated,

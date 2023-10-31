@@ -1,5 +1,6 @@
 //@ts-nocheck
 import useWorkoutData from "@/hooks/useWorkoutData"
+import useToast from "@/hooks/useToast"
 
 export default function WorkoutExercisesListExerciseCard({
   onClick,
@@ -17,6 +18,12 @@ export default function WorkoutExercisesListExerciseCard({
   }
 
   const { bodypart, category, name, _id } = exercise
+  const { exerciseAddedToWorkout } = useToast()
+
+  function handleAddExercise(exercise) {
+    addExercise(exercise)
+    exerciseAddedToWorkout()
+  }
 
   return (
     <div
@@ -40,7 +47,7 @@ export default function WorkoutExercisesListExerciseCard({
         </div>
         <div>
           <button
-            onClick={() => addExercise(exercise)}
+            onClick={() => handleAddExercise(exercise)}
             className="rounded-full bg-gray-300 hover:bg-gray-400 h-8 w-8 text-blue-700 text-2xl font-semibold"
           >
             +

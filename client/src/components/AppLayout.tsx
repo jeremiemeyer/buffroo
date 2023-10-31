@@ -42,7 +42,7 @@ export const AppLayout = () => {
       <div className="max-w-[1200px] mx-auto">
         <Outlet />
       </div>
-      <div className="fixed w-full bottom-0 transform translate-y-[-80px]">
+      <div className="fixed w-full bottom-0 transform translate-y-[-80px] z-[900]">
         <Toaster position="bottom-center" />
       </div>
       <Navbar />

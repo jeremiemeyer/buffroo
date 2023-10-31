@@ -1,3 +1,4 @@
+//@ts-nocheck
 export default function calculateBestSet(exerciseSets) {
     if (!Array.isArray(exerciseSets) || exerciseSets.length === 0) {
       return "No data available"; // Return this message if exerciseSets is not an array or is empty

@@ -42,10 +42,9 @@ const handleLogin = async (req, res) => {
     console.log(result)
 
     res.cookie("jwt", refreshToken, {
-      // httpOnly: true,  //uncomment in prod /!\
+      httpOnly: true,  //uncomment in prod /!\
       sameSite: "None",
-      secure: false,
-      // secure: true,
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     })
     res.json({ accessToken, roles, username, userId }) // not secure to store it in local storage. to be stored in app state memory

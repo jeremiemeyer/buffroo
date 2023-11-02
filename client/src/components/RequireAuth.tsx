@@ -17,8 +17,8 @@ const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useAuth()
   const location = useLocation()
 
-  const jwtcookie = getCookie("jwt")
-  alert(jwtcookie)
+  // const jwtcookie = getCookie("jwt")
+  // alert(jwtcookie)
 
   // {
   //   auth ? alert(auth) : alert("auth is undefined")

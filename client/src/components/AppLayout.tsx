@@ -56,7 +56,7 @@ export const AppLayout = () => {
         ) : (
           <div
             onClick={() => setSessionWindowIsMinimized(false)}
-            className="z-[500] fixed bottom-[55px] bg-glassmorphism cursor-pointer text-slate-900 w-full px-6 my-1 rounded-2xl"
+            className="z-[500] fixed bottom-[55px] bg-glassmorphism cursor-pointer text-slate-900 w-full px-6 justify-center mx-auto my-1 rounded-2xl"
           >
             <Menu>
               <MenuButton

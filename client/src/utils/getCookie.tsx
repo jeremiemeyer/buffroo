@@ -1,13 +1,6 @@
 //@ts-nocheck
 
 export default function getCookie(cookieName) {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith(cookieName + '=')) {
-        const value = cookie.substring(cookieName.length + 1);
-        return decodeURIComponent(value);
-      }
-    }
-    return null; // Cookie not found
+    const cookie = document.cookie.split('; ').filter(row => row.startsWith('jwt=')).map(c=>c.split('=')[1])[0]
+    return cookie
 }

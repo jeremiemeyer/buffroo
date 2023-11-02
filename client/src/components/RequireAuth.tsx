@@ -17,18 +17,25 @@ const RequireAuth = ({ allowedRoles }) => {
   const location = useLocation()
 
   if (auth) {
-    alert(auth.roles[0])
+    {
+      auth ? alert(auth) : alert("auth is undefined")
+    }
+    {
+      auth.roles ? alert(auth.roles) : alert("auth.roles is undefined")
+    }
     if (auth.roles) {
-      const hasAllowedRole = auth.roles.some((role) => allowedRoles.includes(role));
+      const hasAllowedRole = auth.roles.some((role) =>
+        allowedRoles.includes(role)
+      )
       if (hasAllowedRole) {
-        return <Outlet />;
+        return <Outlet />
       }
     }
     if (auth.user) {
-      return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+      return <Navigate to="/unauthorized" state={{ from: location }} replace />
     }
   }
 
-  return <Navigate to="/login" state={{ from: location }} replace />;
-};
+  return <Navigate to="/login" state={{ from: location }} replace />
+}
 export default RequireAuth

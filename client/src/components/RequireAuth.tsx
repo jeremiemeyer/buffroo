@@ -11,17 +11,21 @@ import WorkoutDataContext from "../context/WorkoutDataProvider.tsx"
 import useWorkoutStatus from "../hooks/useWorkoutStatus.tsx"
 import useWorkoutData from "../hooks/useWorkoutData.tsx"
 import { AppLayout } from "./AppLayout.tsx"
+import getCookie from "@/utils/getCookie.tsx"
 
 const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useAuth()
   const location = useLocation()
 
-  {
-    auth ? alert(auth) : alert("auth is undefined")
-  }
-  {
-    auth.roles ? alert(auth.roles) : alert("auth.roles is undefined")
-  }
+  const jwtcookie = getCookie("jwt")
+  alert(jwtcookie)
+
+  // {
+  //   auth ? alert(auth) : alert("auth is undefined")
+  // }
+  // {
+  //   auth.roles ? alert(auth.roles) : alert("auth.roles is undefined")
+  // }
 
   if (auth) {
     if (auth.roles) {

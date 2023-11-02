@@ -16,13 +16,14 @@ const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useAuth()
   const location = useLocation()
 
+  {
+    auth ? alert(auth) : alert("auth is undefined")
+  }
+  {
+    auth.roles ? alert(auth.roles) : alert("auth.roles is undefined")
+  }
+
   if (auth) {
-    {
-      auth ? alert(auth) : alert("auth is undefined")
-    }
-    {
-      auth.roles ? alert(auth.roles) : alert("auth.roles is undefined")
-    }
     if (auth.roles) {
       const hasAllowedRole = auth.roles.some((role) =>
         allowedRoles.includes(role)

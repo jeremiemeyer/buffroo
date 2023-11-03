@@ -46,12 +46,14 @@ export default function TemplateExercisesListExerciseCard({
           </p>
         </div>
         <div>
-          <button
-            onClick={() => handleAddExercise(exercise)}
-            className="rounded-full bg-gray-300 hover:bg-gray-400 h-8 w-8 text-blue-700 text-2xl font-semibold"
-          >
-            +
-          </button>
+          <div onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => handleAddExercise(exercise)}
+              className="rounded-full bg-gray-300 hover:bg-gray-400 h-8 w-8 text-blue-700 text-2xl font-semibold"
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
     </div>

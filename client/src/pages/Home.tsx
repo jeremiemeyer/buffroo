@@ -3,6 +3,7 @@ import Title from "@/components/layout/Title"
 import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
 import WorkoutModal from "@/components/workout/WorkoutModal"
+import { Box, SkeletonText } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import WorkoutStatusContext from "@/context/WorkoutStatusProvider"
 import WorkoutDataContext from "@/context/WorkoutDataProvider"
@@ -35,7 +36,8 @@ export default function Home() {
   const { auth } = useAuth()
   const { workoutAdded, workoutAlreadyInProgress } = useToast()
   const { userTemplatesData, isLoading, getUserTemplates } = useTemplates()
-  const [filteredUserTemplates, setFilteredUserTemplates] = useState(userTemplatesData)
+  const [filteredUserTemplates, setFilteredUserTemplates] =
+    useState(userTemplatesData)
 
   useEffect(() => {
     setFilteredUserTemplates(userTemplatesData)
@@ -70,7 +72,6 @@ export default function Home() {
     }
   }
 
-
   useEffect(() => {
     getUserTemplates()
   }, [])
@@ -104,18 +105,30 @@ export default function Home() {
             Console log user templates
           </button> */}
           <div className="space-y-2">
-            {!isLoading &&
-              filteredUserTemplates.map((template, index) => (
-                <TemplateCard
-                  key={index}
-                  templateData={filteredUserTemplates[index]}
-                  setShowConfirmDeleteTemplate={() =>
-                    setShowConfirmDeleteTemplate(true)
-                  }
-                  getUserTemplates={getUserTemplates}
-                  startWorkoutFromTemplate={startWorkoutFromTemplate}
-                />
-              ))}
+            {isLoading
+              ? Array.from({ length: 5 }).map((_, index) => (
+                  <Box
+                    key={index}
+                    className="rounded-3xl border bg-gray-200 pb-6 px-6 mx-auto p-8"
+                  >
+                    <SkeletonText
+                      noOfLines={8}
+                      spacing="4"
+                      skeletonHeight="2"
+                    />
+                  </Box>
+                ))
+              : filteredUserTemplates.map((template, index) => (
+                  <TemplateCard
+                    key={index}
+                    templateData={filteredUserTemplates[index]}
+                    setShowConfirmDeleteTemplate={() =>
+                      setShowConfirmDeleteTemplate(true)
+                    }
+                    getUserTemplates={getUserTemplates}
+                    startWorkoutFromTemplate={startWorkoutFromTemplate}
+                  />
+                ))}
           </div>
         </div>
       </div>

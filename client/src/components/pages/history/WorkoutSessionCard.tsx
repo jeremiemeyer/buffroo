@@ -25,18 +25,17 @@ import ConfirmDeleteSessionModal from "./ConfirmDeleteSessionModal"
 import formatISODate from "@/utils/formatISODate"
 import calculateWorkoutDuration from "@/utils/calculateWorkoutDuration"
 import calculateBestSet from "@/utils/calculateBestSet"
+import useAuth from "@/hooks/useAuth"
+import useToast from "@/hooks/useToast"
+import EditWorkoutModal from "./EditWorkoutModal"
 
-export default function WorkoutSessionCard({
-  sessionData,
-  deleteWorkoutSession,
-  onClick,
-}) {
+export default function WorkoutSessionCard({ sessionData, onClick, getUserSessions }) {
   const [showConfirmDeleteSessionModal, setShowConfirmDeleteSessionModal] =
     useState(false)
+  const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false)
 
-  function deleteSession() {
-    deleteWorkoutSession(sessionData._id)
-  }
+  const { auth } = useAuth()
+  const { workoutDeleted } = useToast()
 
   return (
     <>
@@ -44,6 +43,7 @@ export default function WorkoutSessionCard({
         className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left mt-2`}
       >
         <div className="p-6">
+          {/* <button onClick={() => console.log(sessionData)}>Consolelog this session's data</button> */}
           <div className="flex flex-row justify-between items-center">
             <span className="font-light text-2xl pb-2">
               {sessionData?.name}
@@ -59,7 +59,7 @@ export default function WorkoutSessionCard({
               <MenuList>
                 <MenuItem
                   icon={<EditIcon />}
-                  onClick={onClick}
+                  onClick={() => setShowEditWorkoutModal(true)}
                   // command="⌘T"
                 >
                   Edit session
@@ -104,12 +104,23 @@ export default function WorkoutSessionCard({
             </div>
           ))}
         </div>
+        {/* <button onClick={() => console.log(sessionData._id)}>ID</button> */}
       </div>
       {showConfirmDeleteSessionModal &&
         createPortal(
           <ConfirmDeleteSessionModal
-            deleteSession={deleteSession}
             onClose={() => setShowConfirmDeleteSessionModal(false)}
+            sessionData={sessionData}
+            getUserSessions={getUserSessions}
+          />,
+          document.body
+        )}
+      {showEditWorkoutModal &&
+        createPortal(
+          <EditWorkoutModal
+            thisWorkoutData={sessionData}
+            onClose={() => setShowEditWorkoutModal(false)}
+            getUserSessions={getUserSessions}
           />,
           document.body
         )}

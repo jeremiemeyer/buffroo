@@ -2,11 +2,31 @@
 import { Input } from "@chakra-ui/react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
-import WorkoutDataContext from "../../context/WorkoutDataProvider"
-import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
+import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
+import WorkoutDataContext from "../../../context/WorkoutDataProvider"
+import WorkoutTimerContext from "../../../context/WorkoutTimerProvider"
+import useSessions from "@/hooks/api/useSessions"
+import useAuth from "@/hooks/useAuth"
+import useToast from "@/hooks/useToast"
 
-export default function ConfirmDeleteSessionModal({ deleteSession, onClose }) {
+
+export default function ConfirmDeleteSessionModal({ onClose, sessionData, getUserSessions }) {
+  const { sessionsData, deleteUserSession } = useSessions()
+  const { auth } = useAuth()
+  const { workoutDeleted } = useToast()
+
+  async function deleteSession() {
+    const success = await deleteUserSession({
+      userId: auth.userId,
+      userSessionId: sessionData._id,
+    })
+    if (success) {
+      onClose()
+      getUserSessions()
+      workoutDeleted() // toast
+    }
+  }
+
   return (
     <>
       <div

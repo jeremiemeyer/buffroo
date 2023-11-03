@@ -2,20 +2,32 @@
 import { Input } from "@chakra-ui/react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import useToast from "../../../hooks/useToast"
+import useToast from "@/hooks/useToast"
+import useAuth from "@/hooks/useAuth"
+import useTemplates from "@/hooks/api/useTemplates"
 
 export default function ConfirmDeleteTemplateModal({
   onClose,
   onConfirmDeleteTemplate,
   getUserTemplates,
+  templateData,
 }) {
   const { templateDeleted } = useToast()
-  function onConfirmDelete() {
-    onConfirmDeleteTemplate()
-    onClose()
-    getUserTemplates()
-    templateDeleted()
+  const { auth } = useAuth()
+  const { deleteUserTemplate } = useTemplates()
+
+  async function onConfirmDelete() {
+    const success = await deleteUserTemplate({
+      userId: auth.userId,
+      templateId: templateData._id,
+    })
+    if (success === true) {
+      onClose() // closes modal
+      getUserTemplates() // "refresh" the page
+      templateDeleted() // toast
+    }
   }
+
   return (
     <div
       onClick={onClose}

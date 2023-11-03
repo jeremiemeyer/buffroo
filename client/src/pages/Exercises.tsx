@@ -1,6 +1,6 @@
 //@ts-nocheck
-import ExerciseCard from "./exercises/ExerciseCard"
-import Title from "./layout/Title"
+import ExerciseCard from "../components/pages/exercises/ExerciseCard"
+import Title from "../components/layout/Title"
 import { useState, useEffect, useRef } from "react"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import {
@@ -14,19 +14,19 @@ import {
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
 import { createPortal } from "react-dom"
-import AddExerciseModal from "./exercises/AddExerciseModal"
+import AddExerciseModal from "../components/pages/exercises/AddExerciseModal"
 import { useNavigate, useLocation } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
-import ExerciseStatsModal from "./exercises/ExerciseStatsModal"
-import ExerciseEditModal from "./exercises/ExerciseEditModal"
+import ExerciseStatsModal from "../components/pages/exercises/ExerciseStatsModal"
+import ExerciseEditModal from "../components/pages/exercises/ExerciseEditModal"
 import { Button } from "@/components/ui/button"
+import useExercises from "@/hooks/api/useExercises"
 
 export default function Exercises() {
-  const [isLoading, setIsLoading] = useState(true)
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
   const [showExerciseStatsModal, setShowExerciseStatsModal] = useState(false)
   const [showExerciseEditModal, setShowExerciseEditModal] = useState(false)
-  const [exerciseData, setExerciseData] = useState([])
+  // const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
   const [searchInput, setSearchInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
@@ -36,35 +36,17 @@ export default function Exercises() {
   const navigate = useNavigate()
   const location = useLocation()
   const { auth } = useAuth()
-  // const controller = new AbortController()
-  // let isMounted = true
-  const DEFAULT_EXERCISES_URL = "/api/exercises"
-  const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
-
-  const getExercises = async () => {
-    setIsLoading(true)
-    try {
-      const response = await axiosPrivate.get(DEFAULT_EXERCISES_URL)
-      const defaultExercises = response.data
-
-      const userResponse = await axiosPrivate.get(USER_EXERCISES_URL)
-      const userExercises = userResponse.data
-
-      setExerciseData([...defaultExercises, ...userExercises])
-      setIsLoading(false)
-    } catch (error) {
-      console.error("Error fetching data:", error)
-      navigate("/login", { state: { from: location }, replace: true })
-    }
-  }
+  const { exercisesData, getAllExercises, isLoading } = useExercises()
 
   useEffect(() => {
-    getExercises()
-  }, [])
+    setFilteredExercises(exercisesData)
+  }, [exercisesData])
 
   useEffect(() => {
-    let filteredData = exerciseData
+    // Create a copy of the original exercisesData
+    let filteredData = [...exercisesData]
 
+    // Apply filters
     if (searchInput) {
       filteredData = filteredData.filter((ex) =>
         ex["name"].toLowerCase().includes(searchInput.toLowerCase())
@@ -83,16 +65,17 @@ export default function Exercises() {
       )
     }
 
+    // Update filteredExercises with the filtered data
     setFilteredExercises(filteredData)
-
-    // return () => {
-    //   isMounted = false // Unmounting, set isMounted to false
-    // }
-  }, [exerciseData, searchInput, selectedCategory, selectedBodyPart])
+  }, [exercisesData, searchInput, selectedCategory, selectedBodyPart])
 
   // No overflow when modal is open
   useEffect(() => {
-    if (showNewExerciseModal || showExerciseEditModal || showExerciseStatsModal) {
+    if (
+      showNewExerciseModal ||
+      showExerciseEditModal ||
+      showExerciseStatsModal
+    ) {
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = "auto"
@@ -113,12 +96,7 @@ export default function Exercises() {
       <div className="fixed top-0 left-0 w-full pb-4 items-center bg-glassmorphism2 z-[10]">
         <div className="flex px-6 justify-between flex-row items-center">
           <Title>Exercises</Title>
-          <Button 
-            onClick={() => setShowNewExerciseModal(true)}
-          >
-            Add New
-          </Button>
-
+          <Button onClick={() => setShowNewExerciseModal(true)}>Add New</Button>
         </div>
 
         <div className="flex flex-col">
@@ -165,6 +143,9 @@ export default function Exercises() {
 
       {/* Content */}
       <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-6">
+        {/* <button onClick={() => console.log(exercisesData)}>
+          Consolelog exercisedata
+        </button> */}
         {isLoading ? (
           Array.from({ length: 12 }).map((_, index) => (
             <Box
@@ -181,20 +162,21 @@ export default function Exercises() {
           ))
         ) : (
           <>
-            {filteredExercises.map((ex, key) => (
-              <ExerciseCard
-                key={key}
-                exerciseId={ex["_id"]}
-                name={ex["name"]}
-                category={ex["category"]}
-                bodypart={ex["bodypart"]}
-                selectedExeciseId={selectedExerciseId}
-                setSelectedExerciseId={setSelectedExerciseId}
-                onClickExerciseEdit={onClickExerciseEdit}
-                onClickExerciseStats={onClickExerciseStats}
-                isCustomUserExercise={ex.hasOwnProperty("userId")}
-              />
-            ))}
+            {filteredExercises &&
+              filteredExercises.map((ex, key) => (
+                <ExerciseCard
+                  key={key}
+                  exerciseId={ex["_id"]}
+                  name={ex["name"]}
+                  category={ex["category"]}
+                  bodypart={ex["bodypart"]}
+                  selectedExeciseId={selectedExerciseId}
+                  setSelectedExerciseId={setSelectedExerciseId}
+                  onClickExerciseEdit={onClickExerciseEdit}
+                  onClickExerciseStats={onClickExerciseStats}
+                  isCustomUserExercise={ex.hasOwnProperty("userId")}
+                />
+              ))}
           </>
         )}
       </div>
@@ -202,7 +184,7 @@ export default function Exercises() {
         createPortal(
           <AddExerciseModal
             onClose={() => setShowNewExerciseModal(false)}
-            getExercises={getExercises}
+            getAllExercises={getAllExercises}
           />,
           document.body
         )}
@@ -212,6 +194,9 @@ export default function Exercises() {
           <ExerciseStatsModal
             onClose={() => setShowExerciseStatsModal(false)}
             selectedExerciseId={selectedExerciseId}
+            exerciseData={exercisesData.find(
+              (ex) => ex._id === selectedExerciseId
+            )}
           />,
           document.body
         )}
@@ -221,7 +206,11 @@ export default function Exercises() {
           <ExerciseEditModal
             onClose={() => setShowExerciseEditModal(false)}
             selectedExerciseId={selectedExerciseId}
-            getExercises={getExercises}
+            exerciseData={exercisesData.find(
+              (ex) => ex._id === selectedExerciseId
+            )}
+            getAllExercises={getAllExercises}
+            // getExercises={getExercises}
           />,
           document.body
         )}

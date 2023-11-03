@@ -21,11 +21,12 @@ import ConfirmCancelEditTemplateModal from "./ConfirmCancelEditTemplateModal"
 import AddExerciseToTemplateModal from "./AddExerciseToTemplateModal"
 import useTemplateData from "@/hooks/useTemplateData"
 import useToast from "@/hooks/useToast"
+import useTemplates from "@/hooks/api/useTemplates"
 
 export default function CreateEditTemplateModal({
   actionType,
   onClose,
-  templateId, // for edit mode
+  thisTemplateData,
   getUserTemplates, // for edit mode
 }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +35,9 @@ export default function CreateEditTemplateModal({
     useState(false)
   const [showConfirmCancelEdit, setShowConfirmCancelEdit] = useState(false)
   const { auth } = useAuth()
-  const { cannotSubmitEmptyTemplate, templateAdded, templateUpdated } = useToast()
+  const { cannotSubmitEmptyTemplate, templateAdded, templateUpdated } =
+    useToast()
+  const { createUserTemplate, updateUserTemplate } = useTemplates()
 
   const {
     templateData,
@@ -45,69 +48,40 @@ export default function CreateEditTemplateModal({
     resetTemplate,
   } = useTemplateData()
 
-
   const axiosPrivate = useAxiosPrivate()
 
-  const TEMPLATES_URL = `/api/users/${auth.userId}/templates`
-  const TEMPLATE_URL = `/api/users/${auth.userId}/templates/${templateId}`
 
+  useEffect(() => {
+    setTemplateData(thisTemplateData)
+  }, [])
 
   // create template (for create mode)
   const saveOrEditTemplate = async () => {
     if (actionType === "create") {
-      if (templateData.exercises.length === 0) {
-        return cannotSubmitEmptyTemplate()
-      }
+      const success = await createUserTemplate({
+        userId: auth.userId,
+        newTemplateData: templateData,
+      })
 
-      const dataToSend = {
-        ...templateData,
-      }
-
-      console.log("data sent: ", dataToSend)
-      console.log("user id", auth.userId)
-
-      try {
-        await axiosPrivate.post(TEMPLATES_URL, dataToSend)
-        getUserTemplates()
-        onClose()
-        templateAdded()
-      } catch (error) {
-        return console.log("error")
+      if (success === true) {
+        getUserTemplates() // to refresh list of templates
+        onClose() // closes modal
+        templateAdded() // toast
       }
     } else if (actionType === "edit") {
-      try {
-        const response = await axiosPrivate.put(TEMPLATE_URL, templateData)
-        const updatedTemplateData = response.data
-        // console.log(updatedSessionData)
-        getUserTemplates()
-        templateUpdated()
-        onClose()
-      } catch (error) {
-        console.error("Error updating template:", error)
-        // navigate("/login", { state: { from: location }, replace: true })
+      const success = await updateUserTemplate({
+        userId: auth.userId,
+        templateId: templateData._id,
+        updatedTemplateData: templateData
+      })
+
+      if (success === true) {
+        getUserTemplates() // to refresh list of templates
+        templateUpdated() // toast
+        onClose() // closes modal
       }
     }
   }
-
-  // get template info (for edit mode)
-  const getTemplateData = async () => {
-    try {
-      const response = await axiosPrivate.get(TEMPLATE_URL)
-      console.log(response.data)
-      const templateData = response.data
-      console.log(templateData)
-      setTemplateData(templateData)
-    } catch (error) {
-      console.error("Error fetching template data:", error)
-      // navigate("/login", { state: { from: location }, replace: true })
-    }
-  }
-
-  useEffect(() => {
-    if (actionType === "edit") {
-      getTemplateData()
-    }
-  }, [])
 
   return (
     <>

@@ -2,7 +2,7 @@
 import axios from "../../api/axios"
 import { useState, useEffect } from "react"
 import { SearchIcon } from "@chakra-ui/icons"
-import ExerciseCard from "../exercises/ExerciseCard"
+import ExerciseCard from "../pages/exercises/ExerciseCard"
 import { Button } from "@/components/ui/button"
 import {
   Input,

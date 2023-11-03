@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { useRef, useState, useEffect } from "react"
-import { Button } from "./ui/button"
+import { Button } from "../components/ui/button"
 import {
   Input,
   Stack,
@@ -21,13 +21,13 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import axios from "./../api/axios"
+import axios from "../api/axios"
 import { Link } from "react-router-dom"
 import Particles from "react-particles"
 import type { Engine } from "tsparticles-engine"
 import { loadFull } from "tsparticles"
 import { ISourceOptions } from "tsparticles-engine"
-import particlesOptions from "./../particles.json"
+import particlesOptions from "../particles.json"
 import { useCallback } from "react"
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/

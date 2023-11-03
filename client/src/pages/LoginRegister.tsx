@@ -21,13 +21,13 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import axios from "./../api/axios"
+import axios from "../api/axios"
 import { Link } from "react-router-dom"
 import Particles from "react-particles"
 import type { Engine } from "tsparticles-engine"
 import { loadFull } from "tsparticles"
 import { ISourceOptions } from "tsparticles-engine"
-import particlesOptions from "./../particles.json"
+import particlesOptions from "../particles.json"
 import { useCallback } from "react"
 import logo from "./../assets/logo.png"
 

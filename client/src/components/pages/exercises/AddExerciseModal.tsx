@@ -1,20 +1,22 @@
 //@ts-nocheck
 import { Input, Select } from "@chakra-ui/react"
 import { Button } from "@/components//ui/button"
-import axios from "../../api/axios"
+import axios from "../../../api/axios"
 import { useState } from "react"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
-import useAuth from "../../hooks/useAuth"
-import useToast from "../../hooks/useToast"
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
+import useAuth from "../../../hooks/useAuth"
+import useToast from "../../../hooks/useToast"
+import useExercises from "@/hooks/api/useExercises"
 
-export default function AddExerciseModal({ onClose, getExercises }: any) {
+export default function AddExerciseModal({ onClose, getAllExercises }: any) {
   const [nameInput, setNameInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedBodyPart, setSelectedBodyPart] = useState("")
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
-  const { exerciseAdded } = useToast()
+  const { exerciseAdded, someFieldsAreMissing } = useToast()
+  const { addNewUserExercise } = useExercises()
 
   function handleChange(e) {
     setNameInput(e.target.value)
@@ -29,19 +31,27 @@ export default function AddExerciseModal({ onClose, getExercises }: any) {
   }
 
   async function handleSave() {
-    const exerciseData = {
+    const userId = auth.userId
+
+    if (!nameInput | !selectedBodyPart | !selectedCategory) {
+      return someFieldsAreMissing()
+    }
+
+    const newExerciseData = {
       name: nameInput,
       bodypart: selectedBodyPart,
       category: selectedCategory,
     }
 
-    try {
-      await axiosPrivate.post(USER_EXERCISES_URL, exerciseData)
+    console.log(newExerciseData)
+    const success = await addNewUserExercise({
+      userId: auth.userId,
+      exerciseData: newExerciseData,
+    })
+    if (success) {
       onClose()
-      getExercises()
-      exerciseAdded()
-    } catch (error) {
-      return console.log("error")
+      getAllExercises()
+      exerciseAdded() // toast notification
     }
   }
 

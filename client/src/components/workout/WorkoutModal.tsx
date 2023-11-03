@@ -22,6 +22,7 @@ import useWorkoutStatus from "../../hooks/useWorkoutStatus"
 import useWorkoutTimer from "../../hooks/useWorkoutTimer"
 import useWorkoutData from "../../hooks/useWorkoutData"
 import useToast from "../../hooks/useToast"
+import useSessions from "@/hooks/api/useSessions"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -30,10 +31,8 @@ export default function WorkoutModal({ onClose }: any) {
   const [workoutModalIsMinimized, setWorkoutModalIsMinimized] = useState(false)
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
-  const SESSIONS_URL = `/api/users/${auth.userId}/sessions`
+  
   const {
-    workoutIsInProgress,
-    setWorkoutIsInProgress,
     sessionWindowIsMinimized,
     setSessionWindowIsMinimized,
   } = useWorkoutStatus()
@@ -50,28 +49,18 @@ export default function WorkoutModal({ onClose }: any) {
   const { reset, start, pause } = useWorkoutTimer()
   const notify = () => toast("Here is your toast.")
   const { workoutAdded, cannotSubmitEmptyWorkout } = useToast()
+  const { createUserSession } = useSessions()
 
   async function saveSession() {
-    if (workoutData.exercises.length === 0) {
-      return cannotSubmitEmptyWorkout()
-    }
-
-    const dataToSend = {
-      ...workoutData,
-      enddate: new Date().toISOString(),
-    }
-
-    console.log("data sent: ", dataToSend)
-    console.log("user id", auth.userId)
-
-    try {
-      await axiosPrivate.post(SESSIONS_URL, dataToSend)
-      resetWorkout()
+    const success = await createUserSession({
+      userId: auth.userId,
+      userSessionData: workoutData,
+    })
+    if (success === true) {
+      resetWorkout() // workout data reinitialized
       reset() // reset timer
-      workoutAdded()
-      onClose()
-    } catch (error) {
-      return console.log("error")
+      workoutAdded() // toast
+      onClose() // closes modal
     }
   }
 
@@ -106,7 +95,9 @@ export default function WorkoutModal({ onClose }: any) {
               onChange={handleEditWorkoutName}
               borderColor={"gray.300"}
             />
-            <Button onClick={saveSession} variant="secondary">Finish</Button>
+            <Button onClick={saveSession} variant="secondary">
+              Finish
+            </Button>
           </div>
 
           <div className="grow mt-6 overflow-auto">

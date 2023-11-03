@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { useState, useEffect } from "react"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
 import { Button } from "@/components/ui/button"
 import {
   Input,
@@ -12,64 +12,85 @@ import {
   TabPanels,
   TabPanel,
 } from "@chakra-ui/react"
-import useAuth from "../../hooks/useAuth"
+import useAuth from "../../../hooks/useAuth"
 import useToast from "@/hooks/useToast"
+import useExercises from "@/hooks/api/useExercises"
 
 export default function ExerciseEditModal({
-  onClose,
+  exerciseData,
   selectedExerciseId,
-  getExercises,
+  onClose,
+  getAllExercises,
 }) {
-  const [exerciseData, setExerciseData] = useState([])
+  const [thisExerciseData, setThisExerciseData] = useState(exerciseData)
   const [isLoading, setIsLoading] = useState(true)
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
   const { exerciseUpdated } = useToast()
+  const { exercisesData, editUserExercise } = useExercises()
+
+  useEffect(() => {
+    console.log("exercises updated")
+  }, [exercisesData])
 
   const EXERCISE_DATA_URL = `/api/exercises/${selectedExerciseId}`
   const EXERCISE_UPDATE_URL = `/api/users/${auth.userId}/exercises/${selectedExerciseId}`
 
-  const getExerciseData = async () => {
-    setIsLoading(true)
-    try {
-      const response = await axiosPrivate.get(EXERCISE_DATA_URL)
-      const exerciseData = response.data
-      console.log(exerciseData)
-      setExerciseData(exerciseData)
-      setIsLoading(false)
-    } catch (error) {
-      console.error("Error fetching data:", error)
-      // navigate("/login", { state: { from: location }, replace: true })
-    }
-  }
+  // const getExerciseData = async () => {
+  //   setIsLoading(true)
+  //   try {
+  //     const response = await axiosPrivate.get(EXERCISE_DATA_URL)
+  //     const exerciseData = response.data
+  //     console.log(exerciseData)
+  //     setExerciseData(exerciseData)
+  //     setIsLoading(false)
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error)
+  //     // navigate("/login", { state: { from: location }, replace: true })
+  //   }
+  // }
 
-  const editUserExercise = async () => {
-    try {
-      console.log(EXERCISE_UPDATE_URL)
-      const response = await axiosPrivate.patch(EXERCISE_UPDATE_URL, {
-        exerciseData: exerciseData,
-      })
-      const updatedExercise = response.data
-      console.log(updatedExercise)
-      getExercises()
-      onClose()
-      exerciseUpdated()
-    } catch (error) {
-      console.error("Error updating user exercise:", error)
-      // navigate("/login", { state: { from: location }, replace: true })
-    }
-  }
+  // const editUserExercise = async () => {
+  //   try {
+  //     console.log(EXERCISE_UPDATE_URL)
+  //     const response = await axiosPrivate.patch(EXERCISE_UPDATE_URL, {
+  //       exerciseData: exerciseData,
+  //     })
+  //     const updatedExercise = response.data
+  //     console.log(updatedExercise)
+  //     getExercises()
+  //     onClose()
+  //     exerciseUpdated()
+  //   } catch (error) {
+  //     console.error("Error updating user exercise:", error)
+  //     // navigate("/login", { state: { from: location }, replace: true })
+  //   }
+  // }
 
-  useEffect(() => {
-    getExerciseData({ selectedExerciseId })
-  }, [])
+  // useEffect(() => {
+  //   getExerciseData({ selectedExerciseId })
+  // }, [])
 
   function handleChange(e) {
     const { name, value } = e.target
-    setExerciseData({
-      ...exerciseData,
+    setThisExerciseData({
+      ...thisExerciseData,
       [name]: value,
     })
+  }
+
+  async function handleSaveChanges() {
+    console.log(selectedExerciseId)
+    const success = await editUserExercise({
+      userId: auth.userId,
+      exerciseToEditId: selectedExerciseId,
+      updatedExerciseData: thisExerciseData,
+    })
+    if (success) {
+      getAllExercises()
+      onClose()
+      exerciseUpdated() // toast
+    }
   }
 
   return (
@@ -85,14 +106,13 @@ export default function ExerciseEditModal({
           <Button onClick={onClose} variant="destructive">
             X
           </Button>
-          <h1 className="text-3xl text-center px-5">{exerciseData["name"]}</h1>
-          <Button
-            onClick={editUserExercise}
-          >
-            Save
-          </Button>
+          <h1 className="text-3xl text-center px-5">
+            {thisExerciseData["name"]}
+          </h1>
+          <Button onClick={handleSaveChanges}>Save</Button>
         </div>
-        {!isLoading && (
+        {/* <button onClick={() => console.log(thisExerciseData)}>consolelog</button> */}
+        {thisExerciseData !== null && (
           <div className="space-y-2 mt-4">
             <div className="flex flex-row items-center">
               <i className="fa fa-heading mr-4" />
@@ -100,7 +120,7 @@ export default function ExerciseEditModal({
               <Input
                 placeholder="Exercise name"
                 variant="flushed"
-                value={exerciseData.name}
+                value={thisExerciseData.name}
                 name="name"
                 onChange={(e) => handleChange(e)}
               ></Input>
@@ -111,7 +131,7 @@ export default function ExerciseEditModal({
               <Select
                 placeholder="Select option"
                 onChange={(e) => handleChange(e)}
-                value={exerciseData.bodypart}
+                value={thisExerciseData.bodypart}
                 name="bodypart"
               >
                 <option value="core">Core</option>
@@ -131,7 +151,7 @@ export default function ExerciseEditModal({
                 placeholder="Select option"
                 onChange={(e) => handleChange(e)}
                 name="category"
-                value={exerciseData.category}
+                value={thisExerciseData.category}
               >
                 <option value="barbell">Barbell</option>
                 <option value="dumbbell">Dumbbell</option>

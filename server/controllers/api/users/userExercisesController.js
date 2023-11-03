@@ -45,6 +45,7 @@ const updateUserExercise = async (req, res) => {
 
   const { userId, exerciseId } = req.params
   const { exerciseData } = req.body
+  console.log(exerciseData)
 
   const updatedExercise = await UserExercise.findByIdAndUpdate(exerciseId, {
     name: exerciseData.name,

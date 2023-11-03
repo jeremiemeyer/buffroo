@@ -118,7 +118,7 @@ export default function Home() {
                     />
                   </Box>
                 ))
-              : filteredUserTemplates.map((template, index) => (
+              : filteredUserTemplates.length > 0 && filteredUserTemplates.map((template, index) => (
                   <TemplateCard
                     key={index}
                     templateData={filteredUserTemplates[index]}

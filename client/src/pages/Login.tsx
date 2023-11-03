@@ -52,7 +52,7 @@ const Login = () => {
   const [user, resetUser, userAttribs] = useInput("user", "") //useState("")
   const [pwd, setPwd] = useState("")
   const [errMsg, setErrMsg] = useState("")
-  const [check, toggleCheck] = useToggle("persist", false)
+  const [check, toggleCheck] = useToggle("persist", true)
 
   useEffect(() => {
     userRef.current.focus()

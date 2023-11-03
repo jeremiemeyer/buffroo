@@ -50,8 +50,6 @@ export default function History() {
     setShowExerciseDetailsModal(true)
   }
 
-
-
   return (
     <>
       {/* Title  */}
@@ -66,10 +64,16 @@ export default function History() {
         </button> */}
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
-            <Box key={index}>
-              <SkeletonText noOfLines={1} skeletonHeight="10" />
-              <SkeletonText noOfLines={2} skeletonHeight="6" />
-              <SkeletonText noOfLines={3} skeletonHeight="6" />
+            <Box
+              key={index}
+              className="border border-gray-200 bg-gray-200 mt-2 p-[20px] mx-auto rounded-xl"
+            >
+              <SkeletonText
+                mt="4"
+                noOfLines={8}
+                spacing="4"
+                skeletonHeight="2"
+              />
             </Box>
           ))
         ) : (
@@ -99,7 +103,6 @@ export default function History() {
       </div>
 
       {/* <button onClick={() => console.log(historyData[0])}>ok</button> */}
-
     </>
   )
 }

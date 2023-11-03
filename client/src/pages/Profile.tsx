@@ -1,4 +1,5 @@
 //@ts-nocheck
+import { Box, SkeletonText } from "@chakra-ui/react"
 import { Button } from "../components/ui/button"
 import Title from "../components/layout/Title"
 import { useNavigate, Link } from "react-router-dom"
@@ -51,9 +52,7 @@ export default function Profile() {
   }, [])
 
   const signOut = async () => {
-    workoutIsInProgress
-      ? cannotLogOutWorkoutInProgress()
-      : await logout()
+    workoutIsInProgress ? cannotLogOutWorkoutInProgress() : await logout()
   }
 
   return (
@@ -70,7 +69,18 @@ export default function Profile() {
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
 
-          {!isLoading && (
+          <h1 className="text-2xl font-light">Settings</h1>
+          {isLoading ? (
+            <>
+              <Box className="rounded-3xl border bg-gray-200 pb-6 px-6 max-w-[800px] mx-auto">
+                <SkeletonText
+                  noOfLines={8}
+                  spacing="4"
+                  skeletonHeight="2"
+                />
+              </Box>
+            </>
+          ) : (
             <Settings
               userPreferences={userPreferences}
               setUserPreferences={setUserPreferences}

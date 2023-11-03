@@ -215,7 +215,8 @@ export default function ExerciseInWorkout({
 
               <Button
                 onClick={() => handleRemoveSet(index)}
-                className="ml-auto h-2 w-2"
+                className="ml-auto"
+                variant="outline"
               >
                 <i className="fa fa-trash "></i>
               </Button>

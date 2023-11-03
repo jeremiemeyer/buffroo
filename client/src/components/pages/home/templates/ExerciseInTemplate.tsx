@@ -221,8 +221,8 @@ export default function ExerciseInTemplate({
 
               <Button
                 onClick={() => handleRemoveSet(index)}
-                className="ml-auto h-2 w-2"
-                  fontWeight={"400"}
+                className="ml-auto"
+                variant="outline"
               >
                 <i className="fa fa-trash "></i>
               </Button>

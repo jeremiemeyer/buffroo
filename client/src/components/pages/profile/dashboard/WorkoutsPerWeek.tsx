@@ -21,7 +21,7 @@ import useSessions0 from "@/hooks/api/useSessions"
 import { createPortal } from "react-dom"
 import { useState } from "react"
 import { create } from "domain"
-import EditWorkoutsPerWeekModal from "./editWorkoutsPerWeekModal"
+import EditWorkoutsPerWeekModal from "./EditWorkoutsPerWeekModal"
 
 const data = [
   {

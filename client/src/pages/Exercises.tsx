@@ -124,7 +124,7 @@ export default function Exercises() {
             </Select>
           </div>
         </div>
-        <button
+        {/* <button
           onClick={() => {
             const newExercise = {
               _id: "65467b2e0ec1822be06bda33",
@@ -141,7 +141,7 @@ export default function Exercises() {
         >
           change filteredexercisesData
         </button>
-        // <button onClick={() => console.log(exercisesData)}>zeze</button>
+        // <button onClick={() => console.log(exercisesData)}>zeze</button> */}
       </div>
 
       {/* Content */}

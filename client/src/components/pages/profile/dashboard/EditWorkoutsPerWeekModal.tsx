@@ -60,7 +60,7 @@ export default function EditWorkoutsPerWeekModal({
             value={updatedWorkoutsPerWeekGoal}
             onChange={(e) => setUpdatedWorkoutsPerWeekGoal(e.target.value)}
           />
-          <button onClick={() => console.log(updatedWorkoutsPerWeekGoal)}>consolelog updatedWorkoutsPerWeekGoal</button>
+          {/* <button onClick={() => console.log(updatedWorkoutsPerWeekGoal)}>consolelog updatedWorkoutsPerWeekGoal</button> */}
         </div>
       </div>
     </>

@@ -70,7 +70,7 @@ export default function WorkoutsPerWeek({
       <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 max-w-[800px] mx-auto">
         <div className="flex flex-row items-center pb-8">
           <h1 className="font-semibold text-xl flex grow ">
-            Workouts per week
+            Workouts/week
           </h1>
           <h2 className="px-4 font-semibold">
             Current goal:{" "}

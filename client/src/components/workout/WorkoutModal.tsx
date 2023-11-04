@@ -141,9 +141,9 @@ export default function WorkoutModal({ onClose }: any) {
               Cancel workout
             </Button>
           </div>
-          <button onClick={() => console.log(workoutData)}>
+          {/* <button onClick={() => console.log(workoutData)}>
             consolelog workout data
-          </button>
+          </button> */}
         </div>
       </div>
       {showAddExerciseModal &&

@@ -36,23 +36,23 @@ export default function Profile() {
         </div>
 
         {/* Content  */}
-        <div className="pt-[80px] pb-[100px] z-[0] px-6 space-y-12 w-full">
+        <div className="pt-[80px] pb-[100px] z-[0] px-6 w-full">
           {/* <button onClick={() => console.log(auth)}>Click</button> */}
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
 
           {isLoading ? (
             <>
-              <h1 className="text-2xl font-light">Settings</h1>
+              <h1 className="text-2xl font-light mb-4">Settings</h1>
               <Box className="rounded-3xl border bg-white pb-6 px-6 max-w-[800px] mx-auto">
                 <SkeletonText noOfLines={8} spacing="4" skeletonHeight="2" />
               </Box>
             </>
           ) : (
             <>
-              <h1 className="text-2xl font-semibold">Dashboard</h1>
+              <h1 className="text-2xl font-semibold mb-4">Dashboard</h1>
               <Dashboard userData={userData} updateUserData={updateUserData} />
-              <h1 className="pt-8 text-2xl font-semibold">Settings</h1>
+              <h1 className="pt-8 text-2xl font-semibold mb-4">Settings</h1>
               <Settings
                 userData={userData}
                 updateUserData={updateUserData}
@@ -61,7 +61,7 @@ export default function Profile() {
             </>
           )}
 
-          <Button variant="destructive" onClick={signOut}>
+          <Button variant="destructive" onClick={signOut} className="mt-12">
             Sign out
           </Button>
           {/* <button onClick={() => console.log(userPreferences)}>Console log userPreferences</button> */}

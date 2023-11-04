@@ -17,17 +17,17 @@ import { createPortal } from "react-dom"
 import AddExerciseModal from "../components/pages/exercises/AddExerciseModal"
 import { useNavigate, useLocation } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
-import ExerciseStatsModal from "../components/pages/exercises/ExerciseStatsModal"
-import ExerciseEditModal from "../components/pages/exercises/ExerciseEditModal"
+
 import { Button } from "@/components/ui/button"
 import useExercises from "@/hooks/api/useExercises"
+import ExercisesList from "@/components/pages/exercises/ExercisesList"
 
 export default function Exercises() {
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
-  const [showExerciseStatsModal, setShowExerciseStatsModal] = useState(false)
-  const [showExerciseEditModal, setShowExerciseEditModal] = useState(false)
+ 
   // const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
+
   const [searchInput, setSearchInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedBodyPart, setSelectedBodyPart] = useState("")
@@ -37,10 +37,6 @@ export default function Exercises() {
   const location = useLocation()
   const { auth } = useAuth()
   const { exercisesData, getAllExercises, isLoading } = useExercises()
-
-  useEffect(() => {
-    setFilteredExercises(exercisesData)
-  }, [exercisesData])
 
   useEffect(() => {
     // Create a copy of the original exercisesData
@@ -69,18 +65,7 @@ export default function Exercises() {
     setFilteredExercises(filteredData)
   }, [exercisesData, searchInput, selectedCategory, selectedBodyPart])
 
-  // No overflow when modal is open
-  useEffect(() => {
-    if (
-      showNewExerciseModal ||
-      showExerciseEditModal ||
-      showExerciseStatsModal
-    ) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "auto"
-    }
-  }, [showNewExerciseModal, showExerciseEditModal, showExerciseStatsModal])
+
 
   function onClickExerciseEdit(exerciseId) {
     setShowExerciseEditModal(true)
@@ -139,47 +124,29 @@ export default function Exercises() {
             </Select>
           </div>
         </div>
+        <button
+          onClick={() => {
+            const newExercise = {
+              _id: "65467b2e0ec1822be06bda33",
+              userId: "6545eb6a98c432e7721d3da6",
+              name: "erdf",
+              bodypart: "cardio",
+              category: "weighted-bodyweight",
+              __v: 0,
+            }
+
+            setFilteredExercises([...filteredExercises, newExercise])
+          }}
+          className="text-4xl "
+        >
+          change filteredexercisesData
+        </button>
+        // <button onClick={() => console.log(exercisesData)}>zeze</button>
       </div>
 
       {/* Content */}
-      <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-6">
-        {/* <button onClick={() => console.log(exercisesData)}>
-          Consolelog exercisedata
-        </button> */}
-        {isLoading ? (
-          Array.from({ length: 12 }).map((_, index) => (
-            <Box
-              key={index}
-              className="border border-gray-200 bg-gray-200 mt-2  p-[20px] mx-auto rounded-xl"
-            >
-              <SkeletonText
-                mt="4"
-                noOfLines={3}
-                spacing="4"
-                skeletonHeight="2"
-              />
-            </Box>
-          ))
-        ) : (
-          <>
-            {filteredExercises &&
-              filteredExercises.map((ex, key) => (
-                <ExerciseCard
-                  key={key}
-                  exerciseId={ex["_id"]}
-                  name={ex["name"]}
-                  category={ex["category"]}
-                  bodypart={ex["bodypart"]}
-                  selectedExeciseId={selectedExerciseId}
-                  setSelectedExerciseId={setSelectedExerciseId}
-                  onClickExerciseEdit={onClickExerciseEdit}
-                  onClickExerciseStats={onClickExerciseStats}
-                  isCustomUserExercise={ex.hasOwnProperty("userId")}
-                />
-              ))}
-          </>
-        )}
-      </div>
+      <ExercisesList exercisesData={filteredExercises} isLoading={isLoading} />
+
       {showNewExerciseModal &&
         createPortal(
           <AddExerciseModal
@@ -189,31 +156,7 @@ export default function Exercises() {
           document.body
         )}
 
-      {showExerciseStatsModal &&
-        createPortal(
-          <ExerciseStatsModal
-            onClose={() => setShowExerciseStatsModal(false)}
-            selectedExerciseId={selectedExerciseId}
-            exerciseData={exercisesData.find(
-              (ex) => ex._id === selectedExerciseId
-            )}
-          />,
-          document.body
-        )}
 
-      {showExerciseEditModal &&
-        createPortal(
-          <ExerciseEditModal
-            onClose={() => setShowExerciseEditModal(false)}
-            selectedExerciseId={selectedExerciseId}
-            exerciseData={exercisesData.find(
-              (ex) => ex._id === selectedExerciseId
-            )}
-            getAllExercises={getAllExercises}
-            // getExercises={getExercises}
-          />,
-          document.body
-        )}
     </>
   )
 }

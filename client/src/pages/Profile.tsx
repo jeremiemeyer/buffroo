@@ -11,6 +11,8 @@ import Settings from "../components/pages/profile/Settings"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import useWorkoutStatus from "../hooks/useWorkoutStatus"
 import useToast from "@/hooks/useToast"
+import Dashboard from "@/components/pages/profile/dashboard/Dashboard"
+import useUserData from "@/hooks/api/useUserData"
 
 export default function Profile() {
   const navigate = useNavigate()
@@ -18,38 +20,8 @@ export default function Profile() {
   const { auth } = useAuth()
   const { workoutIsInProgress } = useWorkoutStatus()
   const axiosPrivate = useAxiosPrivate()
-  const USER_DATA_URL = `/api/users/${auth.userId}`
-  const [userPreferences, setUserPreferences] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const { userData, setUserData, updateUserData, isLoading } = useUserData()
   const { cannotLogOutWorkoutInProgress, preferencesSaved } = useToast()
-
-  const getUserPreferences = async () => {
-    try {
-      const response = await axiosPrivate.get(USER_DATA_URL)
-      const userData = response.data
-      setUserPreferences(userData.preferences)
-      setIsLoading(false)
-    } catch (error) {
-      console.error("Error fetching data:", error)
-    }
-  }
-
-  const saveUserPreferences = async () => {
-    try {
-      const response = await axiosPrivate.patch(USER_DATA_URL, {
-        userPreferences: userPreferences,
-      })
-      const updatedUser = response.data
-      preferencesSaved()
-    } catch (error) {
-      console.error("Error updating user:", error)
-    }
-  }
-
-  useEffect(() => {
-    // console.log(USER_DATA_URL)
-    getUserPreferences()
-  }, [])
 
   const signOut = async () => {
     workoutIsInProgress ? cannotLogOutWorkoutInProgress() : await logout()
@@ -69,23 +41,24 @@ export default function Profile() {
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
 
-          <h1 className="text-2xl font-light">Settings</h1>
           {isLoading ? (
             <>
-              <Box className="rounded-3xl border bg-gray-200 pb-6 px-6 max-w-[800px] mx-auto">
-                <SkeletonText
-                  noOfLines={8}
-                  spacing="4"
-                  skeletonHeight="2"
-                />
+              <h1 className="text-2xl font-light">Settings</h1>
+              <Box className="rounded-3xl border bg-white pb-6 px-6 max-w-[800px] mx-auto">
+                <SkeletonText noOfLines={8} spacing="4" skeletonHeight="2" />
               </Box>
             </>
           ) : (
-            <Settings
-              userPreferences={userPreferences}
-              setUserPreferences={setUserPreferences}
-              saveUserPreferences={saveUserPreferences}
-            />
+            <>
+              <h1 className="text-2xl font-semibold">Dashboard</h1>
+              <Dashboard userData={userData} updateUserData={updateUserData} />
+              <h1 className="pt-8 text-2xl font-semibold">Settings</h1>
+              <Settings
+                userData={userData}
+                updateUserData={updateUserData}
+                // saveUserData={saveUserPreferences}
+              />
+            </>
           )}
 
           <Button variant="destructive" onClick={signOut}>

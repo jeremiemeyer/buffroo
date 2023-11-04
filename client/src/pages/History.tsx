@@ -66,7 +66,7 @@ export default function History() {
           Array.from({ length: 5 }).map((_, index) => (
             <Box
               key={index}
-              className="border border-gray-200 bg-gray-200 mt-2 p-[20px] mx-auto rounded-xl"
+              className="border border-gray-200 bg-white mt-2 p-[20px] mx-auto rounded-xl"
             >
               <SkeletonText
                 mt="4"

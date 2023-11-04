@@ -20,7 +20,11 @@ import useToast from "@/hooks/useToast"
 import useWorkoutData from "@/hooks/useWorkoutData"
 import useSessions from "@/hooks/api/useSessions"
 
-export default function EditWorkoutModal({ onClose, thisWorkoutData, getUserSessions }) {
+export default function EditWorkoutModal({
+  onClose,
+  thisWorkoutData,
+  getUserSessions,
+}) {
   const [showConfirmDiscardChangesModal, setShowConfirmDiscardChangesModal] =
     useState(false)
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -58,13 +62,14 @@ export default function EditWorkoutModal({ onClose, thisWorkoutData, getUserSess
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
+        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
             <i className="fa fa-heading mr-4" />
             <Input
               variant="flushed"
               value={workoutData.name}
               onChange={handleEditWorkoutName}
+              marginRight={"30px"}
             />
             <Button onClick={saveSessionChanges}>Save</Button>
           </div>
@@ -78,6 +83,7 @@ export default function EditWorkoutModal({ onClose, thisWorkoutData, getUserSess
                   variant="flushed"
                   value={workoutData.notes}
                   onChange={(e) => handleEditWorkoutNotes(e)}
+                  marginRight={"30px"}
                 ></Input>
               </div>
 

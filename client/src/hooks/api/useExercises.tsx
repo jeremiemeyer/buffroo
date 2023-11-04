@@ -31,11 +31,12 @@ const useExercises = () => {
     }
   }
 
-  const addNewUserExercise = async ({ userId, exerciseData }) => {
+  const addNewUserExercise = async ({ userId, newExerciseData }) => {
     const USER_EXERCISES_URL = `/api/users/${userId}/exercises`
     try {
-      await axiosPrivate.post(USER_EXERCISES_URL, exerciseData)
-      setExercisesData([...exercisesData, exerciseData])
+      const response = await axiosPrivate.post(USER_EXERCISES_URL, newExerciseData)
+      const updatedExercisesData = [...exercisesData, newExerciseData]
+      setExercisesData(updatedExercisesData)
       return true
     } catch (error) {
       console.error("Error adding new exercise:", error)
@@ -69,8 +70,11 @@ const useExercises = () => {
     getAllExercises()
   }, [])
 
+
+  
   return {
     exercisesData,
+    setExercisesData,
     isLoading,
     getAllExercises,
     addNewUserExercise,

@@ -17,6 +17,7 @@ const workoutSessionSchema = new Schema({
           rpe: { type: Number },
         },
       ],
+      exerciseId: { type: String },
     },
   ],
 })

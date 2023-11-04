@@ -89,7 +89,7 @@ export default function AddExerciseToTemplateModal({onClose}) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-100 text-slate-900 xl:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
+        className="z-[900] relative bg-gray-50 text-slate-900 xl:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
       >
         <div className="flex flex-row justify-between items-center h-[10%]">
           <Button onClick={onClose} variant="destructive">
@@ -118,7 +118,7 @@ export default function AddExerciseToTemplateModal({onClose}) {
               Array.from({ length: 12 }).map((_, index) => (
                 <Box
                   key={index}
-                  className="bg-gray-200 mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
+                  className="bg-white mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
                 >
                   <SkeletonText
                     mt="4"

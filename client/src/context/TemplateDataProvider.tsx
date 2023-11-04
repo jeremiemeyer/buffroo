@@ -40,6 +40,7 @@ export const TemplateDataProvider = ({ children }) => {
     const exerciseToBeAdded = {
       name: exercise.name,
       sets: [{ reps: "", weight: "", rpe: "" }],
+      exerciseId: exercise._id,
     }
     const updatedExercises = [...templateData.exercises, exerciseToBeAdded]
     setTemplateData({ ...templateData, exercises: updatedExercises })

@@ -39,12 +39,12 @@ export default function TemplateCard({
   return (
     <>
       <div
-        className="border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-3xl  mx-auto cursor-pointer"
+        className="border border-gray-200 bg-white hover:bg-sky-50 hover:border-blue-200 rounded-3xl  mx-auto cursor-pointer"
         onClick={() => setShowConfirmStartWorkoutFromTemplateModal(true)}
       >
         <div className="p-4">
           <div className="flex justify-between items-center pb-4">
-            <h1 className="text-2xl font-light">{templateData.name}</h1>
+            <h1 className="text-2xl font-semibold">{templateData.name}</h1>
             {/* <button onClick={() => console.log(templateData)}>Consolelog data</button> */}
             <div onClick={(e) => e.stopPropagation()}>
               <Menu variant="filled">
@@ -52,7 +52,8 @@ export default function TemplateCard({
                   as={IconButton}
                   aria-label="Options"
                   icon={<Icon as={FaEllipsisH} />}
-                  variant="filled"
+                  textColor="rgba(14,165,233,1)" //sky-500
+                  backgroundColor="rgba(186,230,253,0.4)" //sky-200
                   className="hover:bg-gray-200"
                 />
                 <MenuList zIndex={"600"}>

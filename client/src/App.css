@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 #root {
   text-align: center;
+   background-color: rgb(249 250 251); /*gray-50*/
+
 }
 
 @layer base {

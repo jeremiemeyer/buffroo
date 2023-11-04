@@ -4,6 +4,6 @@ const userController = require('../../../controllers/api/users/userController');
 
 router.route('/:userId')
     .get(userController.getUserData)
-    .patch(userController.editUserPreferences)
+    .patch(userController.editUserData)
 
 module.exports = router;

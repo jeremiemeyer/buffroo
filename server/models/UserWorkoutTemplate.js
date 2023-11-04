@@ -15,6 +15,7 @@ const userWorkoutTemplateSchema = new Schema({
           rpe: { type: Number },
         },
       ],
+      exerciseId: { type: String },
     },
   ],
 })

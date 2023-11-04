@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -6,23 +6,19 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   roles: {
-    User: {
-      type: Number,
-      default: 2001,
-    },
+    User: { type: Number, default: 2001 },
     Admin: { type: Number },
   },
-  preferences: {
-    unitsystem: {
-      type: String,
-      default: "metric",
+  refreshToken: { type: String },
+  userData: {
+    preferences: {
+      theme: { type: String, default: "light" },
+      unitSystem: { type: String, default: "metric" },
     },
-    theme: {
-      type: String,
-      default: "light"
+    goals: {
+      workoutsPerWeek: { type: Number, default: 3 },
     },
   },
-  refreshToken: { type: String },
 })
 
 const User = mongoose.model("User", userSchema, "users")

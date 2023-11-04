@@ -86,7 +86,7 @@ export default function CreateEditTemplateModal({
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
+        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
             <i className="fa fa-heading mr-4" />
             <Input
@@ -94,6 +94,7 @@ export default function CreateEditTemplateModal({
               variant="flushed"
               value={templateData.name}
               onChange={handleEditTemplateName}
+              marginRight={"30px"}
             />
             <Button onClick={saveOrEditTemplate} variant="secondary">
               Save
@@ -113,6 +114,7 @@ export default function CreateEditTemplateModal({
                   variant="flushed"
                   value={templateData.notes}
                   onChange={(e) => handleEditTemplateNotes(e)}
+                  marginRight={"30px"}
                 ></Input>
               </div>
 

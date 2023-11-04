@@ -131,7 +131,7 @@ export default function ExerciseInTemplate({
   }
 
   return (
-    <div className="pb-8 bg-gray-200 rounded-xl p-4">
+    <div className="pb-8 bg-white border border-gray-200 rounded-xl p-4">
       <div className="flex flex-row justify-between">
         <p className="text-2xl">{exercise.name}</p>
         <Menu variant="filled">
@@ -139,7 +139,8 @@ export default function ExerciseInTemplate({
             as={IconButton}
             aria-label="Options"
             icon={<Icon as={FaEllipsisH} />}
-            variant="filled"
+            textColor="rgba(14,165,233,1)" //sky-500
+            backgroundColor="rgba(186,230,253,0.4)" //sky-200
           />
           <MenuList>
             <MenuItem
@@ -181,7 +182,7 @@ export default function ExerciseInTemplate({
         </button> */}
       </div>
       <div className="space-y-2">
-        <div className="grid grid-cols-5 gap-8">
+        <div className="grid grid-cols-5 gap-8 font-semibold">
           <div>Set</div>
           <div>Prev.</div>
           <div>kg</div>
@@ -192,7 +193,7 @@ export default function ExerciseInTemplate({
           exerciseSets.length > 0 &&
           exerciseSets.map((set, index) => (
             <div
-              className="grid grid-cols-5 bg-gray-200 px-2 items-center gap-8"
+              className="grid grid-cols-5 bg-white px-2 items-center gap-8"
               key={index}
             >
               <div>{index + 1}</div>

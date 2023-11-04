@@ -13,22 +13,23 @@ const getUserData = async (req, res) => {
   res.json(userData)
 }
 
-const editUserPreferences = async (req, res) => {
+const editUserData = async (req, res) => {
   if (!req?.params?.userId)
     return res.status(400).json({ message: "User ID required." }) // 400 Bad Request
 
   const { userId } = req.params
-  const { userPreferences } = req.body
+  const { userData } = req.body
+  // console.log(userId, userData)
 
-  const updatedUser = await User.findByIdAndUpdate(userId, {preferences: userPreferences}).exec()
+  const updatedUser = await User.findByIdAndUpdate(userId, {userData: userData}).exec()
 
-  if (!updatedUser) return res.status(500).json({ message: "Error updating user preferences"})
+  if (!updatedUser) return res.status(500).json({ message: "Error updating user data"})
   res.json(updatedUser)
   
 }
 
 module.exports = {
   getUserData,
-  editUserPreferences,
+  editUserData,
   // updateUserExercise,
 }

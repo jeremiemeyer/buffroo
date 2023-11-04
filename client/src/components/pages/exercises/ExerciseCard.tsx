@@ -28,6 +28,7 @@ export default function ExerciseCard({
   selectedExerciseId,
   setSelectedExerciseId,
   isCustomUserExercise,
+  index,
 }) {
   const { noEditDefaultExercises } = useToast()
 
@@ -49,13 +50,14 @@ export default function ExerciseCard({
     <div
       // onClick={() => onClickExerciseCard(exerciseId)}
       className={`${
-        isSelected ? "bg-gray-400" : "hover:bg-gray-300 "
-      } border border-gray-200 bg-gray-200 rounded-2xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
+        isSelected ? "bg-gray-200" : "hover:bg-sky-50 hover:border-blue-200"
+      } border bg-white border-gray-200 rounded-2xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
+      key={index}
     >
       <div className="text-4xl mr-8 w-8">{name.charAt(0)}</div>
 
       <div className="flex-col grow">
-        <p className="text-xl font-light">{name}</p>
+        <p className="text-xl font-semibold">{name}</p>
         <p>
           <span className="text-gray-500">Body part:</span> {String(bodypart)}
         </p>
@@ -71,7 +73,8 @@ export default function ExerciseCard({
             as={IconButton}
             aria-label="Options"
             icon={<Icon as={FaEllipsisH} />}
-            variant="filled"
+            textColor="rgba(14,165,233,1)" //sky-500
+            backgroundColor="rgba(186,230,253,0.4)" //sky-200
             onClick={() => setSelectedExerciseId(exerciseId)}
             className="hover:bg-gray-200"
           />

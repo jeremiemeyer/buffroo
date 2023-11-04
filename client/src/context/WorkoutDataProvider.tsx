@@ -40,6 +40,7 @@ export const WorkoutDataProvider = ({ children }) => {
     const exerciseToBeAdded = {
       name: exercise.name,
       sets: [{ reps: "", weight: "", rpe: "" }],
+      exerciseId: exercise._id,
     }
     const updatedExercises = [...workoutData.exercises, exerciseToBeAdded]
     setWorkoutData({ ...workoutData, exercises: updatedExercises })

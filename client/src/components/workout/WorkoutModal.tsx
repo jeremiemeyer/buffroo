@@ -67,7 +67,7 @@ export default function WorkoutModal({ onClose }: any) {
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-100 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
+        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="text-center">
             <Menu>
               <MenuButton
@@ -94,6 +94,7 @@ export default function WorkoutModal({ onClose }: any) {
               value={workoutData.name}
               onChange={handleEditWorkoutName}
               borderColor={"gray.300"}
+              marginRight={"30px"}
             />
             <Button onClick={saveSession} variant="secondary">
               Finish
@@ -110,6 +111,7 @@ export default function WorkoutModal({ onClose }: any) {
                   value={workoutData.notes}
                   onChange={(e) => handleEditWorkoutNotes(e)}
                   borderColor={"gray.300"}
+                  marginRight={"30px"}
                 ></Input>
               </div>
 
@@ -139,9 +141,9 @@ export default function WorkoutModal({ onClose }: any) {
               Cancel workout
             </Button>
           </div>
-          {/* <button onClick={() => console.log(workoutData)}>
+          <button onClick={() => console.log(workoutData)}>
             consolelog workout data
-          </button> */}
+          </button>
         </div>
       </div>
       {showAddExerciseModal &&

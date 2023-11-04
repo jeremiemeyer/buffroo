@@ -16,7 +16,7 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
   const { auth } = useAuth()
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
   const { exerciseAdded, someFieldsAreMissing } = useToast()
-  const { addNewUserExercise } = useExercises()
+  const { addNewUserExercise, setExercisesData, exercisesData } = useExercises()
 
   function handleChange(e) {
     setNameInput(e.target.value)
@@ -43,14 +43,14 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
       category: selectedCategory,
     }
 
-    console.log(newExerciseData)
+    // console.log(newExerciseData)
     const success = await addNewUserExercise({
       userId: auth.userId,
-      exerciseData: newExerciseData,
+      newExerciseData: newExerciseData,
     })
     if (success) {
       onClose()
-      getAllExercises()
+      // getAllExercises()
       exerciseAdded() // toast notification
     }
   }
@@ -62,7 +62,7 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-100 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4 xl:max-w-[1200px]"
+        className="z-[900] relative bg-gray-50 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4 xl:max-w-[1200px]"
       >
         <div className="flex flex-row justify-between items-center text-center">
           <Button onClick={onClose} variant="destructive">

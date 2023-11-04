@@ -40,21 +40,22 @@ export default function WorkoutSessionCard({ sessionData, onClick, getUserSessio
   return (
     <>
       <div
-        className={`border border-gray-200 bg-gray-200 hover:bg-gray-300 rounded-xl text-left mt-2`}
+        className={`border border-gray-200 bg-white hover:bg-sky-50 hover:border-blue-200 rounded-xl text-left mt-2`}
       >
         <div className="p-6">
           {/* <button onClick={() => console.log(sessionData)}>Consolelog this session's data</button> */}
           <div className="flex flex-row justify-between items-center">
-            <span className="font-light text-2xl pb-2">
+            <span className="font-semibold text-2xl pb-2">
               {sessionData?.name}
             </span>
             <Menu variant="filled">
               <MenuButton
                 as={IconButton}
                 aria-label="Options"
+                textColor="rgba(14,165,233,1)" //sky-500
+                backgroundColor="rgba(186,230,253,0.4)" //sky-200
                 icon={<Icon as={FaEllipsisH} />}
-                variant="filled"
-                className="hover:bg-gray-200"
+                className="hover:bg-sky-800"
               />
               <MenuList>
                 <MenuItem
@@ -87,13 +88,13 @@ export default function WorkoutSessionCard({ sessionData, onClick, getUserSessio
           {sessionData?.notes !== "" && (
             <p>
               <i className="fa fa-pen mr-4" />{" "}
-              <span className="font-light italic">“{sessionData?.notes}”</span>
+              <span className="text-gray-400 italic">“{sessionData?.notes}”</span>
             </p>
           )}
 
           <div className="grid grid-cols-2 pt-4">
-            <div className="text-gray-500">Exercise</div>
-            <div className="text-gray-500">Best set</div>
+            <div className="font-semibold">Exercise</div>
+            <div className="font-semibold">Best set</div>
           </div>
           {sessionData?.exercises.map((exercise, key) => (
             <div className="grid grid-cols-2" key={key}>

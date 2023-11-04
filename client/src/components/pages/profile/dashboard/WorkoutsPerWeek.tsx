@@ -73,7 +73,7 @@ export default function WorkoutsPerWeek({
             Workouts/week
           </h1>
           <h2 className="px-4 font-semibold">
-            Current goal:{" "}
+            Goal:{" "}
             <span className="font-normal">
               {userData.goals.workoutsPerWeek}
             </span>

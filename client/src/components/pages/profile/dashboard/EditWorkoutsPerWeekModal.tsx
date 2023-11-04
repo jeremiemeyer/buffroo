@@ -45,7 +45,7 @@ export default function EditWorkoutsPerWeekModal({
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="z-[900] relative bg-gray-50 text-slate-900 min-w-[400px] px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
+          className="z-[900] relative bg-gray-50 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
         >
           <div className="flex flex-row justify-between items-center text-center">
             <Button onClick={onClose} variant="destructive">

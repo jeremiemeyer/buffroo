@@ -181,11 +181,11 @@ const Login = () => {
               <span className="text-black underline">Sign Up</span>
             </Link>
           </span>
-          <div className="font-bold text-red-800 mt-6">
-            /!\ Nouveau compte test: <br />
+          {/* <div className="font-bold text-red-800 mt-6">
+            /!\ Account for testing: <br />
             login: walter <br />
             mdp: @Walter123
-          </div>
+          </div> */}
         </p>
       </div>
     </>

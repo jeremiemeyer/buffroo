@@ -49,7 +49,7 @@ export default function WorkoutModal({ onClose }: any) {
   const { reset, start, pause } = useWorkoutTimer()
   const notify = () => toast("Here is your toast.")
   const { workoutAdded, cannotSubmitEmptyWorkout } = useToast()
-  const { createUserSession } = useSessions()
+  const { createUserSession, getUserSessions } = useSessions()
 
   async function saveSession() {
     const success = await createUserSession({
@@ -60,6 +60,7 @@ export default function WorkoutModal({ onClose }: any) {
       resetWorkout() // workout data reinitialized
       reset() // reset timer
       workoutAdded() // toast
+      getUserSessions()
       onClose() // closes modal
     }
   }

@@ -36,40 +36,6 @@ export default function ExerciseEditModal({
   const EXERCISE_DATA_URL = `/api/exercises/${selectedExerciseId}`
   const EXERCISE_UPDATE_URL = `/api/users/${auth.userId}/exercises/${selectedExerciseId}`
 
-  // const getExerciseData = async () => {
-  //   setIsLoading(true)
-  //   try {
-  //     const response = await axiosPrivate.get(EXERCISE_DATA_URL)
-  //     const exerciseData = response.data
-  //     console.log(exerciseData)
-  //     setExerciseData(exerciseData)
-  //     setIsLoading(false)
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error)
-  //     // navigate("/login", { state: { from: location }, replace: true })
-  //   }
-  // }
-
-  // const editUserExercise = async () => {
-  //   try {
-  //     console.log(EXERCISE_UPDATE_URL)
-  //     const response = await axiosPrivate.patch(EXERCISE_UPDATE_URL, {
-  //       exerciseData: exerciseData,
-  //     })
-  //     const updatedExercise = response.data
-  //     console.log(updatedExercise)
-  //     getExercises()
-  //     onClose()
-  //     exerciseUpdated()
-  //   } catch (error) {
-  //     console.error("Error updating user exercise:", error)
-  //     // navigate("/login", { state: { from: location }, replace: true })
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getExerciseData({ selectedExerciseId })
-  // }, [])
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -87,7 +53,7 @@ export default function ExerciseEditModal({
       updatedExerciseData: thisExerciseData,
     })
     if (success) {
-      getAllExercises()
+      // getAllExercises() -- of course I can force the list to update by calling this function here, which will fetch all the exercises again, but I would like to understand why my "ExercisesList" component does not automatically update, considering it's using the "exercisesData" from the custom hook, and that this value is supposed to change when using "addNewUserExercise"
       onClose()
       exerciseUpdated() // toast
     }

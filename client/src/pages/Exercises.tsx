@@ -21,10 +21,12 @@ import useAuth from "../hooks/useAuth"
 import { Button } from "@/components/ui/button"
 import useExercises from "@/hooks/api/useExercises"
 import ExercisesList from "@/components/pages/exercises/ExercisesList"
+import useUserData from "@/hooks/api/useUserData"
+import WorkoutsPerWeek from "@/components/pages/profile/dashboard/WorkoutsPerWeek"
 
 export default function Exercises() {
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
- 
+
   // const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
 
@@ -37,6 +39,8 @@ export default function Exercises() {
   const location = useLocation()
   const { auth } = useAuth()
   const { exercisesData, getAllExercises, isLoading } = useExercises()
+  const { userData, updateUserData } = useUserData()
+
 
   useEffect(() => {
     // Create a copy of the original exercisesData
@@ -64,8 +68,6 @@ export default function Exercises() {
     // Update filteredExercises with the filtered data
     setFilteredExercises(filteredData)
   }, [exercisesData, searchInput, selectedCategory, selectedBodyPart])
-
-
 
   function onClickExerciseEdit(exerciseId) {
     setShowExerciseEditModal(true)
@@ -125,6 +127,24 @@ export default function Exercises() {
           </div>
         </div>
         {/* <button
+          onClick={() =>
+            updateUserData({
+              userId: auth.userId,
+              updatedUserData: {
+                ...userData,
+                goals: {
+                  ...userData.goals,
+                  workoutsPerWeek: "666",
+                },
+              },
+            })
+          }
+        >
+          change user data
+        </button>
+        <button onClick={() => console.log(userData)}>get user data</button> */}
+        {/* <WorkoutsPerWeek userData={thisUserData} updateUserData={updateUserData} /> */}
+        {/* <button
           onClick={() => {
             const newExercise = {
               _id: "65467b2e0ec1822be06bda33",
@@ -145,7 +165,7 @@ export default function Exercises() {
       </div>
 
       {/* Content */}
-      <ExercisesList exercisesData={filteredExercises} isLoading={isLoading} />
+      <ExercisesList exercisesData={filteredExercises} isLoading={isLoading} getAllExercises={getAllExercises}/>
 
       {showNewExerciseModal &&
         createPortal(
@@ -155,8 +175,6 @@ export default function Exercises() {
           />,
           document.body
         )}
-
-
     </>
   )
 }

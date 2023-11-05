@@ -50,7 +50,8 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
     })
     if (success) {
       onClose()
-      // getAllExercises()
+      // getAllExercises() -- of course I can force the list to update by calling this function here, which will fetch all the exercises again, but I would like to understand why my "ExercisesList" component does not automatically update, considering it's using the "exercisesData" from the custom hook, and that this value is supposed to change when using "addNewUserExercise"
+      
       exerciseAdded() // toast notification
     }
   }

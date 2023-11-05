@@ -15,7 +15,7 @@ import ExerciseCard from "./ExerciseCard"
 import ExerciseStatsModal from "@/components/pages/exercises/ExerciseStatsModal"
 import ExerciseEditModal from "@/components/pages/exercises/ExerciseEditModal"
 
-export default function ExercisesList({ exercisesData, isLoading }) {
+export default function ExercisesList({ exercisesData, isLoading, getAllExercises }) {
   const [showExerciseStatsModal, setShowExerciseStatsModal] = useState(false)
   const [showExerciseEditModal, setShowExerciseEditModal] = useState(false)
   const [selectedExerciseId, setSelectedExerciseId] = useState("")
@@ -44,9 +44,9 @@ export default function ExercisesList({ exercisesData, isLoading }) {
   return (
     <>
       <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-6">
-        {/* <button onClick={() => console.log(exercisesData)}>
-      Consolelog exercisedata
-    </button> */}
+        <button onClick={() => console.log(exercisesData)} className="bg-slate-500 text-white">
+      Click to Consolelog 'exercisesData'
+    </button>
         {isLoading ? (
           Array.from({ length: 12 }).map((_, index) => (
             <Box
@@ -101,7 +101,7 @@ export default function ExercisesList({ exercisesData, isLoading }) {
             exerciseData={exercisesData.find(
               (ex) => ex._id === selectedExerciseId
             )}
-            // getAllExercises={getAllExercises}
+            getAllExercises={getAllExercises}
             // getExercises={getExercises}
           />,
           document.body

@@ -45,7 +45,9 @@ const useSessions = () => {
     // console.log("user id", auth.userId)
 
     try {
-      await axiosPrivate.post(SESSIONS_URL, dataToSend)
+      const newUserSession = await axiosPrivate.post(SESSIONS_URL, dataToSend)
+      setSessionsData([...sessionsData, userSessionData])
+      console.log([...sessionsData, userSessionData])
       return true
     } catch (error) {
       console.error("Error creating user session:", error)

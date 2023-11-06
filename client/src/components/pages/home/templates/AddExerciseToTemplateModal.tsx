@@ -19,7 +19,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import TemplateExercisesListExerciseCard from "./TemplateExercisesListExerciseCard"
 import useTemplateData from "@/hooks/useTemplateData"
 
-export default function AddExerciseToTemplateModal({onClose}) {
+export default function AddExerciseToTemplateModal({onClose, templateData, setTemplateData}) {
   const [isLoading, setIsLoading] = useState(true)
   const [exerciseData, setExerciseData] = useState([])
   const [searchInput, setSearchInput] = useState("")
@@ -31,14 +31,7 @@ export default function AddExerciseToTemplateModal({onClose}) {
   const location = useLocation()
   const DEFAULT_EXERCISES_URL = "/api/exercises"
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
-  const {
-    templateData,
-    setTemplateData,
-    handleEditTemplateNotes,
-    handleEditTemplateName,
-    addExercise,
-    resetTemplate,
-  } = useTemplateData()
+
 
   const getExercises = async () => {
     setIsLoading(true)
@@ -71,14 +64,17 @@ export default function AddExerciseToTemplateModal({onClose}) {
 
   function handleSelectExercise(exercise) {
     setSelectedExercise(exercise)
-    console.log(exercise)
+    // console.log(exercise)
   }
 
-  function handleAddExercise() {
-    if (selectedExercise.length === 0) {
-      return
+  function handleAddExercise(exercise) {
+    const exerciseToBeAdded = {
+      name: exercise.name,
+      sets: [{ reps: "", weight: "", rpe: "" }],
+      exerciseId: exercise._id,
     }
-    addExercise(selectedExercise)
+    const updatedExercises = [...templateData.exercises, exerciseToBeAdded]
+    setTemplateData({ ...templateData, exercises: updatedExercises })
     onClose()
   }
 
@@ -89,13 +85,13 @@ export default function AddExerciseToTemplateModal({onClose}) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-50 text-slate-900 xl:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
+        className="z-[900] relative bg-gray-50 text-slate-900 md:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
       >
         <div className="flex flex-row justify-between items-center h-[10%]">
           <Button onClick={onClose} variant="destructive">
             X
           </Button>
-          <Button onClick={handleAddExercise}>Add</Button>
+          <Button onClick={() => handleAddExercise(selectedExercise)}>Add</Button>
           {/* <Button onClick={handleSave} colorScheme="blue">Save</Button> */}
         </div>
 
@@ -136,6 +132,8 @@ export default function AddExerciseToTemplateModal({onClose}) {
                     key={index}
                     exercise={exercise}
                     isSelected={exercise["_id"] === selectedExercise["_id"]}
+                    templateData={templateData}
+                    setTemplateData={setTemplateData}
                   />
                 ))}
               </>

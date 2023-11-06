@@ -97,10 +97,6 @@ export default function ExerciseInTemplate({
   function handleChange({ index, event, field }: any) {
     const updatedData = { ...templateData }
 
-    const exerciseIndex = updatedData.exercises.findIndex(
-      (exercise: any) => exercise.name === name
-    )
-
     if (exerciseIndex !== -1) {
       const updatedExerciseSets = [...updatedData.exercises[exerciseIndex].sets]
 

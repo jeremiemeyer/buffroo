@@ -134,10 +134,10 @@ function ExerciseProgressLineChart({ sessionsData, selectedExerciseId }) {
               <XAxis dataKey="date" />
               <YAxis dataKey="weight" />
               <Tooltip
-                  formatter={(value, name, props) => {
-                    return `${props.payload.bestSet}`;
-                  }}
-            />
+                formatter={(value, name, props) => {
+                  return `${props.payload.bestSet}`
+                }}
+              />
               <Legend />
               <Line
                 type="monotone"

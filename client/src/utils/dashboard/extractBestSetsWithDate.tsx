@@ -13,16 +13,18 @@ export function extractBestSetsWithDate({ sessionsData, selectedExerciseId }) {
           date.getMonth() + 1
         )}`
 
-        const reps = parseInt(bestSet.split('x')[0].trim());
-        const weight = parseFloat(bestSet.split('x')[1].trim().replace('kg', ''));
-        const product = reps * weight;
+        const reps = parseInt(bestSet.split("x")[0].trim())
+        const weight = parseFloat(
+          bestSet.split("x")[1].trim().replace("kg", "")
+        )
+        const product = reps * weight
 
         bestSets.push({
           date: formattedDate,
           bestSet,
           weight,
         })
-        break // Move to the next session
+        break
       }
     }
   }

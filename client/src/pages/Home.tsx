@@ -86,30 +86,23 @@ export default function Home() {
       {/* Content */}
       <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-6  space-y-4">
         <div className="text-3xl  mt-8">Quick start</div>
-        {/* <button onClick={() => console.log(workoutIsInProgress)}>
-          console log workoutIsInProgress
-        </button> */}
 
         <Button onClick={handleClick}>Start an empty workout</Button>
 
         <div className="pt-12 text-3xl  mt-12 mb-4">
           Start from template
         </div>
-        {/* <button onClick={() => console.log(userTemplatesData)}>Consolelog templates data</button> */}
         <div className="space-y-5">
           <Button onClick={() => setShowCreateTemplateModal(true)}>
             Create new...
           </Button>
 
-          {/* <button onClick={() => console.log(userTemplates)}>
-            Console log user templates
-          </button> */}
-          <div className="space-y-2">
+          <div className="gap-2 grid grid-cols-2">
             {isLoading
               ? Array.from({ length: 5 }).map((_, index) => (
                   <Box
                     key={index}
-                    className="rounded-3xl border border-gray-200 bg-white pb-6 px-6 mx-auto p-8"
+                    className="rounded-3xl border border-gray-200 bg-white pb-6 px-6 mx-auto p-8 w-full"
                   >
                     <SkeletonText
                       noOfLines={8}

@@ -19,15 +19,15 @@ import AddExerciseToWorkoutModal from "../../workout/AddExerciseToWorkoutModal"
 import ConfirmDiscardTemplateModal from "./ConfirmDiscardTemplateModal"
 import ConfirmCancelEditTemplateModal from "./ConfirmCancelEditTemplateModal"
 import AddExerciseToTemplateModal from "./AddExerciseToTemplateModal"
-import useTemplateData from "@/hooks/useTemplateData"
 import useToast from "@/hooks/useToast"
 import useTemplates from "@/hooks/api/useTemplates"
 
 export default function CreateEditTemplateModal({
   actionType,
   onClose,
-  thisTemplateData,
+  templateData,
 }) {
+  const axiosPrivate = useAxiosPrivate()
   const [isLoading, setIsLoading] = useState(false)
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
   const [showConfirmDiscardTemplate, setShowConfirmDiscardTemplate] =
@@ -38,28 +38,53 @@ export default function CreateEditTemplateModal({
     useToast()
   const { createUserTemplate, updateUserTemplate } = useTemplates()
 
-  const {
-    templateData,
-    setTemplateData,
-    handleEditTemplateNotes,
-    handleEditTemplateName,
-    addExercise,
-    resetTemplate,
-  } = useTemplateData()
+  const emptyTemplate = {
+    name: "New template",
+    startdate: "",
+    enddate: "",
+    exercises: [],
+    notes: "",
+  }
 
-  const axiosPrivate = useAxiosPrivate()
+  // if edit mode, takes templateData from TemplateCard. If create mode, initialize with emptyTemplate
+  const [thisTemplateData, setThisTemplateData] = useState(templateData ?? emptyTemplate)
+
+  function resetTemplate() {
+    setThisTemplateData({
+      name: "",
+      startdate: "",
+      enddate: "",
+      exercises: [],
+      notes: "",
+    })
+  }
+
+  function handleEditTemplateNotes(e) {
+    const newNotes = e.target.value
+    setThisTemplateData({ ...thisTemplateData, notes: newNotes })
+  }
+
+  function handleEditTemplateName(e) {
+    const newName = e.target.value
+    setThisTemplateData({ ...thisTemplateData, name: newName })
+  }
+
+  function addExercise(exercise) {
+    const exerciseToBeAdded = {
+      name: exercise.name,
+      sets: [{ reps: "", weight: "", rpe: "" }],
+      exerciseId: exercise._id,
+    }
+    const updatedExercises = [...thisTemplateData.exercises, exerciseToBeAdded]
+    setThisTemplateData({ ...thisTemplateData, exercises: updatedExercises })
+  }
 
 
-  useEffect(() => {
-    setTemplateData(thisTemplateData)
-  }, [])
-
-  // create template (for create mode)
   const saveOrEditTemplate = async () => {
     if (actionType === "create") {
       const success = await createUserTemplate({
         userId: auth.userId,
-        newTemplateData: templateData,
+        newTemplateData: thisTemplateData,
       })
 
       if (success === true) {
@@ -69,8 +94,8 @@ export default function CreateEditTemplateModal({
     } else if (actionType === "edit") {
       const success = await updateUserTemplate({
         userId: auth.userId,
-        templateId: templateData._id,
-        updatedTemplateData: templateData
+        templateId: thisTemplateData._id,
+        updatedTemplateData: thisTemplateData,
       })
 
       if (success === true) {
@@ -89,7 +114,7 @@ export default function CreateEditTemplateModal({
             <Input
               placeholder="Template title"
               variant="flushed"
-              value={templateData.name}
+              value={thisTemplateData && thisTemplateData.name}
               onChange={handleEditTemplateName}
               marginRight={"30px"}
             />
@@ -109,22 +134,25 @@ export default function CreateEditTemplateModal({
                 <Input
                   placeholder="Notes"
                   variant="flushed"
-                  value={templateData.notes}
+                  value={thisTemplateData && thisTemplateData.notes}
                   onChange={(e) => handleEditTemplateNotes(e)}
                   marginRight={"30px"}
                 ></Input>
               </div>
 
+              {/* <button onClick={() => console.log(thisTemplateData)}>
+                consolelog thisTemplateData
+              </button> */}
               {/* Liste des exos */}
               <div className="h-1/2 overflow-auto space-y-3">
                 {!isLoading &&
-                  templateData.exercises.length > 0 &&
-                  templateData.exercises.map((exercise, index) => (
+                  thisTemplateData &&
+                  thisTemplateData.exercises.map((exercise, index) => (
                     <ExerciseInTemplate
                       key={index}
                       exercise={exercise}
-                      templateData={templateData}
-                      setTemplateData={setTemplateData}
+                      templateData={thisTemplateData}
+                      setTemplateData={setThisTemplateData}
                     />
                   ))}
               </div>
@@ -159,6 +187,8 @@ export default function CreateEditTemplateModal({
         createPortal(
           <AddExerciseToTemplateModal
             onClose={() => setShowAddExerciseModal(false)}
+            templateData={thisTemplateData}
+            setTemplateData={setThisTemplateData}
           />,
           document.body
         )}
@@ -180,7 +210,6 @@ export default function CreateEditTemplateModal({
           />,
           document.body
         )}
-
     </>
   )
 }

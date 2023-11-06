@@ -38,14 +38,15 @@ export default function TemplateCard({
   return (
     <>
       <div
-        className="border border-gray-200 bg-white hover:bg-sky-50 hover:border-blue-200 rounded-3xl  mx-auto cursor-pointer"
+        className="border border-gray-200 bg-white hover:bg-sky-50 hover:border-blue-200 rounded-3xl mx-auto cursor-pointer w-full"
         onClick={() => setShowConfirmStartWorkoutFromTemplateModal(true)}
       >
         <div className="p-4">
           <div className="flex justify-between items-center pb-4">
             <h1 className="text-2xl font-semibold">{templateData.name}</h1>
-            {/* <button onClick={() => console.log(templateData)}>Consolelog data</button> */}
             <div onClick={(e) => e.stopPropagation()}>
+            {/* <button onClick={() => console.log(templateData)}>Consolelog templateData</button> */}
+
               <Menu variant="filled">
                 <MenuButton
                   as={IconButton}
@@ -98,7 +99,7 @@ export default function TemplateCard({
         createPortal(
           <CreateEditTemplateModal
             actionType="edit"
-            thisTemplateData={templateData}
+            templateData={templateData}
             onClose={() => setShowEditTemplate(false)}
           />,
           document.body

@@ -6,9 +6,9 @@ export default function TemplateExercisesListExerciseCard({
   onClick,
   isSelected,
   exercise,
+  templateData,
+  setTemplateData,
 }) {
-  const { addExercise } = useTemplateData()
-
   // formats category and bodypart fields correctly for the frontend
   function formatString(category) {
     const words = category
@@ -21,17 +21,25 @@ export default function TemplateExercisesListExerciseCard({
   const { exerciseAddedToTemplate } = useToast()
 
   function handleAddExercise(exercise) {
-    addExercise(exercise)
-    exerciseAddedToTemplate()
+    const exerciseToBeAdded = {
+      name: exercise.name,
+      sets: [{ reps: "", weight: "", rpe: "" }],
+      exerciseId: exercise._id,
+    }
+    const updatedExercises = [...templateData.exercises, exerciseToBeAdded]
+    setTemplateData({ ...templateData, exercises: updatedExercises })
   }
 
   return (
     <div
       onClick={onClick}
       className={`${
-        isSelected ? "bg-blue-100 border-blue-300" : "hover:bg-sky-50 hover:border-blue-200"
+        isSelected
+          ? "bg-blue-200 border-blue-300"
+          : "hover:bg-sky-50 hover:border-blue-200"
       } border border-gray-200 bg-white rounded-xl text-left cursor-pointer mt-2 w-[calc(100%-40px)] mx-auto p-4`}
     >
+      {/* <button onClick={() => console.log(exercise)}>consolelog exercise</button> */}
       <div className="flex flex-row items-center">
         <div className="mr-8 text-4xl">{name.charAt(0)}</div>
         <div className="grow">

@@ -77,6 +77,11 @@ export const TemplatesProvider = ({ children }) => {
           withCredentials: true,
         }
       )
+
+      const updatedUserTemplatesData = userTemplatesData.filter(
+        (template) => template._id !== templateId
+      )
+      setUserTemplatesData(updatedUserTemplatesData)
       return true
     } catch (error) {
       console.error("Error deleting session:", error)

@@ -58,7 +58,7 @@ export default function WorkoutSessionCard({
                 aria-label="Options"
                 textColor="rgba(14,165,233,1)" //sky-500
                 bg={"rgba(186,230,253,0.4)"}
-                _hover={{ bg: "rgba(186,230,253,0.8)"}}
+                _hover={{ bg: "rgba(186,230,253,0.8)" }}
                 icon={<Icon as={FaEllipsisH} />}
                 className="hover:bg-sky-800"
               />
@@ -81,18 +81,21 @@ export default function WorkoutSessionCard({
             </Menu>
           </div>
           <p>
-            <i className="fa-regular fa-calendar mr-4" />
+            <span className="mr-4">📆</span>
+            {/* <i className="fa-regular fa-calendar mr-4" /> */}
             {formatISODate(sessionData?.startdate)}
           </p>
 
-          <i className="fa-solid fa-clock mr-4" />
+          {/* <i className="fa-solid fa-clock mr-4" /> */}
+          <span className="mr-4">🕓</span>
           {calculateWorkoutDuration(
             sessionData?.startdate,
             sessionData?.enddate
           )}
           {sessionData?.notes !== "" && (
             <p>
-              <i className="fa fa-pen mr-4" />{" "}
+              <span className="mr-4">📝</span>
+              {/* <i className="fa fa-pen mr-4" />{" "} */}
               <span className="text-gray-400 italic">
                 “{sessionData?.notes}”
               </span>

@@ -30,7 +30,7 @@ export default function WorkoutExercisesListExerciseCard({
       onClick={onClick}
       className={`${
         isSelected ? "bg-blue-200 border-blue-300" : "hover:bg-sky-50 hover:border-blue-200"
-      } border border-gray-200 bg-white rounded-xl text-left cursor-pointer mt-2 w-[calc(100%-40px)] mx-auto p-4`}
+      } border border-gray-200 bg-white rounded-xl text-left cursor-pointer mt-2  mx-auto p-4`}
     >
       <div className="flex flex-row items-center">
         <div className="mr-8 text-4xl w-4">{name.charAt(0)}</div>

@@ -28,6 +28,7 @@ export default function TemplateExercisesListExerciseCard({
     }
     const updatedExercises = [...templateData.exercises, exerciseToBeAdded]
     setTemplateData({ ...templateData, exercises: updatedExercises })
+    exerciseAddedToTemplate()
   }
 
   return (

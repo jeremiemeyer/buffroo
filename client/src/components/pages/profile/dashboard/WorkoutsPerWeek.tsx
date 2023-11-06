@@ -53,6 +53,7 @@ const WorkoutsPerWeekBarChart = ({ aggregatedData, goalValue }) => {
           axisLine={true}
         />
         <YAxis
+          datakey="workouts"
           domain={yDomain}
           stroke="#888888"
           fontSize={12}

@@ -36,7 +36,7 @@ export default function Profile() {
         </div>
 
         {/* Content  */}
-        <div className="pt-[80px] pb-[100px] z-[0] px-6 w-full">
+        <div className="pt-[80px] pb-[100px] z-[0] px-4 w-full">
           {/* <button onClick={() => console.log(auth)}>Click</button> */}
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>

@@ -40,7 +40,7 @@ export default function Settings({ userData, updateUserData }) {
           <div className="rounded-3xl border bg-white pt-8 pb-6 px-6 max-w-[800px] mx-auto">
             <div className="text-left space-y-4 pb-6">
               <div className="grid grid-cols-2">
-                <span>Preferred unit system</span>
+                <span className="truncate ...">Preferred unit system</span>
                 <Select
                   placeholder="Select option"
                   value={updatedUserPreferences["unitSystem"]}

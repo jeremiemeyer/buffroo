@@ -50,7 +50,7 @@ export default function History() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[80px] z-[0] mx-auto w-full px-6">
+      <div className="pt-[80px] pb-[80px] z-[0] mx-auto w-full px-4">
         {/* <button onClick={() => console.log(sessionsData)}>
           Get history data
         </button> */}

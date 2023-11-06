@@ -46,7 +46,7 @@ export default function ExercisesList({
 
   return (
     <>
-      <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-6">
+      <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-4">
         {/* <button
           onClick={() => console.log(exercisesData)}
           className="bg-slate-500 text-white"

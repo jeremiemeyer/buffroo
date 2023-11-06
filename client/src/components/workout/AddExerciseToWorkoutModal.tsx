@@ -85,7 +85,7 @@ export default function AddExerciseToWorkoutModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-50 text-slate-900 md:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
+        className="z-[900] w-full md:max-w-[600px] m-2 relative bg-gray-50 text-slate-900 md:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
       >
         <div className="flex flex-row justify-between items-center h-[10%]">
           <Button onClick={onClose} variant="destructive">

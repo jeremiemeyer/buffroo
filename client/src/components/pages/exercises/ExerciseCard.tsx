@@ -54,7 +54,7 @@ export default function ExerciseCard({
       } border bg-white border-gray-200 rounded-3xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
       key={index}
     >
-      <div className="text-4xl mr-8 w-8">{name.charAt(0)}</div>
+      <div className="text-4xl mr-8 w-6">{name.charAt(0)}</div>
 
       <div className="flex-col grow">
         <p className="text-xl font-semibold">{name}</p>

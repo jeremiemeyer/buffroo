@@ -84,7 +84,7 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-6  space-y-4">
+      <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-4 space-y-4">
         <div className="text-3xl  mt-8">Quick start</div>
 
         <Button onClick={handleClick}>Start an empty workout</Button>

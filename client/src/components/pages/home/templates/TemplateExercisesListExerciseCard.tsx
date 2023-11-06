@@ -42,7 +42,7 @@ export default function TemplateExercisesListExerciseCard({
     >
       {/* <button onClick={() => console.log(exercise)}>consolelog exercise</button> */}
       <div className="flex flex-row items-center">
-        <div className="mr-8 text-4xl">{name.charAt(0)}</div>
+        <div className="mr-8 text-4xl w-4">{name.charAt(0)}</div>
         <div className="grow">
           <p className="font-semibold text-xl">{name}</p>
           <p>

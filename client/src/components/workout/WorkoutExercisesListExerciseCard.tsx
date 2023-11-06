@@ -33,7 +33,7 @@ export default function WorkoutExercisesListExerciseCard({
       } border border-gray-200 bg-white rounded-xl text-left cursor-pointer mt-2 w-[calc(100%-40px)] mx-auto p-4`}
     >
       <div className="flex flex-row items-center">
-        <div className="mr-8 text-4xl">{name.charAt(0)}</div>
+        <div className="mr-8 text-4xl w-4">{name.charAt(0)}</div>
         <div className="grow">
           <p className="font-semibold text-xl">{name}</p>
           <p>

@@ -1,13 +1,14 @@
 //@ts-nocheck
+import ExerciseProgress from "./ExerciseProgress"
 import WorkoutsPerWeek from "./WorkoutsPerWeek"
 
-export default function Dashboard({ userData,  updateUserData }) {
+export default function Dashboard({ userData, updateUserData }) {
   return (
     <>
-      <WorkoutsPerWeek
-        userData={userData}
-        updateUserData={updateUserData}
-      />
+      <div className="space-y-2">
+        <WorkoutsPerWeek userData={userData} updateUserData={updateUserData} />
+        <ExerciseProgress />
+      </div>
     </>
   )
 }

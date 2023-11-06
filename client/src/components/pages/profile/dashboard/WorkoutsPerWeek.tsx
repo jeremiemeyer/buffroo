@@ -33,7 +33,7 @@ import { useState } from "react"
 import { create } from "domain"
 import EditWorkoutsPerWeekModal from "./EditWorkoutsPerWeekModal"
 import useSessions from "@/hooks/api/useSessions"
-import { aggregateWorkoutsByWeek } from "@/utils/aggregateWorkoutsByWeek"
+import { aggregateWorkoutsByWeek } from "@/utils/dashboard/aggregateWorkoutsByWeek"
 
 const WorkoutsPerWeekBarChart = ({ aggregatedData, goalValue }) => {
   // Find the maximum value in your aggregated data
@@ -64,7 +64,7 @@ const WorkoutsPerWeekBarChart = ({ aggregatedData, goalValue }) => {
         />
         <Bar dataKey="workouts" fill="rgb(37 99 235)" radius={[4, 4, 0, 0]} />
         <ReferenceLine y={goalValue} stroke="red" />
-        <CartesianGrid horizontal={true} stroke="rgba(107,114,128,0.2)" />
+        <CartesianGrid horizontal={true} strokeDasharray="3 3" />
         {/* <Legend /> */}
       </BarChart>
     </ResponsiveContainer>

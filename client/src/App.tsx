@@ -37,9 +37,32 @@ function App() {
       <Route element={<AppLayout />}>
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-            <Route path="/" element={<TemplatesProvider><Home /></TemplatesProvider>} />
-            <Route path="/history" element={<SessionsProvider><History /></SessionsProvider>} />
-            <Route path="/profile" element={<SessionsProvider><Profile /></SessionsProvider>} />
+            <Route
+              path="/"
+              element={
+                <TemplatesProvider>
+                  <Home />
+                </TemplatesProvider>
+              }
+            />
+            <Route
+              path="/history"
+              element={
+                <SessionsProvider>
+                  <History />
+                </SessionsProvider>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ExercisesProvider>
+                  <SessionsProvider>
+                    <Profile />
+                  </SessionsProvider>
+                </ExercisesProvider>
+              }
+            />
             <Route
               path="/exercises"
               element={

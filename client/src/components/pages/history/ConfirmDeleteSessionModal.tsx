@@ -10,7 +10,7 @@ import useAuth from "@/hooks/useAuth"
 import useToast from "@/hooks/useToast"
 
 
-export default function ConfirmDeleteSessionModal({ onClose, sessionData, getUserSessions }) {
+export default function ConfirmDeleteSessionModal({ onClose, sessionData }) {
   const { sessionsData, deleteUserSession } = useSessions()
   const { auth } = useAuth()
   const { workoutDeleted } = useToast()
@@ -22,7 +22,6 @@ export default function ConfirmDeleteSessionModal({ onClose, sessionData, getUse
     })
     if (success) {
       onClose()
-      getUserSessions()
       workoutDeleted() // toast
     }
   }

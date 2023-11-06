@@ -69,6 +69,18 @@ export const SessionsProvider = ({ children }) => {
         updatedSessionData
       )
       const updatedSessionDataResponse = response.data
+
+      // Find the index of the session in sessionsData
+      const sessionIndex = sessionsData.findIndex(
+        (session) => session._id === userSessionId
+      )
+      // Create a copy of the sessionsData object
+      const updatedSessionsData = [...sessionsData]
+      // Update the session with new data
+      updatedSessionsData[sessionIndex] = updatedSessionDataResponse
+      // Set the updated data back in the state
+      setSessionsData(updatedSessionsData)
+
       return true
     } catch (error) {
       console.error("Error updating session:", error)
@@ -85,6 +97,10 @@ export const SessionsProvider = ({ children }) => {
           withCredentials: true,
         }
       )
+      const updatedSessionsData = sessionsData.filter(
+        (session) => session._id !== userSessionId
+      )
+      setSessionsData(updatedSessionsData)
       return true
     } catch (error) {
       console.error("Error deleting session:", error)

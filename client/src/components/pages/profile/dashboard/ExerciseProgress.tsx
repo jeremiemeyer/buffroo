@@ -118,6 +118,7 @@ function ExerciseProgressLineChart({ sessionsData, selectedExerciseId }) {
     <>
       {data.length > 0 ? (
         <>
+        {/* <button onClick={() => console.log(data)}>consolelog data</button> */}
           <ResponsiveContainer width="99%" aspect={2}>
             <LineChart
               width={500}

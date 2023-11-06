@@ -62,6 +62,14 @@ export const TemplatesProvider = ({ children }) => {
     try {
       const response = await axiosPrivate.put(TEMPLATE_URL, updatedTemplateData)
       const updatedTemplateDataResponse = response.data
+
+      const templateIndex = userTemplatesData.findIndex(
+        (template) => template._id === templateId
+      )
+      const updatedUserTemplatesData = [...userTemplatesData]
+      updatedUserTemplatesData[templateIndex] = updatedTemplateDataResponse
+      setUserTemplatesData(updatedUserTemplatesData)
+
       return true
     } catch (error) {
       console.error("Error updating template:", error)

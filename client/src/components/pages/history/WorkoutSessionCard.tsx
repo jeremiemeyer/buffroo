@@ -122,7 +122,6 @@ export default function WorkoutSessionCard({
           <ConfirmDeleteSessionModal
             onClose={() => setShowConfirmDeleteSessionModal(false)}
             sessionData={sessionData}
-            getUserSessions={getUserSessions}
           />,
           document.body
         )}
@@ -131,7 +130,6 @@ export default function WorkoutSessionCard({
           <EditWorkoutModal
             thisWorkoutData={sessionData}
             onClose={() => setShowEditWorkoutModal(false)}
-            getUserSessions={getUserSessions}
           />,
           document.body
         )}

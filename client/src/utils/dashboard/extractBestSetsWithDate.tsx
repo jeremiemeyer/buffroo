@@ -29,6 +29,14 @@ export function extractBestSetsWithDate({ sessionsData, selectedExerciseId }) {
     }
   }
 
+    // Sort the bestSets array by date in ascending order (least recent to most recent)
+    bestSets.sort((a, b) => {
+      // Parse the dates in "DD/MM" format
+      const dateA = a.date.split('/').reverse().join('');
+      const dateB = b.date.split('/').reverse().join('');
+      return dateA.localeCompare(dateB);
+    });
+
   return bestSets
 }
 

@@ -34,7 +34,7 @@ function App() {
       <Route path="unauthorized" element={<Unauthorized />} />
 
       {/* protected routes */}
-      <Route element={<AppLayout />}>
+      <Route element={<SessionsProvider><AppLayout /></SessionsProvider>}>
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route

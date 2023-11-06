@@ -60,7 +60,6 @@ export default function WorkoutModal({ onClose }: any) {
       resetWorkout() // workout data reinitialized
       reset() // reset timer
       workoutAdded() // toast
-      getUserSessions()
       onClose() // closes modal
     }
   }

@@ -23,7 +23,6 @@ import useSessions from "@/hooks/api/useSessions"
 export default function EditWorkoutModal({
   onClose,
   thisWorkoutData,
-  getUserSessions,
 }) {
   const [showConfirmDiscardChangesModal, setShowConfirmDiscardChangesModal] =
     useState(false)
@@ -53,7 +52,6 @@ export default function EditWorkoutModal({
       updatedSessionData: workoutData,
     })
     if (success) {
-      getUserSessions()
       onClose() // closes modal
       workoutUpdated() // toast
     }

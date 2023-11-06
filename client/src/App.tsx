@@ -39,7 +39,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/" element={<TemplatesProvider><Home /></TemplatesProvider>} />
             <Route path="/history" element={<SessionsProvider><History /></SessionsProvider>} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<SessionsProvider><Profile /></SessionsProvider>} />
             <Route
               path="/exercises"
               element={

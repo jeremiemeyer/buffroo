@@ -74,9 +74,9 @@ export default function ExerciseCard({
             aria-label="Options"
             icon={<Icon as={FaEllipsisH} />}
             textColor="rgba(14,165,233,1)" //sky-500
-            backgroundColor="rgba(186,230,253,0.4)" //sky-200
+            bg={"rgba(186,230,253,0.4)"}
+            _hover={{ bg: "rgba(186,230,253,0.8)"}}
             onClick={() => setSelectedExerciseId(exerciseId)}
-            className="hover:bg-gray-200"
           />
           <MenuList zIndex={"600"}>
             <MenuItem

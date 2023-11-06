@@ -43,7 +43,7 @@ export default function TemplateCard({
       >
         <div className="p-4">
           <div className="flex justify-between items-center pb-4">
-            <h1 className="text-2xl font-semibold">{templateData.name}</h1>
+            <h1 className="text-xl md:text-2xl font-semibold truncate ...">{templateData.name}</h1>
             <div onClick={(e) => e.stopPropagation()}>
             {/* <button onClick={() => console.log(templateData)}>Consolelog templateData</button> */}
 

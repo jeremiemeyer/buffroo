@@ -44,7 +44,14 @@ const WorkoutsPerWeekBarChart = ({ aggregatedData, goalValue }) => {
 
   return (
     <ResponsiveContainer width="99%" aspect={2}>
-      <BarChart data={aggregatedData}>
+      <BarChart
+        data={aggregatedData}
+        margin={{
+          top: 5,
+          left: 10,
+          bottom: 5,
+        }}
+      >
         <XAxis
           dataKey="week"
           stroke="#888888"
@@ -53,6 +60,7 @@ const WorkoutsPerWeekBarChart = ({ aggregatedData, goalValue }) => {
           axisLine={true}
         />
         <YAxis
+          width={15}
           datakey="workouts"
           domain={yDomain}
           stroke="#888888"

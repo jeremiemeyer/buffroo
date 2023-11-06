@@ -125,14 +125,13 @@ function ExerciseProgressLineChart({ sessionsData, selectedExerciseId }) {
               data={data}
               margin={{
                 top: 5,
-                right: 30,
-                left: 20,
+                left: 10,
                 bottom: 5,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
-              <YAxis dataKey="weight" />
+              <YAxis dataKey="weight" width={15} />
               <Tooltip
                 formatter={(value, name, props) => {
                   return `${props.payload.bestSet}`

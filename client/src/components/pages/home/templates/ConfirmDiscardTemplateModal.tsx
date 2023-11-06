@@ -8,11 +8,11 @@ export default function ConfirmDiscardTemplateModal({
   onClose,
   onConfirmDiscardTemplate,
 }) {
-  const { resetTemplate } = useTemplateData()
+  // const { resetTemplate } = useTemplateData()
 
   function handleDiscard() {
     onConfirmDiscardTemplate()
-    resetTemplate()
+    // resetTemplate()
     onClose()
   }
 

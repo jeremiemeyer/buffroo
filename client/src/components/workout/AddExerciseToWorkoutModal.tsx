@@ -114,7 +114,7 @@ export default function AddExerciseToWorkoutModal({
               Array.from({ length: 12 }).map((_, index) => (
                 <Box
                   key={index}
-                  className="bg-white mt-2 w-[calc(100%-40px)] p-[20px] mx-auto rounded-xl"
+                  className="bg-white mt-2 p-[20px] mx-auto rounded-xl"
                 >
                   <SkeletonText
                     mt="4"

@@ -10,12 +10,15 @@ import {
   Box,
 } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
-import useExercises from "@/hooks/api/useExercises"
 import ExerciseCard from "./ExerciseCard"
 import ExerciseStatsModal from "@/components/pages/exercises/ExerciseStatsModal"
 import ExerciseEditModal from "@/components/pages/exercises/ExerciseEditModal"
 
-export default function ExercisesList({ exercisesData, isLoading, getAllExercises }) {
+export default function ExercisesList({
+  exercisesData,
+  isLoading,
+  getAllExercises,
+}) {
   const [showExerciseStatsModal, setShowExerciseStatsModal] = useState(false)
   const [showExerciseEditModal, setShowExerciseEditModal] = useState(false)
   const [selectedExerciseId, setSelectedExerciseId] = useState("")
@@ -28,30 +31,33 @@ export default function ExercisesList({ exercisesData, isLoading, getAllExercise
     setShowExerciseStatsModal(true)
   }
 
-    // No overflow when modal is open
-    // useEffect(() => {
-    //   if (
-    //     showNewExerciseModal ||
-    //     showExerciseEditModal ||
-    //     showExerciseStatsModal
-    //   ) {
-    //     document.body.style.overflow = "hidden"
-    //   } else {
-    //     document.body.style.overflow = "auto"
-    //   }
-    // }, [showNewExerciseModal, showExerciseEditModal, showExerciseStatsModal])
+  // No overflow when modal is open
+  // useEffect(() => {
+  //   if (
+  //     showNewExerciseModal ||
+  //     showExerciseEditModal ||
+  //     showExerciseStatsModal
+  //   ) {
+  //     document.body.style.overflow = "hidden"
+  //   } else {
+  //     document.body.style.overflow = "auto"
+  //   }
+  // }, [showNewExerciseModal, showExerciseEditModal, showExerciseStatsModal])
 
   return (
     <>
       <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-6">
-        <button onClick={() => console.log(exercisesData)} className="bg-slate-500 text-white">
-      Click to Consolelog 'exercisesData'
-    </button>
+        {/* <button
+          onClick={() => console.log(exercisesData)}
+          className="bg-slate-500 text-white"
+        >
+          Click to Consolelog 'exercisesData'
+        </button> */}
         {isLoading ? (
           Array.from({ length: 12 }).map((_, index) => (
             <Box
               key={index}
-              className="border bg-white border-gray-200  mt-2  p-[20px] mx-auto rounded-xl"
+              className="border bg-white border-gray-200  mt-2  p-[20px] mx-auto rounded-3xl"
             >
               <SkeletonText
                 mt="4"

@@ -50,8 +50,8 @@ export default function ExerciseCard({
     <div
       // onClick={() => onClickExerciseCard(exerciseId)}
       className={`${
-        isSelected ? "bg-gray-200" : "hover:bg-sky-50 hover:border-blue-200"
-      } border bg-white border-gray-200 rounded-2xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
+        isSelected ? "bg-gray-200" : ""
+      } border bg-white border-gray-200 rounded-3xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
       key={index}
     >
       <div className="text-4xl mr-8 w-8">{name.charAt(0)}</div>

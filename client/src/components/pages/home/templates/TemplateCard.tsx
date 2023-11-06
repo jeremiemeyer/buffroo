@@ -23,7 +23,6 @@ import ConfirmStartWorkoutFromTemplateModal from "./ConfirmStartWorkoutFromTempl
 
 export default function TemplateCard({
   templateData,
-  getUserTemplates,
   startWorkoutFromTemplate,
 }) {
   const [showConfirmDeleteTemplate, setShowConfirmDeleteTemplate] =
@@ -90,7 +89,6 @@ export default function TemplateCard({
         createPortal(
           <ConfirmDeleteTemplateModal
             onClose={() => setShowConfirmDeleteTemplate(false)}
-            getUserTemplates={getUserTemplates}
             templateData={templateData}
           />,
           document.body
@@ -100,7 +98,6 @@ export default function TemplateCard({
           <CreateEditTemplateModal
             actionType="edit"
             thisTemplateData={templateData}
-            getUserTemplates={getUserTemplates}
             onClose={() => setShowEditTemplate(false)}
           />,
           document.body

@@ -27,7 +27,6 @@ export default function CreateEditTemplateModal({
   actionType,
   onClose,
   thisTemplateData,
-  getUserTemplates, // for edit mode
 }) {
   const [isLoading, setIsLoading] = useState(false)
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -64,7 +63,6 @@ export default function CreateEditTemplateModal({
       })
 
       if (success === true) {
-        getUserTemplates() // to refresh list of templates
         onClose() // closes modal
         templateAdded() // toast
       }
@@ -76,7 +74,6 @@ export default function CreateEditTemplateModal({
       })
 
       if (success === true) {
-        getUserTemplates() // to refresh list of templates
         templateUpdated() // toast
         onClose() // closes modal
       }
@@ -184,14 +181,6 @@ export default function CreateEditTemplateModal({
           document.body
         )}
 
-      {/* {showConfirmDiscardChangesModal &&
-        createPortal(
-          <ConfirmDiscardChangesModal
-            onClose={() => setShowConfirmDiscardChangesModal(false)}
-            onCancelEditWorkout={onClose}
-          />,
-          document.body
-        )} */}
     </>
   )
 }

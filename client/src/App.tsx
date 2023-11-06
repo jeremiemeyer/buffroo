@@ -1,17 +1,20 @@
-import "./App.css"
-import Home from "./pages/Home.tsx"
-import Register from "./pages/Register.tsx"
-import Login from "./pages/Login.tsx"
-import Profile from "./pages/Profile.tsx"
-import History from "./pages/History.tsx"
-import Exercises from "./pages/Exercises.tsx"
-import Unauthorized from "./pages/Unauthorized.tsx"
-import NotFound from "./components/NotFound.tsx"
-import RequireAuth from "./components/RequireAuth.tsx"
-import PersistLogin from "./components/PersistLogin.tsx"
+import "@/App.css"
+import Home from "@/pages/Home.tsx"
+import Register from "@/pages/Register.tsx"
+import Login from "@/pages/Login.tsx"
+import Profile from "@/pages/Profile.tsx"
+import History from "@/pages/History.tsx"
+import Exercises from "@/pages/Exercises.tsx"
+import Unauthorized from "@/pages/Unauthorized.tsx"
+import NotFound from "@/components/NotFound.tsx"
+import RequireAuth from "@/components/RequireAuth.tsx"
+import PersistLogin from "@/components/PersistLogin.tsx"
 import { Routes, Route } from "react-router-dom"
-import LoginRegister from "./pages/LoginRegister.tsx"
-import { AppLayout } from "./components/AppLayout.tsx"
+import LoginRegister from "@/pages/LoginRegister.tsx"
+import { AppLayout } from "@/components/AppLayout.tsx"
+import { ExercisesProvider } from "@/context/api/ExercisesProvider.tsx"
+import { SessionsProvider } from "@/context/api/SessionsProvider.tsx"
+import { TemplatesProvider } from "./context/api/TemplatesProvider"
 
 const ROLES = {
   User: 2001,
@@ -34,10 +37,17 @@ function App() {
       <Route element={<AppLayout />}>
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/history" element={<History />} />
+            <Route path="/" element={<TemplatesProvider><Home /></TemplatesProvider>} />
+            <Route path="/history" element={<SessionsProvider><History /></SessionsProvider>} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/exercises" element={<Exercises />} />
+            <Route
+              path="/exercises"
+              element={
+                <ExercisesProvider>
+                  <Exercises />
+                </ExercisesProvider>
+              }
+            />
           </Route>
         </Route>
       </Route>

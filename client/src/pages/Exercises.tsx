@@ -25,9 +25,16 @@ import useUserData from "@/hooks/api/useUserData"
 import WorkoutsPerWeek from "@/components/pages/profile/dashboard/WorkoutsPerWeek"
 
 export default function Exercises() {
+  const {
+    exercisesData,
+    isLoading,
+    getAllExercises,
+    addNewUserExercise,
+    editUserExercise,
+  } = useExercises()
+  
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
 
-  // const [exerciseData, setExerciseData] = useState([])
   const [filteredExercises, setFilteredExercises] = useState([])
 
   const [searchInput, setSearchInput] = useState("")
@@ -38,9 +45,7 @@ export default function Exercises() {
   const navigate = useNavigate()
   const location = useLocation()
   const { auth } = useAuth()
-  const { exercisesData, getAllExercises, isLoading } = useExercises()
   const { userData, updateUserData } = useUserData()
-
 
   useEffect(() => {
     // Create a copy of the original exercisesData
@@ -126,46 +131,15 @@ export default function Exercises() {
             </Select>
           </div>
         </div>
-        {/* <button
-          onClick={() =>
-            updateUserData({
-              userId: auth.userId,
-              updatedUserData: {
-                ...userData,
-                goals: {
-                  ...userData.goals,
-                  workoutsPerWeek: "666",
-                },
-              },
-            })
-          }
-        >
-          change user data
-        </button>
-        <button onClick={() => console.log(userData)}>get user data</button> */}
-        {/* <WorkoutsPerWeek userData={thisUserData} updateUserData={updateUserData} /> */}
-        {/* <button
-          onClick={() => {
-            const newExercise = {
-              _id: "65467b2e0ec1822be06bda33",
-              userId: "6545eb6a98c432e7721d3da6",
-              name: "erdf",
-              bodypart: "cardio",
-              category: "weighted-bodyweight",
-              __v: 0,
-            }
 
-            setFilteredExercises([...filteredExercises, newExercise])
-          }}
-          className="text-4xl "
-        >
-          change filteredexercisesData
-        </button>
-        // <button onClick={() => console.log(exercisesData)}>zeze</button> */}
       </div>
 
       {/* Content */}
-      <ExercisesList exercisesData={filteredExercises} isLoading={isLoading} getAllExercises={getAllExercises}/>
+      <ExercisesList
+        exercisesData={filteredExercises}
+        isLoading={isLoading}
+        getAllExercises={getAllExercises}
+      />
 
       {showNewExerciseModal &&
         createPortal(

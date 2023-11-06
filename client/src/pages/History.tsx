@@ -51,14 +51,14 @@ export default function History() {
 
       {/* Content */}
       <div className="pt-[80px] pb-[80px] z-[0] mx-auto w-full px-6">
-        <button onClick={() => console.log(sessionsData)}>
+        {/* <button onClick={() => console.log(sessionsData)}>
           Get history data
-        </button>
+        </button> */}
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <Box
               key={index}
-              className="border border-gray-200 bg-white mt-2 p-[20px] mx-auto rounded-xl"
+              className="border border-gray-200 bg-white mt-2 p-[20px] mx-auto rounded-3xl"
             >
               <SkeletonText
                 mt="4"

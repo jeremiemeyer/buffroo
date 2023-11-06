@@ -37,7 +37,7 @@ export default function Home() {
   const { workoutAdded, workoutAlreadyInProgress } = useToast()
   const { userTemplatesData, isLoading, getUserTemplates } = useTemplates()
   const [filteredUserTemplates, setFilteredUserTemplates] =
-    useState(userTemplatesData)
+    useState()
 
   useEffect(() => {
     setFilteredUserTemplates(userTemplatesData)
@@ -137,7 +137,6 @@ export default function Home() {
           <CreateEditTemplateModal
             actionType="create"
             onClose={() => setShowCreateTemplateModal(false)}
-            getUserTemplates={getUserTemplates}
             thisTemplateData={{
               name: "New template",
               startdate: "",

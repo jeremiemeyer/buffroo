@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { Button } from "@/components/ui/button"
 import { Input } from "@chakra-ui/react"
-import { useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import useAuth from "@/hooks/useAuth"
 import useToast from "@/hooks/useToast"
 import useUserData from "@/hooks/api/useUserData"
@@ -17,6 +17,11 @@ export default function EditWorkoutsPerWeekModal({
   const { auth } = useAuth()
   const { preferencesSaved } = useToast()
   const { getUserData } = useUserData()
+  const workoutsPerWeekInputRef = useRef(null)
+
+  useEffect(() => {
+    workoutsPerWeekInputRef.current.focus()
+  }, [])
 
   async function handleClick() {
     const success = await updateUserData({
@@ -30,7 +35,6 @@ export default function EditWorkoutsPerWeekModal({
       },
     })
     if (success === true) {
-    //   getUserData()
       onClose() // closes modal
       preferencesSaved() // toast
 
@@ -57,6 +61,7 @@ export default function EditWorkoutsPerWeekModal({
 
           <div className="pt-4">Target Workouts per Week</div>
           <Input
+            ref={workoutsPerWeekInputRef}
             value={updatedWorkoutsPerWeekGoal}
             onChange={(e) => setUpdatedWorkoutsPerWeekGoal(e.target.value)}
           />

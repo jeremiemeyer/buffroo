@@ -9,7 +9,6 @@ import useTemplates from "@/hooks/api/useTemplates"
 export default function ConfirmDeleteTemplateModal({
   onClose,
   onConfirmDeleteTemplate,
-  getUserTemplates,
   templateData,
 }) {
   const { templateDeleted } = useToast()
@@ -23,7 +22,6 @@ export default function ConfirmDeleteTemplateModal({
     })
     if (success === true) {
       onClose() // closes modal
-      getUserTemplates() // "refresh" the page
       templateDeleted() // toast
     }
   }

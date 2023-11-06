@@ -29,7 +29,11 @@ import useAuth from "@/hooks/useAuth"
 import useToast from "@/hooks/useToast"
 import EditWorkoutModal from "./EditWorkoutModal"
 
-export default function WorkoutSessionCard({ sessionData, onClick, getUserSessions }) {
+export default function WorkoutSessionCard({
+  sessionData,
+  onClick,
+  getUserSessions,
+}) {
   const [showConfirmDeleteSessionModal, setShowConfirmDeleteSessionModal] =
     useState(false)
   const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false)
@@ -40,7 +44,7 @@ export default function WorkoutSessionCard({ sessionData, onClick, getUserSessio
   return (
     <>
       <div
-        className={`border border-gray-200 bg-white hover:bg-sky-50 hover:border-blue-200 rounded-xl text-left mt-2`}
+        className={`border border-gray-200 bg-white rounded-3xl text-left mt-2`}
       >
         <div className="p-6">
           {/* <button onClick={() => console.log(sessionData)}>Consolelog this session's data</button> */}
@@ -88,7 +92,9 @@ export default function WorkoutSessionCard({ sessionData, onClick, getUserSessio
           {sessionData?.notes !== "" && (
             <p>
               <i className="fa fa-pen mr-4" />{" "}
-              <span className="text-gray-400 italic">“{sessionData?.notes}”</span>
+              <span className="text-gray-400 italic">
+                “{sessionData?.notes}”
+              </span>
             </p>
           )}
 

@@ -39,7 +39,7 @@ export default function ExerciseProgress() {
 
   useEffect(() => {
     if (exercisesData.length > 0) {
-      setSelectedExerciseId(exercisesData[1]._id)
+      setSelectedExerciseId(exercisesData[0]._id)
     }
   }, [exercisesData])
 
@@ -118,8 +118,8 @@ function ExerciseProgressLineChart({ sessionsData, selectedExerciseId }) {
     <>
       {data.length > 0 ? (
         <>
-        {/* <button onClick={() => console.log(data)}>consolelog data</button> */}
-          <ResponsiveContainer width="99%" aspect={2}>
+          {/* <button onClick={() => console.log(data)}>consolelog data</button> */}
+          <ResponsiveContainer width="99%" aspect={1.5}>
             <LineChart
               width={500}
               height={300}

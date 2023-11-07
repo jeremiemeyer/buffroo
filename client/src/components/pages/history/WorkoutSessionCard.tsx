@@ -49,7 +49,7 @@ export default function WorkoutSessionCard({
         <div className="p-6">
           {/* <button onClick={() => console.log(sessionData)}>Consolelog this session's data</button> */}
           <div className="flex flex-row justify-between items-center">
-            <span className="font-semibold text-2xl pb-2">
+            <span className="font-semibold text-2xl pb-2 truncate ...">
               {sessionData?.name}
             </span>
             <Menu variant="filled">

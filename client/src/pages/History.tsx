@@ -119,24 +119,26 @@ export default function History() {
               activeClassName="text-white bg-blue-600 hover:bg-blue-700"
             />
 
-            <div className="justify-between flex flex-row items-center px-4">
-              <p>
+            <div className="justify-between flex flex-col md:flex-row items-center px-4">
+              <p className="pb-2 md:pb-0">
                 Showing{" "}
                 {pageNumber === pageCount - 1
                   ? sessionsData.length - itemsShown
                   : sessionsPerPage}{" "}
                 out of {sessionsData.length} workouts.
               </p>
-              <div className="w-[350px] flex flex-row flex-nowrap items-center">
+              <div className="w-[300px] flex flex-row flex-nowrap items-center">
                 <p className="whitespace-nowrap mr-4">Sorted by</p>
-                <Select
-                  value={sortedBy}
-                  onChange={(e) => setSortedBy(e.target.value)}
-                  bgColor="white"
-                >
-                  <option value="newest">Newest to oldest</option>
-                  <option value="oldest">Oldest to newest</option>
-                </Select>
+                <div className="flex grow">
+                  <Select
+                    value={sortedBy}
+                    onChange={(e) => setSortedBy(e.target.value)}
+                    bgColor="white"
+                  >
+                    <option value="newest">Newest to oldest</option>
+                    <option value="oldest">Oldest to newest</option>
+                  </Select>
+                </div>
               </div>
             </div>
 

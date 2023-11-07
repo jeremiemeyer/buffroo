@@ -102,16 +102,16 @@ export default function WorkoutSessionCard({
             </p>
           )}
 
-          <div className="grid grid-cols-2 pt-4">
-            <div className="font-semibold">Exercise</div>
-            <div className="font-semibold">Best set</div>
+          <div className="grid grid-cols-6 pt-4">
+            <div className="font-semibold col-span-4">Exercise</div>
+            <div className="font-semibold col-span-2">Best set</div>
           </div>
           {sessionData?.exercises.map((exercise, key) => (
-            <div className="grid grid-cols-2" key={key}>
-              <div>
+            <div className="grid grid-cols-6" key={key}>
+              <div className="col-span-4 truncate ...">
                 {exercise.sets.length} x {exercise.name}
               </div>
-              <div>{calculateBestSet(exercise.sets)}</div>
+              <div className="col-span-2 truncate ...">{calculateBestSet(exercise.sets)}</div>
             </div>
           ))}
         </div>

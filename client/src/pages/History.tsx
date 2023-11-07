@@ -43,7 +43,13 @@ export default function History() {
   const [sortedBy, setSortedBy] = useState("newest")
 
   useEffect(() => {
-    setSortedSessionsData(sessionsData)
+    setSortedSessionsData(
+      sessionsData.slice().sort((a, b) => {
+        const dateA = new Date(a.startdate)
+        const dateB = new Date(b.startdate)
+        return dateB - dateA // Sort in descending order (newest to oldest)
+      })
+    )
   }, [sessionsData])
 
   useEffect(() => {

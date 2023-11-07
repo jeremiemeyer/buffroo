@@ -32,6 +32,12 @@ export default function History() {
   const { sessionsData, isLoading, getUserSessions, deleteUserSession } =
     useSessions()
 
+  const goTop = () => {
+    window.scrollTo({
+      top: 0,
+    })
+  }
+
   // Sorting
   const [sortedSessionsData, setSortedSessionsData] = useState(sessionsData)
   const [sortedBy, setSortedBy] = useState("newest")
@@ -72,6 +78,7 @@ export default function History() {
   const pageCount = Math.ceil(sortedSessionsData.length / sessionsPerPage)
   const changePage = ({ selected }) => {
     setPageNumber(selected)
+    goTop()
   }
 
   function onClickExerciseCard(exerciseId) {
@@ -107,18 +114,6 @@ export default function History() {
           ))
         ) : (
           <>
-            <ReactPaginate
-              previousLabel={"<"}
-              nextLabel={">"}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName="flex flex-row justify-center text-xl gap-1 items-center mb-4"
-              previousLinkClassName="font-semibold opacity-40 mr-2"
-              nextLinkClassName="font-semibold opacity-40 ml-2"
-              pageClassName="text-black md:hover:bg-gray-200 rounded-full p-2 px-4"
-              activeClassName="text-white bg-blue-600 hover:bg-blue-700"
-            />
-
             <div className="justify-between flex flex-col md:flex-row items-center px-4">
               <p className="pb-2 md:pb-0">
                 Showing{" "}
@@ -146,6 +141,18 @@ export default function History() {
               sessionsData={displaySessions}
               deleteUserSession={deleteUserSession}
               getUserSessions={getUserSessions}
+            />
+
+            <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName="flex flex-row justify-center text-xl gap-1 items-center mt-4"
+              previousLinkClassName="font-semibold opacity-40 mr-2"
+              nextLinkClassName="font-semibold opacity-40 ml-2"
+              pageClassName="text-black md:hover:bg-gray-200 rounded-full p-2 px-4"
+              activeClassName="text-white bg-blue-600 hover:bg-blue-700"
             />
           </>
         )}

@@ -29,7 +29,7 @@ export default function WorkoutExercisesListExerciseCard({
     <div
       onClick={onClick}
       className={`${
-        isSelected ? "bg-sky-300 border-blue-300" : "hover:bg-sky-50 hover:border-blue-200"
+        isSelected ? "bg-sky-300 border-blue-300" : "md:hover:bg-sky-50 hover:border-blue-200"
       } border border-gray-200 bg-white rounded-xl text-left cursor-pointer mt-2  mx-auto p-4`}
     >
       <div className="flex flex-row items-center">

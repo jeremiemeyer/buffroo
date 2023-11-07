@@ -108,7 +108,7 @@ export default function WorkoutSessionCard({
           </div>
           {sessionData?.exercises.map((exercise, key) => (
             <div className="grid grid-cols-6" key={key}>
-              <div className="col-span-4 truncate ...">
+              <div className="col-span-4 pr-4 truncate ...">
                 {exercise.sets.length} x {exercise.name}
               </div>
               <div className="col-span-2 truncate ...">{calculateBestSet(exercise.sets)}</div>

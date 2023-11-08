@@ -22,7 +22,7 @@ export const WorkoutTimerProvider = ({ children }) => {
     restart,
   } = useTimer({
     expiryTimestamp,
-    onExpire: () => navigator.vibrate(1000),
+    onExpire: () => console.warn("Time's up!", expiryTimestamp),
   })
 
   return (

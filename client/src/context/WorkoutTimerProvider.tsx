@@ -9,6 +9,13 @@ export const WorkoutTimerProvider = ({ children }) => {
   const [lastSetTimerDuration, setLastSetTimeDuration] = useState(null)
   const expiryTimestamp = new Date()
 
+  function handleSkip() {
+    const time = new Date()
+    time.setSeconds(time.getSeconds())
+    restart(time) // sets to 0
+    pause() // isRunning is now false
+  }
+
   const {
     totalSeconds,
     seconds,
@@ -22,7 +29,7 @@ export const WorkoutTimerProvider = ({ children }) => {
     restart,
   } = useTimer({
     expiryTimestamp,
-    onExpire: () => console.warn("Time's up!", expiryTimestamp),
+    onExpire: () => handleSkip(),
   })
 
   return (

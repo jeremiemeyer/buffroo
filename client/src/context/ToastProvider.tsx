@@ -29,6 +29,7 @@ export const ToastProvider = ({ children }) => {
 
   const workoutDeleted = () => toast("Workout deleted!")
   const templateDeleted = () => toast("Template deleted!")
+  const timesUp = () => toast("Time's up!")
 
   // const [persist, setPersist] = useState(
   //   JSON.parse(localStorage.getItem("persist")) || false
@@ -54,6 +55,7 @@ export const ToastProvider = ({ children }) => {
         someFieldsAreMissing,
         workoutDeleted,
         templateDeleted,
+        timesUp,
       }}
     >
       {children}

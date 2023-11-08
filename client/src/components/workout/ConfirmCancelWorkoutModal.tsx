@@ -7,7 +7,8 @@ import WorkoutDataContext from "../../context/WorkoutDataProvider"
 import WorkoutTimerContext from "../../context/WorkoutStopwatchProvider"
 import useWorkoutStatus from "../../hooks/useWorkoutStatus"
 import useWorkoutData from "../../hooks/useWorkoutData"
-import useWorkoutTimer from "../../hooks/useWorkoutStopwatch"
+import useWorkoutStopwatch from "../../hooks/useWorkoutStopwatch"
+import useWorkoutTimer from "@/hooks/useWorkoutTimer"
 
 export default function ConfirmCancelWorkoutModal({
   onClose,
@@ -16,11 +17,13 @@ export default function ConfirmCancelWorkoutModal({
   const { workoutIsInProgress, setWorkoutIsInProgress } =
     useWorkoutStatus()
   const { resetWorkout } = useWorkoutData()
-  const { reset, start, pause } = useWorkoutTimer()
+  const { reset, start} = useWorkoutStopwatch()
+  const { pause }   = useWorkoutTimer()
 
   function handleCancel() {
     onCancelWorkout()
     resetWorkout()
+    pause() // pauses timer
     reset() // reset stopwatch
     onClose()
   }

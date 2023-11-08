@@ -78,6 +78,7 @@ export default function WorkoutModal({ onClose }: any) {
     }
   }
 
+
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">

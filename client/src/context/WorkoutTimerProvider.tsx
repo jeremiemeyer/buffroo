@@ -2,6 +2,7 @@
 import { createContext, useState } from "react"
 import Timer from "@/components/workout/Timer"
 import { useTimer } from "react-timer-hook"
+import useToast from "@/hooks/useToast"
 
 const WorkoutTimerContext = createContext({})
 
@@ -10,18 +11,10 @@ export const WorkoutTimerProvider = ({ children }) => {
   const expiryTimestamp = new Date()
 
   function handleExpire() {
-    navigator.vibrate =
-      navigator.vibrate ||
-      navigator.webkitVibrate ||
-      navigator.mozVibrate ||
-      navigator.msVibrate
     const time = new Date()
     time.setSeconds(time.getSeconds())
     restart(time) // sets to 0
     pause() // isRunning is now false
-    if (navigator.vibrate) {
-      navigator.vibrate(1000)
-    }
   }
 
   const {

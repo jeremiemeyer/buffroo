@@ -57,10 +57,15 @@ export default function StartTimerModal({ onClose }) {
                 <Button onClick={(e) => handleStartTimer(e)} value={5}>
                   5"
                 </Button>
+                <Button onClick={(e) => handleStartTimer(e)} value={30}>
+                  30"
+                </Button>
                 <Button onClick={(e) => handleStartTimer(e)} value={90}>
                   1'30"
                 </Button>
-
+                <Button onClick={(e) => handleStartTimer(e)} value={120}>
+                  2'
+                </Button>
                 <Button onClick={onClose} variant="destructive">
                   Cancel
                 </Button>

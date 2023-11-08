@@ -27,6 +27,7 @@ import useSessions from "@/hooks/api/useSessions"
 import Timer from "./Timer"
 import StartTimerModal from "./StartTimerModal"
 import TimerButton from "./TimerButton"
+import useWorkoutStopwatch from "@/hooks/useWorkoutStopwatch"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -56,11 +57,11 @@ export default function WorkoutModal({ onClose }: any) {
     hours,
     days,
     isRunning,
-    start,
-    pause,
     resume,
     restart,
   } = useWorkoutTimer()
+
+  const { reset, start, pause } = useWorkoutStopwatch()
 
   const { workoutAdded, cannotSubmitEmptyWorkout } = useToast()
   const { createUserSession, getUserSessions } = useSessions()

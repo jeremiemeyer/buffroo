@@ -57,6 +57,7 @@ const createUserWorkoutTemplate = async (req, res) => {
     })
     console.log(newUserWorkoutTemplate)
     res.status(201).json(newUserWorkoutTemplate) // 201 Created
+    console.log("data:", newUserWorkoutTemplate)
   } catch (err) {
     console.error(err)
   }

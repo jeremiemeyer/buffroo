@@ -29,8 +29,13 @@ export default function History() {
   const [selectedWorkoutId, setSelectedWorkoutId] = useState("")
   const { workoutDeleted } = useToast()
   const { auth } = useAuth()
-  const { sessionsData, isLoading, getUserSessions, deleteUserSession } =
-    useSessions()
+  const {
+    sessionsData,
+    isLoading,
+    getUserSessions,
+    deleteUserSession,
+    createUserSession,
+  } = useSessions()
 
   const goTop = () => {
     window.scrollTo({
@@ -71,7 +76,7 @@ export default function History() {
         })
       )
     }
-  }, [sortedBy])
+  }, [sortedBy, sessionsData])
 
   // Pagination
   const [pageNumber, setPageNumber] = useState(0)
@@ -101,9 +106,10 @@ export default function History() {
 
       {/* Content */}
       <div className="pt-[80px] pb-[80px] z-[0] mx-auto w-full px-4">
-        {/* <button onClick={() => console.log(sessionsData.slice(0, 30))}>
+        {/* <button onClick={() => console.log(sessionsData)}>
           Get history data
         </button> */}
+
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <Box
@@ -122,14 +128,17 @@ export default function History() {
           <>
             <div className="justify-between flex flex-col md:flex-row items-center px-4">
               <p className="pb-2 md:pb-0">
-                Showing{" "}
                 {pageNumber === pageCount - 1
-                  ? sessionsData.length - itemsShown
-                  : sessionsPerPage}{" "}
-                out of {sessionsData.length} workouts.
+                  ? `Showing results ${itemsShown}-${sessionsData.length} out of ${sessionsData.length}.`
+                  : `Showing results ${itemsShown}-${
+                      itemsShown + sessionsPerPage
+                    } out of ${sessionsData.length}.`}
               </p>
+              {/* {pageNumber === pageCount - 1
+                  ? sessionsData.length - itemsShown
+                  : sessionsPerPage}{" "} */}
               <div className="w-[300px] flex flex-row flex-nowrap items-center">
-                <p className="whitespace-nowrap mr-4">Sorted by</p>
+                <p className="whitespace-nowrap mr-4">Sort by</p>
                 <div className="flex grow">
                   <Select
                     value={sortedBy}
@@ -143,12 +152,6 @@ export default function History() {
               </div>
             </div>
 
-            <WorkoutSessionsList
-              sessionsData={displaySessions}
-              deleteUserSession={deleteUserSession}
-              getUserSessions={getUserSessions}
-            />
-
             <ReactPaginate
               previousLabel={"<"}
               nextLabel={">"}
@@ -159,6 +162,11 @@ export default function History() {
               nextLinkClassName="font-semibold opacity-40 ml-2"
               pageClassName="text-black md:hover:bg-gray-200 rounded-full p-2 px-4"
               activeClassName="text-white bg-blue-600 hover:bg-blue-700"
+            />
+
+            <WorkoutSessionsList
+              sessionsData={displaySessions}
+              deleteUserSession={deleteUserSession}
             />
           </>
         )}

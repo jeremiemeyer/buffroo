@@ -16,6 +16,7 @@ export const SessionsProvider = ({ children }) => {
 
   const getUserSessions = async () => {
     const SESSIONS_URL = `/api/users/${auth.userId}/sessions`
+    console.log("auth", auth)
     setIsLoading(true)
     try {
       const response = await axiosPrivate.get(SESSIONS_URL, {
@@ -23,6 +24,7 @@ export const SessionsProvider = ({ children }) => {
       })
       // isMounted &&
       setSessionsData(response.data)
+      console.log(response.data)
       setIsLoading(false)
     } catch (error) {
       console.error("Error fetching sessions data:", error)
@@ -43,13 +45,14 @@ export const SessionsProvider = ({ children }) => {
       enddate: new Date().toISOString(),
     }
 
-    // console.log("data sent: ", dataToSend)
-    // console.log("user id", auth.userId)
-
     try {
-      const newUserSession = await axiosPrivate.post(SESSIONS_URL, dataToSend)
-      setSessionsData([...sessionsData, userSessionData])
-      console.log([...sessionsData, userSessionData])
+      const response = await axiosPrivate.post(SESSIONS_URL, dataToSend)
+      console.log("sessionsData:", sessionsData)
+      // setSessionsData([...sessionsData, newUserSession.data])
+       const updatedSessionsData = [...sessionsData, response.data]
+       console.log("updatedSessionsData", updatedSessionsData)
+       // Set the updated data back in the state
+       setSessionsData(updatedSessionsData)
       return true
     } catch (error) {
       console.error("Error creating user session:", error)
@@ -64,6 +67,7 @@ export const SessionsProvider = ({ children }) => {
   }) => {
     const SESSION_UPDATE_URL = `/api/users/${userId}/sessions/${userSessionId}`
     try {
+      console.log(sessionsData)
       const response = await axiosPrivate.put(
         SESSION_UPDATE_URL,
         updatedSessionData
@@ -89,7 +93,7 @@ export const SessionsProvider = ({ children }) => {
   }
 
   const deleteUserSession = async ({ userId, userSessionId }) => {
-    console.log(userSessionId)
+    // console.log(userSessionId)
     try {
       const response = await axiosPrivate.delete(
         `/api/users/${userId}/sessions/${userSessionId}`,
@@ -109,9 +113,11 @@ export const SessionsProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    getUserSessions()
-  }, [])
-
+    if (auth.userId) {
+      getUserSessions();
+    }
+  }, [auth.userId]);
+  
   return (
     <SessionsContext.Provider
       value={{

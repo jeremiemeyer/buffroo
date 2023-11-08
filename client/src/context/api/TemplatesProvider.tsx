@@ -43,8 +43,11 @@ export const TemplatesProvider = ({ children }) => {
     }
 
     try {
-      await axiosPrivate.post(TEMPLATES_URL, dataToSend)
-      setUserTemplatesData([...userTemplatesData, newTemplateData])
+      const newTemplateResponse = await axiosPrivate.post(
+        TEMPLATES_URL,
+        dataToSend
+      )
+      setUserTemplatesData([...userTemplatesData, newTemplateResponse.data])
       return true
     } catch (error) {
       console.error("Error creating new template:", error)

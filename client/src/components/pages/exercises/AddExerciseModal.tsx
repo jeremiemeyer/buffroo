@@ -1,6 +1,20 @@
 //@ts-nocheck
-import { Input, Select } from "@chakra-ui/react"
-import { Button } from "@/components//ui/button"
+import {
+  Input,
+  Select,
+  Popover,
+  PopoverTrigger,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  PopoverContent,
+  IconButton,
+  Icon,
+} from "@chakra-ui/react"
+import { QuestionIcon, SearchIcon } from "@chakra-ui/icons"
+import { PiQuestionFill } from "react-icons/pi"
+import { Button } from "@/components/ui/button"
 import axios from "../../../api/axios"
 import { useState } from "react"
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
@@ -101,7 +115,30 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
           </div>
 
           <div className="grid grid-cols-2 justify-between items-center">
-            <p>Category</p>
+            <div className="flex flex-row items-center">
+              <p>Category</p>
+              <Popover>
+                <PopoverTrigger>
+                  <IconButton
+                    isRound="true"
+                    colorScheme="gray"
+                    variant=""
+                    aria-label="Search database"
+                    icon={<Icon as={PiQuestionFill} />}
+                    className="hover:bg-gray-100 ml-1 text-gray-400"
+                  />
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverHeader>Info</PopoverHeader>
+                  <PopoverBody>
+                    Assisted bodyweight exercises will register a negative value weight.
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </div>
+
             <Select
               placeholder="Select option"
               onChange={(e) => handleChangeCategory(e)}

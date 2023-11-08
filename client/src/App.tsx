@@ -48,18 +48,14 @@ function App() {
             <Route
               path="/history"
               element={
-                <SessionsProvider>
                   <History />
-                </SessionsProvider>
               }
             />
             <Route
               path="/profile"
               element={
                 <ExercisesProvider>
-                  <SessionsProvider>
                     <Profile />
-                  </SessionsProvider>
                 </ExercisesProvider>
               }
             />

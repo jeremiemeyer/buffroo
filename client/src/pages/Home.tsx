@@ -72,9 +72,6 @@ export default function Home() {
     }
   }
 
-  useEffect(() => {
-    getUserTemplates()
-  }, [])
 
   return (
     <>

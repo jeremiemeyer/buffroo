@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import WorkoutStatusContext from "../../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../../context/WorkoutDataProvider"
-import WorkoutTimerContext from "../../../context/WorkoutTimerProvider"
+import WorkoutTimerContext from "../../../context/WorkoutStopwatchProvider"
 import useWorkoutStatus from "../../../hooks/useWorkoutStatus"
-import useWorkoutTimer from "../../../hooks/useWorkoutTimer"
+import useWorkoutTimer from "../../../hooks/useWorkoutStopwatch"
 import useWorkoutData from "@/hooks/useWorkoutData"
 
 export default function ConfirmDiscardChangesModal({

@@ -3,14 +3,15 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App.tsx"
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
-import { AuthProvider } from "./context/AuthProvider"
+import { AuthProvider } from "@/context/AuthProvider"
 import "./index.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { WorkoutStatusProvider } from "./context/WorkoutStatusProvider.tsx"
-import { WorkoutDataProvider } from "./context/WorkoutDataProvider.tsx"
-import { WorkoutTimerProvider } from "./context/WorkoutTimerProvider.tsx"
-import { ToastProvider } from "./context/ToastProvider.tsx"
-import { TemplateDataProvider } from "./context/TemplateDataProvider.tsx"
+import { WorkoutStatusProvider } from "@/context/WorkoutStatusProvider.tsx"
+import { WorkoutDataProvider } from "@/context/WorkoutDataProvider.tsx"
+import { WorkoutStopwatchProvider } from "@/context/WorkoutStopwatchProvider.tsx"
+import { WorkoutTimerProvider } from "@/context/WorkoutTimerProvider.tsx"
+import { ToastProvider } from "@/context/ToastProvider.tsx"
+import { TemplateDataProvider } from "@/context/TemplateDataProvider.tsx"
 
 const colors = {
   brand: {
@@ -45,13 +46,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <WorkoutStatusProvider>
           <WorkoutDataProvider>
             <TemplateDataProvider>
-              <WorkoutTimerProvider>
-                <ToastProvider>
-                  <ChakraProvider theme={theme}>
-                    <App />
-                  </ChakraProvider>
-                </ToastProvider>
-              </WorkoutTimerProvider>
+              <WorkoutStopwatchProvider>
+                <WorkoutTimerProvider>
+                  <ToastProvider>
+                    <ChakraProvider theme={theme}>
+                      <App />
+                    </ChakraProvider>
+                  </ToastProvider>
+                </WorkoutTimerProvider>
+              </WorkoutStopwatchProvider>
             </TemplateDataProvider>
           </WorkoutDataProvider>
         </WorkoutStatusProvider>

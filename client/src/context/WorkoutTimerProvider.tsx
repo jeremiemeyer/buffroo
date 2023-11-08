@@ -1,11 +1,14 @@
 //@ts-nocheck
 import { createContext, useState } from "react"
-import Stopwatch from "../components/workout/Stopwatch"
-import { useStopwatch } from "react-timer-hook"
+import Timer from "@/components/workout/Timer"
+import { useTimer } from "react-timer-hook"
 
 const WorkoutTimerContext = createContext({})
 
 export const WorkoutTimerProvider = ({ children }) => {
+  const [lastSetTimerDuration, setLastSetTimeDuration] = useState(null)
+  const expiryTimestamp = new Date()
+
   const {
     totalSeconds,
     seconds,
@@ -15,9 +18,12 @@ export const WorkoutTimerProvider = ({ children }) => {
     isRunning,
     start,
     pause,
-    reset,
-  } = useStopwatch({ autoStart: false })
-
+    resume,
+    restart,
+  } = useTimer({
+    expiryTimestamp,
+    onExpire: () => navigator.vibrate(1000),
+  })
 
   return (
     <WorkoutTimerContext.Provider
@@ -30,7 +36,10 @@ export const WorkoutTimerProvider = ({ children }) => {
         isRunning,
         start,
         pause,
-        reset,
+        resume,
+        restart,
+        lastSetTimerDuration,
+        setLastSetTimeDuration,
       }}
     >
       {children}

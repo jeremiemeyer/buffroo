@@ -157,11 +157,11 @@ export default function History() {
               nextLabel={">"}
               pageCount={pageCount}
               onPageChange={changePage}
-              containerClassName="flex flex-row justify-center text-xl gap-1 items-center mt-4"
+              containerClassName="flex flex-row justify-center  gap-1 items-center mt-4"
               previousLinkClassName="font-semibold opacity-40 mr-2"
               nextLinkClassName="font-semibold opacity-40 ml-2"
-              pageClassName="text-black md:hover:bg-gray-200 rounded-full p-2 px-4"
-              activeClassName="text-white bg-blue-600 md:hover:bg-blue-700 hover:bg-blue-700"
+              pageClassName="text-black hover:bg-gray-200 rounded-full p-2 px-4"
+              activeClassName="text-white bg-blue-600 hover:bg-blue-800 "
             />
 
             <WorkoutSessionsList

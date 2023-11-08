@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom"
 import WorkoutModal from "./workout/WorkoutModal"
 import useWorkoutStatus from "../hooks/useWorkoutStatus"
 import useWorkoutData from "../hooks/useWorkoutData"
-import useWorkoutTimer from "../hooks/useWorkoutTimer"
+import useWorkoutTimer from "../hooks/useWorkoutStopwatch.tsx"
 import { useEffect, useState } from "react"
 import Navbar from "@/components/layout/Navbar/Navbar"
 import { createPortal } from "react-dom"
@@ -39,7 +39,7 @@ export const AppLayout = () => {
 
   return (
     <>
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1200px] mx-auto min-h-screen">
         <Outlet />
       </div>
       <div className="fixed w-full bottom-0 transform translate-y-[-80px] z-[900]">

@@ -12,17 +12,21 @@ import {
   MenuList,
   IconButton,
   MenuItem,
+  Icon,
 } from "@chakra-ui/react"
 import { Button } from "@/components/ui/button"
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import { useState, useEffect } from "react"
 import Stopwatch from "./Stopwatch"
 import { useStopwatch } from "react-timer-hook"
-import useWorkoutStatus from "../../hooks/useWorkoutStatus"
-import useWorkoutTimer from "../../hooks/useWorkoutTimer"
-import useWorkoutData from "../../hooks/useWorkoutData"
-import useToast from "../../hooks/useToast"
+import useWorkoutStatus from "@/hooks/useWorkoutStatus"
+import useWorkoutTimer from "@/hooks/useWorkoutStopwatch"
+import useWorkoutData from "@/hooks/useWorkoutData"
+import useToast from "@/hooks/useToast"
 import useSessions from "@/hooks/api/useSessions"
+import Timer from "./Timer"
+import StartTimerModal from "./StartTimerModal"
+import TimerButton from "./TimerButton"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -31,11 +35,10 @@ export default function WorkoutModal({ onClose }: any) {
   const [workoutModalIsMinimized, setWorkoutModalIsMinimized] = useState(false)
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
-  
-  const {
-    sessionWindowIsMinimized,
-    setSessionWindowIsMinimized,
-  } = useWorkoutStatus()
+  const [showStartTimerModal, setShowStartTimerModal] = useState(false)
+
+  const { sessionWindowIsMinimized, setSessionWindowIsMinimized } =
+    useWorkoutStatus()
 
   const {
     workoutData,
@@ -46,8 +49,19 @@ export default function WorkoutModal({ onClose }: any) {
     resetWorkout,
   } = useWorkoutData()
 
-  const { reset, start, pause } = useWorkoutTimer()
-  const notify = () => toast("Here is your toast.")
+  const {
+    totalSeconds,
+    seconds,
+    minutes,
+    hours,
+    days,
+    isRunning,
+    start,
+    pause,
+    resume,
+    restart,
+  } = useWorkoutTimer()
+
   const { workoutAdded, cannotSubmitEmptyWorkout } = useToast()
   const { createUserSession, getUserSessions } = useSessions()
 
@@ -87,6 +101,8 @@ export default function WorkoutModal({ onClose }: any) {
           </div>
 
           <div className="h-[5%] flex flex-row justify-between items-center gap-2">
+            <TimerButton setShowStartTimerModal={setShowStartTimerModal}/>
+
             <i className="fa fa-heading mr-4" />
             <Input
               placeholder="Workout title"
@@ -160,6 +176,11 @@ export default function WorkoutModal({ onClose }: any) {
             onClose={() => setShowConfirmCancelWorkoutModal(false)}
             onCancelWorkout={onClose}
           />,
+          document.body
+        )}
+      {showStartTimerModal &&
+        createPortal(
+          <StartTimerModal onClose={() => setShowStartTimerModal(false)} />,
           document.body
         )}
     </>

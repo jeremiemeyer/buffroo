@@ -15,9 +15,10 @@ import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
 import EditExerciseModal from "./ExerciseEditModal"
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts"
-import { ExerciseProgressLineChart, ExerciseVolumesLineChart } from "../profile/dashboard/ExerciseProgress"
 import useUserData from "@/hooks/api/useUserData"
 import useSessions from "@/hooks/api/useSessions"
+import { ExerciseBestSetLineChart } from "../profile/dashboard/ExerciseBestSet"
+import { ExerciseVolumesLineChart } from "../profile/dashboard/ExerciseVolumeLineChart"
 
 export default function ExerciseStatsModal({
   onClose,
@@ -67,7 +68,7 @@ export default function ExerciseStatsModal({
               />
               <TabPanels>
                 <TabPanel>
-                  <ExerciseProgressLineChart sessionsData={sessionsData} selectedExerciseId={selectedExerciseId}/>
+                  <ExerciseBestSetLineChart sessionsData={sessionsData} selectedExerciseId={selectedExerciseId}/>
                 </TabPanel>
                 <TabPanel>
                   <ExerciseVolumesLineChart sessionsData={sessionsData} selectedExerciseId={selectedExerciseId} />

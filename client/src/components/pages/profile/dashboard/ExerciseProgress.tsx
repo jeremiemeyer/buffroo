@@ -15,23 +15,15 @@ import {
   EditIcon,
   RepeatClockIcon,
 } from "@chakra-ui/icons"
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts"
+
 import { FaEllipsisH } from "react-icons/fa"
 import { GoGoal } from "react-icons/go"
 import useExercises from "@/hooks/api/useExercises"
 import useSessions from "@/hooks/api/useSessions"
 import { useEffect, useState } from "react"
-import { extractBestSetsWithDate } from "@/utils/dashboard/extractBestSetsWithDate"
-import { extractVolumesWithDate } from "@/utils/dashboard/extractVolumesWithDate"
+import { ExerciseVolumesLineChart } from "./ExerciseVolumeLineChart"
+import { ExerciseBestSetLineChart } from "./ExerciseBestSet"
+
 
 export default function ExerciseProgress() {
   const { exercisesData } = useExercises()
@@ -103,7 +95,7 @@ export default function ExerciseProgress() {
           {/* <button onClick={() => console.log(exercisesData)}>
             consolelog exercisesData
           </button> */}
-          <ExerciseProgressLineChart
+          <ExerciseBestSetLineChart
             selectedExerciseId={selectedExerciseId}
             sessionsData={sessionsData}
           />
@@ -112,12 +104,6 @@ export default function ExerciseProgress() {
 
 
       <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 max-w-[800px] mx-auto">
-        {/* <button onClick={() => console.log(exercisesData[1].name)}>
-          Consolelog exercisesData[1]
-        </button> */}
-        {/* <button onClick={() => console.log(selectedExerciseId)}>
-          Consolelog id exercice sélectionné
-        </button> */}
 
         <div className="flex flex-row items-center pb-8">
           <h1 className="font-semibold text-xl flex grow ">Volume</h1>
@@ -175,93 +161,5 @@ export default function ExerciseProgress() {
   )
 }
 
-export function ExerciseProgressLineChart({
-  sessionsData,
-  selectedExerciseId,
-}) {
-  const data = extractBestSetsWithDate({ sessionsData, selectedExerciseId })
-  return (
-    <>
-      {data.length > 0 ? (
-        <>
-          {/* <button onClick={() => console.log(data)}>consolelog data</button> */}
-          <ResponsiveContainer width="99%" aspect={1.5}>
-            <LineChart
-              width={500}
-              height={300}
-              data={data}
-              margin={{
-                top: 5,
-                left: 10,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis dataKey="weight" width={15} />
-              <Tooltip
-                formatter={(value, name, props) => {
-                  return `${props.payload.bestSet}`
-                }}
-              />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="weight"
-                name="Best set"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </>
-      ) : (
-        <p>No data found for this exercise.</p>
-      )}
-    </>
-  )
-}
 
-export function ExerciseVolumesLineChart({ sessionsData, selectedExerciseId }) {
-  const data = extractVolumesWithDate({ sessionsData, selectedExerciseId })
-  return (
-    <>
-      {data.length > 0 ? (
-        <>
-          {/* <button onClick={() => console.log(data)}>consolelog data</button> */}
-          <ResponsiveContainer width="99%" aspect={1.5}>
-            <LineChart
-              width={500}
-              height={300}
-              data={data}
-              margin={{
-                top: 5,
-                left: 10,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis dataKey="volume" width={15} />
-              <Tooltip
-                formatter={(value, name, props) => {
-                  return `${props.payload.volume} kg`
-                }}
-              />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="volume"
-                name="Volume"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </>
-      ) : (
-        <p>No data found for this exercise.</p>
-      )}
-    </>
-  )
-}
+

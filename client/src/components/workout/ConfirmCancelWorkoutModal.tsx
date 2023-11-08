@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import WorkoutStatusContext from "../../context/WorkoutStatusProvider"
 import WorkoutDataContext from "../../context/WorkoutDataProvider"
-import WorkoutTimerContext from "../../context/WorkoutTimerProvider"
+import WorkoutTimerContext from "../../context/WorkoutStopwatchProvider"
 import useWorkoutStatus from "../../hooks/useWorkoutStatus"
 import useWorkoutData from "../../hooks/useWorkoutData"
-import useWorkoutTimer from "../../hooks/useWorkoutTimer"
+import useWorkoutTimer from "../../hooks/useWorkoutStopwatch"
 
 export default function ConfirmCancelWorkoutModal({
   onClose,

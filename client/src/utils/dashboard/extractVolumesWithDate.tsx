@@ -1,42 +1,36 @@
 //@ts-nocheck
-import calculateBestSet from "../calculateBestSet"
+import calculateVolume from "../calculateVolume"
 
-export function extractBestSetsWithDate({ sessionsData, selectedExerciseId }) {
-  const bestSets = []
+export function extractVolumesWithDate({ sessionsData, selectedExerciseId }) {
+  const volumes = []
 
   for (const session of sessionsData) {
     for (const exercise of session.exercises) {
       if (exercise.exerciseId === selectedExerciseId) {
-        const bestSet = calculateBestSet(exercise.sets)
+        const volume = calculateVolume(exercise.sets)
         const date = new Date(session.startdate)
         const formattedDate = `${padZero(date.getDate())}/${padZero(
           date.getMonth() + 1
         )}`
 
-        const reps = parseInt(bestSet.split("x")[0].trim())
-        const weight = parseFloat(
-          bestSet.split("x")[1].trim().replace("kg", "")
-        )
-
-        bestSets.push({
+        volumes.push({
           date: formattedDate,
-          bestSet,
-          weight,
+          volume,
         })
         break
       }
     }
   }
 
-    // Sort the bestSets array by date in ascending order (least recent to most recent)
-    bestSets.sort((a, b) => {
+    // Sort the volume array by date in ascending order (least recent to most recent)
+    volumes.sort((a, b) => {
       // Parse the dates in "DD/MM" format
       const dateA = a.date.split('/').reverse().join('');
       const dateB = b.date.split('/').reverse().join('');
       return dateA.localeCompare(dateB);
     });
 
-  return bestSets
+  return volumes
 }
 
 function padZero(value) {

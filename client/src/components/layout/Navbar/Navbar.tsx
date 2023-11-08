@@ -3,10 +3,16 @@ import { Link, useLocation } from "react-router-dom"
 export default function Navbar() {
   const location = useLocation()
 
+  const goTop = () => {
+    window.scrollTo({
+      top: 0,
+    })
+  }
+
   return (
     <>
       <div className="fixed w-full bottom-0 z-[500] bg-glassmorphism3 text-white flex flex-row justify-center">
-        <Link to={"profile"}>
+        <Link to={"profile"} onClick={goTop}>
           <div
             className={`${
               location.pathname.startsWith("/profile")
@@ -19,7 +25,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <Link to={"history"}>
+        <Link to={"history"} onClick={goTop}>
           <div
             className={`${
               location.pathname.startsWith("/history")
@@ -32,12 +38,10 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <Link to={"/"}>
+        <Link to={"/"} onClick={goTop}>
           <div
             className={`${
-              location.pathname === "/"
-                ? "bg-gray-800"
-                : "hover:bg-gray-600"
+              location.pathname === "/" ? "bg-gray-800" : "hover:bg-gray-600"
             } cursor-pointer py-2 px-4 `}
           >
             <i className="fa-solid fa-plus" />
@@ -45,7 +49,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <Link to={"exercises"}>
+        <Link to={"exercises"} onClick={goTop}>
           <div
             className={`${
               location.pathname.startsWith("/exercises")

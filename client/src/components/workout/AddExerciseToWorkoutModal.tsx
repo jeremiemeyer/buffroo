@@ -97,7 +97,7 @@ export default function AddExerciseToWorkoutModal({
 
         <div className="relative h-[90%]">
           <div className="h-[10%]">
-            <InputGroup>
+            <InputGroup className="bg-white">
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />
               </InputLeftElement>

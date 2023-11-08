@@ -161,13 +161,15 @@ export default function History() {
               previousLinkClassName="font-semibold opacity-40 mr-2"
               nextLinkClassName="font-semibold opacity-40 ml-2"
               pageClassName="text-black md:hover:bg-gray-200 rounded-full p-2 px-4"
-              activeClassName="text-white bg-blue-600 hover:bg-blue-700"
+              activeClassName="text-white bg-blue-600 md:hover:bg-blue-700 hover:bg-blue-700"
             />
 
             <WorkoutSessionsList
               sessionsData={displaySessions}
               deleteUserSession={deleteUserSession}
             />
+
+            <button onClick={goTop} className="py-4 font-semibold text-blue-600">Back to top</button>
           </>
         )}
       </div>

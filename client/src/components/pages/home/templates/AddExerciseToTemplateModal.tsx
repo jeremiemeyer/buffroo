@@ -19,7 +19,11 @@ import { useLocation, useNavigate } from "react-router-dom"
 import TemplateExercisesListExerciseCard from "./TemplateExercisesListExerciseCard"
 import useTemplateData from "@/hooks/useTemplateData"
 
-export default function AddExerciseToTemplateModal({onClose, templateData, setTemplateData}) {
+export default function AddExerciseToTemplateModal({
+  onClose,
+  templateData,
+  setTemplateData,
+}) {
   const [isLoading, setIsLoading] = useState(true)
   const [exerciseData, setExerciseData] = useState([])
   const [searchInput, setSearchInput] = useState("")
@@ -31,7 +35,6 @@ export default function AddExerciseToTemplateModal({onClose, templateData, setTe
   const location = useLocation()
   const DEFAULT_EXERCISES_URL = "/api/exercises"
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
-
 
   const getExercises = async () => {
     setIsLoading(true)
@@ -91,13 +94,15 @@ export default function AddExerciseToTemplateModal({onClose, templateData, setTe
           <Button onClick={onClose} variant="destructive">
             X
           </Button>
-          <Button onClick={() => handleAddExercise(selectedExercise)}>Add</Button>
+          <Button onClick={() => handleAddExercise(selectedExercise)}>
+            Add
+          </Button>
           {/* <Button onClick={handleSave} colorScheme="blue">Save</Button> */}
         </div>
 
         <div className="relative h-[90%]">
           <div className="h-[10%]">
-            <InputGroup>
+            <InputGroup className="bg-white">
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />
               </InputLeftElement>

@@ -49,10 +49,10 @@ export const SessionsProvider = ({ children }) => {
       const response = await axiosPrivate.post(SESSIONS_URL, dataToSend)
       console.log("sessionsData:", sessionsData)
       // setSessionsData([...sessionsData, newUserSession.data])
-       const updatedSessionsData = [...sessionsData, response.data]
-       console.log("updatedSessionsData", updatedSessionsData)
-       // Set the updated data back in the state
-       setSessionsData(updatedSessionsData)
+      const updatedSessionsData = [...sessionsData, response.data]
+      console.log("updatedSessionsData", updatedSessionsData)
+      // Set the updated data back in the state
+      setSessionsData(updatedSessionsData)
       return true
     } catch (error) {
       console.error("Error creating user session:", error)
@@ -114,10 +114,10 @@ export const SessionsProvider = ({ children }) => {
 
   useEffect(() => {
     if (auth.userId) {
-      getUserSessions();
+      getUserSessions()
     }
-  }, [auth.userId]);
-  
+  }, [auth.userId])
+
   return (
     <SessionsContext.Provider
       value={{

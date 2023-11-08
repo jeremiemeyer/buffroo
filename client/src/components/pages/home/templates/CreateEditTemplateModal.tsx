@@ -108,8 +108,8 @@ export default function CreateEditTemplateModal({
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
-          <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
+        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-2 md:px-6 pb-4 rounded-2xl border border-slate-600 max-w-[1300px]">
+          <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12 px-2">
             <i className="fa fa-heading mr-4" />
             <Input
               placeholder="Template title"
@@ -128,7 +128,7 @@ export default function CreateEditTemplateModal({
               Template to edit ID
             </button> */}
 
-            <div className="space-y-2 mt-4">
+            <div className="space-y-2 mt-4 px-2 md:pb-4">
               <div className="flex flex-row items-center">
                 <i className="fa fa-pen mr-4" />
                 <Input

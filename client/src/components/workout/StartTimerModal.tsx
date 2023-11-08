@@ -45,7 +45,7 @@ export default function StartTimerModal({ onClose }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-50 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 h-[400px] w-[350px]"
+        className="z-[900] relative bg-gray-50 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600  w-[350px]"
       >
         <div className="h-[5%] flex flex-col justify-between items-center">
           {!isRunning ? (

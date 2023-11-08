@@ -79,11 +79,10 @@ export default function WorkoutModal({ onClose }: any) {
     }
   }
 
-
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
+        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-2 md:px-6 pb-4 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="text-center">
             <Menu>
               <MenuButton
@@ -98,30 +97,33 @@ export default function WorkoutModal({ onClose }: any) {
               />
             </Menu>
           </div>
-          <div className="pb-2">
+          <div>
             <Stopwatch />
           </div>
 
-          <div className="h-[5%] flex flex-row justify-between items-center gap-2">
-            <TimerButton setShowStartTimerModal={setShowStartTimerModal}/>
+          <div className="h-[5%] flex flex-row justify-between items-center gap-2 px-2">
+            <TimerButton setShowStartTimerModal={setShowStartTimerModal} />
 
-            <i className="fa fa-heading mr-4" />
-            <Input
-              placeholder="Workout title"
-              variant="flushed"
-              value={workoutData.name}
-              onChange={handleEditWorkoutName}
-              borderColor={"gray.300"}
-              marginRight={"30px"}
-            />
             <Button onClick={saveSession} variant="secondary">
               Finish
             </Button>
           </div>
 
-          <div className="grow mt-6 overflow-auto">
-            <div className="space-y-2 mt-4">
-              <div className="flex flex-row items-center">
+          <div className="grow mt-2 overflow-auto ">
+            <div className="space-y-2">
+              <div className="flex flex-row items-center px-2">
+                <i className="fa fa-heading mr-4" />
+                <Input
+                  placeholder="Workout title"
+                  variant="flushed"
+                  value={workoutData.name}
+                  onChange={handleEditWorkoutName}
+                  borderColor={"gray.300"}
+                  marginRight={"30px"}
+                />
+              </div>
+
+              <div className="flex flex-row items-center px-2 md:pb-4">
                 <i className="fa fa-pen mr-4" />
                 <Input
                   placeholder="Notes"

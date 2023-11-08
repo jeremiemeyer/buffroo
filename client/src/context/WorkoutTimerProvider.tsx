@@ -9,11 +9,19 @@ export const WorkoutTimerProvider = ({ children }) => {
   const [lastSetTimerDuration, setLastSetTimeDuration] = useState(null)
   const expiryTimestamp = new Date()
 
-  function handleSkip() {
+  function handleExpire() {
+    navigator.vibrate =
+      navigator.vibrate ||
+      navigator.webkitVibrate ||
+      navigator.mozVibrate ||
+      navigator.msVibrate
     const time = new Date()
     time.setSeconds(time.getSeconds())
     restart(time) // sets to 0
     pause() // isRunning is now false
+    if (navigator.vibrate) {
+      navigator.vibrate(1000)
+    }
   }
 
   const {
@@ -29,7 +37,7 @@ export const WorkoutTimerProvider = ({ children }) => {
     restart,
   } = useTimer({
     expiryTimestamp,
-    onExpire: () => handleSkip(),
+    onExpire: () => handleExpire(),
   })
 
   return (

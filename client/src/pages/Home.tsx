@@ -3,7 +3,17 @@ import Title from "@/components/layout/Title"
 import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
 import WorkoutModal from "@/components/workout/WorkoutModal"
-import { Box, SkeletonText } from "@chakra-ui/react"
+import {
+  Button as ChakraButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  IconButton,
+  MenuItem,
+  Icon,
+  Box,
+  SkeletonText,
+} from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import WorkoutStatusContext from "@/context/WorkoutStatusProvider"
 import WorkoutDataContext from "@/context/WorkoutDataProvider"
@@ -19,6 +29,7 @@ import useWorkoutTimer from "@/hooks/useWorkoutStopwatch"
 import useToast from "@/hooks/useToast"
 import useTemplates from "@/hooks/api/useTemplates"
 import formatDate from "@/utils/formatDate"
+import { AiOutlinePlus } from "react-icons/ai"
 
 export default function Home() {
   const { workoutIsInProgress, setWorkoutIsInProgress } = useWorkoutStatus()
@@ -36,8 +47,7 @@ export default function Home() {
   const { auth } = useAuth()
   const { workoutAdded, workoutAlreadyInProgress } = useToast()
   const { userTemplatesData, isLoading, getUserTemplates } = useTemplates()
-  const [filteredUserTemplates, setFilteredUserTemplates] =
-    useState()
+  const [filteredUserTemplates, setFilteredUserTemplates] = useState()
 
   useEffect(() => {
     setFilteredUserTemplates(userTemplatesData)
@@ -72,7 +82,6 @@ export default function Home() {
     }
   }
 
-
   return (
     <>
       {/* Title */}
@@ -81,20 +90,27 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-4 space-y-4">
-        <div className="text-3xl  mt-8">Quick start</div>
+      <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-4">
+        <div className="text-3xl mt-8 mb-4">Quick start</div>
 
-        <Button onClick={handleClick}>Start an empty workout</Button>
+        <Button onClick={handleClick} className="mb-16">Start an empty workout</Button>
 
-        <div className="pt-12 text-3xl  mt-12 mb-4">
-          Start from template
+        <div className="flex flex-row justify-between max-w-[800px] mx-auto">
+          <h1 className="text-3xl font-semibold mb-4 px-4">Templates</h1>
+          <div>
+            <ChakraButton
+              onClick={() => setShowCreateTemplateModal(true)}
+              leftIcon={<Icon as={AiOutlinePlus} />}
+              textColor="rgba(14,165,233,1)" //sky-500
+              bg={"rgba(186,230,253,0.4)"}
+              _hover={{ bg: "rgba(186,230,253,0.8)" }}
+            >
+              Template
+            </ChakraButton>
+          </div>
         </div>
         <div className="space-y-5">
-          <Button onClick={() => setShowCreateTemplateModal(true)}>
-            Create new...
-          </Button>
-
-          <div className="gap-2 grid grid-cols-2">
+          <div className="gap-2 grid grid-cols-2 max-w-[800px] mx-auto">
             {isLoading
               ? Array.from({ length: 5 }).map((_, index) => (
                   <Box
@@ -108,7 +124,8 @@ export default function Home() {
                     />
                   </Box>
                 ))
-              : filteredUserTemplates.length > 0 && filteredUserTemplates.map((template, index) => (
+              : filteredUserTemplates.length > 0 &&
+                filteredUserTemplates.map((template, index) => (
                   <TemplateCard
                     key={index}
                     templateData={filteredUserTemplates[index]}

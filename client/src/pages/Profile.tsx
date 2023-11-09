@@ -13,6 +13,24 @@ import useWorkoutStatus from "../hooks/useWorkoutStatus"
 import useToast from "@/hooks/useToast"
 import Dashboard from "@/components/pages/profile/dashboard/Dashboard"
 import useUserData from "@/hooks/api/useUserData"
+import {
+  Button as ChakraButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  IconButton,
+  MenuItem,
+  Icon,
+} from "@chakra-ui/react"
+import {
+  HamburgerIcon,
+  DeleteIcon,
+  ArrowDownIcon,
+  EditIcon,
+  RepeatClockIcon,
+  AddIcon,
+} from "@chakra-ui/icons"
+import { AiOutlinePlus } from "react-icons/ai"
 
 export default function Profile() {
   const navigate = useNavigate()
@@ -37,7 +55,9 @@ export default function Profile() {
 
         {/* Content  */}
         <div className="pt-[80px] pb-[100px] z-[0] px-4 w-full">
-          {/* <button onClick={() => console.log(auth)}>Click</button> */}
+          {/* <button onClick={() => console.log(userData)}>consolelog userData</button>
+          <button onClick={() => console.log(userData.dashboard)}>consolelog userData.dashboard</button> */}
+
 
           <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
 
@@ -50,9 +70,8 @@ export default function Profile() {
             </>
           ) : (
             <>
-              <h1 className="text-2xl font-semibold mb-4">Dashboard</h1>
               <Dashboard userData={userData} updateUserData={updateUserData} />
-              <h1 className="pt-8 text-2xl font-semibold mb-4">Settings</h1>
+
               <Settings
                 userData={userData}
                 updateUserData={updateUserData}

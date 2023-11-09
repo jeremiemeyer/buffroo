@@ -8,6 +8,7 @@ function makeMeTwoDigits(n) {
 }
 
 export default function Timer({ expiryTimestamp }) {
+
   const {
     totalSeconds,
     seconds,

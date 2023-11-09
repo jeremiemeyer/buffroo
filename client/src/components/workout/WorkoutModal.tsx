@@ -171,6 +171,7 @@ export default function WorkoutModal({ onClose }: any) {
           <AddExerciseToWorkoutModal
             onClose={() => setShowAddExerciseModal(false)}
             addExercise={addExercise}
+            actionType="workout"
           />,
           document.body
         )}

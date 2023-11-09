@@ -1,15 +1,5 @@
 //@ts-nocheck
-import {
-  Bar,
-  BarChart,
-  ResponsiveContainer,
-  XAxis,
-  YAxis,
-  ReferenceLine,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts"
+
 import {
   Menu,
   MenuButton,
@@ -22,6 +12,7 @@ import {
   HamburgerIcon,
   DeleteIcon,
   ArrowDownIcon,
+  ArrowUpIcon,
   EditIcon,
   RepeatClockIcon,
 } from "@chakra-ui/icons"
@@ -34,61 +25,111 @@ import { create } from "domain"
 import EditWorkoutsPerWeekModal from "./EditWorkoutsPerWeekModal"
 import useSessions from "@/hooks/api/useSessions"
 import { aggregateWorkoutsByWeek } from "@/utils/dashboard/aggregateWorkoutsByWeek"
+import WorkoutsPerWeekBarChart from "./charts/WorkoutsPerWeekBarChart"
+import useUserData from "@/hooks/api/useUserData"
+import useAuth from "@/hooks/useAuth"
+import useToast from "@/hooks/useToast"
 
-const WorkoutsPerWeekBarChart = ({ aggregatedData, goalValue }) => {
-  // Find the maximum value in your aggregated data
-  const maxWorkouts = Math.max(...aggregatedData.map((item) => item.workouts))
-
-  // Determine the domain range for the YAxis
-  const yDomain = [0, Math.max(maxWorkouts, goalValue) + 1]
-
-  return (
-    <ResponsiveContainer width="99%" aspect={2}>
-      <BarChart
-        data={aggregatedData}
-        margin={{
-          top: 5,
-          left: 10,
-          bottom: 5,
-        }}
-      >
-        <XAxis
-          dataKey="week"
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={true}
-        />
-        <YAxis
-          width={15}
-          datakey="workouts"
-          domain={yDomain}
-          stroke="#888888"
-          fontSize={12}
-          tickLine={true}
-          axisLine={true}
-          tickFormatter={(value) => `${value}`}
-          tickCount={Math.max(maxWorkouts, goalValue) + 2}
-          interval={0}
-        />
-        <Bar dataKey="workouts" fill="rgb(37 99 235)" radius={[4, 4, 0, 0]} />
-        <ReferenceLine y={goalValue} stroke="red" />
-        <CartesianGrid horizontal={true} strokeDasharray="3 3" />
-        {/* <Legend /> */}
-      </BarChart>
-    </ResponsiveContainer>
-  )
-}
-
-export default function WorkoutsPerWeek({ userData, updateUserData }) {
+export default function WorkoutsPerWeek({
+  userData,
+  updateUserData,
+  widgetData,
+}) {
   const [showEditWorkoutsPerWeekModal, setShowEditWorkoutsPerWeekModal] =
     useState(false)
   const { sessionsData } = useSessions()
   const aggregatedData = aggregateWorkoutsByWeek(sessionsData)
+  const { auth } = useAuth()
+  const { preferencesSaved } = useToast()
+  // const { userData, setUserData } = useUserData()
+
+  // marche
+  async function handleDelete() {
+    const updatedUserData = {
+      ...userData,
+      dashboard: [...userData.dashboard.filter((el) => el._id !== widgetId)],
+    }
+    const success = await updateUserData({
+      userId: auth.userId,
+      updatedUserData: updatedUserData,
+    })
+    if (success === true) {
+      preferencesSaved()
+    }
+    // console.log(updatedUserData)
+  }
+
+  // function getLastUsedPosition(array) {
+  //   let lastUsedPosition = 0
+  //   for (const index in array) {
+  //     if (array[index].position > lastUsedPosition) {
+  //       lastUsedPosition = array[index].position
+  //     }
+  //   }
+  //   return lastUsedPosition
+  // }
+
+  async function moveWidgetAfter() {
+    let updatedDashboardData = userData.dashboard
+    // Find the index of the widget to move.
+    const widgetIndex = updatedDashboardData.findIndex(
+      (widget) => widget._id === widgetData._id
+    )
+
+    // If the widget is the last element in the array, do nothing.
+    if (widgetIndex === updatedDashboardData.length - 1) {
+      return
+    }
+
+    // Swap the widget with the next widget in the array.
+    const widget = updatedDashboardData[widgetIndex]
+    const nextWidget = updatedDashboardData[widgetIndex + 1]
+    updatedDashboardData[widgetIndex] = nextWidget
+    updatedDashboardData[widgetIndex + 1] = widget
+
+    // console.log({...userData, dashboard: updatedDashboardData})
+    const success = await updateUserData({
+      userId: auth.userId,
+      updatedUserData: { ...userData, dashboard: updatedDashboardData },
+    })
+    if (success === true) {
+      preferencesSaved()
+    }
+  }
+
+  async function moveWidgetBefore() {
+    let updatedDashboardData = userData.dashboard
+    // Find the index of the widget to move.
+    const widgetIndex = updatedDashboardData.findIndex(
+      (widget) => widget._id === widgetData._id
+    )
+
+    // If the widget is the first element in the array, do nothing.
+    if (widgetIndex === 0) {
+      return
+    }
+
+    // Swap the widget with the next widget in the array.
+    const widget = updatedDashboardData[widgetIndex]
+    const previousWidget = updatedDashboardData[widgetIndex - 1]
+    updatedDashboardData[widgetIndex - 1] = widget
+    updatedDashboardData[widgetIndex] = previousWidget
+
+    const success = await updateUserData({
+      userId: auth.userId,
+      updatedUserData: { ...userData, dashboard: updatedDashboardData },
+    })
+    if (success === true) {
+      preferencesSaved()
+    }
+  }
 
   return (
     <>
       <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 max-w-[800px] mx-auto">
+        {/* <button onClick={() => console.log(userData)}>
+          consolelog userData
+        </button> */}
         {/* <button onClick={() => console.log(sessionsData)}>
           Consolelog sessionsData
         </button>
@@ -97,6 +138,7 @@ export default function WorkoutsPerWeek({ userData, updateUserData }) {
         </button> */}
 
         <div className="flex flex-row items-center pb-8">
+          {/* <button onClick={() => console.log(widgetId)}>consolelog widgetId</button> */}
           <h1 className="font-semibold text-xl flex grow ">Workouts/week</h1>
           <h2 className="px-4 font-semibold">
             Goal:{" "}
@@ -133,20 +175,27 @@ export default function WorkoutsPerWeek({ userData, updateUserData }) {
               />
               <MenuList zIndex={"600"}>
                 <MenuItem
+                  onClick={moveWidgetBefore}
+                  icon={<ArrowUpIcon />}
+                  // command="⌘N"
+                >
+                  Move Before
+                </MenuItem>
+                <MenuItem
+                  // onClick={moveExerciseAfter}
+                  onClick={moveWidgetAfter}
+                  icon={<ArrowDownIcon />}
+                  // command="⌘N"
+                >
+                  Move After
+                </MenuItem>
+                <MenuItem
                   icon={<DeleteIcon />}
-                  // onClick={() => onClickExerciseStats(selectedExerciseId)}
+                  onClick={handleDelete}
                   // command="⌘T"
                 >
-                  Remove from dashboard
+                  Remove
                 </MenuItem>
-
-                {/* <MenuItem
-                // onClick={() => setShowConfirmDeleteSessionModal(true)}
-                // onClick={handleClickEditExercise}
-                icon={<EditIcon />}
-              >
-                Edit exercise
-              </MenuItem> */}
               </MenuList>
             </Menu>
           </div>

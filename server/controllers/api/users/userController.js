@@ -21,11 +21,15 @@ const editUserData = async (req, res) => {
   const { userData } = req.body
   // console.log(userId, userData)
 
-  const updatedUser = await User.findByIdAndUpdate(userId, {userData: userData}).exec()
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    { userData: userData },
+    { new: true }
+  ).exec()
 
-  if (!updatedUser) return res.status(500).json({ message: "Error updating user data"})
+  if (!updatedUser)
+    return res.status(500).json({ message: "Error updating user data" })
   res.json(updatedUser)
-  
 }
 
 module.exports = {

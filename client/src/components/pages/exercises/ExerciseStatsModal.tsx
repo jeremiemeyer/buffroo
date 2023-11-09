@@ -17,8 +17,8 @@ import EditExerciseModal from "./ExerciseEditModal"
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts"
 import useUserData from "@/hooks/api/useUserData"
 import useSessions from "@/hooks/api/useSessions"
-import { ExerciseBestSetLineChart } from "../profile/dashboard/ExerciseBestSet"
-import { ExerciseVolumesLineChart } from "../profile/dashboard/ExerciseVolumeLineChart"
+import { ExerciseBestSetLineChart } from "../profile/dashboard/charts/ExerciseBestSetLineChart"
+import { ExerciseVolumesLineChart } from "../profile/dashboard/charts/ExerciseVolumeLineChart"
 
 export default function ExerciseStatsModal({
   onClose,

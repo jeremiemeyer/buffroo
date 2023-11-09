@@ -81,9 +81,13 @@ export const ExercisesProvider = ({ children }) => {
     }
   }
 
+
   useEffect(() => {
+    if (auth.userId) {
     getAllExercises()
-  }, [])
+    }
+  }, [auth.userId])
+  
 
   return (
     <ExercisesContext.Provider

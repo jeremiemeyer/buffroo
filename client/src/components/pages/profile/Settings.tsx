@@ -28,6 +28,9 @@ export default function Settings({ userData, updateUserData }) {
 
   return (
     <>
+      <div className="flex flex-row justify-between max-w-[800px] mx-auto">
+        <h1 className="pt-8 text-3xl font-semibold mb-4 px-4">Settings</h1>
+      </div>
       {userData && (
         <div>
           {/* <button
@@ -40,7 +43,7 @@ export default function Settings({ userData, updateUserData }) {
           <div className="rounded-3xl border bg-white pt-8 pb-6 px-6 max-w-[800px] mx-auto">
             <div className="text-left space-y-4 pb-6">
               <div className="grid grid-cols-2">
-                <span className="truncate ...">Preferred unit system</span>
+                <span className="truncate ...">Unit system</span>
                 <Select
                   placeholder="Select option"
                   value={updatedUserPreferences["unitSystem"]}

@@ -28,10 +28,7 @@ export const WorkoutTimerProvider = ({ children }) => {
     pause,
     resume,
     restart,
-  } = useTimer({
-    expiryTimestamp,
-    onExpire: () => handleExpire(),
-  })
+  } = useTimer({expiryTimestamp, onExpire: () => handleExpire()})
 
   return (
     <WorkoutTimerContext.Provider
@@ -48,6 +45,7 @@ export const WorkoutTimerProvider = ({ children }) => {
         restart,
         lastSetTimerDuration,
         setLastSetTimeDuration,
+        expiryTimestamp
       }}
     >
       {children}

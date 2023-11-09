@@ -38,6 +38,13 @@ export default function StartTimerModal({ onClose }) {
     onClose()
   }
 
+  function addTime(duration){
+    const time = new Date()
+    time.setSeconds(time.getSeconds() + totalSeconds + parseInt(duration))
+    setLastSetTimeDuration(lastSetTimerDuration + parseInt(duration))
+    restart(time)
+  }
+
   return (
     <div
       // onClick={onClose}
@@ -66,6 +73,9 @@ export default function StartTimerModal({ onClose }) {
                 <Button onClick={(e) => handleStartTimer(e)} value={120}>
                   2'
                 </Button>
+                <Button onClick={(e) => handleStartTimer(e)} value={150}>
+                  2'30"
+                </Button>
                 <Button onClick={onClose} variant="destructive">
                   Cancel
                 </Button>
@@ -74,12 +84,28 @@ export default function StartTimerModal({ onClose }) {
           ) : (
             <>
               <h1 className="text-2xl">Rest Timer</h1>
-              <div className="grid grid-rows-2 gap-2">
-                <div className="text-3xl"><Timer /></div>
-                
-
-                <Button onClick={handleSkip}>Skip</Button>
+              <div className="grid grid-rows-2 pt-8 text-center">
+                {/* time.setSeconds(time.getSeconds() + parseInt(e.target.value)) */}
+                <div className="grid grid-cols-3 text-center  gap-4 items-center">
+                  <div
+                    onClick={() => addTime(-10)}
+                    className="bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-full p-2"
+                  >
+                    -10"
+                  </div>
+                  <div className="text-3xl text-center w-[90px]">
+                    <Timer />
+                  </div>
+                  <div
+                    onClick={() => addTime(10)}
+                    className="bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-full p-2"
+                  >
+                    +10"
+                  </div>
+                </div>
               </div>
+              <Button onClick={handleSkip} className="mb-2">Skip timer</Button>
+              <Button onClick={onClose} variant="destructive">Go back</Button>
             </>
           )}
         </div>

@@ -14,7 +14,8 @@ import LoginRegister from "@/pages/LoginRegister.tsx"
 import { AppLayout } from "@/components/AppLayout.tsx"
 import { ExercisesProvider } from "@/context/api/ExercisesProvider.tsx"
 import { SessionsProvider } from "@/context/api/SessionsProvider.tsx"
-import { TemplatesProvider } from "./context/api/TemplatesProvider"
+import { TemplatesProvider } from "@/context/api/TemplatesProvider"
+import { UserDataProvider } from "@/context/api/UserDataProvider"
 
 const ROLES = {
   User: 2001,
@@ -34,7 +35,15 @@ function App() {
       <Route path="unauthorized" element={<Unauthorized />} />
 
       {/* protected routes */}
-      <Route element={<SessionsProvider><AppLayout /></SessionsProvider>}>
+      <Route
+        element={
+          <UserDataProvider>
+            <SessionsProvider>
+              <AppLayout />
+            </SessionsProvider>
+          </UserDataProvider>
+        }
+      >
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route
@@ -45,17 +54,12 @@ function App() {
                 </TemplatesProvider>
               }
             />
-            <Route
-              path="/history"
-              element={
-                  <History />
-              }
-            />
+            <Route path="/history" element={<History />} />
             <Route
               path="/profile"
               element={
                 <ExercisesProvider>
-                    <Profile />
+                  <Profile />
                 </ExercisesProvider>
               }
             />

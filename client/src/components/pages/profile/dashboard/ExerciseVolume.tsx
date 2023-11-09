@@ -26,7 +26,8 @@ import { ExerciseBestSetLineChart } from "./charts/ExerciseBestSetLineChart"
 import useAuth from "@/hooks/useAuth"
 import useToast from "@/hooks/useToast"
 
-export default function ExerciseBestSet({
+
+export default function ExerciseVolume({
   userData,
   updateUserData,
   widgetData,
@@ -51,9 +52,8 @@ export default function ExerciseBestSet({
     const updatedUserDashboard = [
       ...dashboardWithoutThisWidget,
       {
-        type: "exerciseBestSet",
+        type: "exerciseVolume",
         exerciseId: e.target.value,
-        position: widgetData.position,
         _id: widgetData._id,
       },
     ]
@@ -140,19 +140,10 @@ export default function ExerciseBestSet({
 
   return (
     <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 max-w-[800px] mx-auto">
-      {/* <button onClick={() => console.log(exercisesData[1].name)}>
-      Consolelog exercisesData[1]
-    </button> */}
-      {/* <button onClick={() => console.log(selectedExerciseId)}>
-      Consolelog id exercice sélectionné
-    </button> */}
-
       <div className="flex flex-row items-center pb-8">
-        <h1 className="font-semibold text-xl flex grow ">Best set</h1>
-        <button onClick={() => console.log(userData)}>
-          Console log userData
-        </button>
-        <button onClick={() => console.log(widgetData)}>widget data</button>
+        <h1 className="font-semibold text-xl flex grow ">Volume</h1>
+        <button onClick={() => console.log(widgetData._id)}>widget id</button>
+
         <h2 className="px-4">
           <Select
             placeholder="Exercise name"
@@ -211,7 +202,7 @@ export default function ExerciseBestSet({
         {/* <button onClick={() => console.log(exercisesData)}>
         consolelog exercisesData
       </button> */}
-        <ExerciseBestSetLineChart
+        <ExerciseVolumesLineChart
           selectedExerciseId={selectedExerciseId}
           sessionsData={sessionsData}
         />

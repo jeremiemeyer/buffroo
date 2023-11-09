@@ -25,7 +25,6 @@ export default function TimerButton({ setShowStartTimerModal }) {
     pause,
     resume,
     restart,
-    expiryTimestamp,
     lastSetTimerDuration,
   } = useWorkoutTimer()
 
@@ -34,7 +33,7 @@ export default function TimerButton({ setShowStartTimerModal }) {
       {!isRunning ? (
         <Button
           onClick={() => setShowStartTimerModal(true)}
-          colorScheme="gray"
+          className="bg-gray-300"
           as={IconButton}
           icon={<Icon as={BiTimer} className="text-2xl" />}
           className="w-[100px]"
@@ -44,7 +43,7 @@ export default function TimerButton({ setShowStartTimerModal }) {
           <div
             onClick={() => setShowStartTimerModal(true)}
             variant="ghost"
-            className="bg-gray-200 w-[100px] h-8 rounded-xl text-center items-center justify-center flex z-[600] relative mr-1 cursor-pointer"
+            className="bg-gray-300 w-[100px] h-8 rounded-xl text-center items-center justify-center flex z-[600] relative mr-1 cursor-pointer"
           >
             <div
               className={`bg-blue-500 w-full left-0 h-full rounded-xl origin-left relative z-0`}

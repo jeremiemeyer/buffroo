@@ -18,6 +18,12 @@ const userSchema = new Schema({
     goals: {
       workoutsPerWeek: { type: Number, default: 3 },
     },
+    dashboard: [
+      {
+        type: { type: String, required: true },
+        exerciseId: { type: String },
+      },
+    ],
   },
 })
 

@@ -131,6 +131,8 @@ export default function AddExerciseToWorkoutModal({
                     onClick={() => handleSelectExercise(exercise)}
                     key={index}
                     exercise={exercise}
+                    addExerciseToHistorySession={addExercise}
+                    actionType={"edit-history"}
                     isSelected={exercise["_id"] === selectedExercise["_id"]}
                   />
                 ))}

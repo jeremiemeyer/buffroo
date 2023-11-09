@@ -101,8 +101,12 @@ export const TemplatesProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    getUserTemplates()
-  }, [])
+    if (auth.userId) {
+      getUserTemplates()
+    }
+  }, [auth.userId])
+
+  
 
   return (
     <TemplatesContext.Provider

@@ -33,7 +33,6 @@ export default function EditWorkoutModal({
   const { auth } = useAuth()
   // const SESSION_URL = `/api/users/${auth.userId}/sessions/${selectedWorkoutId}`
   const { workoutUpdated } = useToast()
-  const { addExercise } = useWorkoutData()
   const { updateUserSession } = useSessions()
 
   function handleEditWorkoutName(e) {
@@ -43,6 +42,16 @@ export default function EditWorkoutModal({
   function handleEditWorkoutNotes(e) {
     const newNotes = e.target.value
     setWorkoutData({ ...workoutData, notes: newNotes })
+  }
+
+   function addExercise(exercise) {
+    const exerciseToBeAdded = {
+      name: exercise.name,
+      sets: [{ reps: "", weight: "", rpe: "" }],
+      exerciseId: exercise._id,
+    }
+    const updatedExercises = [...workoutData.exercises, exerciseToBeAdded]
+    setWorkoutData({ ...workoutData, exercises: updatedExercises })
   }
 
   const saveSessionChanges = async () => {

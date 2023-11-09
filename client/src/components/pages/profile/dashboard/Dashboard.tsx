@@ -43,7 +43,7 @@ export default function Dashboard({ userData, updateUserData }) {
       {/* <button onClick={() => console.log(userData.dashboard)}>
         consolelog userData.dashboard
       </button> */}
-      <div className="flex flex-row justify-between max-w-[800px] mx-auto">
+      <div className="flex flex-row justify-between mx-auto">
         <h1 className="text-3xl font-semibold mb-4 px-4">Dashboard</h1>
         <div>
           <Button

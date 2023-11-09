@@ -95,7 +95,7 @@ export default function Home() {
 
         <Button onClick={handleClick} className="mb-16">Start an empty workout</Button>
 
-        <div className="flex flex-row justify-between max-w-[800px] mx-auto">
+        <div className="flex flex-row justify-between mx-auto">
           <h1 className="text-3xl font-semibold mb-4 px-4">Templates</h1>
           <div>
             <ChakraButton
@@ -110,7 +110,7 @@ export default function Home() {
           </div>
         </div>
         <div className="space-y-5">
-          <div className="gap-2 grid grid-cols-2 max-w-[800px] mx-auto">
+          <div className="gap-2 grid grid-cols-2 mx-auto">
             {isLoading
               ? Array.from({ length: 5 }).map((_, index) => (
                   <Box

@@ -47,7 +47,7 @@ export default function StartTimerModal({ onClose }) {
 
   return (
     <div
-      // onClick={onClose}
+      onClick={onClose}
       className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center"
     >
       <div

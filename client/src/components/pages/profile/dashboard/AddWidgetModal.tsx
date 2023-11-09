@@ -27,19 +27,18 @@ export default function AddWidgetModal({ onClose }) {
   async function handleAddWidget() {
     const updatedUserData = {
       ...userData,
-      dashboard: [
-        ...userData.dashboard,
-        { ...widgetToAddOptions,
-        },
-      ],
+      dashboard: [...userData.dashboard, { ...widgetToAddOptions }],
     }
 
     console.log(updatedUserData)
 
-    const success = await updateUserData({userId: auth.userId, updatedUserData: updatedUserData})
+    const success = await updateUserData({
+      userId: auth.userId,
+      updatedUserData: updatedUserData,
+    })
     if (success === true) {
-        onClose()
-        preferencesSaved()
+      onClose()
+      preferencesSaved()
     }
   }
 
@@ -54,7 +53,7 @@ export default function AddWidgetModal({ onClose }) {
           className="z-[900] relative bg-gray-50 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 w-full md:w-[600px]"
         >
           <div className="h-[5%] flex flex-col justify-between items-center">
-            <div className="justify-between w-full grid grid-cols-3 items-center text-center pb-12">
+            <div className="justify-between w-full grid grid-cols-3 items-center text-center pb-6">
               <Button className="w-2" onClick={onClose} variant="destructive">
                 X
               </Button>
@@ -118,7 +117,7 @@ export default function AddWidgetModal({ onClose }) {
                 </div>
               ) : null}
             </div>
-            <div className="grid grid-rows-2 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <Button onClick={handleAddWidget}>Add widget</Button>
               <Button onClick={onClose} variant="destructive">
                 Cancel

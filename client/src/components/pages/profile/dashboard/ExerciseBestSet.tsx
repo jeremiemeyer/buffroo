@@ -43,6 +43,7 @@ export default function ExerciseBestSet({
     }
   }, [exercisesData])
 
+  // refaire sans modifier ordre des éléments
   async function handleSelectExercise(e) {
     setSelectedExerciseId(e.target.value)
     const dashboardWithoutThisWidget = userData.dashboard.filter(
@@ -139,7 +140,7 @@ export default function ExerciseBestSet({
   }
 
   return (
-    <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 max-w-[800px] mx-auto">
+    <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 mx-auto">
       {/* <button onClick={() => console.log(exercisesData[1].name)}>
       Consolelog exercisesData[1]
     </button> */}

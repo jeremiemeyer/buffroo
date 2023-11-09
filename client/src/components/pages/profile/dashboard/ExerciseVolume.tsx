@@ -142,7 +142,7 @@ export default function ExerciseVolume({
     <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 max-w-[800px] mx-auto">
       <div className="flex flex-row items-center pb-8">
         <h1 className="font-semibold text-xl flex grow ">Volume</h1>
-        <button onClick={() => console.log(widgetData._id)}>widget id</button>
+        {/* <button onClick={() => console.log(widgetData._id)}>widget id</button> */}
 
         <h2 className="px-4">
           <Select

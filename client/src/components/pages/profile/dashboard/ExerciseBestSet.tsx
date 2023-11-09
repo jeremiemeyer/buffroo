@@ -149,10 +149,10 @@ export default function ExerciseBestSet({
 
       <div className="flex flex-row items-center pb-8">
         <h1 className="font-semibold text-xl flex grow ">Best set</h1>
-        <button onClick={() => console.log(userData)}>
+        {/* <button onClick={() => console.log(userData)}>
           Console log userData
-        </button>
-        <button onClick={() => console.log(widgetData)}>widget data</button>
+        </button> */}
+        {/* <button onClick={() => console.log(widgetData)}>widget data</button> */}
         <h2 className="px-4">
           <Select
             placeholder="Exercise name"

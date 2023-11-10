@@ -91,16 +91,6 @@ export default function AddWidgetModal({ onClose }) {
                     }
                     className=" dark:bg-gray-600 dark:border-gray-600"
                     color={theme === "dark" ? "white" : ""}
-                    sx={
-                      theme === "dark"
-                        ? {
-                            "> option": {
-                              background: "black",
-                              color: "white",
-                            },
-                          }
-                        : ""
-                    }
                   >
                     <option value="workoutsPerWeek">Workouts per week</option>
                     <option value="exerciseBestSet">Best set</option>
@@ -125,17 +115,6 @@ export default function AddWidgetModal({ onClose }) {
                         })
                       }
                       className=" dark:bg-gray-600 dark:border-gray-600"
-                      color={theme === "dark" ? "white" : ""}
-                      sx={
-                        theme === "dark"
-                          ? {
-                              "> option": {
-                                background: "black",
-                                color: "white",
-                              },
-                            }
-                          : ""
-                      }
                     >
                       {exercisesData.map((exercise, index) => (
                         <option key={index} value={exercise._id}>

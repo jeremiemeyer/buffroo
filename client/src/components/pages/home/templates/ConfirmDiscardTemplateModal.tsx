@@ -19,7 +19,7 @@ export default function ConfirmDiscardTemplateModal({
   return (
     <div
       onClick={onClose}
-      className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center"
+      className="fixed z-[700] inset-0 bg-slate-700/75 bg-glassmorphism3 flex justify-center items-center"
     >
       <div
         onClick={(e) => e.stopPropagation()}

@@ -109,7 +109,7 @@ export default function CreateEditTemplateModal({
 
   return (
     <>
-      <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
+      <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-glassmorphism3 flex justify-center items-center">
         <div className="flex flex-col z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900 w-[100%] h-[95%] px-2 md:px-6 pb-4 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12 px-2">
             <i className="fa fa-heading mr-4 dark:text-white dark:text-opacity-90" />

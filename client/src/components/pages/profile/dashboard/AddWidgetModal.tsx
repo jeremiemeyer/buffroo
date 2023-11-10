@@ -115,6 +115,7 @@ export default function AddWidgetModal({ onClose }) {
                         })
                       }
                       className=" dark:bg-gray-600 dark:border-gray-600"
+                      color={theme === "dark" ? "white" : ""}
                     >
                       {exercisesData.map((exercise, index) => (
                         <option key={index} value={exercise._id}>

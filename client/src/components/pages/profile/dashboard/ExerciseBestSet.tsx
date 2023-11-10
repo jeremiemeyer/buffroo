@@ -25,6 +25,8 @@ import { ExerciseVolumesLineChart } from "./charts/ExerciseVolumeLineChart"
 import { ExerciseBestSetLineChart } from "./charts/ExerciseBestSetLineChart"
 import useAuth from "@/hooks/useAuth"
 import useToast from "@/hooks/useToast"
+import useTheme from "@/hooks/useTheme"
+
 
 export default function ExerciseBestSet({
   userData,
@@ -36,6 +38,7 @@ export default function ExerciseBestSet({
   const [selectedExerciseId, setSelectedExerciseId] = useState(null)
   const { auth } = useAuth()
   const { preferencesSaved } = useToast()
+  const { theme } = useTheme()
 
   useEffect(() => {
     if (exercisesData.length > 0) {
@@ -159,7 +162,14 @@ export default function ExerciseBestSet({
             placeholder="Exercise name"
             value={selectedExerciseId && selectedExerciseId}
             onChange={(e) => handleSelectExercise(e)}
-            className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
+            className=" dark:bg-gray-600 dark:border-gray-600"
+            color={theme==="dark" ? "white" : ""}
+            sx={theme==="dark" ? {
+              "> option": {
+                background: "black",
+                color: "white",
+              },
+            } : ""}
           >
             {exercisesData.map((exercise, index) => (
               <option key={index} value={exercise._id}>

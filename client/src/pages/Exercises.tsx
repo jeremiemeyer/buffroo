@@ -17,12 +17,12 @@ import { createPortal } from "react-dom"
 import AddExerciseModal from "../components/pages/exercises/AddExerciseModal"
 import { useNavigate, useLocation } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
-
 import { Button } from "@/components/ui/button"
 import useExercises from "@/hooks/api/useExercises"
 import ExercisesList from "@/components/pages/exercises/ExercisesList"
 import useUserData from "@/hooks/api/useUserData"
 import WorkoutsPerWeek from "@/components/pages/profile/dashboard/WorkoutsPerWeek"
+import useTheme from "@/hooks/useTheme"
 
 export default function Exercises() {
   const {
@@ -32,7 +32,8 @@ export default function Exercises() {
     addNewUserExercise,
     editUserExercise,
   } = useExercises()
-  
+  const { theme } = useTheme()
+
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
 
   const [filteredExercises, setFilteredExercises] = useState([])
@@ -93,7 +94,7 @@ export default function Exercises() {
 
         <div className="flex flex-col">
           <div className="px-6 pt-2">
-            <InputGroup>
+            <InputGroup color={"white"}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />
               </InputLeftElement>
@@ -101,7 +102,7 @@ export default function Exercises() {
                 placeholder="Search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
+                className=" dark:bg-gray-600 dark:border-gray-600"
               />
             </InputGroup>
           </div>
@@ -110,7 +111,14 @@ export default function Exercises() {
             <Select
               placeholder="Any body part"
               onChange={(e) => setSelectedBodyPart(e.target.value)}
-              className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
+              className=" dark:bg-gray-600 dark:border-gray-600"
+              color={theme==="dark" ? "white" : ""}
+              sx={theme==="dark" ? {
+                "> option": {
+                  background: "black",
+                  color: "white",
+                },
+              } : ""}
             >
               <option value="core">Core</option>
               <option value="arms">Arms</option>
@@ -124,8 +132,16 @@ export default function Exercises() {
             <Select
               placeholder="Any category"
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
+              className=" dark:bg-gray-600 dark:border-gray-600"
+              color={theme==="dark" ? "white" : ""}
+              sx={theme==="dark" ? {
+                "> option": {
+                  background: "black",
+                  color: "white",
+                },
+              } : ""}
             >
+              <option value="any-category">Any category</option>
               <option value="barbell">Barbell</option>
               <option value="dumbbell">Dumbbell</option>
               <option value="machine">Machine</option>
@@ -134,7 +150,6 @@ export default function Exercises() {
             </Select>
           </div>
         </div>
-
       </div>
 
       {/* Content */}

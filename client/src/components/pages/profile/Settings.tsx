@@ -8,6 +8,8 @@ import useAuth from "@/hooks/useAuth"
 import { PiExportLight } from "react-icons/pi"
 import { createPortal } from "react-dom"
 import ExportDataModal from "./ExportDataModal"
+import useTheme from "@/hooks/useTheme"
+
 
 export default function Settings({ userData, updateUserData }) {
   const [updatedUserPreferences, setUpdatedUserPreferences] = useState(
@@ -16,6 +18,7 @@ export default function Settings({ userData, updateUserData }) {
   const [showExportDataModal, setShowExportDataModal] = useState(false)
   const { auth } = useAuth()
   const { preferencesSaved } = useToast()
+  const { theme } = useTheme()
 
   async function handleClick() {
     const success = await updateUserData({
@@ -59,7 +62,14 @@ export default function Settings({ userData, updateUserData }) {
                   }
                   name="unitsystem"
                   borderColor="gray.400"
-                  className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
+                  className=" dark:bg-gray-600 dark:border-gray-600"
+                  color={theme==="dark" ? "white" : ""}
+                  sx={theme==="dark" ? {
+                    "> option": {
+                      background: "black",
+                      color: "white",
+                    },
+                  } : ""}
                 >
                   <option value="imperial">Imperial</option>
                   <option value="metric">Metric</option>
@@ -79,7 +89,14 @@ export default function Settings({ userData, updateUserData }) {
                   }
                   name="theme"
                   borderColor="gray.400"
-                  className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
+                  className=" dark:bg-gray-600 dark:border-gray-600"
+                  color={theme==="dark" ? "white" : ""}
+                  sx={theme==="dark" ? {
+                    "> option": {
+                      background: "black",
+                      color: "white",
+                    },
+                  } : ""}
                 >
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>

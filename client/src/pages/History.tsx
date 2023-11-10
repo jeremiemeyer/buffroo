@@ -23,12 +23,15 @@ import { Button } from "@/components/ui/button"
 import useSessions from "@/hooks/api/useSessions"
 import WorkoutSessionsList from "@/components/pages/history/WorkoutSessionsList"
 import ReactPaginate from "react-paginate"
+import useTheme from "@/hooks/useTheme"
+
 
 export default function History() {
   const axiosPrivate = useAxiosPrivate()
   const [selectedWorkoutId, setSelectedWorkoutId] = useState("")
   const { workoutDeleted } = useToast()
   const { auth } = useAuth()
+  const { theme } = useTheme()
   const {
     sessionsData,
     isLoading,
@@ -138,13 +141,20 @@ export default function History() {
                   ? sessionsData.length - itemsShown
                   : sessionsPerPage}{" "} */}
               <div className="w-[300px] flex flex-row flex-nowrap items-center">
-                <p className="whitespace-nowrap mr-4">Sort by</p>
+                <p className="whitespace-nowrap mr-4 dark:text-white dark:text-opacity-90">Sort by</p>
                 <div className="flex grow">
                   <Select
                     value={sortedBy}
                     onChange={(e) => setSortedBy(e.target.value)}
-                    bgColor="white"
-                    className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
+                    className="bg-white dark:bg-gray-600 dark:border-gray-600"
+                    bg={theme==="dark" ?  "" : "white"}
+                    color={theme==="dark" ? "white" : ""}
+                    sx={theme==="dark" ? {
+                      "> option": {
+                        background: "black",
+                        color: "white",
+                      },
+                    } : ""}
                   >
                     <option value="newest">Newest to oldest</option>
                     <option value="oldest">Oldest to newest</option>
@@ -163,7 +173,6 @@ export default function History() {
               nextLinkClassName="font-semibold opacity-40 ml-2"
               activeClassName="text-white bg-blue-600 hover:bg-blue-800"
               pageClassName="text-black rounded-full p-2 px-4 dark:text-white"
-            
             />
 
             <WorkoutSessionsList
@@ -171,7 +180,12 @@ export default function History() {
               deleteUserSession={deleteUserSession}
             />
 
-            <button onClick={goTop} className="py-4 font-semibold text-blue-600">Back to top</button>
+            <button
+              onClick={goTop}
+              className="py-4 font-semibold text-blue-600"
+            >
+              Back to top
+            </button>
           </>
         )}
       </div>

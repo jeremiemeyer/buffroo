@@ -49,7 +49,7 @@ export function ExerciseVolumesLineChart({ sessionsData, selectedExerciseId }) {
             </ResponsiveContainer>
           </>
         ) : (
-          <p>No data found for this exercise.</p>
+          <p className="dark:text-white dark:text-opacity-70">No data found for this exercise.</p>
         )}
       </>
     )

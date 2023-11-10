@@ -104,7 +104,7 @@ const Login = () => {
   return (
     <>
       <h1 className="text-4xl pb-8 text-white z-[600]">Sign In</h1>
-      <div className="bg-glassmorphism2 rounded-3xl p-12 z-[600] xl:min-w-[500px]">
+      <div className="bg-glassmorphism2 bg-white bg-opacity-70  rounded-3xl p-12 z-[600] xl:min-w-[500px]">
         <p
           ref={errRef}
           className={errMsg ? "errmsg" : "offscreen"}
@@ -133,6 +133,8 @@ const Login = () => {
                 //   onBlur={() => setUserFocus(false)}
                 borderRadius="16px"
                 borderColor="gray.400"
+                
+                bo
                 required
               />
             </InputGroup>

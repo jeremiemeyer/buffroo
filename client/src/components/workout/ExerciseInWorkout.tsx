@@ -21,6 +21,7 @@ import {
   ArrowUpIcon,
 } from "@chakra-ui/icons"
 import { FaEllipsisH } from "react-icons/fa"
+import useTheme from "@/hooks/useTheme"
 
 export default function ExerciseInWorkout({
   workoutData,
@@ -34,6 +35,7 @@ export default function ExerciseInWorkout({
   )
 
   const exerciseSets = workoutData.exercises[exerciseIndex].sets
+  const { theme } = useTheme()
 
   // ajouter série
   function handleAddSet() {
@@ -127,9 +129,9 @@ export default function ExerciseInWorkout({
   }
 
   return (
-    <div className="pb-8 bg-white border border-gray-200 rounded-xl p-4">
+    <div className="pb-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
       <div className="flex flex-row justify-between">
-        <p className="text-2xl">{exercise.name}</p>
+        <p className="text-2xl dark:text-white dark:text-opacity-90">{exercise.name}</p>
         <Menu variant="filled">
           <MenuButton
             as={IconButton}
@@ -177,7 +179,7 @@ export default function ExerciseInWorkout({
 
       </div>
       <div className="space-y-2">
-        <div className="grid grid-cols-5 gap-8 font-semibold">
+        <div className="grid grid-cols-5 gap-8 font-semibold dark:text-white dark:text-opacity-80">
           <div>Set</div>
           <div>Prev.</div>
           <div>kg</div>
@@ -188,7 +190,7 @@ export default function ExerciseInWorkout({
           exerciseSets.length > 0 &&
           exerciseSets.map((set, index) => (
             <div
-              className="grid grid-cols-5 bg-white px-2 items-center gap-8"
+              className="grid grid-cols-5 bg-white dark:bg-gray-800 px-2 items-center gap-8 dark:text-white dark:text-opacity-90"
               key={index}
             >
               <div>{index + 1}</div>
@@ -201,7 +203,9 @@ export default function ExerciseInWorkout({
                 }
                 value={set.weight}
                 textAlign={"center"}
-                borderColor={"rgba(0,0,0,0.2)"}
+                borderColor={theme === "dark" ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)"}
+                color={theme === "dark" ? "white" : ""}
+
               />
 
               <Input
@@ -212,7 +216,9 @@ export default function ExerciseInWorkout({
                 }
                 value={set.reps}
                 textAlign={"center"}
-                borderColor={"rgba(0,0,0,0.2)"}
+                borderColor={theme === "dark" ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)"}
+                color={theme === "dark" ? "white" : ""}
+
               />
 
               <Button
@@ -220,7 +226,7 @@ export default function ExerciseInWorkout({
                 className="ml-auto"
                 variant="outline"
               >
-                <i className="fa fa-trash "></i>
+                <i className="fa fa-trash dark:text-gray-300"></i>
               </Button>
             </div>
           ))}

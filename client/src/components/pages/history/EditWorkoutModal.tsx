@@ -19,11 +19,9 @@ import AddExerciseToWorkoutModal from "../../workout/AddExerciseToWorkoutModal"
 import useToast from "@/hooks/useToast"
 import useWorkoutData from "@/hooks/useWorkoutData"
 import useSessions from "@/hooks/api/useSessions"
+import useTheme from "@/hooks/useTheme"
 
-export default function EditWorkoutModal({
-  onClose,
-  thisWorkoutData,
-}) {
+export default function EditWorkoutModal({ onClose, thisWorkoutData }) {
   const [showConfirmDiscardChangesModal, setShowConfirmDiscardChangesModal] =
     useState(false)
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -34,6 +32,7 @@ export default function EditWorkoutModal({
   // const SESSION_URL = `/api/users/${auth.userId}/sessions/${selectedWorkoutId}`
   const { workoutUpdated } = useToast()
   const { updateUserSession } = useSessions()
+  const { theme } = useTheme()
 
   function handleEditWorkoutName(e) {
     const newName = e.target.value
@@ -44,7 +43,7 @@ export default function EditWorkoutModal({
     setWorkoutData({ ...workoutData, notes: newNotes })
   }
 
-   function addExercise(exercise) {
+  function addExercise(exercise) {
     const exerciseToBeAdded = {
       name: exercise.name,
       sets: [{ reps: "", weight: "", rpe: "" }],
@@ -69,14 +68,15 @@ export default function EditWorkoutModal({
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
+        <div className="flex flex-col z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900 w-[100%] h-[95%] px-6  pb-6 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12">
-            <i className="fa fa-heading mr-4" />
+            <i className="fa fa-heading mr-4 dark:text-white dark:text-opacity-90" />
             <Input
               variant="flushed"
               value={workoutData.name}
               onChange={handleEditWorkoutName}
               marginRight={"30px"}
+              color={theme === "dark" ? "white" : ""}
             />
             <Button onClick={saveSessionChanges}>Save</Button>
           </div>
@@ -84,14 +84,15 @@ export default function EditWorkoutModal({
           <div className="grow mt-6 overflow-auto">
             <div className="space-y-2 mt-4">
               <div className="flex flex-row items-center">
-                <i className="fa fa-pen mr-4" />
+                <i className="fa fa-pen mr-4 dark:text-white dark:text-opacity-90" />
                 <Input
                   placeholder="Notes"
                   variant="flushed"
                   value={workoutData.notes}
                   onChange={(e) => handleEditWorkoutNotes(e)}
                   marginRight={"30px"}
-                ></Input>
+                  color={theme === "dark" ? "white" : ""}
+                />
               </div>
 
               {/* Liste des exos */}

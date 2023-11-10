@@ -64,7 +64,7 @@ export default function Profile() {
           {isLoading ? (
             <>
               <h1 className="text-2xl font-light mb-4">Settings</h1>
-              <Box className="rounded-3xl border bg-white py-6 px-6 max-w-[800px] mx-auto">
+              <Box className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800  py-6 px-6 max-w-[800px] mx-auto">
                 <SkeletonText noOfLines={8} spacing="4" skeletonHeight="2" />
               </Box>
             </>

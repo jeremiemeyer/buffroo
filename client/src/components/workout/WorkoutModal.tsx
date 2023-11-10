@@ -28,6 +28,7 @@ import Timer from "./Timer"
 import StartTimerModal from "./StartTimerModal"
 import TimerButton from "./TimerButton"
 import useWorkoutStopwatch from "@/hooks/useWorkoutStopwatch"
+import useTheme from "@/hooks/useTheme"
 
 export default function WorkoutModal({ onClose }: any) {
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false)
@@ -37,6 +38,7 @@ export default function WorkoutModal({ onClose }: any) {
   const axiosPrivate = useAxiosPrivate()
   const { auth } = useAuth()
   const [showStartTimerModal, setShowStartTimerModal] = useState(false)
+  const { theme } = useTheme()
 
   const { sessionWindowIsMinimized, setSessionWindowIsMinimized } =
     useWorkoutStatus()
@@ -82,11 +84,11 @@ export default function WorkoutModal({ onClose }: any) {
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-2 md:px-6 pb-4 rounded-2xl border border-slate-600 max-w-[1300px]">
+        <div className="flex flex-col z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900 w-[100%] h-[95%] px-2 md:px-6 pb-4 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="text-center">
             <Menu>
               <MenuButton
-                className="hover:bg-slate-300"
+                className="hover:bg-slate-300 dark:hover:bg-gray-600 dark:text-white"
                 as={IconButton}
                 aria-label="Options"
                 onClick={() => setSessionWindowIsMinimized(true)}
@@ -97,7 +99,7 @@ export default function WorkoutModal({ onClose }: any) {
               />
             </Menu>
           </div>
-          <div>
+          <div className="dark:text-white dark:text-opacity-90">
             <Stopwatch />
           </div>
 
@@ -112,7 +114,7 @@ export default function WorkoutModal({ onClose }: any) {
           <div className="grow mt-2 overflow-auto ">
             <div className="space-y-2">
               <div className="flex flex-row items-center px-2">
-                <i className="fa fa-heading mr-4" />
+                <i className="fa fa-heading mr-4 dark:text-white dark:text-opacity-90" />
                 <Input
                   placeholder="Workout title"
                   variant="flushed"
@@ -120,11 +122,12 @@ export default function WorkoutModal({ onClose }: any) {
                   onChange={handleEditWorkoutName}
                   borderColor={"gray.300"}
                   marginRight={"30px"}
+                  color={theme === "dark" ? "white" : ""}
                 />
               </div>
 
               <div className="flex flex-row items-center px-2 md:pb-4">
-                <i className="fa fa-pen mr-4" />
+                <i className="fa fa-pen mr-4 dark:text-white dark:text-opacity-90" />
                 <Input
                   placeholder="Notes"
                   variant="flushed"
@@ -132,6 +135,7 @@ export default function WorkoutModal({ onClose }: any) {
                   onChange={(e) => handleEditWorkoutNotes(e)}
                   borderColor={"gray.300"}
                   marginRight={"30px"}
+                  color={theme === "dark" ? "white" : ""}
                 ></Input>
               </div>
 

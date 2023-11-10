@@ -18,6 +18,8 @@ import useAxiosPrivate from "@/hooks/useAxiosPrivate"
 import { useLocation, useNavigate } from "react-router-dom"
 import TemplateExercisesListExerciseCard from "./TemplateExercisesListExerciseCard"
 import useTemplateData from "@/hooks/useTemplateData"
+import useTheme from "@/hooks/useTheme"
+
 
 export default function AddExerciseToTemplateModal({
   onClose,
@@ -35,6 +37,7 @@ export default function AddExerciseToTemplateModal({
   const location = useLocation()
   const DEFAULT_EXERCISES_URL = "/api/exercises"
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
+  const { theme } = useTheme()
 
   const getExercises = async () => {
     setIsLoading(true)
@@ -88,7 +91,7 @@ export default function AddExerciseToTemplateModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative w-full m-2 md:max-w-[600px] bg-gray-50 text-slate-900 md:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
+        className="z-[900] relative w-full m-2 md:max-w-[600px] bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900 md:min-w-[600px] h-[90%] px-4 pb-4 rounded-2xl border border-slate-600 mb-[10vh] mt-12"
       >
         <div className="flex flex-row justify-between items-center h-[10%]">
           <Button onClick={onClose} variant="destructive">
@@ -102,7 +105,7 @@ export default function AddExerciseToTemplateModal({
 
         <div className="relative h-[90%]">
           <div className="h-[10%]">
-            <InputGroup className="bg-white">
+          <InputGroup className={theme === "dark" ? "" : "bg-white"}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />
               </InputLeftElement>
@@ -110,6 +113,8 @@ export default function AddExerciseToTemplateModal({
                 placeholder="Search"
                 value={searchInput}
                 onChange={(e) => handleChange(e)}
+                className=" bg-white dark:bg-gray-600 dark:border-gray-600"
+                color={theme === "dark" ? "white" : ""}
               />
             </InputGroup>
           </div>
@@ -119,7 +124,7 @@ export default function AddExerciseToTemplateModal({
               Array.from({ length: 12 }).map((_, index) => (
                 <Box
                   key={index}
-                  className="bg-white mt-2 p-[20px] mx-auto rounded-xl"
+                  className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700  mt-2 p-[20px] mx-auto rounded-xl"
                 >
                   <SkeletonText
                     mt="4"

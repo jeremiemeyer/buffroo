@@ -21,6 +21,7 @@ import ConfirmCancelEditTemplateModal from "./ConfirmCancelEditTemplateModal"
 import AddExerciseToTemplateModal from "./AddExerciseToTemplateModal"
 import useToast from "@/hooks/useToast"
 import useTemplates from "@/hooks/api/useTemplates"
+import useTheme from "@/hooks/useTheme"
 
 export default function CreateEditTemplateModal({
   actionType,
@@ -37,6 +38,7 @@ export default function CreateEditTemplateModal({
   const { cannotSubmitEmptyTemplate, templateAdded, templateUpdated } =
     useToast()
   const { createUserTemplate, updateUserTemplate } = useTemplates()
+  const { theme } = useTheme()
 
   const emptyTemplate = {
     name: "New template",
@@ -108,15 +110,16 @@ export default function CreateEditTemplateModal({
   return (
     <>
       <div className="fixed z-[700] inset-0 bg-slate-700/75 bg-blur flex justify-center items-center">
-        <div className="flex flex-col z-[900] relative bg-gray-50 text-slate-900 w-[100%] h-[95%] px-2 md:px-6 pb-4 rounded-2xl border border-slate-600 max-w-[1300px]">
+        <div className="flex flex-col z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900 w-[100%] h-[95%] px-2 md:px-6 pb-4 rounded-2xl border border-slate-600 max-w-[1300px]">
           <div className="h-[5%] flex flex-row justify-between items-center gap-2 pt-12 px-2">
-            <i className="fa fa-heading mr-4" />
+            <i className="fa fa-heading mr-4 dark:text-white dark:text-opacity-90" />
             <Input
               placeholder="Template title"
               variant="flushed"
               value={thisTemplateData && thisTemplateData.name}
               onChange={handleEditTemplateName}
               marginRight={"30px"}
+              color={theme === "dark" ? "white" : ""}
             />
             <Button onClick={saveOrEditTemplate} variant="secondary">
               Save
@@ -130,13 +133,14 @@ export default function CreateEditTemplateModal({
 
             <div className="space-y-2 mt-4 px-2 md:pb-4">
               <div className="flex flex-row items-center">
-                <i className="fa fa-pen mr-4" />
+                <i className="fa fa-pen mr-4 dark:text-white dark:text-opacity-90" />
                 <Input
                   placeholder="Notes"
                   variant="flushed"
                   value={thisTemplateData && thisTemplateData.notes}
                   onChange={(e) => handleEditTemplateNotes(e)}
                   marginRight={"30px"}
+                  color={theme === "dark" ? "white" : ""}
                 ></Input>
               </div>
 

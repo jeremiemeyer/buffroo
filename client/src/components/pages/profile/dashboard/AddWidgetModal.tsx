@@ -6,6 +6,7 @@ import useExercises from "@/hooks/api/useExercises"
 import useUserData from "@/hooks/api/useUserData"
 import useToast from "@/hooks/useToast"
 import useAuth from "@/hooks/useAuth"
+import useTheme from "@/hooks/useTheme"
 
 export default function AddWidgetModal({ onClose }) {
   const [widgetToAddOptions, setWidgetToAddOptions] = useState({})
@@ -13,6 +14,7 @@ export default function AddWidgetModal({ onClose }) {
   const { preferencesSaved } = useToast()
   const { userData, updateUserData } = useUserData()
   const { auth } = useAuth()
+  const { theme } = useTheme()
 
   function getLastUsedPosition(array) {
     let lastUsedPosition = 0
@@ -50,14 +52,16 @@ export default function AddWidgetModal({ onClose }) {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="z-[900] relative bg-gray-50 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 w-full md:w-[600px]"
+          className="z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 border border-slate-600  text-slate-900  px-6 pt-6 pb-6 rounded-2xl  w-full md:w-[600px]"
         >
           <div className="h-[5%] flex flex-col justify-between items-center">
             <div className="justify-between w-full grid grid-cols-3 items-center text-center pb-6">
               <Button className="w-2" onClick={onClose} variant="destructive">
                 X
               </Button>
-              <h1 className="text-2xl">Add widget</h1>
+              <h1 className="text-2xl dark:text-white dark:text-opacity-90">
+                Add widget
+              </h1>
               <div></div>
             </div>
             <div className="space-y-2 pb-8 w-full">
@@ -66,7 +70,9 @@ export default function AddWidgetModal({ onClose }) {
               </button> */}
 
               <div className="grid grid-cols-2 items-center">
-                <span>Widget type</span>
+                <span className="dark:text-white dark:text-opacity-90">
+                  Widget type
+                </span>
                 <div>
                   <Select
                     value={widgetToAddOptions.type}
@@ -83,6 +89,18 @@ export default function AddWidgetModal({ onClose }) {
                             exerciseId: undefined,
                           })
                     }
+                    className=" dark:bg-gray-600 dark:border-gray-600"
+                    color={theme === "dark" ? "white" : ""}
+                    sx={
+                      theme === "dark"
+                        ? {
+                            "> option": {
+                              background: "black",
+                              color: "white",
+                            },
+                          }
+                        : ""
+                    }
                   >
                     <option value="workoutsPerWeek">Workouts per week</option>
                     <option value="exerciseBestSet">Best set</option>
@@ -93,7 +111,7 @@ export default function AddWidgetModal({ onClose }) {
               {(widgetToAddOptions.type === "exerciseVolume") |
               (widgetToAddOptions.type === "exerciseBestSet") ? (
                 <div className="grid grid-cols-2 items-center">
-                  <span>Exercise</span>
+                  <span className="dark:text-white dark:text-opacity-90">Exercise</span>
                   <div>
                     <Select
                       isDisabled={widgetToAddOptions.type === "workoutsPerWeek"}
@@ -105,6 +123,18 @@ export default function AddWidgetModal({ onClose }) {
                           ...widgetToAddOptions,
                           exerciseId: e.target.value,
                         })
+                      }
+                      className=" dark:bg-gray-600 dark:border-gray-600"
+                      color={theme === "dark" ? "white" : ""}
+                      sx={
+                        theme === "dark"
+                          ? {
+                              "> option": {
+                                background: "black",
+                                color: "white",
+                              },
+                            }
+                          : ""
                       }
                     >
                       {exercisesData.map((exercise, index) => (

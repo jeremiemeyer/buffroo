@@ -26,11 +26,11 @@ export default function ConfirmDiscardChangesModal({
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="z-[900] relative bg-gray-50 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
+          className="z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
         >
           <div className="h-[5%] flex flex-col justify-between items-center">
-            <h1 className="text-2xl">Discard changes?</h1>
-            <p className="py-4">
+            <h1 className="text-2xl dark:text-white dark:text-opacity-90">Discard changes?</h1>
+            <p className="py-4 dark:text-white dark:text-opacity-80">
               Are you sure you want to discard changes made to this workout?
             </p>
             <div className="grid grid-rows-2 gap-2">

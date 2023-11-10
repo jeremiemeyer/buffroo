@@ -15,6 +15,7 @@ import {
 import useAuth from "../../../hooks/useAuth"
 import useToast from "@/hooks/useToast"
 import useExercises from "@/hooks/api/useExercises"
+import useTheme from "@/hooks/useTheme"
 
 export default function ExerciseEditModal({
   exerciseData,
@@ -28,6 +29,7 @@ export default function ExerciseEditModal({
   const { auth } = useAuth()
   const { exerciseUpdated } = useToast()
   const { exercisesData, editUserExercise } = useExercises()
+  const { theme } = useTheme()
 
   useEffect(() => {
     console.log("exercises updated")
@@ -35,7 +37,6 @@ export default function ExerciseEditModal({
 
   const EXERCISE_DATA_URL = `/api/exercises/${selectedExerciseId}`
   const EXERCISE_UPDATE_URL = `/api/users/${auth.userId}/exercises/${selectedExerciseId}`
-
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -62,17 +63,17 @@ export default function ExerciseEditModal({
   return (
     <div
       onClick={onClose}
-      className="fixed z-[800] inset-0 bg-slate-700/75 flex justify-center items-center"
+      className="fixed z-[800] inset-0 bg-slate-700/75  flex justify-center items-center"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-50 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
+        className="z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 "
       >
         <div className="flex flex-row justify-between items-center text-center">
           <Button onClick={onClose} variant="destructive">
             X
           </Button>
-          <h1 className="text-3xl text-center px-5">
+          <h1 className="text-3xl text-center px-5 dark:text-white dark:text-opacity-90">
             {thisExerciseData["name"]}
           </h1>
           <Button onClick={handleSaveChanges}>Save</Button>
@@ -81,7 +82,7 @@ export default function ExerciseEditModal({
         {thisExerciseData !== null && (
           <div className="space-y-2 mt-4">
             <div className="flex flex-row items-center">
-              <i className="fa fa-heading mr-4" />
+              <i className="fa fa-heading mr-4 dark:text-white dark:text-opacity-90" />
 
               <Input
                 placeholder="Exercise name"
@@ -89,16 +90,29 @@ export default function ExerciseEditModal({
                 value={thisExerciseData.name}
                 name="name"
                 onChange={(e) => handleChange(e)}
+                color={theme === "dark" ? "white" : ""}
               ></Input>
             </div>
 
             <div className="grid grid-cols-2 justify-between items-center">
-              <p>Body part</p>
+              <p className="dark:text-white dark:text-opacity-90">Body part</p>
               <Select
                 placeholder="Select option"
                 onChange={(e) => handleChange(e)}
                 value={thisExerciseData.bodypart}
                 name="bodypart"
+                className=" dark:bg-gray-600 dark:border-gray-600"
+                color={theme === "dark" ? "white" : ""}
+                sx={
+                  theme === "dark"
+                    ? {
+                        "> option": {
+                          background: "black",
+                          color: "white",
+                        },
+                      }
+                    : ""
+                }
               >
                 <option value="core">Core</option>
                 <option value="arms">Arms</option>
@@ -112,12 +126,24 @@ export default function ExerciseEditModal({
             </div>
 
             <div className="grid grid-cols-2 justify-between items-center">
-              <p>Category</p>
+              <p className="dark:text-white dark:text-opacity-90">Category</p>
               <Select
                 placeholder="Select option"
                 onChange={(e) => handleChange(e)}
                 name="category"
                 value={thisExerciseData.category}
+                className=" dark:bg-gray-600 dark:border-gray-600"
+                color={theme === "dark" ? "white" : ""}
+                sx={
+                  theme === "dark"
+                    ? {
+                        "> option": {
+                          background: "black",
+                          color: "white",
+                        },
+                      }
+                    : ""
+                }
               >
                 <option value="barbell">Barbell</option>
                 <option value="dumbbell">Dumbbell</option>

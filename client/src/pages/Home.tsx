@@ -115,7 +115,7 @@ export default function Home() {
               ? Array.from({ length: 5 }).map((_, index) => (
                   <Box
                     key={index}
-                    className="rounded-3xl border border-gray-200 bg-white pb-6 px-6 mx-auto p-8 w-full"
+                    className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800  pb-6 px-6 mx-auto p-8 w-full"
                   >
                     <SkeletonText
                       noOfLines={8}

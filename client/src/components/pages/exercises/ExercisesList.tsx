@@ -57,7 +57,7 @@ export default function ExercisesList({
           Array.from({ length: 12 }).map((_, index) => (
             <Box
               key={index}
-              className="border bg-white border-gray-200  mt-2  p-[20px] mx-auto rounded-3xl"
+              className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800   mt-2  p-[20px] mx-auto rounded-3xl"
             >
               <SkeletonText
                 mt="4"

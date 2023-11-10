@@ -35,21 +35,24 @@ export default function TemplateExercisesListExerciseCard({
     <div
       onClick={onClick}
       className={`${
-        isSelected ? "bg-sky-100 border-blue-300" : "md:hover:bg-sky-50 hover:border-blue-200 bg-white"
+        isSelected
+          ? "bg-sky-100 dark:bg-slate-600 border-blue-300 dark:border-blue-300"
+          : "md:hover:bg-sky-50 dark:md:hover:bg-gray-700 hover:border-blue-200 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 "
       } border border-gray-200 rounded-xl text-left cursor-pointer mt-2  mx-auto p-4`}
     >
       {/* <button onClick={() => console.log(exercise)}>consolelog exercise</button> */}
       <div className="flex flex-row items-center">
-        <div className="mr-8 text-4xl w-4">{name.charAt(0)}</div>
+        <div className="mr-8 text-4xl w-4 dark:text-white dark:text-opacity-90">{name.charAt(0)}</div>
         <div className="grow">
-          <p className="font-semibold text-xl">{name}</p>
+          <p className="font-semibold text-xl dark:text-white dark:text-opacity-90">{name}</p>
           <p>
-            <span className="text-gray-500">Body part:</span>{" "}
-            {formatString(bodypart)}
+            <span className="text-gray-500 dark:text-white dark:text-opacity-70">Body part:</span>{" "}
+            <span className="dark:text-white dark:text-opacity-90">{formatString(bodypart)}</span>
           </p>
           <p>
-            <span className="text-gray-500">Category:</span>{" "}
-            {formatString(category)}
+            <span className="text-gray-500 dark:text-white dark:text-opacity-70">Category:</span>{" "}
+            <span className="dark:text-white dark:text-opacity-90">
+          {formatString(category)}</span>
           </p>
         </div>
         <div>

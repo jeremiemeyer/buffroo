@@ -39,10 +39,10 @@ export default function ExerciseStatsModal({
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="z-[900] relative bg-gray-50 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 w-[600px] h-[500px]"
+          className="z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900  px-6 pt-6 pb-6 rounded-2xl border border-slate-600 w-[600px] h-[500px]"
         >
           <div className="flex flex-row justify-between items-center text-center">
-            <h1 className="text-3xl text-center px-5">
+            <h1 className="text-3xl text-center px-5 dark:text-white dark:text-opacity-90">
               {thisExerciseData["name"]}
             </h1>
             <Button onClick={onClose} variant="destructive">
@@ -57,8 +57,8 @@ export default function ExerciseStatsModal({
             <Tabs position="relative" variant="unstyled">
               <TabList>
                 {/* <Tab>History</Tab> */}
-                <Tab>Best set</Tab>
-                <Tab>Volume</Tab>
+                <Tab className="dark:text-white dark:text-opacity-90">Best set</Tab>
+                <Tab className="dark:text-white dark:text-opacity-90">Volume</Tab>
               </TabList>
               <TabIndicator
                 mt="-1.5px"

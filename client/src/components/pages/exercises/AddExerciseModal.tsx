@@ -21,6 +21,7 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
 import useAuth from "../../../hooks/useAuth"
 import useToast from "../../../hooks/useToast"
 import useExercises from "@/hooks/api/useExercises"
+import useTheme from "@/hooks/useTheme"
 
 export default function AddExerciseModal({ onClose, getAllExercises }: any) {
   const [nameInput, setNameInput] = useState("")
@@ -31,6 +32,7 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
   const USER_EXERCISES_URL = `/api/users/${auth.userId}/exercises`
   const { exerciseAdded, someFieldsAreMissing } = useToast()
   const { addNewUserExercise, setExercisesData, exercisesData } = useExercises()
+  const { theme } = useTheme()
 
   function handleChange(e) {
     setNameInput(e.target.value)
@@ -76,32 +78,45 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-50 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4 xl:max-w-[1200px]"
+        className="z-[900] relative bg-gray-50 dark:bg-black bg-glassmorphism2 dark:bg-opacity-50 dark:border-gray-700 text-slate-900 px-6 pt-6 pb-6 rounded-2xl border border-slate-600 mb-[10vh] mx-4 xl:max-w-[1200px]"
       >
         <div className="flex flex-row justify-between items-center text-center">
           <Button onClick={onClose} variant="destructive">
             X
           </Button>
-          <h1 className="text-2xl text-center">Create New Exercise</h1>
+          <h1 className="text-2xl text-center dark:text-white dark:text-opacity-90">Create New Exercise</h1>
           <Button onClick={handleSave}>Save</Button>
         </div>
 
         <div className="space-y-2 mt-4">
           <div className="flex flex-row items-center">
-            <i className="fa fa-heading mr-4" />
+            <i className="fa fa-heading mr-4 dark:text-white dark:text-opacity-90" />
             <Input
               placeholder="Exercise name"
               variant="flushed"
               value={nameInput}
               onChange={(e) => handleChange(e)}
+              color={theme === "dark" ? "white" : ""}
             ></Input>
           </div>
 
           <div className="grid grid-cols-2 justify-between items-center">
-            <p>Body part</p>
+            <p className="dark:text-white dark:text-opacity-90">Body part</p>
             <Select
               placeholder="Select option"
               onChange={(e) => handleChangeBodyPart(e)}
+              className=" dark:bg-gray-600 dark:border-gray-600"
+              color={theme === "dark" ? "white" : ""}
+              sx={
+                theme === "dark"
+                  ? {
+                      "> option": {
+                        background: "black",
+                        color: "white",
+                      },
+                    }
+                  : ""
+              }
             >
               <option value="core">Core</option>
               <option value="arms">Arms</option>
@@ -116,7 +131,7 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
 
           <div className="grid grid-cols-2 justify-between items-center">
             <div className="flex flex-row items-center">
-              <p>Category</p>
+              <p className="dark:text-white dark:text-opacity-90">Category</p>
               <Popover>
                 <PopoverTrigger>
                   <IconButton
@@ -142,6 +157,18 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
             <Select
               placeholder="Select option"
               onChange={(e) => handleChangeCategory(e)}
+              className=" dark:bg-gray-600 dark:border-gray-600"
+              color={theme === "dark" ? "white" : ""}
+              sx={
+                theme === "dark"
+                  ? {
+                      "> option": {
+                        background: "black",
+                        color: "white",
+                      },
+                    }
+                  : ""
+              }
             >
               <option value="barbell">Barbell</option>
               <option value="dumbbell">Dumbbell</option>

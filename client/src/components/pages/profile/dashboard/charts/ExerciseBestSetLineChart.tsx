@@ -36,6 +36,7 @@ export function ExerciseBestSetLineChart({
                 <XAxis dataKey="date" />
                 <YAxis dataKey="weight" width={15} />
                 <Tooltip
+                  contentStyle={{color: "black"}}
                   formatter={(value, name, props) => {
                     return `${props.payload.bestSet}`
                   }}

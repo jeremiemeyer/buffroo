@@ -15,8 +15,6 @@ import { AppLayout } from "@/components/AppLayout.tsx"
 import { ExercisesProvider } from "@/context/api/ExercisesProvider.tsx"
 import { SessionsProvider } from "@/context/api/SessionsProvider.tsx"
 import { TemplatesProvider } from "@/context/api/TemplatesProvider"
-import { UserDataProvider } from "@/context/api/UserDataProvider"
-import { useState, useEffect } from "react"
 
 const ROLES = {
   User: 2001,

@@ -17,6 +17,7 @@ import {
 import { ArrowDownIcon, ArrowUpIcon, HamburgerIcon } from "@chakra-ui/icons"
 import Stopwatch from "./workout/Stopwatch.tsx"
 import { Toaster } from "react-hot-toast"
+import useTheme from "@/hooks/useTheme.tsx"
 
 export const AppLayout = () => {
   // const [showWorkoutModal, setShowWorkoutModal] = useState(false)
@@ -28,6 +29,7 @@ export const AppLayout = () => {
   } = useWorkoutStatus()
 
   const { workoutData } = useWorkoutData()
+  const { theme } = useTheme()
 
   useEffect(() => {
     if (workoutIsInProgress & !sessionWindowIsMinimized) {
@@ -43,7 +45,21 @@ export const AppLayout = () => {
         <Outlet />
       </div>
       <div className="fixed w-full bottom-0 transform translate-y-[-80px] z-[900]">
-        <Toaster position="bottom-center" />
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            className: "",
+            style:
+              theme === "dark"
+                ? {
+                    border: "1px solid #374151",
+                    background: "bg-glassmorphism2",
+                    backgroundColor: "#1f2937",
+                    color: "white",
+                  }
+                : "",
+          }}
+        />
       </div>
       <Navbar />
 

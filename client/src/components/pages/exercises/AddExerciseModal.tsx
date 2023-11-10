@@ -84,7 +84,9 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
           <Button onClick={onClose} variant="destructive">
             X
           </Button>
-          <h1 className="text-2xl text-center dark:text-white dark:text-opacity-90">Create New Exercise</h1>
+          <h1 className="text-2xl text-center dark:text-white dark:text-opacity-90">
+            Create New Exercise
+          </h1>
           <Button onClick={handleSave}>Save</Button>
         </div>
 
@@ -140,15 +142,24 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
                     variant=""
                     aria-label="Search database"
                     icon={<Icon as={PiQuestionFill} />}
-                    className="hover:bg-gray-100 ml-1 text-gray-400"
+                    className="hover:bg-gray-100 ml-1 text-gray-400 dark:hover:bg-gray-700"
                   />
                 </PopoverTrigger>
-                <PopoverContent>
-                  <PopoverArrow />
+                <PopoverContent
+                  bgColor={theme === "dark" ? "#1e293b" : ""}
+                  color={theme === "dark" ? "white" : ""}
+                  borderColor={theme === "dark" ? "#374151" : "#d1d5db"}
+                >
+                  <PopoverArrow bgColor={theme === "dark" ? "#1e293b" : ""}  />
                   <PopoverCloseButton />
-                  <PopoverHeader>Info</PopoverHeader>
+                  <PopoverHeader
+                    borderColor={theme === "dark" ? "#374151" : "#d1d5db"}
+                  >
+                    Info
+                  </PopoverHeader>
                   <PopoverBody>
-                    Assisted bodyweight exercises will register a negative value weight.
+                    Assisted bodyweight exercises will register a negative value
+                    weight.
                   </PopoverBody>
                 </PopoverContent>
               </Popover>

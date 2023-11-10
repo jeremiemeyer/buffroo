@@ -2,7 +2,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App.tsx"
-import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react"
 import { AuthProvider } from "@/context/AuthProvider"
 import "./index.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -23,6 +23,11 @@ const colors = {
   },
 }
 
+const config = {
+  initialColorMode: "dark",
+  useSystemColorMode: false,
+}
+
 const zIndices = {
   hide: -1,
   auto: "auto",
@@ -39,30 +44,33 @@ const zIndices = {
   tooltip: 1800,
 }
 
-const theme = extendTheme({ colors, zIndices })
+const theme = extendTheme({ colors, zIndices, config })
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <UserDataProvider>
-        <WorkoutStatusProvider>
-          <WorkoutDataProvider>
-            <TemplateDataProvider>
-              <WorkoutStopwatchProvider>
-                <WorkoutTimerProvider>
-                  <ToastProvider>
-                    <ChakraProvider theme={theme}>
-                      <ThemeProvider>
-                        <App />
-                      </ThemeProvider>
-                    </ChakraProvider>
-                  </ToastProvider>
-                </WorkoutTimerProvider>
-              </WorkoutStopwatchProvider>
-            </TemplateDataProvider>
-          </WorkoutDataProvider>
-        </WorkoutStatusProvider>
+          <WorkoutStatusProvider>
+            <WorkoutDataProvider>
+              <TemplateDataProvider>
+                <WorkoutStopwatchProvider>
+                  <WorkoutTimerProvider>
+                    <ToastProvider>
+                      <ChakraProvider theme={theme}>
+                        <ColorModeScript
+                          initialColorMode={theme.config.initialColorMode}
+                        />
+                        <ThemeProvider>
+                          <App />
+                        </ThemeProvider>
+                      </ChakraProvider>
+                    </ToastProvider>
+                  </WorkoutTimerProvider>
+                </WorkoutStopwatchProvider>
+              </TemplateDataProvider>
+            </WorkoutDataProvider>
+          </WorkoutStatusProvider>
         </UserDataProvider>
       </AuthProvider>
     </BrowserRouter>

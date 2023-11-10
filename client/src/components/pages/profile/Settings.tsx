@@ -63,13 +63,6 @@ export default function Settings({ userData, updateUserData }) {
                   name="unitsystem"
                   borderColor="gray.400"
                   className=" dark:bg-gray-600 dark:border-gray-600"
-                  color={theme==="dark" ? "white" : ""}
-                  sx={theme==="dark" ? {
-                    "> option": {
-                      background: "black",
-                      color: "white",
-                    },
-                  } : ""}
                 >
                   <option value="imperial">Imperial</option>
                   <option value="metric">Metric</option>
@@ -90,13 +83,6 @@ export default function Settings({ userData, updateUserData }) {
                   name="theme"
                   borderColor="gray.400"
                   className=" dark:bg-gray-600 dark:border-gray-600"
-                  color={theme==="dark" ? "white" : ""}
-                  sx={theme==="dark" ? {
-                    "> option": {
-                      background: "black",
-                      color: "white",
-                    },
-                  } : ""}
                 >
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>

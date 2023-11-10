@@ -1,17 +1,25 @@
 //@ts-nocheck
 import { createContext, useState, useEffect } from "react"
 import useUserData from "@/hooks/api/useUserData"
+import { useColorMode } from "@chakra-ui/react"
 
 const ThemeContext = createContext({})
 
 export const ThemeProvider = ({children}) => {
     const [theme, setTheme] = useState("light")
     const {userData} = useUserData()
+    const { colorMode, toggleColorMode } = useColorMode()
 
     useEffect(() => {
       if (userData && userData.preferences && userData.preferences.theme) {
         setTheme(userData.preferences.theme)
+
+        // Chakra UI: makes sure the colorMode matches the one we fetched from the user preferences
+        if (colorMode !== userData.preferences.theme){
+          toggleColorMode()
+        }
       }
+
       if (theme === "dark") {
         document.body.classList.add("dark")
       } else {

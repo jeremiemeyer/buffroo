@@ -7,6 +7,7 @@ import {
   MenuItem,
   Icon,
   Select,
+  useColorModeValue
 } from "@chakra-ui/react"
 import {
   HamburgerIcon,
@@ -142,6 +143,7 @@ export default function ExerciseBestSet({
     }
   }
 
+
   return (
     <div className="flex flex-col justify-center border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-3xl p-6 mx-auto">
       {/* <button onClick={() => console.log(exercisesData[1].name)}>
@@ -163,13 +165,6 @@ export default function ExerciseBestSet({
             value={selectedExerciseId && selectedExerciseId}
             onChange={(e) => handleSelectExercise(e)}
             className=" dark:bg-gray-600 dark:border-gray-600"
-            color={theme==="dark" ? "white" : ""}
-            sx={theme==="dark" ? {
-              "> option": {
-                background: "black",
-                color: "white",
-              },
-            } : ""}
           >
             {exercisesData.map((exercise, index) => (
               <option key={index} value={exercise._id}>
@@ -192,7 +187,7 @@ export default function ExerciseBestSet({
               //   onClick={() => setSelectedExerciseId(exerciseId)}
               className="hover:bg-gray-200"
             />
-            <MenuList zIndex={"600"}>
+            <MenuList zIndex={"600"} >
                 <MenuItem
                   onClick={moveWidgetBefore}
                   icon={<ArrowUpIcon />}

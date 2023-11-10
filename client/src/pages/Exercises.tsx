@@ -112,13 +112,6 @@ export default function Exercises() {
               placeholder="Any body part"
               onChange={(e) => setSelectedBodyPart(e.target.value)}
               className=" dark:bg-gray-600 dark:border-gray-600"
-              color={theme==="dark" ? "white" : ""}
-              sx={theme==="dark" ? {
-                "> option": {
-                  background: "black",
-                  color: "white",
-                },
-              } : ""}
             >
               <option value="core">Core</option>
               <option value="arms">Arms</option>
@@ -133,13 +126,6 @@ export default function Exercises() {
               placeholder="Any category"
               onChange={(e) => setSelectedCategory(e.target.value)}
               className=" dark:bg-gray-600 dark:border-gray-600"
-              color={theme==="dark" ? "white" : ""}
-              sx={theme==="dark" ? {
-                "> option": {
-                  background: "black",
-                  color: "white",
-                },
-              } : ""}
             >
               <option value="any-category">Any category</option>
               <option value="barbell">Barbell</option>

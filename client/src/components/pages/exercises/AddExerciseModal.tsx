@@ -109,16 +109,6 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
               onChange={(e) => handleChangeBodyPart(e)}
               className=" dark:bg-gray-600 dark:border-gray-600"
               color={theme === "dark" ? "white" : ""}
-              sx={
-                theme === "dark"
-                  ? {
-                      "> option": {
-                        background: "black",
-                        color: "white",
-                      },
-                    }
-                  : ""
-              }
             >
               <option value="core">Core</option>
               <option value="arms">Arms</option>
@@ -170,16 +160,6 @@ export default function AddExerciseModal({ onClose, getAllExercises }: any) {
               onChange={(e) => handleChangeCategory(e)}
               className=" dark:bg-gray-600 dark:border-gray-600"
               color={theme === "dark" ? "white" : ""}
-              sx={
-                theme === "dark"
-                  ? {
-                      "> option": {
-                        background: "black",
-                        color: "white",
-                      },
-                    }
-                  : ""
-              }
             >
               <option value="barbell">Barbell</option>
               <option value="dumbbell">Dumbbell</option>

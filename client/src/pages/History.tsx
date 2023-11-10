@@ -147,14 +147,6 @@ export default function History() {
                     value={sortedBy}
                     onChange={(e) => setSortedBy(e.target.value)}
                     className="bg-white dark:bg-gray-600 dark:border-gray-600"
-                    bg={theme==="dark" ?  "" : "white"}
-                    color={theme==="dark" ? "white" : ""}
-                    sx={theme==="dark" ? {
-                      "> option": {
-                        background: "black",
-                        color: "white",
-                      },
-                    } : ""}
                   >
                     <option value="newest">Newest to oldest</option>
                     <option value="oldest">Oldest to newest</option>

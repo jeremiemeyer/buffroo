@@ -153,13 +153,6 @@ export default function ExerciseVolume({
             value={selectedExerciseId && selectedExerciseId}
             onChange={(e) => handleSelectExercise(e)}
             className=" dark:bg-gray-600 dark:border-gray-600"
-            color={theme==="dark" ? "white" : ""}
-            sx={theme==="dark" ? {
-              "> option": {
-                background: "black",
-                color: "white",
-              },
-            } : ""}
           >
             {exercisesData.map((exercise, index) => (
               <option key={index} value={exercise._id}>

@@ -38,12 +38,12 @@ export default function TemplateCard({
   return (
     <>
       <div
-        className="border border-gray-200 bg-white hover:bg-sky-50 hover:border-blue-200 rounded-3xl mx-auto cursor-pointer w-full"
+        className="border border-gray-200 dark:border-gray-700 dark:bg-gray-800 bg-white hover:bg-sky-50 dark:hover:bg-gray-700 hover:border-blue-200 dark:hover:border-gray-400 rounded-3xl mx-auto cursor-pointer w-full"
         onClick={() => setShowConfirmStartWorkoutFromTemplateModal(true)}
       >
         <div className="p-4">
           <div className="flex justify-between items-center pb-4">
-            <h1 className="text-xl md:text-2xl font-semibold truncate ...">{templateData.name}</h1>
+            <h1 className="dark:text-white dark:text-opacity-90 text-xl md:text-2xl font-semibold truncate ...">{templateData.name}</h1>
             <div onClick={(e) => e.stopPropagation()}>
             {/* <button onClick={() => console.log(templateData)}>Consolelog templateData</button> */}
 
@@ -76,7 +76,7 @@ export default function TemplateCard({
             </div>
           </div>
           <div>
-            <ul>
+            <ul className="dark:text-white dark:text-opacity-70">
               {templateData.exercises.map((exercise, index) => (
                 <li key={index}>
                   {" "}

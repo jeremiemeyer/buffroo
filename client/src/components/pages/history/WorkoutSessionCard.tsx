@@ -44,12 +44,12 @@ export default function WorkoutSessionCard({
   return (
     <>
       <div
-        className={`border border-gray-200 bg-white rounded-3xl text-left mt-2`}
+        className={`border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-3xl text-left mt-2`}
       >
         <div className="p-6">
           {/* <button onClick={() => console.log(sessionData)}>Consolelog this session's data</button> */}
           <div className="flex flex-row justify-between items-center">
-            <span className="font-semibold text-2xl pb-2 truncate ...">
+            <span className="dark:text-white dark:text-opacity-90 font-semibold text-2xl pb-2 truncate ...">
               {sessionData?.name}
             </span>
             <Menu variant="filled">
@@ -80,38 +80,47 @@ export default function WorkoutSessionCard({
               </MenuList>
             </Menu>
           </div>
-          <p>
+          <p className="dark:text-white dark:text-opacity-90">
             <span className="mr-4">📆</span>
             {/* <i className="fa-regular fa-calendar mr-4" /> */}
             {formatISODate(sessionData?.startdate)}
           </p>
 
           {/* <i className="fa-solid fa-clock mr-4" /> */}
-          <span className="mr-4">🕓</span>
-          {calculateWorkoutDuration(
-            sessionData?.startdate,
-            sessionData?.enddate
-          )}
+          <p className="dark:text-white dark:text-opacity-90">
+            <span className="mr-4">🕓</span>
+            {calculateWorkoutDuration(
+              sessionData?.startdate,
+              sessionData?.enddate
+            )}
+          </p>
+
           {sessionData?.notes !== "" && (
             <p>
               <span className="mr-4">📝</span>
               {/* <i className="fa fa-pen mr-4" />{" "} */}
-              <span className="text-gray-400 italic">
+              <span className="text-gray-400 dark:text-white dark:text-opacity-70 italic">
                 “{sessionData?.notes}”
               </span>
             </p>
           )}
 
           <div className="grid grid-cols-6 pt-4">
-            <div className="font-semibold col-span-4">Exercise</div>
-            <div className="font-semibold col-span-2">Best set</div>
+            <div className="font-semibold col-span-4 dark:text-white dark:text-opacity-70">
+              Exercise
+            </div>
+            <div className="font-semibold col-span-2 dark:text-white dark:text-opacity-70">
+              Best set
+            </div>
           </div>
           {sessionData?.exercises.map((exercise, key) => (
             <div className="grid grid-cols-6" key={key}>
-              <div className="col-span-4 pr-4 truncate ...">
+              <div className="col-span-4 pr-4 truncate ... dark:text-white dark:text-opacity-90">
                 {exercise.sets.length} x {exercise.name}
               </div>
-              <div className="col-span-2 truncate ...">{calculateBestSet(exercise.sets)}</div>
+              <div className="col-span-2 truncate ... dark:text-white dark:text-opacity-90">
+                {calculateBestSet(exercise.sets)}
+              </div>
             </div>
           ))}
         </div>

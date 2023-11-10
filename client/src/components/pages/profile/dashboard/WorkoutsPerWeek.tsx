@@ -47,7 +47,7 @@ export default function WorkoutsPerWeek({
   async function handleDelete() {
     const updatedUserData = {
       ...userData,
-      dashboard: [...userData.dashboard.filter((el) => el._id !== widgetId)],
+      dashboard: [...userData.dashboard.filter((el) => el._id !== widgetData._id)],
     }
     const success = await updateUserData({
       userId: auth.userId,
@@ -126,7 +126,7 @@ export default function WorkoutsPerWeek({
 
   return (
     <>
-      <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 mx-auto">
+      <div className="flex flex-col justify-center border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-3xl p-6 mx-auto">
         {/* <button onClick={() => console.log(userData)}>
           consolelog userData
         </button> */}
@@ -139,8 +139,8 @@ export default function WorkoutsPerWeek({
 
         <div className="flex flex-row items-center pb-8">
           {/* <button onClick={() => console.log(widgetId)}>consolelog widgetId</button> */}
-          <h1 className="font-semibold text-xl flex grow ">Workouts/week</h1>
-          <h2 className="px-4 font-semibold">
+          <h1 className="font-semibold text-xl flex grow dark:text-white dark:text-opacity-90">Workouts/week</h1>
+          <h2 className="px-4 font-semibold dark:text-white dark:text-opacity-90">
             Goal:{" "}
             <span className="font-normal">
               {userData.goals.workoutsPerWeek}

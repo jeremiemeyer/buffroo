@@ -3,5 +3,5 @@ type TitleProps = {
 }
 
 export default function Title({ children }: TitleProps) {
-  return <h1 className="text-[36px] dark:bg-slate-600">{children}</h1>
+  return <h1 className="text-[36px] dark:text-white dark:text-opacity-90">{children}</h1>
 }

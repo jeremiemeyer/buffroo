@@ -140,7 +140,7 @@ export default function ExerciseBestSet({
   }
 
   return (
-    <div className="flex flex-col justify-center border border-gray-200 bg-white rounded-3xl p-6 mx-auto">
+    <div className="flex flex-col justify-center border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-3xl p-6 mx-auto">
       {/* <button onClick={() => console.log(exercisesData[1].name)}>
       Consolelog exercisesData[1]
     </button> */}
@@ -149,7 +149,7 @@ export default function ExerciseBestSet({
     </button> */}
 
       <div className="flex flex-row items-center pb-8">
-        <h1 className="font-semibold text-xl flex grow ">Best set</h1>
+        <h1 className="font-semibold text-xl flex grow dark:text-white dark:text-opacity-90">Best set</h1>
         {/* <button onClick={() => console.log(userData)}>
           Console log userData
         </button> */}
@@ -159,6 +159,7 @@ export default function ExerciseBestSet({
             placeholder="Exercise name"
             value={selectedExerciseId && selectedExerciseId}
             onChange={(e) => handleSelectExercise(e)}
+            className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
           >
             {exercisesData.map((exercise, index) => (
               <option key={index} value={exercise._id}>

@@ -85,18 +85,18 @@ export default function Home() {
   return (
     <>
       {/* Title */}
-      <div className="fixed bg-glassmorphism2 top-0 left-0 w-screen z-[10]">
+      <div className="fixed bg-glassmorphism2 bg-white bg-opacity-70 dark:bg-gray-800 dark:border-gray-800  dark:bg-opacity-30 top-0 left-0 w-screen z-[10]">
         <Title className="z-[500]">Start Workout</Title>
       </div>
 
       {/* Content */}
       <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-4">
-        <div className="text-3xl mt-8 mb-4">Quick start</div>
+        <div className="text-3xl mt-8 mb-4 dark:text-white dark:text-opacity-90">Quick start</div>
 
         <Button onClick={handleClick} className="mb-16">Start an empty workout</Button>
 
         <div className="flex flex-row justify-between mx-auto">
-          <h1 className="text-3xl font-semibold mb-4 px-4">Templates</h1>
+          <h1 className="text-3xl font-semibold mb-4 px-4 dark:text-white dark:text-opacity-90">Templates</h1>
           <div>
             <ChakraButton
               onClick={() => setShowCreateTemplateModal(true)}

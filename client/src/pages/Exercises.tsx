@@ -85,7 +85,7 @@ export default function Exercises() {
   return (
     <>
       {/* Title + search bar */}
-      <div className="fixed top-0 left-0 w-full pb-4 items-center bg-glassmorphism2 z-[10]">
+      <div className="fixed top-0 left-0 w-full pb-4 items-center bg-glassmorphism2 bg-white bg-opacity-70 dark:bg-black dark:bg-opacity-30 z-[10] dark:border-gray-800">
         <div className="flex px-6 justify-between flex-row items-center">
           <Title>Exercises</Title>
           <Button onClick={() => setShowNewExerciseModal(true)}>Add New</Button>
@@ -101,6 +101,7 @@ export default function Exercises() {
                 placeholder="Search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
+                className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
               />
             </InputGroup>
           </div>
@@ -109,6 +110,7 @@ export default function Exercises() {
             <Select
               placeholder="Any body part"
               onChange={(e) => setSelectedBodyPart(e.target.value)}
+              className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
             >
               <option value="core">Core</option>
               <option value="arms">Arms</option>
@@ -122,6 +124,7 @@ export default function Exercises() {
             <Select
               placeholder="Any category"
               onChange={(e) => setSelectedCategory(e.target.value)}
+              className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
             >
               <option value="barbell">Barbell</option>
               <option value="dumbbell">Dumbbell</option>

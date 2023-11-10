@@ -44,7 +44,7 @@ export default function Dashboard({ userData, updateUserData }) {
         consolelog userData.dashboard
       </button> */}
       <div className="flex flex-row justify-between mx-auto">
-        <h1 className="text-3xl font-semibold mb-4 px-4">Dashboard</h1>
+        <h1 className="text-3xl font-semibold mb-4 px-4 dark:text-white dark:text-opacity-90">Dashboard</h1>
         <div>
           <Button
             onClick={() => setShowAddWidgetModal(true)}
@@ -89,6 +89,7 @@ export default function Dashboard({ userData, updateUserData }) {
               )
             }
           })}
+          {userData.length == 0 && <p>Your dashboard is empty. You can add a widget using the button above.</p>}
       </div>
       {showAddWidgetModal &&
         createPortal(

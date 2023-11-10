@@ -49,7 +49,7 @@ export default function Profile() {
     <>
       <div>
         {/* Title  */}
-        <div className="fixed px-6 bg-glassmorphism2 top-0 left-0 w-full z-[10]">
+        <div className="fixed px-6 bg-glassmorphism2 bg-white bg-opacity-70 dark:bg-gray-800 dark:border-gray-800 dark:bg-opacity-30 top-0 left-0 w-full z-[10]">
           <Title className="z-[500]">Profile</Title>
         </div>
 
@@ -59,7 +59,7 @@ export default function Profile() {
           <button onClick={() => console.log(userData.dashboard)}>consolelog userData.dashboard</button> */}
 
 
-          <p className="pb-8 text-xl">Hello, {auth.username}! 👋</p>
+          <p className="pb-8 text-xl dark:text-white dark:text-opacity-90">Hello, {auth.username}! 👋</p>
 
           {isLoading ? (
             <>

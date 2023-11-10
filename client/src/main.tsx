@@ -12,6 +12,8 @@ import { WorkoutStopwatchProvider } from "@/context/WorkoutStopwatchProvider.tsx
 import { WorkoutTimerProvider } from "@/context/WorkoutTimerProvider.tsx"
 import { ToastProvider } from "@/context/ToastProvider.tsx"
 import { TemplateDataProvider } from "@/context/TemplateDataProvider.tsx"
+import { ThemeProvider } from "@/context/ThemeProvider.tsx"
+import { UserDataProvider } from "./context/api/UserDataProvider.tsx"
 
 const colors = {
   brand: {
@@ -43,6 +45,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
+        <UserDataProvider>
         <WorkoutStatusProvider>
           <WorkoutDataProvider>
             <TemplateDataProvider>
@@ -50,7 +53,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <WorkoutTimerProvider>
                   <ToastProvider>
                     <ChakraProvider theme={theme}>
-                      <App />
+                      <ThemeProvider>
+                        <App />
+                      </ThemeProvider>
                     </ChakraProvider>
                   </ToastProvider>
                 </WorkoutTimerProvider>
@@ -58,6 +63,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             </TemplateDataProvider>
           </WorkoutDataProvider>
         </WorkoutStatusProvider>
+        </UserDataProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

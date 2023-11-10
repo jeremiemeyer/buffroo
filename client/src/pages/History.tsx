@@ -100,7 +100,7 @@ export default function History() {
   return (
     <>
       {/* Title  */}
-      <div className="px-6 bg-gray-200 bg-glassmorphism2 fixed top-0 left-0 w-full z-[10]">
+      <div className="px-6 bg-glassmorphism2 bg-white bg-opacity-70 dark:bg-gray-800 dark:border-gray-800  dark:bg-opacity-30 fixed top-0 left-0 w-full z-[10]">
         <Title className="h-[10%] z-[500]">History</Title>
       </div>
 
@@ -127,7 +127,7 @@ export default function History() {
         ) : (
           <>
             <div className="justify-between flex flex-col md:flex-row items-center px-4">
-              <p className="pb-2 md:pb-0">
+              <p className="pb-2 md:pb-0 dark:text-white dark:text-opacity-70">
                 {pageNumber === pageCount - 1
                   ? `Showing results ${itemsShown}-${sessionsData.length} out of ${sessionsData.length}.`
                   : `Showing results ${itemsShown}-${
@@ -144,6 +144,7 @@ export default function History() {
                     value={sortedBy}
                     onChange={(e) => setSortedBy(e.target.value)}
                     bgColor="white"
+                    className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
                   >
                     <option value="newest">Newest to oldest</option>
                     <option value="oldest">Oldest to newest</option>
@@ -160,8 +161,9 @@ export default function History() {
               containerClassName="flex flex-row justify-center  gap-1 items-center mt-4"
               previousLinkClassName="font-semibold opacity-40 mr-2"
               nextLinkClassName="font-semibold opacity-40 ml-2"
-              pageClassName="text-black hover:bg-gray-200 rounded-full p-2 px-4"
-              activeClassName="text-white bg-blue-600 hover:bg-blue-800 "
+              activeClassName="text-white bg-blue-600 hover:bg-blue-800"
+              pageClassName="text-black rounded-full p-2 px-4 dark:text-white"
+            
             />
 
             <WorkoutSessionsList

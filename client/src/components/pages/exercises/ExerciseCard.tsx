@@ -51,19 +51,19 @@ export default function ExerciseCard({
       // onClick={() => onClickExerciseCard(exerciseId)}
       className={`${
         isSelected ? "bg-gray-200" : ""
-      } border bg-white border-gray-200 rounded-3xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
+      } border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-3xl text-left mt-2 mx-auto p-4 flex flex-row items-center`}
       key={index}
     >
-      <div className="text-4xl mr-8 w-6">{name.charAt(0)}</div>
+      <div className="text-4xl mr-8 w-6 dark:text-white dark:text-opacity-90">{name.charAt(0)}</div>
 
       <div className="flex-col grow">
-        <p className="text-xl font-semibold">{name}</p>
+        <p className="text-xl font-semibold dark:text-white dark:text-opacity-90">{name}</p>
         <p>
-          <span className="text-gray-500">Body part:</span> {String(bodypart)}
+          <span className="text-gray-500 dark:text-white dark:text-opacity-70">Body part:</span> <span className="dark:text-white dark:text-opacity-90">{formatString(bodypart)}</span>
         </p>
         <p>
-          <span className="text-gray-500">Category:</span>{" "}
-          {formatString(category)}
+          <span className="text-gray-500 dark:text-white dark:text-opacity-70">Category:</span>{" "}<span className="dark:text-white dark:text-opacity-90">
+          {formatString(category)}</span>
         </p>
       </div>
       <div>

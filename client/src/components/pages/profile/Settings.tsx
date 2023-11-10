@@ -33,7 +33,7 @@ export default function Settings({ userData, updateUserData }) {
   return (
     <>
       <div className="flex flex-row justify-between mx-auto">
-        <h1 className="pt-8 text-3xl font-semibold mb-4 px-4">Settings</h1>
+        <h1 className="pt-8 text-3xl font-semibold mb-4 px-4 dark:text-white dark:text-opacity-90">Settings</h1>
       </div>
       {userData && (
         <div>
@@ -44,10 +44,10 @@ export default function Settings({ userData, updateUserData }) {
           >
             Consolelog "userData"
           </button> */}
-          <div className="rounded-3xl border bg-white pt-8 pb-6 px-6 mx-auto">
+          <div className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 pt-8 pb-6 px-6 mx-auto">
             <div className="text-left space-y-4 pb-6">
               <div className="grid grid-cols-2">
-                <span className="truncate ...">Unit system</span>
+                <span className="truncate ... dark:text-white dark:text-opacity-90">Unit system</span>
                 <Select
                   placeholder="Select option"
                   value={updatedUserPreferences["unitSystem"]}
@@ -59,13 +59,14 @@ export default function Settings({ userData, updateUserData }) {
                   }
                   name="unitsystem"
                   borderColor="gray.400"
+                  className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
                 >
                   <option value="imperial">Imperial</option>
                   <option value="metric">Metric</option>
                 </Select>
               </div>
               <div className="grid grid-cols-2 pb-2">
-                <span>Theme</span>
+                <span className="dark:text-white dark:text-opacity-90">Theme</span>
 
                 <Select
                   placeholder="Select option"
@@ -78,6 +79,7 @@ export default function Settings({ userData, updateUserData }) {
                   }
                   name="theme"
                   borderColor="gray.400"
+                  className=" dark:bg-gray-600 dark:text-white dark:text-opacity-80 dark:border-gray-600"
                 >
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>

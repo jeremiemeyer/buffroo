@@ -1,8 +1,8 @@
 require('dotenv').config()
 const mongoose = require('mongoose');
 const fs = require('fs');
-const WorkoutSession = require("./models/WorkoutSession")
-const connectDB = require('./config/dbConn')
+const WorkoutSession = require("../models/WorkoutSession")
+const connectDB = require('../config/dbConn')
 
 
 // Read the Buffroo data from the JSON file

@@ -128,7 +128,7 @@ export default function ExerciseInTemplate({
   }
 
   return (
-    <div className="pb-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+    <div className="pb-8 bg-white dark:text-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
       <div className="flex flex-row justify-between">
         <p className="text-2xl dark:text-white dark:text-opacity-90">{exercise.name}</p>
         <Menu variant="filled">

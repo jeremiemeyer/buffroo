@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Buffroo</string>
-    <string name="title_activity_main">Buffroo</string>
-    <string name="package_name">fr.jeremiemeyer</string>
-    <string name="custom_url_scheme">fr.jeremiemeyer</string>
-</resources>

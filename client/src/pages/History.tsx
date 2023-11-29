@@ -25,7 +25,6 @@ import WorkoutSessionsList from "@/components/pages/history/WorkoutSessionsList"
 import ReactPaginate from "react-paginate"
 import useTheme from "@/hooks/useTheme"
 
-
 export default function History() {
   const axiosPrivate = useAxiosPrivate()
   const [selectedWorkoutId, setSelectedWorkoutId] = useState("")
@@ -51,17 +50,7 @@ export default function History() {
   const [sortedBy, setSortedBy] = useState("newest")
 
   useEffect(() => {
-    setSortedSessionsData(
-      sessionsData.slice().sort((a, b) => {
-        const dateA = new Date(a.startdate)
-        const dateB = new Date(b.startdate)
-        return dateB - dateA // Sort in descending order (newest to oldest)
-      })
-    )
-  }, [sessionsData])
-
-  useEffect(() => {
-    if (sortedBy === "newest") {
+    if (sessionsData.length > 0) {
       setSortedSessionsData(
         sessionsData.slice().sort((a, b) => {
           const dateA = new Date(a.startdate)
@@ -70,7 +59,19 @@ export default function History() {
         })
       )
     }
-    if (sortedBy === "oldest") {
+  }, [sessionsData])
+
+  useEffect(() => {
+    if (sessionsData.length > 0 && sortedBy === "newest") {
+      setSortedSessionsData(
+        sessionsData.slice().sort((a, b) => {
+          const dateA = new Date(a.startdate)
+          const dateB = new Date(b.startdate)
+          return dateB - dateA // Sort in descending order (newest to oldest)
+        })
+      )
+    }
+    if (sessionsData.length > 0 && sortedBy === "oldest") {
       setSortedSessionsData(
         sessionsData.slice().sort((a, b) => {
           const dateA = new Date(a.startdate)
@@ -129,55 +130,59 @@ export default function History() {
           ))
         ) : (
           <>
-            <div className="justify-between flex flex-col md:flex-row items-center px-4">
-              <p className="pb-2 md:pb-0 dark:text-white dark:text-opacity-70">
-                {pageNumber === pageCount - 1
-                  ? `Showing results ${itemsShown}-${sessionsData.length} out of ${sessionsData.length}.`
-                  : `Showing results ${itemsShown}-${
-                      itemsShown + sessionsPerPage
-                    } out of ${sessionsData.length}.`}
-              </p>
-              {/* {pageNumber === pageCount - 1
-                  ? sessionsData.length - itemsShown
-                  : sessionsPerPage}{" "} */}
-              <div className="w-[300px] flex flex-row flex-nowrap items-center">
-                <p className="whitespace-nowrap mr-4 dark:text-white dark:text-opacity-90">Sort by</p>
-                <div className="flex grow">
-                  <Select
-                    value={sortedBy}
-                    onChange={(e) => setSortedBy(e.target.value)}
-                    className="bg-white dark:bg-gray-600 dark:border-gray-600"
-                  >
-                    <option value="newest">Newest to oldest</option>
-                    <option value="oldest">Oldest to newest</option>
-                  </Select>
+            {sessionsData.length > 0 && (
+              <>
+                <div className="justify-between flex flex-col md:flex-row items-center px-4">
+                  <p className="pb-2 md:pb-0 dark:text-white dark:text-opacity-70">
+                    {pageNumber === pageCount - 1
+                      ? `Showing results ${itemsShown}-${sessionsData.length} out of ${sessionsData.length}.`
+                      : `Showing results ${itemsShown}-${
+                          itemsShown + sessionsPerPage
+                        } out of ${sessionsData.length}.`}
+                  </p>
+                  <div className="w-[300px] flex flex-row flex-nowrap items-center">
+                    <p className="whitespace-nowrap mr-4 dark:text-white dark:text-opacity-90">
+                      Sort by
+                    </p>
+                    <div className="flex grow">
+                      <Select
+                        value={sortedBy}
+                        onChange={(e) => setSortedBy(e.target.value)}
+                        className="bg-white dark:bg-gray-600 dark:border-gray-600"
+                      >
+                        <option value="newest">Newest to oldest</option>
+                        <option value="oldest">Oldest to newest</option>
+                      </Select>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <ReactPaginate
-              previousLabel={"<"}
-              nextLabel={">"}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName="flex flex-row justify-center  gap-1 items-center mt-4"
-              previousLinkClassName="font-semibold opacity-40 mr-2"
-              nextLinkClassName="font-semibold opacity-40 ml-2"
-              activeClassName="text-white bg-blue-600 hover:bg-blue-800"
-              pageClassName="text-black rounded-full p-2 px-4 dark:text-white"
-            />
+                <ReactPaginate
+                  previousLabel={"<"}
+                  nextLabel={">"}
+                  pageCount={pageCount}
+                  onPageChange={changePage}
+                  containerClassName="flex flex-row justify-center  gap-1 items-center mt-4"
+                  previousLinkClassName="font-semibold opacity-40 mr-2"
+                  nextLinkClassName="font-semibold opacity-40 ml-2"
+                  activeClassName="text-white bg-blue-600 hover:bg-blue-800"
+                  pageClassName="text-black rounded-full p-2 px-4 dark:text-white"
+                />
+              </>
+            )}
 
             <WorkoutSessionsList
               sessionsData={displaySessions}
               deleteUserSession={deleteUserSession}
             />
-
-            <button
-              onClick={goTop}
-              className="py-4 font-semibold text-blue-600"
-            >
-              Back to top
-            </button>
+            {sessionsData.length > 0 && (
+              <button
+                onClick={goTop}
+                className="py-4 font-semibold text-blue-600"
+              >
+                Back to top
+              </button>
+            )}
           </>
         )}
       </div>

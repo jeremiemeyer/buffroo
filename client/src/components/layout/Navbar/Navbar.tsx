@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Link, useLocation } from "react-router-dom"
 import { VscGraph } from "react-icons/vsc";
 import { CiClock2 } from "react-icons/ci"

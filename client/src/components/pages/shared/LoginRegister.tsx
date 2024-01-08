@@ -39,7 +39,6 @@ export default function LoginRegister({ children }) {
         {/* Animation image qui descend  */}
         <FadeInSlideDownImage />
 
-        {/* The div below is the div that should swipe right to reveal the form if login or register is pressed  */}
         {!children ? (
           <div className="z-10 text-center flex flex-col z-[10]">
             <motion.div

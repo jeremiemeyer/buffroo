@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -14,129 +14,52 @@
 
 body.dark #root {
   background-color: rgb(0 0 0);
-
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%
-      /* white */
-    ;
-    --foreground: 0 0% 4%
-      /* neutral-950 */
-    ;
-    --card: 0 0% 100%
-      /* white */
-    ;
-    --card-foreground: 0 0% 4%
-      /* neutral-950 */
-    ;
-    --popover: 0 0% 100%
-      /* white */
-    ;
-    --popover-foreground: 0 0% 4%
-      /* neutral-950 */
-    ;
-    --primary: 222 84% 54%
-      /* blue-600 */
-    ;
-    --primary-foreground: 214 100% 97%
-      /* blue-50 */
-    ;
-    --secondary: 141 80% 40%
-      /* green-100 */
-    ;
-    --secondary-foreground: 144 62% 21%
-      /* green-900 */
-    ;
-    --muted: 0 0% 97%
-      /* neutral-100 */
-    ;
-    --muted-foreground: 0 0% 46%
-      /* neutral-500 */
-    ;
-    --accent: 326 78% 95%
-      /* pink-100 */
-    ;
-    --accent-foreground: 336 70% 31%
-      /* pink-900 */
-    ;
-    --destructive: 0 85% 61%
-      /* red-500 */
-    ;
-    --destructive-foreground: 0 0% 99%
-      /* neutral-50 */
-    ;
-    --border: 0 0% 90%
-      /* neutral-200 */
-    ;
-    --input: 0 0% 90%
-      /* neutral-200 */
-    ;
-    --ring: 222 84% 54%
-      /* blue-600 */
-    ;
+    --background: 0 0% 100% /* white */;
+    --foreground: 0 0% 4% /* neutral-950 */;
+    --card: 0 0% 100% /* white */;
+    --card-foreground: 0 0% 4% /* neutral-950 */;
+    --popover: 0 0% 100% /* white */;
+    --popover-foreground: 0 0% 4% /* neutral-950 */;
+    --primary: 222 84% 54% /* blue-600 */;
+    --primary-foreground: 214 100% 97% /* blue-50 */;
+    --secondary: 141 80% 40% /* green-100 */;
+    --secondary-foreground: 144 62% 21% /* green-900 */;
+    --muted: 0 0% 97% /* neutral-100 */;
+    --muted-foreground: 0 0% 46% /* neutral-500 */;
+    --accent: 326 78% 95% /* pink-100 */;
+    --accent-foreground: 336 70% 31% /* pink-900 */;
+    --destructive: 0 85% 61% /* red-500 */;
+    --destructive-foreground: 0 0% 99% /* neutral-50 */;
+    --border: 0 0% 90% /* neutral-200 */;
+    --input: 0 0% 90% /* neutral-200 */;
+    --ring: 222 84% 54% /* blue-600 */;
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0% 4%
-      /* neutral-950 */
-    ;
-    --foreground: 0 0% 99%
-      /* neutral-50 */
-    ;
-    --card: 0 0% 4%
-      /* neutral-950 */
-    ;
-    --card-foreground: 0 0% 99%
-      /* neutral-50 */
-    ;
-    --popover: 0 0% 4%
-      /* neutral-950 */
-    ;
-    --popover-foreground: 0 0% 99%
-      /* neutral-50 */
-    ;
-    --primary: 222 84% 54%
-      /* blue-600 */
-    ;
-    --primary-foreground: 214 100% 97%
-      /* blue-50 */
-    ;
-    --secondary: 143 65% 25%
-      /* green-800 */
-    ;
-    --secondary-foreground: 139 77% 97%
-      /* green-50 */
-    ;
-    --muted: 0 0% 15%
-      /* neutral-800 */
-    ;
-    --muted-foreground: 0 0% 64%
-      /* neutral-400 */
-    ;
-    --accent: 336 75% 36%
-      /* pink-800 */
-    ;
-    --accent-foreground: 328 74% 98%
-      /* pink-50 */
-    ;
-    --destructive: 0 63% 31%
-      /* red-900 */
-    ;
-    --destructive-foreground: 0 0% 99%
-      /* neutral-50 */
-    ;
-    --border: 0 0% 15%
-      /* neutral-800 */
-    ;
-    --input: 0 0% 15%
-      /* neutral-800 */
-    ;
-    --ring: 222 84% 54%
-      /* blue-600 */
-    ;
+    --background: 0 0% 4% /* neutral-950 */;
+    --foreground: 0 0% 99% /* neutral-50 */;
+    --card: 0 0% 4% /* neutral-950 */;
+    --card-foreground: 0 0% 99% /* neutral-50 */;
+    --popover: 0 0% 4% /* neutral-950 */;
+    --popover-foreground: 0 0% 99% /* neutral-50 */;
+    --primary: 222 84% 54% /* blue-600 */;
+    --primary-foreground: 214 100% 97% /* blue-50 */;
+    --secondary: 143 65% 25% /* green-800 */;
+    --secondary-foreground: 139 77% 97% /* green-50 */;
+    --muted: 0 0% 15% /* neutral-800 */;
+    --muted-foreground: 0 0% 64% /* neutral-400 */;
+    --accent: 336 75% 36% /* pink-800 */;
+    --accent-foreground: 328 74% 98% /* pink-50 */;
+    --destructive: 0 63% 31% /* red-900 */;
+    --destructive-foreground: 0 0% 99% /* neutral-50 */;
+    --border: 0 0% 15% /* neutral-800 */;
+    --input: 0 0% 15% /* neutral-800 */;
+    --ring: 222 84% 54% /* blue-600 */;
   }
 }
 
@@ -148,4 +71,76 @@ body.dark #root {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.grd {
+  background-size: 100% 100%;
+  background-position: 0px 0px, 0px 0px, 0px 0px;
+  background-image: radial-gradient(
+      75% 75% at 25% -2%,
+      #ed22726b 0%,
+      #ed227200 100%
+    ),
+    radial-gradient(75% 75% at 126% 87%, #00aeef54 0%, #00aeef00 100%),
+    radial-gradient(100% 75% at 55% 92%, #ffffffff 0%, #ffffff00 100%);
+}
+
+.grd__op {
+  background-size: 100% 100%;
+  background-position: 0px 0px, 0px 0px, 0px 0px;
+  background-image: radial-gradient(
+      75% 75% at 25% -2%,
+      rgba(237, 34, 114, 0.07) 0%,
+      rgba(237, 34, 114, 0) 100%
+    ),
+    radial-gradient(
+      75% 75% at 126% 87%,
+      rgba(0, 174, 239, 0.07) 0%,
+      rgba(0, 174, 239, 0) 100%
+    ),
+    radial-gradient(
+      100% 75% at 55% 92%,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+}
+
+.custom__shadow {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+.grd__desktop {
+  background-size: 100% 100%;
+  background-position: 0px 0px, 0px 0px, 0px 0px;
+  background-image: radial-gradient(
+      75% 75% at 0% -0%,
+      rgba(249, 174, 105, 0.3) 0%,
+      rgba(137, 112, 239, 0) 70% /* #ed227200 100% */
+    ),
+    radial-gradient(
+      75% 75% at 126% 87%,
+      rgba(137, 112, 239, 0.3) 0%,
+      #00aeef00 100%
+    ),
+    radial-gradient(100% 75% at 55% 92%, #ffffff00 0%, #ffffff00 100%);
+}
+/* #f9ae69  
+#8970ef
+*/
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }

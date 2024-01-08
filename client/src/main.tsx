@@ -14,6 +14,7 @@ import { ToastProvider } from "@/context/ToastProvider.tsx"
 import { TemplateDataProvider } from "@/context/TemplateDataProvider.tsx"
 import { ThemeProvider } from "@/context/ThemeProvider.tsx"
 import { UserDataProvider } from "./context/api/UserDataProvider.tsx"
+import { useTheme } from "@chakra-ui/react"
 
 const colors = {
   brand: {

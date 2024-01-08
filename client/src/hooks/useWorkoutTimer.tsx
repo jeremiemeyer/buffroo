@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { useContext } from "react"
 import WorkoutTimerContext from "@/context/WorkoutTimerProvider"
 

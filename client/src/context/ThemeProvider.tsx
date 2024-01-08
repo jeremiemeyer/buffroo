@@ -6,7 +6,7 @@ import { useColorMode } from "@chakra-ui/react"
 const ThemeContext = createContext({})
 
 export const ThemeProvider = ({children}) => {
-    const [theme, setTheme] = useState("light")
+    const [theme, setTheme] = useState("dark")
     const {userData} = useUserData()
     const { colorMode, toggleColorMode } = useColorMode()
 

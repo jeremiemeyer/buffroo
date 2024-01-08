@@ -1,41 +1,22 @@
 //@ts-nocheck
 import { useRef, useState, useEffect } from "react"
-import useAuth from "../hooks/useAuth"
+import useAuth from "@/hooks/useAuth"
+import useInput from "@/hooks/useInput"
+import useToggle from "@/hooks/useToggle"
+import IntroButton from "@/components/ui/intro-button"
+import axios from "@/api/axios"
 import {
   Input,
   Stack,
   InputGroup,
   InputLeftElement,
-  InputRightElement,
   Checkbox,
 } from "@chakra-ui/react"
-import { Button } from "@/components/ui/button"
-import {
-  PhoneIcon,
-  CheckIcon,
-  LockIcon,
-  EmailIcon,
-  CloseIcon,
-} from "@chakra-ui/icons"
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import axios from "../api/axios"
-import {
-  Link,
-  NavLink,
-  UseNavigate,
-  useLocation,
-  useNavigate,
-} from "react-router-dom"
-import useInput from "../hooks/useInput"
-import useToggle from "../hooks/useToggle"
-
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
+import { LockIcon, EmailIcon } from "@chakra-ui/icons"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import "@fontsource/inconsolata"
+import { Squircle } from "corner-smoothing"
+import { GradientBox } from "@/components/StyledComponents"
 
 const LOGIN_URL = "/auth"
 
@@ -44,7 +25,7 @@ const Login = () => {
 
   const navigate = useNavigate()
   const location = useLocation()
-  const from = location.state?.from?.pathname || "/"
+  const from = location.state?.from?.pathname || "/start"
 
   const userRef = useRef()
   const errRef = useRef()
@@ -103,8 +84,19 @@ const Login = () => {
 
   return (
     <>
-      <h1 className="text-4xl pb-8 text-white z-[600]">Sign In</h1>
-      <div className="bg-glassmorphism2 bg-white bg-opacity-70  rounded-3xl p-12 z-[600] xl:min-w-[500px] text-black">
+      <h1
+        className="text-4xl pb-8 text-black dark:text-white z-[600]"
+        style={{ fontFamily: "Inconsolata, monospace" }}
+      >
+        Sign In
+      </h1>
+      <Squircle
+        onClick={(e) => e.stopPropagation()}
+        className="z-[900] relative bg-gray-100/40 dark:bg-gray-500/40 bg-glassmorphism3 rounded-[50px] w-[500px] flex flex-col p-12 xl:min-w-[500px] text-black dark:text-white min-w-[90vw] md:min-w-0"
+        cornerRadius={50}
+        cornerSmoothing={1}
+        as={GradientBox}
+      >
         <p
           ref={errRef}
           className={errMsg ? "errmsg" : "offscreen"}
@@ -133,7 +125,6 @@ const Login = () => {
                 //   onBlur={() => setUserFocus(false)}
                 borderRadius="16px"
                 borderColor="gray.400"
-                
                 bo
                 required
               />
@@ -162,8 +153,8 @@ const Login = () => {
               />
             </InputGroup>
           </Stack>
-          <div className="flex flex-col mt-4">
-            <Button>Sign In</Button>
+          <div className="flex flex-col mt-4 items-center">
+            <IntroButton title="Sign In" className="w-[250px]" />
 
             <Checkbox
               onChange={toggleCheck}
@@ -174,22 +165,17 @@ const Login = () => {
             </Checkbox>
           </div>
         </form>
-        <p>
-          Need an account?
-          <br />
-          <span className="line">
-            {/*put router link here*/}
-            <Link to="/register">
-              <span className="text-black underline">Sign Up</span>
-            </Link>
-          </span>
-          {/* <div className="font-bold text-red-800 mt-6">
-            /!\ Account for testing: <br />
-            login: walter <br />
-            mdp: @Walter123
-          </div> */}
-        </p>
-      </div>
+      </Squircle>
+      <p className="pt-8 text-black dark:text-white">
+        Need an account?
+        <br />
+        <span className="line">
+          {/*put router link here*/}
+          <Link to="/register">
+            <span className="underline">Sign Up</span>
+          </Link>
+        </span>
+      </p>
     </>
   )
 }

@@ -1,42 +1,22 @@
 //@ts-nocheck
-import Title from "../components/layout/Title"
 import { useState, useEffect } from "react"
 import {
-  Input,
-  InputGroup,
-  InputLeftElement,
   Select,
-  Skeleton,
   SkeletonText,
   Box,
 } from "@chakra-ui/react"
-import Pagination from "@mui/material/Pagination"
-import Stack from "@mui/material/Stack"
-
-import { SearchIcon } from "@chakra-ui/icons"
-import useAxiosPrivate from "../hooks/useAxiosPrivate"
-import useAuth from "../hooks/useAuth"
-import { createPortal } from "react-dom"
-import EditWorkoutModal from "../components/pages/history/EditWorkoutModal"
-import useToast from "../hooks/useToast"
-import { Button } from "@/components/ui/button"
 import useSessions from "@/hooks/api/useSessions"
 import WorkoutSessionsList from "@/components/pages/history/WorkoutSessionsList"
 import ReactPaginate from "react-paginate"
-import useTheme from "@/hooks/useTheme"
+
+import { IoIosArrowBack } from "react-icons/io"
+import { IoIosArrowForward } from "react-icons/io"
 
 export default function History() {
-  const axiosPrivate = useAxiosPrivate()
-  const [selectedWorkoutId, setSelectedWorkoutId] = useState("")
-  const { workoutDeleted } = useToast()
-  const { auth } = useAuth()
-  const { theme } = useTheme()
   const {
     sessionsData,
     isLoading,
-    getUserSessions,
     deleteUserSession,
-    createUserSession,
   } = useSessions()
 
   const goTop = () => {
@@ -96,24 +76,11 @@ export default function History() {
     goTop()
   }
 
-  function onClickExerciseCard(exerciseId) {
-    setSelectedExerciseId(exerciseId)
-    setShowExerciseDetailsModal(true)
-  }
 
   return (
     <>
-      {/* Title  */}
-      <div className="px-6 bg-glassmorphism2 bg-white bg-opacity-70 dark:bg-gray-800 dark:border-gray-800  dark:bg-opacity-30 fixed top-0 left-0 w-full z-[10]">
-        <Title className="h-[10%] z-[500]">History</Title>
-      </div>
-
       {/* Content */}
       <div className="pt-[80px] pb-[80px] z-[0] mx-auto w-full px-4">
-        {/* <button onClick={() => console.log(sessionsData)}>
-          Get history data
-        </button> */}
-
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
             <Box
@@ -158,13 +125,13 @@ export default function History() {
                 </div>
 
                 <ReactPaginate
-                  previousLabel={"<"}
-                  nextLabel={">"}
+                  previousLabel={<IoIosArrowBack />}
+                  nextLabel={<IoIosArrowForward />}
                   pageCount={pageCount}
                   onPageChange={changePage}
-                  containerClassName="flex flex-row justify-center  gap-1 items-center mt-4"
-                  previousLinkClassName="font-semibold opacity-40 mr-2"
-                  nextLinkClassName="font-semibold opacity-40 ml-2"
+                  containerClassName="flex justify-center items-center mt-4 mb-4 gap-2"
+                  previousLinkClassName="font-semibold opacity-40"
+                  nextLinkClassName="font-semibold opacity-40"
                   activeClassName="text-white bg-blue-600 hover:bg-blue-800"
                   pageClassName="text-black rounded-full p-2 px-4 dark:text-white"
                 />

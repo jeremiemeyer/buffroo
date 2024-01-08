@@ -1,6 +1,5 @@
 //@ts-nocheck
-import { createContext, useState } from "react"
-import Stopwatch from "@/components/workout/Stopwatch"
+import { createContext } from "react"
 import { useStopwatch } from "react-timer-hook"
 
 const WorkoutStopwatchContext = createContext({})

@@ -1,5 +1,4 @@
 //@ts-nocheck
-import axios from "axios"
 import { useEffect, useState, createContext } from "react"
 import useAuth from "@/hooks/useAuth"
 import useAxiosPrivate from "@/hooks/useAxiosPrivate"

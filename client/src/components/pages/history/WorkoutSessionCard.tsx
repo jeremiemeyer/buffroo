@@ -1,6 +1,5 @@
-// @ts-nocheck
+//@ts-nocheck
 import {
-  Input,
   Menu,
   MenuButton,
   MenuList,
@@ -8,77 +7,60 @@ import {
   MenuItem,
   Icon,
 } from "@chakra-ui/react"
-import {
-  HamburgerIcon,
-  AddIcon,
-  ExternalLinkIcon,
-  RepeatIcon,
-  EditIcon,
-  DeleteIcon,
-  ArrowDownIcon,
-  ArrowUpIcon,
-} from "@chakra-ui/icons"
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons"
 import { FaEllipsisH } from "react-icons/fa"
 import { useState } from "react"
 import { createPortal } from "react-dom"
-import ConfirmDeleteSessionModal from "./ConfirmDeleteSessionModal"
+import ConfirmDeleteSessionModal from "./modals/ConfirmDeleteSessionModal"
 import formatISODate from "@/utils/formatISODate"
 import calculateWorkoutDuration from "@/utils/calculateWorkoutDuration"
 import calculateBestSet from "@/utils/calculateBestSet"
-import useAuth from "@/hooks/useAuth"
-import useToast from "@/hooks/useToast"
-import EditWorkoutModal from "./EditWorkoutModal"
+import EditWorkoutModal from "./modals/EditWorkoutModal"
+import SquircleTile from "@/components/ui/squircle-tile"
 
-export default function WorkoutSessionCard({
-  sessionData,
-  onClick,
-  getUserSessions,
-}) {
+export default function WorkoutSessionCard({ sessionData }) {
   const [showConfirmDeleteSessionModal, setShowConfirmDeleteSessionModal] =
     useState(false)
   const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false)
 
-  const { auth } = useAuth()
-  const { workoutDeleted } = useToast()
-
   return (
     <>
-      <div
-        className={`border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-3xl text-left mt-2`}
-      >
-        <div className="p-6">
+      <div className="relative">
+        <Menu variant="filled">
+          <div className="absolute top-5 right-4 mr-2 z-[1]">
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              textColor="rgba(14,165,233,1)" //sky-500
+              bg={"rgba(186,230,253,0.4)"}
+              _hover={{ bg: "rgba(186,230,253,0.8)" }}
+              icon={<Icon as={FaEllipsisH} />}
+              className="hover:bg-sky-800"
+            />
+          </div>
+          <MenuList>
+            <MenuItem
+              icon={<EditIcon />}
+              onClick={() => setShowEditWorkoutModal(true)}
+              // command="⌘T"
+            >
+              Edit session
+            </MenuItem>
+
+            <MenuItem
+              onClick={() => setShowConfirmDeleteSessionModal(true)}
+              icon={<DeleteIcon />}
+            >
+              Delete from history
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        <SquircleTile>
           {/* <button onClick={() => console.log(sessionData)}>Consolelog this session's data</button> */}
           <div className="flex flex-row justify-between items-center">
             <span className="dark:text-white dark:text-opacity-90 font-semibold text-2xl pb-2 truncate ...">
               {sessionData?.name}
             </span>
-            <Menu variant="filled">
-              <MenuButton
-                as={IconButton}
-                aria-label="Options"
-                textColor="rgba(14,165,233,1)" //sky-500
-                bg={"rgba(186,230,253,0.4)"}
-                _hover={{ bg: "rgba(186,230,253,0.8)" }}
-                icon={<Icon as={FaEllipsisH} />}
-                className="hover:bg-sky-800"
-              />
-              <MenuList>
-                <MenuItem
-                  icon={<EditIcon />}
-                  onClick={() => setShowEditWorkoutModal(true)}
-                  // command="⌘T"
-                >
-                  Edit session
-                </MenuItem>
-
-                <MenuItem
-                  onClick={() => setShowConfirmDeleteSessionModal(true)}
-                  icon={<DeleteIcon />}
-                >
-                  Delete from history
-                </MenuItem>
-              </MenuList>
-            </Menu>
           </div>
           <p className="dark:text-white dark:text-opacity-90">
             <span className="mr-4">📆</span>
@@ -123,9 +105,10 @@ export default function WorkoutSessionCard({
               </div>
             </div>
           ))}
-        </div>
-        {/* <button onClick={() => console.log(sessionData._id)}>ID</button> */}
+          {/* <button onClick={() => console.log(sessionData._id)}>ID</button> */}
+        </SquircleTile>
       </div>
+
       {showConfirmDeleteSessionModal &&
         createPortal(
           <ConfirmDeleteSessionModal

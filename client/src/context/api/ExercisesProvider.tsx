@@ -35,6 +35,7 @@ export const ExercisesProvider = ({ children }) => {
   const addNewUserExercise = async ({ userId, newExerciseData }) => {
     const USER_EXERCISES_URL = `/api/users/${userId}/exercises`
     try {
+      // wtf c'est quoi cette merde
       const response = await axiosPrivate.post(
         USER_EXERCISES_URL,
         newExerciseData
@@ -54,8 +55,6 @@ export const ExercisesProvider = ({ children }) => {
     updatedExerciseData,
   }) => {
     const EXERCISE_UPDATE_URL = `/api/users/${userId}/exercises/${exerciseToEditId}`
-    // console.log(exerciseToEditId)
-    // console.log(EXERCISE_UPDATE_URL)
 
     try {
       const response = await axiosPrivate.patch(EXERCISE_UPDATE_URL, {
@@ -69,7 +68,6 @@ export const ExercisesProvider = ({ children }) => {
       )
 
       const updatedExercisesData = [...exercisesData]
-      console.log(updatedExerciseResponse)
       updatedExercisesData[exerciseIndex] = updatedExerciseData //entourloupe
       setExercisesData(updatedExercisesData)
 

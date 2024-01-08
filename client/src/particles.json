@@ -3,24 +3,24 @@
   "fullScreen": { "enable": true },
   "particles": {
     "number": {
-      "value": 50
+      "value": 1
     },
     "shape": {
       "type": "circle"
     },
     "opacity": {
-      "value": 0.2
+      "value": 0.05 
     },
     "size": {
-      "value": 400,
+      "value": 20,
       "random": {
         "enable": true,
-        "minimumValue": 200
+        "minimumValue": 2
       }
     },
     "move": {
       "enable": true,
-      "speed": 10,
+      "speed": 5,
       "direction": "top",
       "outModes": {
         "default": "out",
@@ -32,11 +32,11 @@
   "interactivity": {
     "detectsOn": "canvas",
     "events": {
-      "resize": true
+      "resize": false
     }
   },
   "style": {
-    "filter": "blur(50px)"
+    "filter": "blur(10px)"
   },
   "detectRetina": true,
   "themes": [

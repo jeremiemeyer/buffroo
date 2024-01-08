@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { useState } from "react"
+//@ts-nocheck
 import {
   Input,
   Menu,
@@ -11,11 +10,8 @@ import {
 } from "@chakra-ui/react"
 import { Button } from "@/components/ui/button"
 import {
-  HamburgerIcon,
   AddIcon,
-  ExternalLinkIcon,
   RepeatIcon,
-  EditIcon,
   DeleteIcon,
   ArrowDownIcon,
   ArrowUpIcon,
@@ -236,10 +232,6 @@ export default function ExerciseInTemplate({
       >
         Add set
       </Button>
-      {/* <button onClick={() => console.log(exerciseSets)}>sets</button>
-      <button onClick={() => console.log(templateData.exercises)}>
-        templateData
-      </button> */}
     </div>
   )
 }

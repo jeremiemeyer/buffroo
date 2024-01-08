@@ -1,14 +1,9 @@
 //@ts-nocheck
 import { createContext, useState } from "react"
-import useAuth from "../hooks/useAuth"
-import WorkoutStatusContext from "./WorkoutStatusProvider"
-import useWorkoutTimer from "@/hooks/useWorkoutTimer"
 
 const WorkoutDataContext = createContext({})
 
 export const WorkoutDataProvider = ({ children }) => {
-  const { auth } = useAuth()
-  const [timer, setTimer] = useState({})
   const [workoutData, setWorkoutData] = useState({
     name: "",
     startdate: "",

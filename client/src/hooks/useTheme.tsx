@@ -1,9 +1,8 @@
-//@ts-nocheck
-import { useContext } from "react";
+import { useContext } from "react"
 import ThemeContext from "@/context/ThemeProvider"
 
 const useTheme = () => {
-    return useContext(ThemeContext)
+  return useContext(ThemeContext)
 }
 
 export default useTheme

@@ -1,7 +1,15 @@
 import { Link, useLocation } from "react-router-dom"
+import { VscGraph } from "react-icons/vsc";
+import { CiClock2 } from "react-icons/ci"
+import { CgMathPlus } from "react-icons/cg"
+import { CiDumbbell } from "react-icons/ci"
+import { Squircle } from "corner-smoothing"
+import { NavbarGradientDark, NavbarGradientLight } from "@/components/StyledComponents"
+import useTheme from "@/hooks/useTheme";
 
 export default function Navbar() {
   const location = useLocation()
+  const {theme} = useTheme()
 
   const goTop = () => {
     window.scrollTo({
@@ -9,59 +17,52 @@ export default function Navbar() {
     })
   }
 
+  const navbar_sections = [
+    {
+      path: "/dashboard",
+      name: "Dashboard",
+      icon: <VscGraph />,
+    },
+    {
+      path: "/history",
+      name: "History",
+      icon: <CiClock2 />,
+    },
+    {
+      path: "/start",
+      name: "Start",
+      icon: <CgMathPlus />,
+    },
+    {
+      path: "/exercises",
+      name: "Exercises",
+      icon: <CiDumbbell />,
+    },
+  ]
+
   return (
     <>
-      <div className="fixed w-full bottom-0 z-[500] bg-glassmorphism2 bg-gray-800 bg-opacity-70 dark:bg-gray-800 dark:bg-opacity-60 text-white flex flex-row justify-center border-t dark:border-gray-800">
-        <Link to={"profile"} onClick={goTop}>
-          <div
-            className={`${
-              location.pathname.startsWith("/profile")
-                ? "bg-gray-800 dark:bg-gray-500"
-                : "hover:bg-gray-700 dark:hover:bg-gray-700"
-            } cursor-pointer py-2 px-4 `}
-          >
-            <i className="fa-solid fa-user" />
-            <p>Profile</p>
-          </div>
-        </Link>
-
-        <Link to={"history"} onClick={goTop}>
-          <div
-            className={`${
-              location.pathname.startsWith("/history")
-                ? "bg-gray-800 dark:bg-gray-500"
-                : "hover:bg-gray-700 dark:hover:bg-gray-700"
-            } cursor-pointer py-2 px-4 `}
-          >
-            <i className="fa-solid fa-clock" />
-            <p>History</p>
-          </div>
-        </Link>
-
-        <Link to={"/"} onClick={goTop}>
-          <div
-            className={`${
-              location.pathname === "/" ? "bg-gray-800 dark:bg-gray-500" : "hover:bg-gray-700 dark:hover:bg-gray-700"
-            } cursor-pointer py-2 px-4 `}
-          >
-            <i className="fa-solid fa-plus" />
-            <p>Start</p>
-          </div>
-        </Link>
-
-        <Link to={"exercises"} onClick={goTop}>
-          <div
-            className={`${
-              location.pathname.startsWith("/exercises")
-                ? "bg-gray-800 dark:bg-gray-500"
-                : "hover:bg-gray-700 dark:hover:bg-gray-700"
-            } cursor-pointer py-2 px-4 `}
-          >
-            <i className="fa-solid fa-dumbbell" />
-            <p>Exercises</p>
-          </div>
-        </Link>
-      </div>
+      <Squircle
+        cornerRadius={25}
+        cornerSmoothing={1}
+        as={theme==='dark' ? NavbarGradientDark : NavbarGradientLight}
+        className="fixed z-[500] bottom-0 max-w-[900px] w-full justify-center mx-auto z-0 bg-glassmorphism-navbar bg-gray-800 bg-opacity-90 dark:bg-black/20 text-white flex flex-row"
+      >
+        {navbar_sections.map((section) => (
+          <Link key={section.path} to={section.path} onClick={goTop}>
+            <div
+              className={`${
+                location.pathname.startsWith(section.path)
+                  ? "bg-gray-800 bg-opacity-30 dark:bg-gray-500 dark:bg-opacity-30"
+                  : "hover:bg-opacity-30 dark:hover:opacity-60 dark:hover:bg-opacity-30 transition-all opacity-40"
+              } cursor-pointer py-2 px-8 flex flex-col items-center mx-auto gap-1`}
+            >
+              <span className="text-3xl">{section.icon}</span>
+              <span className="text-sm">{section.name}</span>
+            </div>
+          </Link>
+        ))}
+      </Squircle>
     </>
   )
 }

@@ -1,18 +1,13 @@
 //@ts-nocheck
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Select,
-  Skeleton,
   SkeletonText,
   Box,
 } from "@chakra-ui/react"
 import { createPortal } from "react-dom"
 import ExerciseCard from "./ExerciseCard"
-import ExerciseStatsModal from "@/components/pages/exercises/ExerciseStatsModal"
-import ExerciseEditModal from "@/components/pages/exercises/ExerciseEditModal"
+import ExerciseStatsModal from "@/components/pages/exercises/modals/ExerciseStatsModal"
+import ExerciseEditModal from "@/components/pages/exercises/modals/ExerciseEditModal"
 
 export default function ExercisesList({
   exercisesData,
@@ -23,36 +18,19 @@ export default function ExercisesList({
   const [showExerciseEditModal, setShowExerciseEditModal] = useState(false)
   const [selectedExerciseId, setSelectedExerciseId] = useState("")
 
-  function onClickExerciseEdit(exerciseId) {
+  function onClickExerciseEdit() {
     setShowExerciseEditModal(true)
   }
 
-  function onClickExerciseStats(exerciseId) {
+  function onClickExerciseStats() {
     setShowExerciseStatsModal(true)
   }
 
-  // No overflow when modal is open
-  // useEffect(() => {
-  //   if (
-  //     showNewExerciseModal ||
-  //     showExerciseEditModal ||
-  //     showExerciseStatsModal
-  //   ) {
-  //     document.body.style.overflow = "hidden"
-  //   } else {
-  //     document.body.style.overflow = "auto"
-  //   }
-  // }, [showNewExerciseModal, showExerciseEditModal, showExerciseStatsModal])
 
   return (
     <>
-      <div className="pt-[160px] pb-[80px] z-[0] mx-auto w-full px-4">
-        {/* <button
-          onClick={() => console.log(exercisesData)}
-          className="bg-slate-500 text-white"
-        >
-          Click to Consolelog 'exercisesData'
-        </button> */}
+      <div className="pt-[60px] pb-[80px] z-[0] mx-auto w-full px-4 space-y-2">
+
         {isLoading ? (
           Array.from({ length: 12 }).map((_, index) => (
             <Box
@@ -73,6 +51,7 @@ export default function ExercisesList({
               exercisesData.map((ex, index) => (
                 <ExerciseCard
                   key={index}
+                  index={index}
                   exerciseId={ex["_id"]}
                   name={ex["name"]}
                   category={ex["category"]}
@@ -108,7 +87,6 @@ export default function ExercisesList({
               (ex) => ex._id === selectedExerciseId
             )}
             getAllExercises={getAllExercises}
-            // getExercises={getExercises}
           />,
           document.body
         )}

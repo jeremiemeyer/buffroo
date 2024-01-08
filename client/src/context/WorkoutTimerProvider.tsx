@@ -1,8 +1,6 @@
 //@ts-nocheck
 import { createContext, useState } from "react"
-import Timer from "@/components/workout/Timer"
 import { useTimer } from "react-timer-hook"
-import useToast from "@/hooks/useToast"
 
 const WorkoutTimerContext = createContext({})
 

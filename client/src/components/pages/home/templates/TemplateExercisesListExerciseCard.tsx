@@ -1,5 +1,4 @@
 //@ts-nocheck
-import useTemplateData from "@/hooks/useTemplateData"
 import useToast from "@/hooks/useToast"
 
 export default function TemplateExercisesListExerciseCard({
@@ -40,7 +39,6 @@ export default function TemplateExercisesListExerciseCard({
           : "md:hover:bg-sky-50 dark:md:hover:bg-gray-700 hover:border-blue-200 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 "
       } border border-gray-200 rounded-xl text-left cursor-pointer mt-2  mx-auto p-4`}
     >
-      {/* <button onClick={() => console.log(exercise)}>consolelog exercise</button> */}
       <div className="flex flex-row items-center">
         <div className="mr-8 text-4xl w-4 dark:text-white dark:text-opacity-90">{name.charAt(0)}</div>
         <div className="grow">

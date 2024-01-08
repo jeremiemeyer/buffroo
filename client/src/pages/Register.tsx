@@ -1,6 +1,5 @@
 //@ts-nocheck
 import { useRef, useState, useEffect } from "react"
-import { Button } from "../components/ui/button"
 import {
   Input,
   Stack,
@@ -9,26 +8,22 @@ import {
   InputRightElement,
 } from "@chakra-ui/react"
 import {
-  PhoneIcon,
   CheckIcon,
   LockIcon,
   EmailIcon,
   CloseIcon,
 } from "@chakra-ui/icons"
 import {
-  faCheck,
-  faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import axios from "../api/axios"
+import axios from "@/api/axios"
 import { Link } from "react-router-dom"
-import Particles from "react-particles"
-import type { Engine } from "tsparticles-engine"
-import { loadFull } from "tsparticles"
-import { ISourceOptions } from "tsparticles-engine"
-import particlesOptions from "../particles.json"
-import { useCallback } from "react"
+import "@fontsource/inconsolata"
+import IntroButton from "@/components/ui/intro-button"
+import { Squircle } from "corner-smoothing"
+import { GradientBox } from "@/components/StyledComponents"
+
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
@@ -59,10 +54,6 @@ const Register = () => {
 
   const [errMsg, setErrMsg] = useState("")
   const [infoMsg, setInfoMsg] = useState("")
-
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine)
-  }, [])
 
   useEffect(() => {
     userRef.current.focus()
@@ -127,9 +118,14 @@ const Register = () => {
 
   return (
     <>
-      <h1 className="text-4xl text-white pb-8 z-[600]">Register</h1>
-
-      <div className="bg-glassmorphism2 bg-white bg-opacity-70  rounded-3xl p-12 z-[600] xl:min-w-[500px] text-black">
+      <h1 className="text-4xl pb-8 text-black dark:text-white z-[600]" style={{fontFamily: 'Inconsolata, monospace'}}>Sign Up</h1>
+      <Squircle
+        onClick={(e) => e.stopPropagation()}
+        className="z-[900] relative bg-gray-100/40 dark:bg-gray-500/40 bg-glassmorphism3 rounded-[50px] w-[500px] flex flex-col p-12 xl:min-w-[500px] text-black dark:text-white min-w-[90vw] md:min-w-0"
+        cornerRadius={50}
+        cornerSmoothing={1}
+        as={GradientBox}
+      >
         <p
           ref={errRef}
           className={errMsg ? "errmsg" : "offscreen"}
@@ -310,22 +306,24 @@ const Register = () => {
               Must match the first password input field.
             </p>
           </Stack>
-          <div className="mt-4 flex flex-col">
+          <IntroButton title="Sign up" className="w-[250px] mt-4" disabled={!validName || !validPwd || !validMatch}/>
+          {/* <div className="mt-4 flex flex-col">
             {!validName || !validPwd || !validMatch ? (
               <Button disabled>Sign Up</Button>
             ) : (
-              <Button>Sign Up</Button>
+              <IntroButton title="Sign Up" className="w-[250px]" />
             )}
-          </div>
+          </div> */}
         </form>
-        <p className="pt-4">
+
+      </Squircle>
+      <p className="pt-8 text-black dark:text-white">
           Already registered?
           <br />
           <Link to="/login">
-            <span className="text-black underline">Sign In</span>
+            <span className="underline">Sign In</span>
           </Link>
         </p>
-      </div>
     </>
   )
 }

@@ -1,8 +1,8 @@
+//@ts-nocheck
 import "@/App.css"
 import Home from "@/pages/Home.tsx"
 import Register from "@/pages/Register.tsx"
 import Login from "@/pages/Login.tsx"
-import Profile from "@/pages/Profile.tsx"
 import History from "@/pages/History.tsx"
 import Exercises from "@/pages/Exercises.tsx"
 import Unauthorized from "@/pages/Unauthorized.tsx"
@@ -10,11 +10,12 @@ import NotFound from "@/components/NotFound.tsx"
 import RequireAuth from "@/components/RequireAuth.tsx"
 import PersistLogin from "@/components/PersistLogin.tsx"
 import { Routes, Route } from "react-router-dom"
-import LoginRegister from "@/pages/LoginRegister.tsx"
-import { AppLayout } from "@/components/AppLayout.tsx"
+import LoginRegister from "@/components/pages/shared/LoginRegister"
+import { AppLayout } from "@/components/layout/AppLayout"
 import { ExercisesProvider } from "@/context/api/ExercisesProvider.tsx"
 import { SessionsProvider } from "@/context/api/SessionsProvider.tsx"
 import { TemplatesProvider } from "@/context/api/TemplatesProvider"
+import Dashboard from "@/pages/Dashboard"
 
 const ROLES = {
   User: 2001,
@@ -26,9 +27,10 @@ function App() {
   return (
     <Routes>
       {/* public routes */}
-      <Route path="login" element={<LoginRegister children={<Login />} />} />
+      <Route path="/" element={<LoginRegister />} />
+      <Route path="/login" element={<LoginRegister children={<Login />} />} />
       <Route
-        path="register"
+        path="/register"
         element={<LoginRegister children={<Register />} />}
       />
       <Route path="unauthorized" element={<Unauthorized />} />
@@ -36,15 +38,15 @@ function App() {
       {/* protected routes */}
       <Route
         element={
-            <SessionsProvider>
-              <AppLayout />
-            </SessionsProvider>
+          <SessionsProvider>
+            <AppLayout />
+          </SessionsProvider>
         }
       >
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route
-              path="/"
+              path="/start"
               element={
                 <TemplatesProvider>
                   <Home />
@@ -53,10 +55,10 @@ function App() {
             />
             <Route path="/history" element={<History />} />
             <Route
-              path="/profile"
+              path="/dashboard"
               element={
                 <ExercisesProvider>
-                  <Profile />
+                  <Dashboard />
                 </ExercisesProvider>
               }
             />

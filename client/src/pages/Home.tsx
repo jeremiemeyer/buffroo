@@ -1,28 +1,15 @@
 //@ts-nocheck
-import Title from "@/components/layout/Title"
 import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
-import WorkoutModal from "@/components/workout/WorkoutModal"
 import {
   Button as ChakraButton,
-  Menu,
-  MenuButton,
-  MenuList,
-  IconButton,
-  MenuItem,
   Icon,
   Box,
   SkeletonText,
 } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
-import WorkoutStatusContext from "@/context/WorkoutStatusProvider"
-import WorkoutDataContext from "@/context/WorkoutDataProvider"
-import WorkoutTimerContext from "@/context/WorkoutStopwatchProvider"
 import TemplateCard from "@/components/pages/home/templates/TemplateCard"
-import CreateEditTemplateModal from "@/components/pages/home/templates/CreateEditTemplateModal"
-import useAuth from "@/hooks/useAuth"
-import useAxiosPrivate from "@/hooks/useAxiosPrivate"
-import ConfirmDeleteTemplateModal from "@/components/pages/home/templates/ConfirmDeleteTemplateModal"
+import CreateEditTemplateModal from "@/components/pages/home/templates/modals/CreateEditTemplateModal"
 import useWorkoutStatus from "@/hooks/useWorkoutStatus"
 import useWorkoutData from "@/hooks/useWorkoutData"
 import useWorkoutTimer from "@/hooks/useWorkoutStopwatch"
@@ -34,18 +21,11 @@ import { AiOutlinePlus } from "react-icons/ai"
 export default function Home() {
   const { workoutIsInProgress, setWorkoutIsInProgress } = useWorkoutStatus()
   const {
-    workoutData,
     setWorkoutData,
-    handleEditWorkoutNotes,
-    handleEditWorkoutName,
-    addExercise,
-    resetWorkout,
   } = useWorkoutData()
-  const { reset, start, pause } = useWorkoutTimer()
+  const { start } = useWorkoutTimer()
   const [showCreateTemplateModal, setShowCreateTemplateModal] = useState(false)
-  const axiosPrivate = useAxiosPrivate()
-  const { auth } = useAuth()
-  const { workoutAdded, workoutAlreadyInProgress } = useToast()
+  const { workoutAlreadyInProgress } = useToast()
   const { userTemplatesData, isLoading, getUserTemplates } = useTemplates()
   const [filteredUserTemplates, setFilteredUserTemplates] = useState()
 
@@ -84,11 +64,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Title */}
-      <div className="fixed bg-glassmorphism2 bg-white bg-opacity-70 dark:bg-gray-800 dark:border-gray-800  dark:bg-opacity-30 top-0 left-0 w-screen z-[10]">
-        <Title className="z-[500]">Start Workout</Title>
-      </div>
-
       {/* Content */}
       <div className="pt-[80px] pb-[100px] z-[0] mx-auto w-full px-4">
         <div className="text-3xl mt-8 mb-4 dark:text-white dark:text-opacity-90">Quick start</div>

@@ -1,52 +1,24 @@
 //@ts-nocheck
-import ExerciseCard from "../components/pages/exercises/ExerciseCard"
-import Title from "../components/layout/Title"
-import { useState, useEffect, useRef } from "react"
-import useAxiosPrivate from "../hooks/useAxiosPrivate"
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Select,
-  Skeleton,
-  SkeletonText,
-  Box,
-} from "@chakra-ui/react"
-import { SearchIcon } from "@chakra-ui/icons"
+import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
-import AddExerciseModal from "../components/pages/exercises/AddExerciseModal"
-import { useNavigate, useLocation } from "react-router-dom"
-import useAuth from "../hooks/useAuth"
+
+import AddExerciseModal from "@/components/pages/exercises/modals/AddExerciseModal"
 import { Button } from "@/components/ui/button"
-import useExercises from "@/hooks/api/useExercises"
 import ExercisesList from "@/components/pages/exercises/ExercisesList"
-import useUserData from "@/hooks/api/useUserData"
-import WorkoutsPerWeek from "@/components/pages/profile/dashboard/WorkoutsPerWeek"
-import useTheme from "@/hooks/useTheme"
+
+import useExercises from "@/hooks/api/useExercises"
+
+import { Input, InputGroup, InputLeftElement, Select } from "@chakra-ui/react"
+import { SearchIcon } from "@chakra-ui/icons"
 
 export default function Exercises() {
-  const {
-    exercisesData,
-    isLoading,
-    getAllExercises,
-    addNewUserExercise,
-    editUserExercise,
-  } = useExercises()
-  const { theme } = useTheme()
+  const { exercisesData, isLoading, getAllExercises } = useExercises()
 
   const [showNewExerciseModal, setShowNewExerciseModal] = useState(false)
-
   const [filteredExercises, setFilteredExercises] = useState([])
-
   const [searchInput, setSearchInput] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedBodyPart, setSelectedBodyPart] = useState("")
-  const [selectedExerciseId, setSelectedExerciseId] = useState("")
-  const axiosPrivate = useAxiosPrivate()
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { auth } = useAuth()
-  const { userData, updateUserData } = useUserData()
 
   useEffect(() => {
     // Create a copy of the original exercisesData
@@ -75,25 +47,32 @@ export default function Exercises() {
     setFilteredExercises(filteredData)
   }, [exercisesData, searchInput, selectedCategory, selectedBodyPart])
 
-  function onClickExerciseEdit(exerciseId) {
-    setShowExerciseEditModal(true)
-  }
+  const bodypart_options = [
+    { value: "core", name: "Core" },
+    { value: "arms", name: "Arms" },
+    { value: "back", name: "Back" },
+    { value: "chest", name: "Chest" },
+    { value: "legs", name: "Legs" },
+    { value: "shoulders", name: "shoulders" },
+    { value: "cardio", name: "Cardio" },
+    { value: "other", name: "Other" },
+  ]
 
-  function onClickExerciseStats(exerciseId) {
-    setShowExerciseStatsModal(true)
-  }
+  const category_options = [
+    { value: "any-category", name: "Any category" },
+    { value: "barbell", name: "Barbell" },
+    { value: "dumbbell", name: "Dumbbell" },
+    { value: "machine", name: "Machine" },
+    { value: "weighted-bodyweight", name: "Weighted Bodyweight" },
+    { value: "assisted-bodyweight", name: "Assisted Bodyweight" },
+  ]
 
   return (
     <>
-      {/* Title + search bar */}
-      <div className="fixed top-0 left-0 w-full pb-4 items-center bg-glassmorphism2 bg-white bg-opacity-70 dark:bg-black dark:bg-opacity-30 z-[10] dark:border-gray-800">
-        <div className="flex px-6 justify-between flex-row items-center">
-          <Title>Exercises</Title>
-          <Button onClick={() => setShowNewExerciseModal(true)}>Add New</Button>
-        </div>
-
-        <div className="flex flex-col">
-          <div className="px-6 pt-2">
+      {/* Search bar */}
+      <div className="sticky top-[55px] bg-white/80 dark:bg-black/60 bg-glassmorphism2 w-full py-6 items-center  z-[10] dark:border-gray-800 w-full">
+        <div className="flex flex-col max-w-[1000px] mx-auto">
+          <div className="px-6 pt-2 flex flex-row gap-2">
             <InputGroup color={"white"}>
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="gray.300" />
@@ -102,9 +81,12 @@ export default function Exercises() {
                 placeholder="Search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className=" dark:bg-gray-600 dark:border-gray-600"
+                className="text-black dark:text-white dark:bg-gray-600 dark:border-gray-600"
               />
             </InputGroup>
+            <Button onClick={() => setShowNewExerciseModal(true)}>
+              Add New
+            </Button>
           </div>
 
           <div className="px-6 pt-2 flex flex-row gap-2">
@@ -113,26 +95,22 @@ export default function Exercises() {
               onChange={(e) => setSelectedBodyPart(e.target.value)}
               className=" dark:bg-gray-600 dark:border-gray-600"
             >
-              <option value="core">Core</option>
-              <option value="arms">Arms</option>
-              <option value="back">Back</option>
-              <option value="chest">Chest</option>
-              <option value="legs">Legs</option>
-              <option value="shoulders">Shoulders</option>
-              <option value="cardio">Cardio</option>
-              <option value="other">Other</option>
+              {bodypart_options.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.name}
+                </option>
+              ))}
             </Select>
             <Select
               placeholder="Any category"
               onChange={(e) => setSelectedCategory(e.target.value)}
               className=" dark:bg-gray-600 dark:border-gray-600"
             >
-              <option value="any-category">Any category</option>
-              <option value="barbell">Barbell</option>
-              <option value="dumbbell">Dumbbell</option>
-              <option value="machine">Machine</option>
-              <option value="weighted-bodyweight">Weighted Bodyweight</option>
-              <option value="assisted-bodyweight">Assisted Bodyweight</option>
+              {category_options.map((category) => (
+                <option key={category.value} value={category.value}>
+                  {category.name}
+                </option>
+              ))}
             </Select>
           </div>
         </div>

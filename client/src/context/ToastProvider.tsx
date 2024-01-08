@@ -1,6 +1,6 @@
 //@ts-nocheck
-import { createContext, useState } from "react"
-import toast, { Toaster } from "react-hot-toast"
+import { createContext } from "react"
+import toast from "react-hot-toast"
 
 const ToastContext = createContext({})
 
@@ -25,7 +25,8 @@ export const ToastProvider = ({ children }) => {
     toast.error("You cannot submit an empty template!")
   const cannotSubmitEmptyWorkout = () =>
     toast.error("You cannot submit an empty workout!")
-  const someFieldsAreMissing = () => toast.error("Please fill out all the fields.")
+  const someFieldsAreMissing = () =>
+    toast.error("Please fill out all the fields.")
 
   const workoutDeleted = () => toast("Workout deleted!")
   const templateDeleted = () => toast("Template deleted!")

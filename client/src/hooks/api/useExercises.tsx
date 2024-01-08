@@ -1,5 +1,4 @@
-//@ts-nocheck
-import { createContext, useContext } from "react"
+import { useContext } from "react"
 import ExercisesContext from "@/context/api/ExercisesProvider"
 
 export default function useExercises() {

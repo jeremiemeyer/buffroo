@@ -71,7 +71,7 @@ export const AppLayout = () => {
           ) : (
             <div
               onClick={() => setSessionWindowIsMinimized(false)}
-              className="z-[500] fixed bottom-[55px] bg-glassmorphism dark:bg-gray-600 dark:hover:bg-gray-500 dark:hover:bg-opacity-50 dark:bg-opacity-50 cursor-pointer text-slate-900 w-full px-6 justify-center mx-auto my-1 rounded-2xl"
+              className="z-[500] fixed bottom-[60px] max-w-[900px] mx-auto left-1/2 transform -translate-x-1/2 justify-center bg-glassmorphism dark:bg-gray-600 dark:hover:bg-gray-500 dark:hover:bg-opacity-50 dark:bg-opacity-50 cursor-pointer text-slate-900 w-full px-6 justify-center mx-auto my-1 rounded-2xl"
             >
               <Menu>
                 <MenuButton

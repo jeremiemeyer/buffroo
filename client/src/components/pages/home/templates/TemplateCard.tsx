@@ -74,7 +74,6 @@ export default function TemplateCard({
             <ul className="dark:text-white dark:text-opacity-70">
               {templateData.exercises.map((exercise, index) => (
                 <li key={index}>
-                  {" "}
                   {exercise.sets.length} x {exercise.name}{" "}
                 </li>
               ))}

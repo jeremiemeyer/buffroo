@@ -74,7 +74,7 @@ export default function ExerciseCard({
       <SquircleTile>
         <div
           // onClick={() => onClickExerciseCard(exerciseId)}
-          className={`text-left mt-2 mx-auto flex flex-row items-center`}
+          className={`text-left mx-auto flex flex-row items-center`}
         >
           <div className="text-4xl mr-8 w-6 dark:text-white dark:text-opacity-90">
             {name.charAt(0)}

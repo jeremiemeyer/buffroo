@@ -53,13 +53,12 @@ export default function Exercises() {
     { value: "back", name: "Back" },
     { value: "chest", name: "Chest" },
     { value: "legs", name: "Legs" },
-    { value: "shoulders", name: "shoulders" },
+    { value: "shoulders", name: "Shoulders" },
     { value: "cardio", name: "Cardio" },
     { value: "other", name: "Other" },
   ]
 
   const category_options = [
-    { value: "any-category", name: "Any category" },
     { value: "barbell", name: "Barbell" },
     { value: "dumbbell", name: "Dumbbell" },
     { value: "machine", name: "Machine" },

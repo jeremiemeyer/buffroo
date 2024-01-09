@@ -6,6 +6,8 @@ import useAuth from "@/hooks/useAuth"
 import useLogout from "@/hooks/useLogout"
 import useToast from "@/hooks/useToast"
 import useUserData from "@/hooks/api/useUserData"
+import SquircleTile from "@/components/ui/squircle-tile"
+import { useEffect } from "react"
 
 export default function Dashboard() {
   const logout = useLogout()
@@ -18,21 +20,25 @@ export default function Dashboard() {
     workoutIsInProgress ? cannotLogOutWorkoutInProgress() : await logout()
   }
 
+  useEffect(() => {
+    console.log(isLoading)
+  }, [])
+
   return (
     <>
       {/* Content  */}
       <div className="pt-[80px] pb-[100px] z-[0] px-4 w-full">
-        <p className="pb-8 text-xl dark:text-white dark:text-opacity-90">
+        {/* <p className="pb-8 text-xl dark:text-white dark:text-opacity-90">
           Hello, {auth.username}! 👋
-        </p>
+        </p> */}
 
         {isLoading ? (
-          <>
-            <h1 className="text-2xl font-light mb-4">Settings</h1>
-            <Box className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800  py-6 px-6 max-w-[800px] mx-auto">
+
+          Array.from({ length: 4 }).map((_, index) => (
+            <SquircleTile>
               <SkeletonText noOfLines={8} spacing="4" skeletonHeight="2" />
-            </Box>
-          </>
+            </SquircleTile>
+          ))
         ) : (
           <>
             <DashboardContent userData={userData} updateUserData={updateUserData} />

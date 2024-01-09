@@ -38,7 +38,7 @@ export default function Title({ children }: TitleProps) {
   const { theme } = useTheme()
   const { userData, updateUserData, isLoading } = useUserData()
   const { workoutIsInProgress } = useWorkoutStatus()
-  const {auth} = useAuth()
+  const { auth } = useAuth()
   const logout = useLogout()
   const { cannotLogOutWorkoutInProgress, preferencesSaved } = useToast()
 
@@ -93,9 +93,18 @@ export default function Title({ children }: TitleProps) {
               <PopoverHeader>Profile</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody zIndex={600}>
+                <p className="pb-8 dark:text-white dark:text-opacity-90">
+                  logged in as <span className="font-bold">{auth.username}</span>
+                </p>
 
-                {isLoading ? '...' : <Settings userData={userData} updateUserData={updateUserData} />}
-                
+                {isLoading ? (
+                  "..."
+                ) : (
+                  <Settings
+                    userData={userData}
+                    updateUserData={updateUserData}
+                  />
+                )}
 
                 <Button
                   variant="destructive"

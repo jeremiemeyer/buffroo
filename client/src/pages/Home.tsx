@@ -17,6 +17,7 @@ import useToast from "@/hooks/useToast"
 import useTemplates from "@/hooks/api/useTemplates"
 import formatDate from "@/utils/formatDate"
 import { AiOutlinePlus } from "react-icons/ai"
+import SquircleTile from "@/components/ui/squircle-tile"
 
 export default function Home() {
   const { workoutIsInProgress, setWorkoutIsInProgress } = useWorkoutStatus()
@@ -88,16 +89,15 @@ export default function Home() {
           <div className="gap-2 grid grid-cols-2 mx-auto">
             {isLoading
               ? Array.from({ length: 5 }).map((_, index) => (
-                  <Box
+                  <SquircleTile
                     key={index}
-                    className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800  pb-6 px-6 mx-auto p-8 w-full"
                   >
                     <SkeletonText
                       noOfLines={8}
                       spacing="4"
                       skeletonHeight="2"
                     />
-                  </Box>
+                  </SquircleTile>
                 ))
               : filteredUserTemplates.length > 0 &&
                 filteredUserTemplates.map((template, index) => (

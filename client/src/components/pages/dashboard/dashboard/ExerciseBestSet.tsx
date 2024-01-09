@@ -136,18 +136,17 @@ export default function ExerciseBestSet({
   return (
     <div className="relative">
       <Menu variant="filled">
-      <div className="absolute top-5 right-4 mr-2 z-[1]">
-
-        <MenuButton
-          as={IconButton}
-          aria-label="Options"
-          icon={<Icon as={FaEllipsisH} />}
-          textColor="rgba(14,165,233,1)" //sky-500
-          bg={"rgba(186,230,253,0.4)"}
-          _hover={{ bg: "rgba(186,230,253,0.8)" }}
-          outlineOffset={-1}
-          className="hover:bg-gray-200"
-        />
+        <div className="absolute top-5 right-4 mr-2 z-[1]">
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<Icon as={FaEllipsisH} />}
+            textColor="rgba(14,165,233,1)" //sky-500
+            bg={"rgba(186,230,253,0.4)"}
+            _hover={{ bg: "rgba(186,230,253,0.8)" }}
+            outlineOffset={-1}
+            className="hover:bg-gray-200"
+          />
         </div>
         <MenuList zIndex={"600"}>
           <MenuItem

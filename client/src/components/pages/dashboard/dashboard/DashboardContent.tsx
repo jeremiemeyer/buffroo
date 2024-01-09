@@ -18,7 +18,7 @@ export default function DashboardContent({ userData, updateUserData }) {
     <>
       {/* entourloupe stylistique, à revoir */}
       <div className="flex flex-row justify-between mx-auto">
-        <h1 className="text-3xl font-semibold mb-4 px-4 dark:text-white dark:text-opacity-90">Dashboard</h1>
+        <h1 className="text-3xl font-semibold mb-4 px-4 dark:text-white dark:text-opacity-90">{" "}</h1>
         <div>
           <Button
             onClick={() => setShowAddWidgetModal(true)}

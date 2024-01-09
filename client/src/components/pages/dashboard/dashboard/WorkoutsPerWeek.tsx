@@ -107,26 +107,9 @@ export default function WorkoutsPerWeek({
 
   return (
     <>
-      <div>
-        <div className="space-x-2 relative">
-          <Menu variant="filled">
-            <div className="absolute top-5 right-2 mr-2 z-[10]">
-              <MenuButton
-                as={IconButton}
-                aria-label="Options"
-                icon={<Icon as={GoGoal} />}
-                textColor="rgba(14,165,233,1)" //sky-500
-                bg={"rgba(186,230,253,0.4)"}
-                _hover={{ bg: "rgba(186,230,253,0.8)" }}
-                outlineOffset={-1}
-                onClick={() => setShowEditWorkoutsPerWeekModal(true)}
-                className="hover:bg-gray-200"
-              />
-            </div>
-          </Menu>
-          <Menu variant="filled">
-          <div className="absolute top-5 right-16 mr-2 z-[10]">
-
+      <div className="space-x-2 relative">
+        <Menu variant="filled">
+          <div className="absolute top-5 right-4 mr-2 z-[10]">
             <MenuButton
               as={IconButton}
               aria-label="Options"
@@ -162,29 +145,43 @@ export default function WorkoutsPerWeek({
                 Remove
               </MenuItem>
             </MenuList>
-            </div>
-          </Menu>
-        </div>
-        <SquircleTile>
-          <div className="flex flex-row items-center pb-8 space-x-2 max-w-[90%]">
-            <h1 className="font-semibold text-xl flex dark:text-white dark:text-opacity-90">
-              Workouts/week
-            </h1>
-            <h2 className="px-4 font-semibold dark:text-white dark:text-opacity-90">
-              Goal:{" "}
-              <span className="font-normal">
-                {userData.goals.workoutsPerWeek}
-              </span>
-            </h2>
           </div>
-          <div className="flex justify-center">
-            <WorkoutsPerWeekBarChart
-              aggregatedData={aggregatedData}
-              goalValue={userData.goals.workoutsPerWeek}
+        </Menu>
+        <Menu variant="filled">
+          <div className="absolute top-5 right-[60px] mr-2 z-[10]">
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<Icon as={GoGoal} />}
+              textColor="rgba(14,165,233,1)" //sky-500
+              bg={"rgba(186,230,253,0.4)"}
+              _hover={{ bg: "rgba(186,230,253,0.8)" }}
+              outlineOffset={-1}
+              onClick={() => setShowEditWorkoutsPerWeekModal(true)}
+              className="hover:bg-gray-200"
             />
           </div>
-        </SquircleTile>
+        </Menu>
       </div>
+      <SquircleTile>
+        <div className="flex flex-row items-center pb-8 space-x-2 max-w-[90%]">
+          <h1 className="font-semibold text-xl flex dark:text-white dark:text-opacity-90">
+            Workouts/week
+          </h1>
+          <h2 className="px-4 font-semibold dark:text-white dark:text-opacity-90">
+            Goal:{" "}
+            <span className="font-normal">
+              {userData.goals.workoutsPerWeek}
+            </span>
+          </h2>
+        </div>
+        <div className="flex justify-center">
+          <WorkoutsPerWeekBarChart
+            aggregatedData={aggregatedData}
+            goalValue={userData.goals.workoutsPerWeek}
+          />
+        </div>
+      </SquircleTile>
 
       {showEditWorkoutsPerWeekModal &&
         createPortal(

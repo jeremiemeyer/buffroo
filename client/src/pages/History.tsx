@@ -11,6 +11,7 @@ import ReactPaginate from "react-paginate"
 
 import { IoIosArrowBack } from "react-icons/io"
 import { IoIosArrowForward } from "react-icons/io"
+import SquircleTile from "@/components/ui/squircle-tile"
 
 export default function History() {
   const {
@@ -83,9 +84,8 @@ export default function History() {
       <div className="pt-[80px] pb-[80px] z-[0] mx-auto w-full px-4">
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
-            <Box
+            <SquircleTile
               key={index}
-              className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 mt-2 p-[20px] mx-auto rounded-3xl"
             >
               <SkeletonText
                 mt="4"
@@ -93,7 +93,7 @@ export default function History() {
                 spacing="4"
                 skeletonHeight="2"
               />
-            </Box>
+            </SquircleTile>
           ))
         ) : (
           <>

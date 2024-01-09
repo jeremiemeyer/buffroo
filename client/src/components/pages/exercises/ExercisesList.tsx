@@ -8,6 +8,7 @@ import { createPortal } from "react-dom"
 import ExerciseCard from "./ExerciseCard"
 import ExerciseStatsModal from "@/components/pages/exercises/modals/ExerciseStatsModal"
 import ExerciseEditModal from "@/components/pages/exercises/modals/ExerciseEditModal"
+import SquircleTile from "@/components/ui/squircle-tile"
 
 export default function ExercisesList({
   exercisesData,
@@ -33,9 +34,8 @@ export default function ExercisesList({
 
         {isLoading ? (
           Array.from({ length: 12 }).map((_, index) => (
-            <Box
+            <SquircleTile
               key={index}
-              className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800   mt-2  p-[20px] mx-auto rounded-3xl"
             >
               <SkeletonText
                 mt="4"
@@ -43,7 +43,7 @@ export default function ExercisesList({
                 spacing="4"
                 skeletonHeight="2"
               />
-            </Box>
+            </SquircleTile>
           ))
         ) : (
           <>

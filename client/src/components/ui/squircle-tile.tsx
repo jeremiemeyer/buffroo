@@ -20,7 +20,7 @@ export default function SquircleTile({
       borderWidth={1}
       cornerRadius={20}
       cornerSmoothing={1}
-      className={`w-full ${onClickAction ? "cursor-pointer hover:bg-zinc-500" : ""}`}
+      className={`w-full h-full ${onClickAction ? "cursor-pointer hover:bg-zinc-500" : ""}`}
       as={theme==='dark' ? StyledSquircleDark : StyledSquircleLight}
       onClick={onClickAction}
       style={{

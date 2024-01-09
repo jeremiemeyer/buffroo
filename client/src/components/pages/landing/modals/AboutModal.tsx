@@ -26,7 +26,6 @@ export default function AboutModal({ onClose }) {
           >
             on GitHub.
           </a>
-          .{" "}
           <a
             className="hover:text-zinc-700"
             href="https://buffroo-87a1e6eff5dd.herokuapp.com/api-docs"

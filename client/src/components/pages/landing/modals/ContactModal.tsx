@@ -27,7 +27,7 @@ export default function ContactModal({ onClose }) {
       <ZoomIn>
       <Squircle
           onClick={(e) => e.stopPropagation()}
-          className="z-[900] relative bg-gray-50/40 bg-glassmorphism3 rounded-[50px] w-[500px] flex flex-col p-12 "
+          className="z-[900] relative bg-gray-50/40 bg-glassmorphism3 rounded-[50px] m-2 flex flex-col p-12 "
           cornerRadius={50}
           cornerSmoothing={1}
         >

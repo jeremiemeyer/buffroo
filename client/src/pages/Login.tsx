@@ -92,7 +92,7 @@ const Login = () => {
       </h1>
       <Squircle
         onClick={(e) => e.stopPropagation()}
-        className="z-[900] relative bg-gray-100/40 dark:bg-gray-500/40 bg-glassmorphism3 rounded-[50px] w-[500px] flex flex-col p-12 xl:min-w-[500px] text-black dark:text-white min-w-[90vw] md:min-w-0"
+        className="z-[900] relative bg-gray-100/40 dark:bg-gray-500/40 bg-glassmorphism3 rounded-[50px] flex flex-col p-12 md:min-w-[500px] text-black dark:text-white min-w-[90vw] md:min-w-0"
         cornerRadius={50}
         cornerSmoothing={1}
         as={GradientBox}

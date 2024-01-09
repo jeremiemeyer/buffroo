@@ -54,8 +54,8 @@ export default function Navbar() {
             <div
               className={`${
                 location.pathname.startsWith(section.path)
-                  ? "bg-gray-800 bg-opacity-30 dark:bg-gray-500 dark:bg-opacity-30"
-                  : "hover:bg-opacity-30 dark:hover:opacity-60 dark:hover:bg-opacity-30 transition-all opacity-40"
+                  ? "bg-gray-600 bg-opacity-30 dark:bg-gray-200 dark:bg-opacity-10"
+                  : "hover:opacity-100 dark:hover:opacity-100 transition-all opacity-90 dark:opacity-60"
               } cursor-pointer py-2 px-4 md:px-8 flex flex-col items-center mx-auto gap-1`}
             >
               <span className="text-3xl">{section.icon}</span>

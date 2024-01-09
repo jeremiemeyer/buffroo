@@ -50,7 +50,7 @@ export default function Navbar() {
         className="fixed z-[500] bottom-0 max-w-[900px] w-full justify-center mx-auto z-0 bg-glassmorphism-navbar bg-gray-800 bg-opacity-90 dark:bg-black/20 text-white flex flex-row"
       >
         {navbar_sections.map((section) => (
-          <Link key={section.path} to={section.path} onClick={goTop}>
+          <Link key={section.path} to={section.path} onClick={goTop} className="w-1/4">
             <div
               className={`${
                 location.pathname.startsWith(section.path)

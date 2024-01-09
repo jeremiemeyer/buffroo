@@ -15,7 +15,18 @@ export default function AboutModal({ onClose }) {
     },
     {
       title: `How was the app made?`,
-      answer: `The app uses React.js, Express.js and many libraries. You can check the full code here.`,
+      answer: (
+        <>
+          The app uses React.js, Express.js and many libraries. You can check
+          the full code on GitHub.{" "}
+          <a
+            className="hover:text-zinc-700"
+            href="https://buffroo-87a1e6eff5dd.herokuapp.com/api-docs"
+          >
+            API documentation here.
+          </a>
+        </>
+      ),
     },
   ]
 
@@ -34,7 +45,6 @@ export default function AboutModal({ onClose }) {
       onClick={onClose}
       className="fixed z-[700] inset-0 bg-slate-700/40 bg-glassmorphism3 flex justify-center items-center"
     >
-
       <ZoomIn>
         <Squircle
           onClick={(e) => e.stopPropagation()}

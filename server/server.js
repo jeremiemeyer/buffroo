@@ -1,5 +1,7 @@
 require('dotenv').config()
 const express = require('express')
+const swaggerUi = require('swagger-ui-express');
+const specs = require('./swagger.js');
 const app = express()
 const path = require('path')
 
@@ -32,6 +34,11 @@ app.use(express.json());
 
 // middleware for cookies
 app.use(cookieParser())
+
+// middleware for swagger
+if (process.env.NODE_ENV !== 'production') {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+}
 
 // routes
 app.use("/register", require("./routes/register"))

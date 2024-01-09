@@ -58,7 +58,7 @@ export default function WorkoutSessionCard({ sessionData }) {
         <SquircleTile>
           {/* <button onClick={() => console.log(sessionData)}>Consolelog this session's data</button> */}
           <div className="flex flex-row justify-between items-center">
-            <span className="dark:text-white dark:text-opacity-90 font-semibold text-2xl pb-2 truncate ...">
+            <span className="dark:text-white dark:text-opacity-90 font-semibold text-2xl pb-2 max-w-[85%] truncate ...">
               {sessionData?.name}
             </span>
           </div>

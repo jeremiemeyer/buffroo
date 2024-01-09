@@ -57,7 +57,7 @@ export default function AboutModal({ onClose }) {
       <ZoomIn>
         <Squircle
           onClick={(e) => e.stopPropagation()}
-          className="z-[900] relative bg-gray-50/40 bg-glassmorphism3 rounded-[50px] flex flex-col p-12 m-2"
+          className="z-[900] relative bg-gray-50/40 bg-glassmorphism3 bg-slate-100/70 dark:bg-slate-300/70 rounded-[50px] flex flex-col p-12 m-2"
           cornerRadius={50}
           cornerSmoothing={1}
         >

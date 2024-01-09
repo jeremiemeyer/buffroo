@@ -18,10 +18,19 @@ export default function AboutModal({ onClose }) {
       answer: (
         <>
           The app uses React.js, Express.js and many libraries. You can check
-          the full code on GitHub.{" "}
+          the full code{" "}
+          <a
+            className="hover:text-zinc-700"
+            href="https://github.com/jeremiemeyer/buffroo"
+            target="_blank"
+          >
+            on GitHub.
+          </a>
+          .{" "}
           <a
             className="hover:text-zinc-700"
             href="https://buffroo-87a1e6eff5dd.herokuapp.com/api-docs"
+            target="_blank"
           >
             API documentation here.
           </a>

@@ -81,7 +81,7 @@ export default function ExerciseCard({
           </div>
 
           <div className="flex-col grow">
-            <p className="text-xl font-semibold dark:text-white dark:text-opacity-90">
+            <p className="text-xl font-semibold dark:text-white dark:text-opacity-90 max-w-[80%] truncate ...">
               {name}
             </p>
             <p>

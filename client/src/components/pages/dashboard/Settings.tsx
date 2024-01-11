@@ -40,7 +40,7 @@ export default function Settings({ userData, updateUserData }) {
                 Unit system
               </span>
               <Select
-                placeholder="Select option"
+                // placeholder="Select option"
                 value={updatedUserPreferences["unitSystem"]}
                 onChange={(e) =>
                   setUpdatedUserPreferences({
@@ -62,7 +62,7 @@ export default function Settings({ userData, updateUserData }) {
               </span>
 
               <Select
-                placeholder="Select option"
+                // placeholder="Select option"
                 value={updatedUserPreferences["theme"]}
                 onChange={(e) =>
                   setUpdatedUserPreferences({
